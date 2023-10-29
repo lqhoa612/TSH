@@ -7,17 +7,30 @@
 
 using namespace std;
 
-int reduceToSingleDigit(int num) {
-    if (num <= 9)
-        return num;
-
-    int sum = 0;
-    while (num > 0) {
-        sum += num % 10;
-        num /= 10;
+int reduceToSingleDigit(int num, bool allowMaster) {
+    if (allowMaster == true) {
+        if (num == 11 || num == 22 || num == 33)
+            return num;
     }
 
-    return reduceToSingleDigit(sum);
+    if (num <= 9)
+            return num;
+
+    while (num > 9)
+    {
+        int sum = 0;
+        while (num > 0) {
+            if (allowMaster == true) {
+                if (num == 11 || num == 22 || num == 33)
+                    return num;
+            }
+            sum += num % 10;
+            num /= 10;
+        }
+        num = sum;
+    }
+
+    return num;
 }
 bool isVowel(char c) {
     char chth = tolower(c);
@@ -43,7 +56,7 @@ void TSH(string name, string birthdate) {
             duongdoi += c - '0';
         }
     }
-    duongdoi = reduceToSingleDigit(duongdoi);
+    duongdoi = reduceToSingleDigit(duongdoi, true);
     cout << "Duong Doi: " << duongdoi << endl;
 
     //2 Destiny
@@ -54,20 +67,20 @@ void TSH(string name, string birthdate) {
             char lowercaseChar = tolower(c);
             int charValue = lowercaseChar - 'a' + 1;
             sumenh += charValue;
-            nameInNum.push_back(reduceToSingleDigit(charValue)); //for sothieu
+            nameInNum.push_back(reduceToSingleDigit(charValue, false)); //for sothieu
         }
     }
-    sumenh = reduceToSingleDigit(sumenh);
+    sumenh = reduceToSingleDigit(sumenh, true);
     cout << "Su Menh: " << sumenh << endl;
 
     //3 Lifepath - Destiny Bridge
     int lienket = 0;
-    lienket = abs(duongdoi - sumenh);
+    lienket = reduceToSingleDigit(abs(duongdoi - sumenh), false);
     cout << "Lien ket DuongDoi-SuMenh: " << lienket << endl;
 
     //4 Growth
     int truongthanh = 0;
-    truongthanh = reduceToSingleDigit(duongdoi + sumenh);
+    truongthanh = reduceToSingleDigit(duongdoi + sumenh, true);
     cout << "Truong Thanh: " << truongthanh << endl;
 
     //5 Soul Urge
@@ -113,7 +126,7 @@ void TSH(string name, string birthdate) {
             }
         }
     }
-    linhhon = reduceToSingleDigit(linhhon);
+    linhhon = reduceToSingleDigit(linhhon, true);
     cout << "Linh Hon: " << linhhon << endl;
 
     //6 Character
@@ -130,12 +143,12 @@ void TSH(string name, string birthdate) {
             }
         }
     }
-    nhancach = reduceToSingleDigit(nhancach);
+    nhancach = reduceToSingleDigit(nhancach, true);
     cout << "Nhan Cach: " << nhancach << endl;
 
     //7 Soul Urge - Character Bridge
     int lienket_lhnc = 0;
-    lienket_lhnc = abs(linhhon - nhancach);
+    lienket_lhnc = reduceToSingleDigit(abs(reduceToSingleDigit(linhhon, false) - reduceToSingleDigit(nhancach, false)), false);
     cout << "Lien ket LinhHon-NhanCach: " << lienket_lhnc << endl;
 
     //8 Balance
@@ -151,7 +164,7 @@ void TSH(string name, string birthdate) {
         if (isInitialLetter == true && isalpha(c) != 0);
         else isInitialLetter = false;
     }
-    canbang = reduceToSingleDigit(canbang);
+    canbang = reduceToSingleDigit(canbang, true);
     cout << "Can Bang: " << canbang << endl;
 
     //9 Rational Thinking
@@ -171,7 +184,7 @@ void TSH(string name, string birthdate) {
             tenTemp += charValue;
         }
     }
-    tenTemp = reduceToSingleDigit(tenTemp);
+    tenTemp = reduceToSingleDigit(tenTemp, false);
 
     int ngayTemp = 0;
     for (char c : ngay) {
@@ -179,9 +192,9 @@ void TSH(string name, string birthdate) {
             ngayTemp += c - '0';
         }
     }
-    ngayTemp = reduceToSingleDigit(ngayTemp);
+    ngayTemp = reduceToSingleDigit(ngayTemp, false);
     
-    tuduylytri = reduceToSingleDigit(tenTemp + ngayTemp);
+    tuduylytri = reduceToSingleDigit(tenTemp + ngayTemp, true);
     cout << "Tu Duy Ly Tri: " << tuduylytri << endl;
 
     //10 Subconcious Power + Missing Number(s)
@@ -198,8 +211,8 @@ void TSH(string name, string birthdate) {
     sumanhtiemthuc = 9 - sothieu.size();
     cout << "Suc Manh Tiem Thuc: " << sumanhtiemthuc << endl;
 
+    cout << "So Thieu: ";
     if (!sothieu.empty()) {
-        cout << "So Thieu: ";
         for (int i : sothieu)
             cout << i << " ";
         cout << endl;
@@ -208,7 +221,7 @@ void TSH(string name, string birthdate) {
 
     //11 Birthday
     int ngaysinh = (birthdate.at(0) - '0') + (birthdate.at(1) - '0');
-    ngaysinh = reduceToSingleDigit(ngaysinh);
+    ngaysinh = reduceToSingleDigit(ngaysinh, true);
     cout << "Ngay Sinh: " << ngaysinh << endl;
 
     //12 Passion
@@ -227,31 +240,31 @@ void TSH(string name, string birthdate) {
     //13 Personal Year
     int namcanhan = 0;
     int thangsinh = (birthdate.at(3) - '0') + (birthdate.at(4) - '0');
-    thangsinh = reduceToSingleDigit(thangsinh);
-    namcanhan = ngaysinh + thangsinh + reduceToSingleDigit(currentYear);
-    namcanhan = reduceToSingleDigit(namcanhan);
+    thangsinh = reduceToSingleDigit(thangsinh, false);
+    namcanhan = ngaysinh + thangsinh + reduceToSingleDigit(currentYear, false);
+    namcanhan = reduceToSingleDigit(namcanhan, false);
     cout << "Nam Ca Nhan: " << namcanhan << endl;
 
     //14 Personal Month
     int thangcanhan = 0;
-    thangcanhan = namcanhan + reduceToSingleDigit(currentMonth);
-    thangcanhan = reduceToSingleDigit(thangcanhan);
+    thangcanhan = namcanhan + reduceToSingleDigit(currentMonth, false);
+    thangcanhan = reduceToSingleDigit(thangcanhan, false);
     cout << "Thang Ca Nhan: " << thangcanhan << endl;
 
     //15 Personal Day
     int ngaycanhan = 0;
-    ngaycanhan = thangcanhan + reduceToSingleDigit(currentDay);
-    ngaycanhan = reduceToSingleDigit(ngaycanhan);
+    ngaycanhan = thangcanhan + reduceToSingleDigit(currentDay, false);
+    ngaycanhan = reduceToSingleDigit(ngaycanhan, false);
     cout << "Ngay Ca Nhan: " << thangcanhan << endl;
 
     //16 Milestones
     vector<int> chang = {0, 0, 0, 0};
     int namsinh = (birthdate.at(6) - '0') + (birthdate.at(7) - '0') + (birthdate.at(8) - '0') + (birthdate.at(9) - '0');
-    namsinh = reduceToSingleDigit(namsinh);
-    chang.at(0) = reduceToSingleDigit(ngaysinh + thangsinh);
-    chang.at(1) = reduceToSingleDigit(ngaysinh + namsinh);
-    chang.at(2) = reduceToSingleDigit(chang.at(0) + chang.at(1));
-    chang.at(3) = reduceToSingleDigit(thangsinh + namsinh);
+    namsinh = reduceToSingleDigit(namsinh, false);
+    chang.at(0) = reduceToSingleDigit(ngaysinh + thangsinh, true);
+    chang.at(1) = reduceToSingleDigit(ngaysinh + namsinh, true);
+    chang.at(2) = reduceToSingleDigit(chang.at(0) + chang.at(1), true);
+    chang.at(3) = reduceToSingleDigit(thangsinh + namsinh, true);
     cout << "Chang: ";
     for (int i : chang)
         cout << i << " ";
@@ -270,10 +283,9 @@ void TSH(string name, string birthdate) {
 }
 
 int main() {
-    string birthdate = ("02/01/1998");
+    string birthdate = ("17/02/2000");
     cout << birthdate << endl;
-    string name = ("nguyen dac dang khoa");
+    string name = ("dao thi huong tra");
     cout << name << endl;
     TSH(name, birthdate);
 }
-
