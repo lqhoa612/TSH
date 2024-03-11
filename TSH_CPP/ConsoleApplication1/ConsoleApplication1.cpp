@@ -54,6 +54,7 @@ void TSH(string name, string birthdate) {
     int currentDay = localTime.tm_mday;
 
     cout << "Hom nay: " << currentDay << "/" << currentMonth << "/" << currentYear << endl;
+    int tuoi = currentYear - (((int)birthdate.at(6) - '0') * 1000 + ((int)birthdate.at(7) - '0') * 100 + ((int)birthdate.at(8) - '0') * 10 + ((int)birthdate.at(9) - '0'));
     cout << endl;
 
     //1 Lifepath
@@ -150,7 +151,6 @@ void TSH(string name, string birthdate) {
     //6 Character
     int nhancach = 0;
     vector<int> phuam;
-    //cout << "Phu Am: ";
     for (char c : name) {
         if (isalpha(c) != 0) {
             char chth = tolower(c);
@@ -159,7 +159,6 @@ void TSH(string name, string birthdate) {
                 chth != 'u') {
                 // Calculate the numerical value of the consonant
                 int charValue = chth - 'a' + 1;
-                //cout << reduceToSingleDigit(charValue, false) << " ";
                 phuam.push_back(reduceToSingleDigit(charValue, false));
                 nhancach += charValue;
             }
@@ -292,9 +291,13 @@ void TSH(string name, string birthdate) {
     chang.at(2) = reduceToSingleDigit(chang.at(0) + chang.at(1), true);
     chang.at(3) = reduceToSingleDigit(thangsinh + namsinh, true);
     cout << "Chang: ";
-    for (int i : chang)
-        cout << i << " ";
+    cout << chang.at(0) << " ";
+    cout << chang.at(1) << " ";
+    cout << chang.at(2) << " ";
+    cout << chang.at(3) << " ";
     cout << endl;
+
+    cout << "Tuoi: " << 36 - reduceToSingleDigit(duongdoi, false) << " " << 36 - reduceToSingleDigit(duongdoi, false) + 9 << " " << 36 - reduceToSingleDigit(duongdoi, false) + 9 * 2 << " " << 36 - reduceToSingleDigit(duongdoi, false) + 9 * 3 << endl;
 
     //17 Challenges
     vector<int> thachthuc = { 0, 0, 0, 0 };
@@ -303,13 +306,15 @@ void TSH(string name, string birthdate) {
     thachthuc.at(2) = abs(chang.at(0) - chang.at(1));
     thachthuc.at(3) = abs(thangsinh - namsinh);
     cout << "Thach Thuc: ";
-    for (int i : thachthuc)
-        cout << i << " ";
+    cout << thachthuc.at(0) << " ";
+    cout << thachthuc.at(1) << " ";
+    cout << thachthuc.at(2) << " ";
+    cout << thachthuc.at(3) << " ";
     cout << endl;
 }
 
 int main() {
-    string name = ("banh le quoc thien");
-    string birthdate = ("12/10/2014");
+    string name = ("le quoc hoa");
+    string birthdate = ("06/12/1997");
     TSH(name, birthdate);
 }

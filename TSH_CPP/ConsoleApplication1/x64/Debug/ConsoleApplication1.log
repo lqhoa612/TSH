@@ -1,3 +1,3 @@
 ﻿  ConsoleApplication1.cpp
-C:\Users\rappi\Desktop\TSH_CPP\ConsoleApplication1\ConsoleApplication1.cpp(237,24): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\rappi\Desktop\TSH_CPP\ConsoleApplication1\ConsoleApplication1.cpp(236,24): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   ConsoleApplication1.vcxproj -> C:\Users\rappi\Desktop\TSH_CPP\x64\Debug\ConsoleApplication1.exe
