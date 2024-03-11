@@ -38,6 +38,10 @@ bool isVowel(char c) {
 }
 
 void TSH(string name, string birthdate) {
+    //Print name and birthday
+    cout << "Ho va Ten: " << name << endl;
+    cout << "Ngay sinh: " << birthdate << endl;
+
     //Get system date
     time_t currentTime;
     time(&currentTime);
@@ -48,6 +52,9 @@ void TSH(string name, string birthdate) {
     int currentYear = localTime.tm_year + 1900;
     int currentMonth = localTime.tm_mon + 1;
     int currentDay = localTime.tm_mday;
+
+    cout << "Hom nay: " << currentDay << "/" << currentMonth << "/" << currentYear << endl;
+    cout << endl;
 
     //1 Lifepath
     int duongdoi = 0;
@@ -75,7 +82,7 @@ void TSH(string name, string birthdate) {
 
     //3 Lifepath - Destiny Bridge
     int lienket = 0;
-    lienket = reduceToSingleDigit(abs(duongdoi - sumenh), false);
+    lienket = reduceToSingleDigit( abs( reduceToSingleDigit(duongdoi, false) - reduceToSingleDigit(sumenh, false)), false);
     cout << "Lien ket DuongDoi-SuMenh: " << lienket << endl;
 
     //4 Growth
@@ -86,6 +93,7 @@ void TSH(string name, string birthdate) {
     //5 Soul Urge
     int linhhon = 0;
     bool previousCharIsVowel = false;
+    vector<int> nguyenam;
     for (char c : name) {
         if (isalpha(c) != 0) {
             char chth = tolower(c);
@@ -93,22 +101,27 @@ void TSH(string name, string birthdate) {
                 switch (chth) {
                 case 'a':
                     linhhon += 1;
+                    nguyenam.push_back(1);
                     previousCharIsVowel = true;
                     break;
                 case 'e':
                     linhhon += 5;
+                    nguyenam.push_back(5);
                     previousCharIsVowel = true;
                     break;
                 case 'i':
                     linhhon += 9;
+                    nguyenam.push_back(9);
                     previousCharIsVowel = true;
                     break;
                 case 'o':
                     linhhon += 6;
+                    nguyenam.push_back(6);
                     previousCharIsVowel = true;
                     break;
                 case 'u':
                     linhhon += 3;
+                    nguyenam.push_back(3);
                     previousCharIsVowel = true;
                     break;
                 default:
@@ -119,6 +132,7 @@ void TSH(string name, string birthdate) {
             }
             else if (chth == 'y' && previousCharIsVowel == false) {
                 linhhon += 7;
+                nguyenam.push_back(7);
                 previousCharIsVowel = true;
             }
             else {
@@ -127,10 +141,16 @@ void TSH(string name, string birthdate) {
         }
     }
     linhhon = reduceToSingleDigit(linhhon, true);
-    cout << "Linh Hon: " << linhhon << endl;
+    cout << "Linh Hon: " << linhhon << " ( Nguyen am: ";
+    for (int i = 0; i < nguyenam.size(); i++) {
+        cout << nguyenam.at(i) << " ";
+    }
+    cout << ")" << endl;
 
     //6 Character
     int nhancach = 0;
+    vector<int> phuam;
+    //cout << "Phu Am: ";
     for (char c : name) {
         if (isalpha(c) != 0) {
             char chth = tolower(c);
@@ -139,12 +159,18 @@ void TSH(string name, string birthdate) {
                 chth != 'u') {
                 // Calculate the numerical value of the consonant
                 int charValue = chth - 'a' + 1;
+                //cout << reduceToSingleDigit(charValue, false) << " ";
+                phuam.push_back(reduceToSingleDigit(charValue, false));
                 nhancach += charValue;
             }
         }
     }
     nhancach = reduceToSingleDigit(nhancach, true);
-    cout << "Nhan Cach: " << nhancach << endl;
+    cout << "Nhan cach: " << nhancach << " ( Phu am: ";
+    for (int i = 0; i < phuam.size(); i++) {
+        cout << phuam.at(i) << " ";
+    }
+    cout << ")" << endl;
 
     //7 Soul Urge - Character Bridge
     int lienket_lhnc = 0;
@@ -241,7 +267,7 @@ void TSH(string name, string birthdate) {
     int namcanhan = 0;
     int thangsinh = (birthdate.at(3) - '0') + (birthdate.at(4) - '0');
     thangsinh = reduceToSingleDigit(thangsinh, false);
-    namcanhan = ngaysinh + thangsinh + reduceToSingleDigit(currentYear, false);
+    namcanhan = reduceToSingleDigit(ngaysinh, false) + thangsinh + reduceToSingleDigit(currentYear, false);
     namcanhan = reduceToSingleDigit(namcanhan, false);
     cout << "Nam Ca Nhan: " << namcanhan << endl;
 
@@ -255,7 +281,7 @@ void TSH(string name, string birthdate) {
     int ngaycanhan = 0;
     ngaycanhan = thangcanhan + reduceToSingleDigit(currentDay, false);
     ngaycanhan = reduceToSingleDigit(ngaycanhan, false);
-    cout << "Ngay Ca Nhan: " << thangcanhan << endl;
+    cout << "Ngay Ca Nhan: " << ngaycanhan << endl;
 
     //16 Milestones
     vector<int> chang = {0, 0, 0, 0};
@@ -283,9 +309,7 @@ void TSH(string name, string birthdate) {
 }
 
 int main() {
-    string birthdate = ("17/02/2000");
-    cout << birthdate << endl;
-    string name = ("dao thi huong tra");
-    cout << name << endl;
+    string name = ("banh le quoc thien");
+    string birthdate = ("12/10/2014");
     TSH(name, birthdate);
 }
