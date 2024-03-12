@@ -1,1 +1,39 @@
-<h1>Hello!</h1>
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Interactive Website</h1>
+    </header>
+    <main>
+        <div id="container">
+            <div id="left-content">
+                <div id="input-container">
+                    <input type="text" id="string1" placeholder="Fullname"><br>
+                    <input type="text" id="string2" placeholder="Birthdate dd/mm/yyyy"><br>
+                    <button id="calculate-btn">Process Strings</button>
+                </div>
+            </div>
+            <div id="middle-column">
+                <!-- Middle column content goes here -->
+                <h2>Numerology</h2>
+                <p id="fullname"></p>
+                <p id="birthdate"></p>
+                <p id="duongdoi"></p>
+                <p id="divisionResult"></p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Your Interactive Website</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
