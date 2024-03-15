@@ -1,14 +1,25 @@
 // script.js
 
 // Define a function to reduce the sum to a single-digit number
-function reduceToSingleDigit(sum) {
+function reduceToSingleDigit(num, allowMaster) {
     // Reduce the sum to a single-digit number
-    while (sum > 9) {
-        sum = sum.toString().split('').reduce(function (acc, digit) {
+    if (allowMaster == true) {
+        if (num == 11 || num == 22 || num == 33)
+        return num;
+    }
+
+    while (num > 9) {
+
+        num = num.toString().split('').reduce(function (acc, digit) {
             return acc + parseInt(digit);
         }, 0);
+        
+        if (allowMaster == true) {
+            if (num == 11 || num == 22 || num == 33)
+            return num;
+        }
     }
-    return sum;
+    return num;
 }
 
 // Define a function to check if a character is a vowel
@@ -42,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Split string2 into individual characters
         var characters = string2.split('');
 
-        // Initialize sum
+        // Initialize variable
         var sum = 0;
 
         // Iterate through each character and sum the numeric value
@@ -57,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Reduce the sum to a single-digit number
-        sum = reduceToSingleDigit(sum);
+        sum = reduceToSingleDigit(sum, true);
 
         // Display the results
         document.getElementById('fullname').textContent = "Họ và Tên: " + string1;
