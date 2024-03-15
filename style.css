@@ -32,3 +32,7 @@ main {
 #middle-column h2, #middle-column p {
     margin: 5px 0; /* Adjust margin between lines */
 }
+
+#middle-column p:nth-child(4) {
+    margin-bottom: 20px;
+}
