@@ -28,9 +28,8 @@ function isVowel(character) {
     character = character.toLowerCase();
 
     // Check if the character is a vowel
-    if (character === 'a' || character === 'e' || character === 'i' || character === 'o' || character === 'u') {
+    if (character === 'a' || character === 'e' || character === 'i' || character === 'o' || character === 'u')
         return character;
-    }
 }
 
 // Add event listener when the DOM content is loaded
@@ -38,10 +37,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var processButton = document.getElementById('calculate-btn');
 
     processButton.addEventListener('click', function () {
-        var string1 = document.getElementById('string1').value;
-        var string2 = document.getElementById('string2').value;
-
-        // You can perform any action with string1 and string2 here
+        // Get user name and birthday inputs
+        var name = document.getElementById('name').value;
+        var birthdate = document.getElementById('birthdate').value;
 
         // Get the current system date
         var currentDate = new Date();
@@ -49,31 +47,38 @@ document.addEventListener('DOMContentLoaded', function () {
         var currentMonth = currentDate.getMonth() + 1;
         var currentDay = currentDate.getDate();
         
-
-        // Split string2 into individual characters
-        var characters = string2.split('');
-
-        // Initialize variable
-        var sum = 0;
-
-        // Iterate through each character and sum the numeric value
-        for (var i = 0; i < characters.length; i++) {
+        // Calculate Lifepath
+        var bdChar = birthdate.split(''); // Split birthdate into individual characters
+        var duongdoi = 0;
+        for (var i = 0; i < bdChar.length; i++) {
             // Parse the character to a number (if it's numeric)
-            var num = parseFloat(characters[i]);
+            var num = parseFloat(bdChar[i]);
             // Check if it's a valid number
-            if (!isNaN(num)) {
-                // Add the numeric value to the sum
-                sum += num;
+            if (!isNaN(num))
+                duongdoi += num; // Add the numeric value to the sum
+            
+        }
+        duongdoi = reduceToSingleDigit(duongdoi, true);
+
+        // Calculate Destiny
+        name = name.toLowerCase();
+        var sumenh = 0;
+        for (var i = 0; i < name.length; i++) {
+            var nChar = name.charAt(i);
+            // Check if the character is alphabetic
+            if (/[a-z]/.test(nChar)) {
+                // Assign a number to the character (1 for 'a', 2 for 'b', ..., 26 for 'z')
+                var nCharNum = nChar.charCodeAt(0) - 96; // 'a' has ASCII code 97, so subtracting 96 gives 1 for 'a', 2 for 'b', and so on
+                sumenh += reduceToSingleDigit(nCharNum, false);
             }
         }
-
-        // Reduce the sum to a single-digit number
-        sum = reduceToSingleDigit(sum, true);
+        sumenh = reduceToSingleDigit(sumenh, true);
 
         // Display the results
-        document.getElementById('fullname').textContent = "Họ và Tên: " + string1;
-        document.getElementById('birthdate').textContent = "Ngày Sinh: " + string2;
-        document.getElementById('todate').textContent = `Ngày hiện tại: ${currentDay}/${currentMonth}/${currentYear}`;
-        document.getElementById('duongdoi').textContent = "Đường đời: " + sum;
+        document.getElementById('fullname').textContent = "Full Name: " + name;
+        document.getElementById('birthdate').textContent = "Birthdate: " + birthdate;
+        document.getElementById('todate').textContent = `Generated Date: ${currentDay}/${currentMonth}/${currentYear}`;
+        document.getElementById('duongdoi').textContent = "1.Lifepath: " + duongdoi;
+        document.getElementById('sumenh').textContent = "2.Destiny: " + sumenh;
     });
 });
