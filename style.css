@@ -36,3 +36,9 @@ main {
 #middle-column p:nth-child(4) {
     margin-bottom: 20px;
 }
+
+#language-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
