@@ -1,5 +1,3 @@
-<!-- index.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +8,9 @@
 </head>
 <body>
     <header>
-        <h1>Welcome to Numerology Calculator</h1>
+        <h1 id="header">Welcome to Numerology Calculator</h1>
         <div id="language-container">
-            <label for="language">Language: </label>
+            <label id="languageLabel" for="language">Language: </label>
             <select id="language">
                 <option value="en">English</option>
                 <option value="vi">Vietnamese</option>
@@ -23,31 +21,32 @@
         <div id="container">
             <div id="left-content">
                 <div id="input-container">
-                    <input type="text" id="name" placeholder="Fullname"><br>
+                    <input type="text" id="name" placeholder="Full Name"><br>
                     <input type="text" id="birthdate" placeholder="Birthdate dd/mm/yyyy"><br>
-                    <button id="calculate-btn">Start Calculation</button>
+                    <button id="calculateBtn" data-translate="calculateBtn">Start Calculation</button>
                 </div>
             </div>
             <div id="middle-column">
                 <!-- Middle column content goes here -->
-                <h2>Result:</h2>
-                <p id="fullname"></p>
-                <p id="birthdate"></p>
-                <p id="todate"></p>
-                <p id="duongdoi"></p>
-                <p id="sumenh"></p>
-                <p id="lienketduongdoisumenh"></p>
-                <P id="truongthanh"></P>
-                <p id="linhhon"></p>
-                <p id="nhancach"></p>
-                <p id="lienketlinhhonnhancach"></p>
-                <p id="canbang"></p>
-                <p id="tuduylytri"></p>
+                <h2 id="resultHeading">Result:</h2>
+                <p><span id="fullnameLabel"></span> <span id="fullname"></span></p>
+                <p><span id="birthdate2Label"></span> <span id="birthdate2"></span></p>
+                <p><span id="todateLabel"></span> <span id="todate"></span></p>
+
+                <p><span id="duongdoiLabel"></span> <span id="duongdoi"></span></p>
+                <p><span id="sumenhLabel"></span> <span id="sumenh"></span></p>
+                <p><span id="lienketduongdoisumenhLabel"></span> <span id="lienketduongdoisumenh"></span></p>
+                <p><span id="truongthanhLabel"></span> <span id="truongthanh"></span></p>
+                <p><span id="linhhonLabel"></span> <span id="linhhon"></span> <span id="vowelsLabel"></span> <span id="vowels"></span></p>
+                <p><span id="nhancachLabel"></span> <span id="nhancach"></span> <span id="consonantsLabel"></span> <span id="consonants"></span></p>
+                <p><span id="lienketlinhhonnhancachLabel"></span> <span id="lienketlinhhonnhancach"></span></p>
+                <p><span id="canbangLabel"></span> <span id="canbang"></span> <span id="initialsLabel"></span> <span id="initials"></span></p>
+                <p><span id="tuduylytriLabel"></span> <span id="tuduylytri"></span></p>
             </div>
         </div>
     </main>
     <footer>
-        <p>&copy; 2024 Numerology Calculator by Quoc Hoa Le</p>
+        <p id="footer">&copy; 2024 Numerology Calculator by Quoc Hoa Le</p>
     </footer>
     <script src="script.js"></script>
 </body>

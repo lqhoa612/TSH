@@ -1,5 +1,4 @@
 // script.js
-
 // Define a function to reduce the sum to a single-digit number
 function reduceToSingleDigit(num, allowMaster) {
     // Reduce the sum to a single-digit number
@@ -22,11 +21,94 @@ function reduceToSingleDigit(num, allowMaster) {
     return num;
 }
 
+// Define a variable to store the current language
+let currentLanguage = 'en'; // Default language is English
+
+// Translations object
+const translations = {
+    en: {
+        name: "Fullname",
+        birthdate: "Birthdate dd/mm/yyyy",
+        header: "Welcome to Numerology Calculator",
+        languageLabel: "Language: ",
+        calculateBtn: "Start Calculation",
+        resultHeading: "Result: ",
+        footer: "&copy; 2024 Numerology Calculator by Quoc Hoa Le",
+
+        fullnameLabel: "Fullname: ",
+        birthdate2Label: "Birthdate: ",
+        todateLabel: "Date generated: ",
+        duongdoiLabel: "Lifepath: ",
+        sumenhLabel: "Destiny/Mission: ",
+        lienketduongdoisumenhLabel: "Connection (Lifepath and Destiny): ",
+        truongthanhLabel: "Growth/Mature: ",
+        linhhonLabel: "Soul/Urge: ", vowelsLabel: "     |     Vowels: ",
+        nhancachLabel: "Characteristic: ", consonantsLabel: "     |     Consonants: ",
+        lienketlinhhonnhancachLabel: "Connection (Soul and Characteristic): ",
+        canbangLabel: "Balance: ", initialsLabel: "     |     Initials: ",
+        tuduylytriLabel: "Rational Thinking: ",
+    },
+    vi: {
+        name: "Họ và Tên",
+        birthdate: "Ngày Sinh dd/mm/yyyy",
+        header: "Chào mừng đến với Máy tính Thần Số Học",
+        languageLabel: "Ngôn ngữ: ",
+        calculateBtn: "Bắt đầu tính toán",
+        resultHeading: "Kết quả: ",
+        footer: "&copy; 2024 Máy tính Thần Số Học do Quốc Hòa Lê phát triển",
+
+        fullnameLabel: "Họ và Tên: ",
+        birthdate2Label: "Ngày sinh: ",
+        todateLabel: "Ngày hiện tại: ",
+        duongdoiLabel: "Đường đời: ",
+        sumenhLabel: "Sứ mệnh: ",
+        lienketduongdoisumenhLabel: "Liên kết (Đường đời và Sứ mệnh): ",
+        truongthanhLabel: "Trưởng thành: ",
+        linhhonLabel: "Linh hồn: ", vowelsLabel: "     |     Nguyên âm: ",
+        nhancachLabel: "Nhân cách: ", consonantsLabel: "     |     Phụ âm: ",
+        lienketlinhhonnhancachLabel: "Liên kết (Linh hồn và Nhân cách): ",
+        canbangLabel: "Cân bằng: ", initialsLabel: "     |     Ký tự đầu: ",
+        tuduylytriLabel: "Tư duy lý trí: ",
+    }
+};
+
+// Function to translate the page
+function translatePage(language) {
+    const languageTranslations = translations[language];
+    if (!languageTranslations) {
+        console.warn(`Translations not found for language '${language}'.`);
+        return;
+    }
+
+    const placeholders = translations[language];
+    document.getElementById('name').placeholder = placeholders.name;
+    document.getElementById('birthdate').placeholder = placeholders.birthdate;
+
+    Object.keys(languageTranslations).forEach(key => {
+        const element = document.getElementById(key);
+        if (element) {
+            element.textContent = languageTranslations[key];
+        } else {
+            console.warn(`Element with ID '${key}' not found.`);
+        }
+    });
+
+    currentLanguage = language;
+}
+
 // Add event listener when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function () {
-    var processButton = document.getElementById('calculate-btn');
+    // Event listener for language selection change
+    document.getElementById('language').addEventListener('change', function () {
+        const selectedLanguage = this.value;
+        translatePage(selectedLanguage);
+    });
 
-    processButton.addEventListener('click', function () {
+    // Initial translation based on default language
+    translatePage(currentLanguage);
+
+    // Event listener for the calculate button
+    document.getElementById('calculateBtn').addEventListener('click', function () {
         // Get user name and birthday inputs
         var name = document.getElementById('name').value;
         var birthdate = document.getElementById('birthdate').value;
@@ -53,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         duongdoi = reduceToSingleDigit(duongdoi, true);
 
-        // Calculate Destiny, Soul Urge, Characteristic, Balance
+        // Calculate Mission, Soul Urge, Characteristic, Balance
         name = name.toLowerCase();
         var prevChar = ' '; // Initialize with a non-letter character to include the first letter
         var sumenh = 0; var linhhon = 0; var nhancach = 0; var canbang = 0;
@@ -119,18 +201,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         // Display the results
-        document.getElementById('fullname').textContent = "Full Name: " + name;
-        document.getElementById('birthdate').textContent = "Birthdate: " + birthdate;
-        document.getElementById('todate').textContent = `Generated Date: ${currentDay}/${currentMonth}/${currentYear}`;
+        document.getElementById('fullname').textContent = name;
+        document.getElementById('birthdate2').textContent = birthdate;
+        document.getElementById('todate').textContent = `${currentDay}/${currentMonth}/${currentYear}`;
 
-        document.getElementById('duongdoi').textContent = "1. Lifepath: " + duongdoi;
-        document.getElementById('sumenh').textContent = "2. Destiny: " + sumenh;
-        document.getElementById('lienketduongdoisumenh').textContent = "3. Connection (Lifepath & Destiny): " + lienketduongdoisumenh;
-        document.getElementById('truongthanh').textContent = "4. Growth: " + truongthanh;
-        document.getElementById('linhhon').textContent = "5. Soul Urge: " + linhhon + " | Vowels: " + vowelsNum;
-        document.getElementById('nhancach').textContent = "6. Charateristic: " + nhancach + " | Consonants: " + consonantsNum;
-        document.getElementById('lienketlinhhonnhancach').textContent = "7. Connection (Soul Urge & Charateristic): " + lienketlinhhonnhancach;
-        document.getElementById('canbang').textContent = "8. Balance: " + canbang + " | Initials: " + initialsNum;
-        document.getElementById('tuduylytri').textContent = "9. Rational Thinking: " + tuduylytri;
+        document.getElementById('duongdoi').textContent = duongdoi;
+        document.getElementById('sumenh').textContent = sumenh;
+        document.getElementById('lienketduongdoisumenh').textContent = lienketduongdoisumenh;
+        document.getElementById('truongthanh').textContent = truongthanh;
+        document.getElementById('linhhon').textContent = linhhon;
+        document.getElementById('vowels').textContent = vowelsNum;
+        document.getElementById('nhancach').textContent = nhancach;
+        document.getElementById('consonants').textContent = consonantsNum;
+        document.getElementById('lienketlinhhonnhancach').textContent = lienketlinhhonnhancach;
+        document.getElementById('canbang').textContent = canbang;
+        document.getElementById('initials').textContent = initialsNum;
+        document.getElementById('tuduylytri').textContent = tuduylytri;
+        
     });
 });
