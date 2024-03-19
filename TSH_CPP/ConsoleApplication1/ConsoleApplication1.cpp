@@ -303,7 +303,7 @@ void TSH(string name, string birthdate) {
     vector<int> thachthuc = { 0, 0, 0, 0 };
     thachthuc.at(0) = abs(ngaysinh - thangsinh);
     thachthuc.at(1) = abs(ngaysinh - namsinh);
-    thachthuc.at(2) = abs(chang.at(0) - chang.at(1));
+    thachthuc.at(2) = abs(thachthuc.at(0) - thachthuc.at(1));
     thachthuc.at(3) = abs(thangsinh - namsinh);
     cout << "Thach Thuc: ";
     cout << thachthuc.at(0) << " ";
