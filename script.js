@@ -47,6 +47,14 @@ const translations = {
         lienketlinhhonnhancachLabel: "Connection (Soul and Characteristic): ",
         canbangLabel: "Balance: ", initialsLabel: "     |     Initials: ",
         tuduylytriLabel: "Rational Thinking: ",
+        sucmanhtiemthucLabel: "Subconsious Ability: ",
+        sothieuLabel: "Unbalanced Number(s): ",
+        ngaysinhLabel: "Birth Day: ",
+        namcanhanLabel: "Personal Year: ",
+        thangcanhanLabel: "Personal Month: ",
+        ngaycanhanLabel: "Personal Day: ",
+        changLabel: "Milestones: ",
+        thachthucLabel: "Challenges: ",
     },
     vi: {
         name: "Họ và Tên",
@@ -69,6 +77,14 @@ const translations = {
         lienketlinhhonnhancachLabel: "Liên kết (Linh hồn và Nhân cách): ",
         canbangLabel: "Cân bằng: ", initialsLabel: "     |     Ký tự đầu: ",
         tuduylytriLabel: "Tư duy lý trí: ",
+        sucmanhtiemthucLabel: "Sức mạnh tiềm thức: ",
+        sothieuLabel: "Số thiếu: ",
+        ngaysinhLabel: "Ngày sinh: ",
+        namcanhanLabel: "Năm cá nhân: ",
+        thangcanhanLabel: "Tháng cá nhân: ",
+        ngaycanhanLabel: "Ngày cá nhân: ",
+        changLabel: "Chặng: ",
+        thachthucLabel: "Thách thức: ",
     }
 };
 
@@ -121,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
         
         // Calculate Lifepath
         var bdChar = birthdate.split(''); // Split birthdate into individual characters
-        var duongdoi = 0; var ngaysinh = 0;
+        var duongdoi = 0; var ngaysinh = 0; var thangsinh = 0; var namsinh = 0;
         for (var i = 0; i < bdChar.length; i++) {
             // Parse the character to a number (if it's numeric)
             var num = parseInt(bdChar[i]);
@@ -131,9 +147,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (i == 0 || i == 1) {
                     ngaysinh += num;
                 }
+                else if (i == 3 || i == 4) {
+                    thangsinh += num;
+                }
+                else if (i >= 6 && i <= 9) {
+                    namsinh += num
+                }
             }
         }
         duongdoi = reduceToSingleDigit(duongdoi, true);
+        ngaysinh = reduceToSingleDigit(ngaysinh, false);
+        thangsinh = reduceToSingleDigit(thangsinh, false);
+        namsinh = reduceToSingleDigit(namsinh, false);
 
         // Calculate Mission, Soul Urge, Characteristic, Balance
         name = name.toLowerCase();
@@ -197,8 +222,34 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         tuduylytri = reduceToSingleDigit(tuduylytri, true);
-        
 
+        // Calculate Subconcious ability and Unbalance Numbers
+        var sothieu = [];
+        for (var i = 1; i <= 9; i++) {
+            if (!nCharNumStorage.includes(i)) {
+                sothieu.push(i);
+            }
+        }
+        var sucmanhtiemthuc = 9 - sothieu.length;
+
+        // Calculate Personal Date
+        var namcanhan = reduceToSingleDigit(ngaysinh + thangsinh + reduceToSingleDigit(currentYear, false), false);
+        var thangcanhan = reduceToSingleDigit(namcanhan + reduceToSingleDigit(currentMonth, false), false);
+        var ngaycanhan = reduceToSingleDigit(thangcanhan + reduceToSingleDigit(currentDay, false), false);
+
+        // Calculate Milestones
+        var chang = [];
+        chang.push(reduceToSingleDigit(thangsinh + ngaysinh, true));
+        chang.push(reduceToSingleDigit(namsinh + ngaysinh, true));
+        chang.push(reduceToSingleDigit(chang[0] + chang[1], true));
+        chang.push(reduceToSingleDigit(thangsinh + namsinh, true));
+
+        // Calculation Challenges
+        var thachthuc = [];
+        thachthuc.push(Math.abs(reduceToSingleDigit(thangsinh - ngaysinh), true));
+        thachthuc.push(Math.abs(reduceToSingleDigit(namsinh - ngaysinh), true));
+        thachthuc.push(Math.abs(reduceToSingleDigit(thachthuc[0] - thachthuc[1]), true));
+        thachthuc.push(Math.abs(reduceToSingleDigit(thangsinh - namsinh), true));
 
         // Display the results
         document.getElementById('fullname').textContent = name;
@@ -217,6 +268,13 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('canbang').textContent = canbang;
         document.getElementById('initials').textContent = initialsNum;
         document.getElementById('tuduylytri').textContent = tuduylytri;
-        
+        document.getElementById('sucmanhtiemthuc').textContent = sucmanhtiemthuc;
+        document.getElementById('sothieu').textContent = sothieu;
+        document.getElementById('ngaysinh').textContent = ngaysinh;
+        document.getElementById('namcanhan').textContent = namcanhan;
+        document.getElementById('thangcanhan').textContent = thangcanhan;
+        document.getElementById('ngaycanhan').textContent = ngaycanhan;
+        document.getElementById('chang').textContent = chang;
+        document.getElementById('thachthuc').textContent = thachthuc;
     });
 });
