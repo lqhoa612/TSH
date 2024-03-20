@@ -21,9 +21,6 @@ function reduceToSingleDigit(num, allowMaster) {
     return num;
 }
 
-// Define a variable to store the current language
-let currentLanguage = 'en'; // Default language is English
-
 // Translations object
 const translations = {
     en: {
@@ -42,10 +39,10 @@ const translations = {
         sumenhLabel: "Destiny/Mission: ",
         lienketduongdoisumenhLabel: "Connection (Lifepath and Destiny): ",
         truongthanhLabel: "Growth/Mature: ",
-        linhhonLabel: "Soul/Urge: ", vowelsLabel: "     |     Vowels: ",
-        nhancachLabel: "Characteristic: ", consonantsLabel: "     |     Consonants: ",
+        linhhonLabel: "Soul/Urge: ", vowelsLabel: "|     Vowels: ",
+        nhancachLabel: "Characteristic: ", consonantsLabel: "|     Consonants: ",
         lienketlinhhonnhancachLabel: "Connection (Soul and Characteristic): ",
-        canbangLabel: "Balance: ", initialsLabel: "     |     Initials: ",
+        canbangLabel: "Balance: ", initialsLabel: "|     Initials: ",
         tuduylytriLabel: "Rational Thinking: ",
         sucmanhtiemthucLabel: "Subconsious Ability: ",
         sothieuLabel: "Unbalanced Number(s): ",
@@ -54,6 +51,7 @@ const translations = {
         thangcanhanLabel: "Personal Month: ",
         ngaycanhanLabel: "Personal Day: ",
         changLabel: "Milestones: ",
+        tuoiLabel: "Milestones Age: ",
         thachthucLabel: "Challenges: ",
     },
     vi: {
@@ -72,10 +70,10 @@ const translations = {
         sumenhLabel: "Sứ mệnh: ",
         lienketduongdoisumenhLabel: "Liên kết (Đường đời và Sứ mệnh): ",
         truongthanhLabel: "Trưởng thành: ",
-        linhhonLabel: "Linh hồn: ", vowelsLabel: "     |     Nguyên âm: ",
-        nhancachLabel: "Nhân cách: ", consonantsLabel: "     |     Phụ âm: ",
+        linhhonLabel: "Linh hồn: ", vowelsLabel: "|     Nguyên âm: ",
+        nhancachLabel: "Nhân cách: ", consonantsLabel: "|     Phụ âm: ",
         lienketlinhhonnhancachLabel: "Liên kết (Linh hồn và Nhân cách): ",
-        canbangLabel: "Cân bằng: ", initialsLabel: "     |     Ký tự đầu: ",
+        canbangLabel: "Cân bằng: ", initialsLabel: "|     Ký tự đầu: ",
         tuduylytriLabel: "Tư duy lý trí: ",
         sucmanhtiemthucLabel: "Sức mạnh tiềm thức: ",
         sothieuLabel: "Số thiếu: ",
@@ -84,6 +82,7 @@ const translations = {
         thangcanhanLabel: "Tháng cá nhân: ",
         ngaycanhanLabel: "Ngày cá nhân: ",
         changLabel: "Chặng: ",
+        tuoiLabel: "Tuổi chặng: ",
         thachthucLabel: "Thách thức: ",
     }
 };
@@ -108,12 +107,63 @@ function translatePage(language) {
             console.warn(`Element with ID '${key}' not found.`);
         }
     });
-
-    currentLanguage = language;
 }
+
+// Date format function
+function formatDate(input) {
+    console.log("Input value changed:", input);
+    
+    // Remove any non-numeric characters from the input
+    var cleanedInput = input.replace(/\D/g, '');
+
+    // Check if the input is empty
+    if (cleanedInput.length === 0) {
+        // Set the input value to empty
+        document.getElementById('birthdate').value = '';
+        return;
+    }
+
+    // Format the date
+    var formattedDate = '';
+
+    // Insert first two characters
+    formattedDate += cleanedInput.slice(0, 2);
+
+    // Insert "/" after the second character if the input length is 3 or more
+    if (cleanedInput.length >= 3) {
+        formattedDate += '/';
+    }
+
+    // Insert next two characters
+    if (cleanedInput.length > 2) {
+        formattedDate += cleanedInput.slice(2, 4);
+    }
+
+    // Insert "/" after the fifth character if the input length is 5 or more
+    if (cleanedInput.length >= 5) {
+        formattedDate += '/';
+    }
+
+    // Insert remaining characters
+    if (cleanedInput.length > 4) {
+        formattedDate += cleanedInput.slice(4, 8);
+    }
+
+    // Set the input value to the formatted date
+    document.getElementById('birthdate').value = formattedDate;
+}
+
+
 
 // Add event listener when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function () {
+    // Event listener for input field value changes
+    document.getElementById('birthdate').addEventListener('input', function () {
+        console.log("Input field value changed:", this.value);
+        // Call the formatDate function when the input field value changes
+        formatDate(this.value);
+    });
+
     // Event listener for language selection change
     document.getElementById('language').addEventListener('change', function () {
         const selectedLanguage = this.value;
@@ -121,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Initial translation based on default language
-    translatePage(currentLanguage);
+    translatePage('en');
 
     // Event listener for the calculate button
     document.getElementById('calculateBtn').addEventListener('click', function () {
@@ -244,6 +294,13 @@ document.addEventListener('DOMContentLoaded', function () {
         chang.push(reduceToSingleDigit(chang[0] + chang[1], true));
         chang.push(reduceToSingleDigit(thangsinh + namsinh, true));
 
+        // Calculate Milestone Age
+        var tuoi = [];
+        tuoi.push(36 - reduceToSingleDigit(duongdoi, false));
+        tuoi.push(tuoi[0] + 9);
+        tuoi.push(tuoi[1] + 9);
+        tuoi.push(tuoi[2] + 9);
+
         // Calculation Challenges
         var thachthuc = [];
         thachthuc.push(Math.abs(reduceToSingleDigit(thangsinh - ngaysinh), true));
@@ -275,6 +332,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('thangcanhan').textContent = thangcanhan;
         document.getElementById('ngaycanhan').textContent = ngaycanhan;
         document.getElementById('chang').textContent = chang;
+        document.getElementById('tuoi').textContent = tuoi;
         document.getElementById('thachthuc').textContent = thachthuc;
     });
 });

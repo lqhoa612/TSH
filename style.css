@@ -28,17 +28,28 @@ main {
     margin: 0 10px;
 }
 
-/* Reduce space between lines */
 #middle-column h2, #middle-column p {
-    margin: 5px 0; /* Adjust margin between lines */
+    margin: 8px 0; /* Adjust margin between lines */
 }
 
 #middle-column p:nth-child(4) {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 #language-container {
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+#linhhon {
+    margin-right: 20px;
+}
+
+#nhancach {
+    margin-right: 20px;
+}
+
+#canbang {
+    margin-right: 20px;
 }
