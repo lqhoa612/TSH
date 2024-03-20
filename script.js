@@ -160,6 +160,15 @@ function formatDate(input) {
 
 // Add event listener when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function () {
+    // Event listener for the Enter key press
+    document.addEventListener('keydown', function(event) {
+        // Check if the pressed key is Enter (keycode 13)
+        if (event.keyCode === 13) {
+            // Trigger the click event of the calculation button
+            document.getElementById('calculateBtn').click();
+        }
+    });
+
     // Event listener for input field value changes
     document.getElementById('birthdate').addEventListener('input', function () {
         console.log("Input field value changed:", this.value);
