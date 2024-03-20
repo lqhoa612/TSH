@@ -109,6 +109,11 @@ function translatePage(language) {
     });
 }
 
+// Function to remove accents from a string
+function removeAccents(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
 // Date format function
 function formatDate(input) {
     console.log("Input value changed:", input);
@@ -153,13 +158,12 @@ function formatDate(input) {
     document.getElementById('birthdate').value = formattedDate;
 }
 
-
-
 // Add event listener when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function () {
     // Event listener for input field value changes
     document.getElementById('birthdate').addEventListener('input', function () {
         console.log("Input field value changed:", this.value);
+
         // Call the formatDate function when the input field value changes
         formatDate(this.value);
     });
@@ -176,7 +180,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Event listener for the calculate button
     document.getElementById('calculateBtn').addEventListener('click', function () {
         // Get user name and birthday inputs
-        var name = document.getElementById('name').value;
+        var preCleanedName= document.getElementById('name').value;
+        var name = removeAccents(document.getElementById('name').value);
         var birthdate = document.getElementById('birthdate').value;
 
         // Get the current system date
@@ -309,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function () {
         thachthuc.push(Math.abs(reduceToSingleDigit(thangsinh - namsinh), true));
 
         // Display the results
-        document.getElementById('fullname').textContent = name;
+        document.getElementById('fullname').textContent = preCleanedName;
         document.getElementById('birthdate2').textContent = birthdate;
         document.getElementById('todate').textContent = `${currentDay}/${currentMonth}/${currentYear}`;
 
