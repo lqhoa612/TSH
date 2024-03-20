@@ -39,10 +39,10 @@ const translations = {
         sumenhLabel: "Destiny/Mission: ",
         lienketduongdoisumenhLabel: "Connection (Lifepath and Destiny): ",
         truongthanhLabel: "Growth/Mature: ",
-        linhhonLabel: "Soul/Urge: ", vowelsLabel: "|     Vowels: ",
-        nhancachLabel: "Characteristic: ", consonantsLabel: "|     Consonants: ",
+        linhhonLabel: "Soul/Urge: ", // vowelsLabel: "|     Vowels: ",
+        nhancachLabel: "Characteristic: ", //consonantsLabel: "|     Consonants: ",
         lienketlinhhonnhancachLabel: "Connection (Soul and Characteristic): ",
-        canbangLabel: "Balance: ", initialsLabel: "|     Initials: ",
+        canbangLabel: "Balance: ", // initialsLabel: "|     Initials: ",
         tuduylytriLabel: "Rational Thinking: ",
         sucmanhtiemthucLabel: "Subconsious Ability: ",
         sothieuLabel: "Unbalanced Number(s): ",
@@ -70,10 +70,10 @@ const translations = {
         sumenhLabel: "Sứ mệnh: ",
         lienketduongdoisumenhLabel: "Liên kết (Đường đời và Sứ mệnh): ",
         truongthanhLabel: "Trưởng thành: ",
-        linhhonLabel: "Linh hồn: ", vowelsLabel: "|     Nguyên âm: ",
-        nhancachLabel: "Nhân cách: ", consonantsLabel: "|     Phụ âm: ",
+        linhhonLabel: "Linh hồn: ", // vowelsLabel: "|     Nguyên âm: ",
+        nhancachLabel: "Nhân cách: ", // consonantsLabel: "|     Phụ âm: ",
         lienketlinhhonnhancachLabel: "Liên kết (Linh hồn và Nhân cách): ",
-        canbangLabel: "Cân bằng: ", initialsLabel: "|     Ký tự đầu: ",
+        canbangLabel: "Cân bằng: ", // initialsLabel: "|     Ký tự đầu: ",
         tuduylytriLabel: "Tư duy lý trí: ",
         sucmanhtiemthucLabel: "Sức mạnh tiềm thức: ",
         sothieuLabel: "Số thiếu: ",
@@ -259,10 +259,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             prevChar = nChar;
         }
-        sumenh = reduceToSingleDigit(sumenh, true);
-        linhhon = reduceToSingleDigit(linhhon, true);
-        nhancach = reduceToSingleDigit(nhancach, true);
-        canbang = reduceToSingleDigit(canbang, true);
+        sumenh = reduceToSingleDigit(sumenh, true); console.log("su menh:", nCharNumStorage);
+        linhhon = reduceToSingleDigit(linhhon, true); console.log("nguyen am:", vowelsNum);
+        nhancach = reduceToSingleDigit(nhancach, true); console.log("phu am:", consonantsNum);
+        canbang = reduceToSingleDigit(canbang, true); console.log("chu cai dau:", initialsNum);
 
         // Calculate Lifepath & Destiny Connection
         var lienketduongdoisumenh = Math.abs(reduceToSingleDigit(duongdoi, false) - reduceToSingleDigit(sumenh, false));
@@ -332,12 +332,12 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('lienketduongdoisumenh').textContent = lienketduongdoisumenh;
         document.getElementById('truongthanh').textContent = truongthanh;
         document.getElementById('linhhon').textContent = linhhon;
-        document.getElementById('vowels').textContent = vowelsNum;
+        // document.getElementById('vowels').textContent = vowelsNum;
         document.getElementById('nhancach').textContent = nhancach;
-        document.getElementById('consonants').textContent = consonantsNum;
+        // document.getElementById('consonants').textContent = consonantsNum;
         document.getElementById('lienketlinhhonnhancach').textContent = lienketlinhhonnhancach;
         document.getElementById('canbang').textContent = canbang;
-        document.getElementById('initials').textContent = initialsNum;
+        // document.getElementById('initials').textContent = initialsNum;
         document.getElementById('tuduylytri').textContent = tuduylytri;
         document.getElementById('sucmanhtiemthuc').textContent = sucmanhtiemthuc;
         document.getElementById('sothieu').textContent = sothieu;
