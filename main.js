@@ -21,7 +21,29 @@ function reduceToSingleDigit(num, allowMaster) {
     return num;
 }
 
-// Translations object
+// Function to translate the page
+function translatePage(language) {
+    const languageTranslations = translations[language];
+    if (!languageTranslations) {
+        console.warn(`Translations not found for language '${language}'.`);
+        return;
+    }
+
+    const placeholders = translations[language];
+    document.getElementById('name').placeholder = placeholders.name;
+    document.getElementById('birthdate').placeholder = placeholders.birthdate;
+
+    Object.keys(languageTranslations).forEach(key => {
+        const element = document.getElementById(key);
+        if (element) {
+            element.textContent = languageTranslations[key];
+        } else {
+            console.warn(`Element with ID '${key}' not found.`);
+        }
+    });
+}
+
+// Translations labels
 const translations = {
     en: {
         name: "Fullname",
@@ -86,28 +108,6 @@ const translations = {
         thachthucLabel: "Thách thức: ",
     }
 };
-
-// Function to translate the page
-function translatePage(language) {
-    const languageTranslations = translations[language];
-    if (!languageTranslations) {
-        console.warn(`Translations not found for language '${language}'.`);
-        return;
-    }
-
-    const placeholders = translations[language];
-    document.getElementById('name').placeholder = placeholders.name;
-    document.getElementById('birthdate').placeholder = placeholders.birthdate;
-
-    Object.keys(languageTranslations).forEach(key => {
-        const element = document.getElementById(key);
-        if (element) {
-            element.textContent = languageTranslations[key];
-        } else {
-            console.warn(`Element with ID '${key}' not found.`);
-        }
-    });
-}
 
 // Function to remove accents from a string
 function removeAccents(str) {

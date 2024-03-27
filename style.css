@@ -14,42 +14,73 @@ header, footer {
 }
 
 main {
-    padding: 20px;
+    padding: 10px;
 }
-
-#container {
+/*------------------------------------------------------*/
+/*Main container*/
+#main-container {
     display: flex;
 }
 
-#middle-column {
+/*Left content*/
+#left-content {
+    background-color: rgb(230, 230, 230);
+    width: fit-content;
+    min-width: 310px;
+}
+
+#input-container {
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+/*Result Container*/
+#result-container p {
+    margin: 5px 0px;
+    margin-left: 10px;
+}
+
+#result-container h2 {
+    margin-top: 1px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+#basicInfo-container {
+    background-color: #a09e9e;
+    margin-bottom: 10px;
+}
+
+#index-container p {
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s;
+}
+
+#index-container p:hover { 
+    /* Add hover effect */
+    background-color: #e0e0e0;
+}
+
+/*Right content*/
+#right-content {
+    background-color: rgb(179, 179, 179);
     flex: 1;
-    background-color: #f0f0f0;
-    padding: 1px;
-    margin: 0 10px;
+    /* min-width: 600px; */
 }
 
-#middle-column h2, #middle-column p {
-    margin: 8px 0; /* Adjust margin between lines */
+#index-head {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-#middle-column p:nth-child(4) {
-    margin-bottom: 18px;
-}
-
+/*Language Container*/
 #language-container {
     position: absolute;
     top: 10px;
     right: 10px;
-}
-
-#linhhon {
-    margin-right: 20px;
-}
-
-#nhancach {
-    margin-right: 20px;
-}
-
-#canbang {
-    margin-right: 20px;
 }
