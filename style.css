@@ -26,7 +26,8 @@ main {
 #left-content {
     background-color: rgb(230, 230, 230);
     width: fit-content;
-    min-width: 310px;
+    flex: 1;
+    max-width: 320px;
 }
 
 #input-container {
