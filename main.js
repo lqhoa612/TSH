@@ -45,7 +45,7 @@ const translations = {
         canbangLabel: "Balance: ", // initialsLabel: "|     Initials: ",
         tuduylytriLabel: "Rational Thinking: ",
         sucmanhtiemthucLabel: "Subconsious Ability: ",
-        sothieuLabel: "Unbalanced Number(s): ",
+        sothieuLabel: "Imbalanced Number(s): ",
         ngaysinhLabel: "Birth Day: ",
         namcanhanLabel: "Personal Year: ",
         thangcanhanLabel: "Personal Month: ",
