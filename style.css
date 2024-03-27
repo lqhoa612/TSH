@@ -71,7 +71,6 @@ main {
 #right-content {
     background-color: rgb(179, 179, 179);
     flex: 1;
-    /* min-width: 600px; */
 }
 
 #index-head {
