@@ -23,28 +23,8 @@ function reduceToSingleDigit(num, allowMaster) {
 
 // Function to translate the page
 function translatePage(language) {
-    const languageTranslations = translations[language];
-    if (!languageTranslations) {
-        console.warn(`Translations not found for language '${language}'.`);
-        return;
-    }
-
-    const placeholders = translations[language];
-    document.getElementById('name').placeholder = placeholders.name;
-    document.getElementById('birthdate').placeholder = placeholders.birthdate;
-
-    Object.keys(languageTranslations).forEach(key => {
-        const element = document.getElementById(key);
-        if (element) {
-            element.textContent = languageTranslations[key];
-        } else {
-            console.warn(`Element with ID '${key}' not found.`);
-        }
-    });
-}
-
-// Translations labels
-const translations = {
+    // Translations
+    const translations = {
     en: {
         name: "Fullname",
         birthdate: "Birthdate dd/mm/yyyy",
@@ -107,7 +87,26 @@ const translations = {
         tuoiLabel: "Tuổi chặng: ",
         thachthucLabel: "Thách thức: ",
     }
-};
+    };
+    const languageTranslations = translations[language];
+    if (!languageTranslations) {
+        console.warn(`Translations not found for language '${language}'.`);
+        return;
+    }
+
+    const placeholders = translations[language];
+    document.getElementById('name').placeholder = placeholders.name;
+    document.getElementById('birthdate').placeholder = placeholders.birthdate;
+
+    Object.keys(languageTranslations).forEach(key => {
+        const element = document.getElementById(key);
+        if (element) {
+            element.textContent = languageTranslations[key];
+        } else {
+            console.warn(`Element with ID '${key}' not found.`);
+        }
+    });
+}
 
 // Function to remove accents from a string
 function removeAccents(str) {
@@ -158,6 +157,163 @@ function formatDate(input) {
     document.getElementById('birthdate').value = formattedDate;
 }
 
+// Calculate Numerology --->
+function calculateNumerology() {
+    // Get user inputs
+    var rawName = document.getElementById('name').value;
+    var name = removeAccents(rawName);
+    var birthdate = document.getElementById('birthdate').value;
+
+    // Get system date
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+
+    // Handle birthdate input
+    var [ngaysinh, thangsinh, namsinh] =  birthdate.split('/').map(Number);
+
+    // Perform calculation of core numbers
+    var [duongdoi, sumenh, linhhon, nhancach, canbang, sucmanhtiemthuc, sothieu] = calculateCoreNumbers(name, ngaysinh, thangsinh, namsinh);
+
+    // Calculate connections and other indices
+    var lienketduongdoisumenh = Math.abs(reduceToSingleDigit(duongdoi, false) - reduceToSingleDigit(sumenh, false));
+    var truongthanh = reduceToSingleDigit(duongdoi + sumenh, true);
+    var lienketlinhhonnhancach = Math.abs(reduceToSingleDigit(linhhon, false) - reduceToSingleDigit(nhancach, false));
+    var tuduylytri = calculateRationalThinking(name, ngaysinh);
+
+    // Calculate personal date, milestones, and challenges
+    var namcanhan = reduceToSingleDigit(ngaysinh + thangsinh + reduceToSingleDigit(year, false), false);
+    var thangcanhan = reduceToSingleDigit(namcanhan + reduceToSingleDigit(month, false), false);
+    var ngaycanhan = reduceToSingleDigit(thangcanhan + reduceToSingleDigit(day, false), false);
+    var [chang, thachthuc] = calculateMilestonesAndChallanges(ngaysinh, thangsinh, namsinh);
+    var tuoi = calculateMilestoneAges(duongdoi);
+
+    // Display the results
+    displayResults(rawName, birthdate, day, month, year, duongdoi, sumenh, lienketduongdoisumenh, truongthanh, linhhon, nhancach, lienketlinhhonnhancach, canbang, tuduylytri, sucmanhtiemthuc, sothieu, ngaysinh, namcanhan, thangcanhan, ngaycanhan, chang, tuoi, thachthuc);
+}
+
+function calculateCoreNumbers(name, ngaysinh, thangsinh, namsinh) {
+    var [duongdoi, sumenh, linhhon, nhancach, canbang, sucmanhtiemthuc, nCharNum] = [0, 0, 0, 0, 0, 0, 0];
+    var [nChar, prevChar] = [' ', ' '];
+    var [nCharNumStorage, vowelsNumStorage, consonantsNumStorage, initialsNumStorage, sothieu] = [[], [], [], [], []];
+    name = name.toLowerCase();
+    // Lifepath
+    duongdoi = reduceToSingleDigit(ngaysinh, false) + reduceToSingleDigit(thangsinh, false) + reduceToSingleDigit(namsinh, false);
+    duongdoi = reduceToSingleDigit(duongdoi, true);
+
+    // Destiny, Soul Urge, Characteristic, and Balance
+    for (var i = 0; i < name.length; i++) {
+        nChar = name.charAt(i);
+        if (/[a-z]/.test(nChar)) {
+            nCharNum = reduceToSingleDigit(nChar.charCodeAt(0)-96, false);
+            sumenh += nCharNum;
+            nCharNumStorage.push(nCharNum);
+            if (/[aeiou]/.test(nChar)) {
+                linhhon += nCharNum;
+                vowelsNumStorage.push(nCharNum);
+            }
+            else if (/[y]/.test(nChar) && !/[aeiou]/.test(prevChar)) {
+                linhhon += nCharNum;
+                vowelsNumStorage.push(nCharNum);
+            }
+            else {
+                nhancach += nCharNum;
+                consonantsNumStorage.push(nCharNum);
+            }
+            if (!/[a-z]/.test(prevChar)) {
+                canbang += nCharNum;
+                initialsNumStorage.push(nCharNum);
+            }
+        }
+        prevChar = nChar;
+    }
+    // Subconcious Power and Imbalance Number(s)
+    for (var i = 1; i <= 9; i++) {
+        if (!nCharNumStorage.includes(i)) {
+            sothieu.push(i);
+        }
+    }
+
+    sumenh = reduceToSingleDigit(sumenh, true); console.log('sumenh: ', nCharNumStorage);
+    linhhon = reduceToSingleDigit(linhhon, true); console.log('nguyenam: ', vowelsNumStorage);
+    nhancach = reduceToSingleDigit(nhancach, true); console.log('phuam: ', consonantsNumStorage);
+    canbang = reduceToSingleDigit(canbang, true); console.log('chucaidau: ', initialsNumStorage);
+    sucmanhtiemthuc = 9 - sothieu.length;
+
+    return [duongdoi, sumenh, linhhon, nhancach, canbang, sucmanhtiemthuc, sothieu];
+}
+
+function calculateRationalThinking(name, ngaysinh) {
+    var tuduylytri = ngaysinh;
+    name = name.toLowerCase();
+    for (var i = name.length - 1; i >= 0; i--) {
+        var nChar = name.charAt(i);
+        if (/[a-z]/.test(nChar)) {
+            var nCharNum = reduceToSingleDigit(nChar.charCodeAt(0) - 96, false);
+            tuduylytri += nCharNum;
+        }
+        else {
+            break;
+        }
+    }
+    return reduceToSingleDigit(tuduylytri, true);
+}
+
+function calculateMilestonesAndChallanges(ngaysinh, thangsinh, namsinh) {
+    var [chang, thachthuc] = [[], []];
+    ngaysinh = reduceToSingleDigit(ngaysinh, false);
+    thangsinh = reduceToSingleDigit(thangsinh, false);
+    namsinh = reduceToSingleDigit(namsinh, false);
+
+    chang.push(reduceToSingleDigit(thangsinh + ngaysinh, true));
+    chang.push(reduceToSingleDigit(namsinh + ngaysinh, true));
+    chang.push(reduceToSingleDigit(chang[0] + chang[1], true));
+    chang.push(reduceToSingleDigit(thangsinh + namsinh, true));
+
+    thachthuc.push(Math.abs(reduceToSingleDigit(thangsinh - ngaysinh), true));
+    thachthuc.push(Math.abs(reduceToSingleDigit(namsinh - ngaysinh), true));
+    thachthuc.push(Math.abs(reduceToSingleDigit(thachthuc[0] - thachthuc[1]), true));
+    thachthuc.push(Math.abs(reduceToSingleDigit(thangsinh - namsinh), true));
+
+    return [chang, thachthuc];
+}
+
+function calculateMilestoneAges(duongdoi) {
+    var tuoi = [];
+    tuoi.push(36 - reduceToSingleDigit(duongdoi, false));
+    tuoi.push(tuoi[0] + 9);
+    tuoi.push(tuoi[1] + 9);
+    tuoi.push(tuoi[2] + 9);
+    return tuoi;
+}
+
+function displayResults(rawName, birthdate, day, month, year, duongdoi, sumenh, lienketduongdoisumenh, truongthanh, linhhon, nhancach, lienketlinhhonnhancach, canbang, tuduylytri, sucmanhtiemthuc, sothieu, ngaysinh, namcanhan, thangcanhan, ngaycanhan, chang, tuoi, thachthuc) {
+    document.getElementById('fullname').textContent = rawName;
+    document.getElementById('birthdate2').textContent = birthdate;
+    document.getElementById('todate').textContent = `${day}/${month}/${year}`;
+
+    document.getElementById('duongdoi').textContent = duongdoi;
+    document.getElementById('sumenh').textContent = sumenh;
+    document.getElementById('lienketduongdoisumenh').textContent = lienketduongdoisumenh;
+    document.getElementById('truongthanh').textContent = truongthanh;
+    document.getElementById('linhhon').textContent = linhhon;
+    document.getElementById('nhancach').textContent = nhancach;
+    document.getElementById('lienketlinhhonnhancach').textContent = lienketlinhhonnhancach;
+    document.getElementById('canbang').textContent = canbang;
+    document.getElementById('tuduylytri').textContent = tuduylytri;
+    document.getElementById('sucmanhtiemthuc').textContent = sucmanhtiemthuc;
+    document.getElementById('sothieu').textContent = sothieu;
+    document.getElementById('ngaysinh').textContent = ngaysinh;
+    document.getElementById('namcanhan').textContent = namcanhan;
+    document.getElementById('thangcanhan').textContent = thangcanhan;
+    document.getElementById('ngaycanhan').textContent = ngaycanhan;
+    document.getElementById('chang').textContent = chang;
+    document.getElementById('tuoi').textContent = tuoi;
+    document.getElementById('thachthuc').textContent = thachthuc;
+}
+// Calculate Numerology <---
+
 // Add event listener when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function () {
     // Event listener for the Enter key press
@@ -186,167 +342,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initial translation based on default language
     translatePage('en');
 
-    // Event listener for the calculate button
-    document.getElementById('calculateBtn').addEventListener('click', function () {
-        // Get user name and birthday inputs
-        var preCleanedName= document.getElementById('name').value;
-        var name = removeAccents(document.getElementById('name').value);
-        var birthdate = document.getElementById('birthdate').value;
-
-        // Get the current system date
-        var currentDate = new Date();
-        var currentYear = currentDate.getFullYear();
-        var currentMonth = currentDate.getMonth() + 1;
-        var currentDay = currentDate.getDate();
-        
-        // Calculate Lifepath
-        var bdChar = birthdate.split(''); // Split birthdate into individual characters
-        var duongdoi = 0; var ngaysinh = 0; var thangsinh = 0; var namsinh = 0;
-        for (var i = 0; i < bdChar.length; i++) {
-            // Parse the character to a number (if it's numeric)
-            var num = parseInt(bdChar[i]);
-            // Check if it's a valid number
-            if (!isNaN(num)){
-                duongdoi += num; // Add the numeric value to the sum
-                if (i == 0 || i == 1) {
-                    ngaysinh += num;
-                }
-                else if (i == 3 || i == 4) {
-                    thangsinh += num;
-                }
-                else if (i >= 6 && i <= 9) {
-                    namsinh += num
-                }
-            }
-        }
-        duongdoi = reduceToSingleDigit(duongdoi, true);
-        ngaysinh = reduceToSingleDigit(ngaysinh, false);
-        thangsinh = reduceToSingleDigit(thangsinh, false);
-        namsinh = reduceToSingleDigit(namsinh, false);
-
-        // Calculate Mission, Soul Urge, Characteristic, Balance
-        name = name.toLowerCase();
-        var prevChar = ' '; // Initialize with a non-letter character to include the first letter
-        var sumenh = 0; var linhhon = 0; var nhancach = 0; var canbang = 0;
-        var nCharNumStorage = []; var vowelsNum = []; var consonantsNum = []; var initialsNum = [];// Initialize vector
-        for (var i = 0; i < name.length; i++) {
-            var nChar = name.charAt(i);
-            // Check if the character is alphabetic
-            if (/[a-z]/.test(nChar)) {
-                // Assign a number to the character (1 for 'a', 2 for 'b', ..., 26 for 'z')
-                var nCharNum = reduceToSingleDigit(nChar.charCodeAt(0) - 96, false); // 'a' has ASCII code 97, so subtracting 96 gives 1 for 'a', 2 for 'b', and so on
-                // Check if the character is an initial (preceded by a non-letter character)
-                if (!/[a-z]/.test(prevChar)) {
-                    canbang += nCharNum; // sum for Balance
-                    initialsNum.push(nCharNum);
-                }
-                // Check if the character is vowels
-                if (/[aeiou]/.test(nChar)) {
-                    linhhon += nCharNum; // sum for Soul Urge
-                    vowelsNum.push(nCharNum);
-                }
-                // count 'y' as a vowel, if the character before it is not
-                else if (/[y]/.test(nChar) && !/[aeiou]/.test(prevChar)) {
-                    linhhon += nCharNum;
-                    vowelsNum.push(nCharNum);
-                }
-                else {
-                    nhancach += nCharNum; // sum for Charateristic
-                    consonantsNum.push(nCharNum);
-                }
-                sumenh += nCharNum; // sum for Destiny
-                nCharNumStorage.push(nCharNum);
-            }
-            prevChar = nChar;
-        }
-        sumenh = reduceToSingleDigit(sumenh, true); console.log("su menh:", nCharNumStorage);
-        linhhon = reduceToSingleDigit(linhhon, true); console.log("nguyen am:", vowelsNum);
-        nhancach = reduceToSingleDigit(nhancach, true); console.log("phu am:", consonantsNum);
-        canbang = reduceToSingleDigit(canbang, true); console.log("chu cai dau:", initialsNum);
-
-        // Calculate Lifepath & Destiny Connection
-        var lienketduongdoisumenh = Math.abs(reduceToSingleDigit(duongdoi, false) - reduceToSingleDigit(sumenh, false));
-
-        // Calculate Growth
-        var truongthanh = reduceToSingleDigit(duongdoi + sumenh, true);
-
-        // Calculate Soul Urge & Charateristic Connection
-        var lienketlinhhonnhancach = Math.abs(reduceToSingleDigit(linhhon, false) - reduceToSingleDigit(nhancach, false));;
-
-        // Calculate Rational Thinking
-        var tuduylytri = ngaysinh;
-        for (var i = name.length - 1; i >= 0; i--) {
-            var nChar = name.charAt(i);
-            if (/[a-z]/.test(nChar)) {
-                var nCharNum = reduceToSingleDigit(nChar.charCodeAt(0) - 96, false);
-                tuduylytri += nCharNum;
-            }
-            else {
-                break;
-            }
-        }
-        tuduylytri = reduceToSingleDigit(tuduylytri, true);
-
-        // Calculate Subconcious ability and Unbalance Numbers
-        var sothieu = [];
-        for (var i = 1; i <= 9; i++) {
-            if (!nCharNumStorage.includes(i)) {
-                sothieu.push(i);
-            }
-        }
-        var sucmanhtiemthuc = 9 - sothieu.length;
-
-        // Calculate Personal Date
-        var namcanhan = reduceToSingleDigit(ngaysinh + thangsinh + reduceToSingleDigit(currentYear, false), false);
-        var thangcanhan = reduceToSingleDigit(namcanhan + reduceToSingleDigit(currentMonth, false), false);
-        var ngaycanhan = reduceToSingleDigit(thangcanhan + reduceToSingleDigit(currentDay, false), false);
-
-        // Calculate Milestones
-        var chang = [];
-        chang.push(reduceToSingleDigit(thangsinh + ngaysinh, true));
-        chang.push(reduceToSingleDigit(namsinh + ngaysinh, true));
-        chang.push(reduceToSingleDigit(chang[0] + chang[1], true));
-        chang.push(reduceToSingleDigit(thangsinh + namsinh, true));
-
-        // Calculate Milestone Age
-        var tuoi = [];
-        tuoi.push(36 - reduceToSingleDigit(duongdoi, false));
-        tuoi.push(tuoi[0] + 9);
-        tuoi.push(tuoi[1] + 9);
-        tuoi.push(tuoi[2] + 9);
-
-        // Calculation Challenges
-        var thachthuc = [];
-        thachthuc.push(Math.abs(reduceToSingleDigit(thangsinh - ngaysinh), true));
-        thachthuc.push(Math.abs(reduceToSingleDigit(namsinh - ngaysinh), true));
-        thachthuc.push(Math.abs(reduceToSingleDigit(thachthuc[0] - thachthuc[1]), true));
-        thachthuc.push(Math.abs(reduceToSingleDigit(thangsinh - namsinh), true));
-
-        // Display the results
-        document.getElementById('fullname').textContent = preCleanedName;
-        document.getElementById('birthdate2').textContent = birthdate;
-        document.getElementById('todate').textContent = `${currentDay}/${currentMonth}/${currentYear}`;
-
-        document.getElementById('duongdoi').textContent = duongdoi;
-        document.getElementById('sumenh').textContent = sumenh;
-        document.getElementById('lienketduongdoisumenh').textContent = lienketduongdoisumenh;
-        document.getElementById('truongthanh').textContent = truongthanh;
-        document.getElementById('linhhon').textContent = linhhon;
-        // document.getElementById('vowels').textContent = vowelsNum;
-        document.getElementById('nhancach').textContent = nhancach;
-        // document.getElementById('consonants').textContent = consonantsNum;
-        document.getElementById('lienketlinhhonnhancach').textContent = lienketlinhhonnhancach;
-        document.getElementById('canbang').textContent = canbang;
-        // document.getElementById('initials').textContent = initialsNum;
-        document.getElementById('tuduylytri').textContent = tuduylytri;
-        document.getElementById('sucmanhtiemthuc').textContent = sucmanhtiemthuc;
-        document.getElementById('sothieu').textContent = sothieu;
-        document.getElementById('ngaysinh').textContent = ngaysinh;
-        document.getElementById('namcanhan').textContent = namcanhan;
-        document.getElementById('thangcanhan').textContent = thangcanhan;
-        document.getElementById('ngaycanhan').textContent = ngaycanhan;
-        document.getElementById('chang').textContent = chang;
-        document.getElementById('tuoi').textContent = tuoi;
-        document.getElementById('thachthuc').textContent = thachthuc;
-    });
+    // Event listener for calculate button press
+    document.getElementById('calculateBtn').addEventListener('click', calculateNumerology);
 });
