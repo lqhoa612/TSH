@@ -26,7 +26,7 @@ function translatePage(language) {
     // Translations
     const translations = {
     en: {
-        name: "Fullname",
+        name: "Fullname last middle first",
         birthdate: "Birthdate dd/mm/yyyy",
         header: "Welcome to Numerology Calculator",
         languageLabel: "Language: ",
@@ -57,7 +57,7 @@ function translatePage(language) {
         thachthucLabel: "Challenges: ",
     },
     vi: {
-        name: "Họ và Tên",
+        name: "Họ và Tên họ đệm tên",
         birthdate: "Ngày Sinh dd/mm/yyyy",
         header: "Chào mừng đến với Máy tính Thần Số Học",
         languageLabel: "Ngôn ngữ: ",
