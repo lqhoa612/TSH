@@ -35,6 +35,11 @@ main {
     margin-left: 10px;
 }
 
+#calculateBtn {
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
 /*Result Container*/
 #result-container p {
     margin: 5px 0px;
@@ -71,6 +76,7 @@ main {
 #right-content {
     background-color: rgb(179, 179, 179);
     flex: 1;
+    text-align: center;
 }
 
 #index-head {
@@ -85,6 +91,11 @@ main {
     right: 10px;
 }
 
+#language {
+    font-size: 16px;
+    padding: 3px;
+}
+
 /* Define a media query for small screens */
 @media only screen and (max-width: 660px) {
     /* Hide the right content */
@@ -96,4 +107,11 @@ main {
     #left-content {
         max-width: 100%;
     }
+}
+
+/* Increase size of Input Boxes */
+input[type="text"] {
+    font-size: 16px; /* Adjust the font size as needed */
+    padding: 3px; /* Adjust padding to increase input box size */
+    width: 290px; /* Adjust width as needed */
 }

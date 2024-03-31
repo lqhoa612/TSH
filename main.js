@@ -181,6 +181,7 @@ function calculateNumerology() {
     var truongthanh = reduceToSingleDigit(duongdoi + sumenh, true);
     var lienketlinhhonnhancach = Math.abs(reduceToSingleDigit(linhhon, false) - reduceToSingleDigit(nhancach, false));
     var tuduylytri = calculateRationalThinking(name, ngaysinh);
+    var ngaysinhIndex = reduceToSingleDigit(ngaysinh, true);
 
     // Calculate personal date, milestones, and challenges
     var namcanhan = reduceToSingleDigit(ngaysinh + thangsinh + reduceToSingleDigit(year, false), false);
@@ -190,7 +191,7 @@ function calculateNumerology() {
     var tuoi = calculateMilestoneAges(duongdoi);
 
     // Display the results
-    displayResults(rawName, birthdate, day, month, year, duongdoi, sumenh, lienketduongdoisumenh, truongthanh, linhhon, nhancach, lienketlinhhonnhancach, canbang, tuduylytri, sucmanhtiemthuc, sothieu, ngaysinh, namcanhan, thangcanhan, ngaycanhan, chang, tuoi, thachthuc);
+    displayResults(rawName, birthdate, day, month, year, duongdoi, sumenh, lienketduongdoisumenh, truongthanh, linhhon, nhancach, lienketlinhhonnhancach, canbang, tuduylytri, sucmanhtiemthuc, sothieu, ngaysinhIndex, namcanhan, thangcanhan, ngaycanhan, chang, tuoi, thachthuc);
 }
 
 function calculateCoreNumbers(name, ngaysinh, thangsinh, namsinh) {
