@@ -37,6 +37,7 @@ function translatePage(language) {
         guide2: "If you have multiple middle names, enter anyhow you like just make sure to enter your first name LAST.",
         guide3: "Enter your birthdate in dd-mm-yyyy format, just the numbers, like 6th December 1997, enter 06121997.",
         guide4: "Finally just hit Enter key or click the Calculate button and your Numerology results should appear below the button.",
+        guide5: "To learn more about your Numerology result, contact me via the email below with the result and I'll get back to you as soon as I can.",
         footer: "&copy; 2024 Numerology Calculator by Quoc Hoa Le",
         contactHead: "Contact Information:",
 
@@ -74,6 +75,7 @@ function translatePage(language) {
         guide2: "Nếu bạn có nhiều tên đệm, bạn nhập theo thứ tự nào cũng được, riêng tên gọi phải được nhập cuối cùng.",
         guide3: "Nhập ngày tháng năm sinh theo dd/mm/yyyy, ví dụ như ngày 6 tháng 12 năm 1997, thì nhập 06121997",
         guide4: "Cuối cùng nhấn Enter hoặc nhấp vào nút tính toán và kết quả Thần Số Học sẽ hiện ra ở dưới nút tính toán.",
+        guide5: "Để tìm hiểu thêm về chỉ số Thần Số Học của bạn, hãy liên hệ tôi qua email bên dưới kèm theo kết quả bạn tính được, và tôi sẽ gửi cho bạn thông tin về các chỉ số sớm nhất có thể.",
         footer: "&copy; 2024 Máy tính Thần Số Học do Quốc Hòa Lê phát triển",
         contactHead: "Thông Tin Liên Lạc:",
 
