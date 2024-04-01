@@ -32,10 +32,26 @@ main {
 
 }
 
+#input-container {
+    text-align: center;
+    width: 100%;
+}
+
+input[type="text"] {
+    font-size: 16px; /* Adjust the font size as needed */
+    padding: 3px; /* Adjust padding to increase input box size */
+    width: 290px; /* Adjust width as needed */
+}
+
+input[type="text"], #calculateBtn {
+    width: calc(100% - 10px);
+    margin-bottom: 2px;
+}
+
 #calculateBtn {
     font-size: 16px;
-    padding: 4px 89.3px;
     text-align: center;
+    width: 100%;
 }
 
 /*Result Container*/
@@ -147,9 +163,3 @@ main {
     }
 }
 
-/* Increase size of Input Boxes */
-input[type="text"] {
-    font-size: 16px; /* Adjust the font size as needed */
-    padding: 3px; /* Adjust padding to increase input box size */
-    width: 290px; /* Adjust width as needed */
-}
