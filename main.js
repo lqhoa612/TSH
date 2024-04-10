@@ -21,6 +21,9 @@ function reduceToSingleDigit(num, allowMaster) {
     return num;
 }
 
+// Define a global variable to store translated text
+let translatedText = {};
+
 // Function to translate the page
 function translatePage(language) {
     // Translations
@@ -35,7 +38,7 @@ function translatePage(language) {
         rightHead: "How to use:",
         guide1: "Enter your fullname in Last-Middle-First name order. Ex: John Micheal Smith, enter Smith Micheal John.",
         guide2: "If you have multiple middle names, enter anyhow you like just make sure to enter your first name LAST.",
-        guide3: "Enter your birthdate in dd-mm-yyyy format, just the numbers, like 6th December 1997, enter 06121997.",
+        guide3: "Enter your birthdate in dd-mm-yyyy format, just the numbers, like 1st January 1111, enter 01011111.",
         guide4: "Finally just hit Enter key or click the Calculate button and your Numerology results should appear below the button.",
         guide5: "To learn more about your Numerology result, contact me via the email below with the result and I'll get back to you as soon as I can.",
         footer: "&copy; 2024 Numerology Calculator by Quoc Hoa Le",
@@ -48,10 +51,10 @@ function translatePage(language) {
         sumenhLabel: "Destiny/Mission: ",
         lienketduongdoisumenhLabel: "Connection (Lifepath and Destiny): ",
         truongthanhLabel: "Growth/Mature: ",
-        linhhonLabel: "Soul/Urge: ", // vowelsLabel: "|     Vowels: ",
-        nhancachLabel: "Characteristic: ", //consonantsLabel: "|     Consonants: ",
+        linhhonLabel: "Soul/Urge: ",
+        nhancachLabel: "Characteristic: ",
         lienketlinhhonnhancachLabel: "Connection (Soul and Characteristic): ",
-        canbangLabel: "Balance: ", // initialsLabel: "|     Initials: ",
+        canbangLabel: "Balance: ",
         tuduylytriLabel: "Rational Thinking: ",
         sucmanhtiemthucLabel: "Subconsious Ability: ",
         sothieuLabel: "Imbalanced Number(s): ",
@@ -73,7 +76,7 @@ function translatePage(language) {
         rightHead: "Cách sử dụng:",
         guide1: "Nhập họ và tên không dấu để độ chính xác cao hơn, không quan trọng viết hoa hay viết thường.",
         guide2: "Nếu bạn có nhiều tên đệm, bạn nhập theo thứ tự nào cũng được, riêng tên gọi phải được nhập cuối cùng.",
-        guide3: "Nhập ngày tháng năm sinh theo dd/mm/yyyy, ví dụ như ngày 6 tháng 12 năm 1997, thì nhập 06121997",
+        guide3: "Nhập ngày tháng năm sinh theo dd/mm/yyyy, ví dụ như ngày 1 tháng 1 năm 1111, thì nhập 01011111",
         guide4: "Cuối cùng nhấn Enter hoặc nhấp vào nút tính toán và kết quả Thần Số Học sẽ hiện ra ở dưới nút tính toán.",
         guide5: "Để tìm hiểu thêm về chỉ số Thần Số Học của bạn, hãy liên hệ tôi qua email bên dưới kèm theo kết quả bạn tính được, và tôi sẽ gửi cho bạn thông tin về các chỉ số sớm nhất có thể.",
         footer: "&copy; 2024 Máy tính Thần Số Học do Quốc Hòa Lê phát triển",
@@ -102,6 +105,7 @@ function translatePage(language) {
         thachthucLabel: "Thách thức: ",
     }
     };
+
     const languageTranslations = translations[language];
     if (!languageTranslations) {
         console.warn(`Translations not found for language '${language}'.`);
@@ -329,6 +333,156 @@ function displayResults(rawName, birthdate, day, month, year, duongdoi, sumenh, 
 }
 // Calculate Numerology <---
 
+// Explanation for the idecies --->
+var prevButton;
+
+function buttonListener() {
+    var buttons = document.querySelectorAll('#index-container p');
+    // Loop through each button and add event listener
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var buttonId = this.id;
+            console.log(buttonId + " - " + getCurrentLanguage());
+            if (getCurrentLanguage() == 'en') {
+                englishIndexButtons(buttonId);
+            }
+            else if (getCurrentLanguage() == 'vi') {
+                vietnameseIndexButtons(buttonId);
+            }
+            prevButton = buttonId
+        });
+    });
+}
+
+function getCurrentLanguage() {
+    const languageSelect = document.getElementById('language');
+    if (languageSelect) {
+        return languageSelect.value;
+    } else {
+        console.warn("Language select element not found.");
+        return null;
+    }
+}
+
+function translateButtonMeaning(prevButton) {
+    var buttonId = prevButton;
+    if (getCurrentLanguage() == 'en') {
+        englishIndexButtons(buttonId);
+    }
+    else if (getCurrentLanguage() == 'vi') {
+        vietnameseIndexButtons(buttonId);
+    }
+}
+
+function englishIndexButtons(buttonId) {
+    var header = document.getElementById('bottomHead');
+    var mess1 = document.getElementById('message1');
+    var mess2 = document.getElementById('message2');
+    var mess3 = document.getElementById('message3');
+    var mess4 = document.getElementById('message4');
+    switch (buttonId) {
+        case 'duongdoiBtn':
+            header.textContent = "Pathlife";
+            mess1.textContent = "hello"
+            break;
+        case 'sumenhBtn':
+            header.textContent = "Destiny";
+            mess1.textContent = "bruh"
+            break;
+        case 'lienketduongdoisumenhBtn':
+            header.textContent = "Connection (Pathlife-Destiny)";
+            mess1.textContent = "shit"
+            break;
+        case 'linhhonBtn':
+            break;
+        case 'nhancachBtn':
+            break;
+        case 'lienketlinhhonnhancachBtn':
+            break;
+        case 'canbangBtn':
+            break;
+        case 'tuduylytriBtn':
+            break;
+        case 'sucmanhtiemthucBtn':
+            break;
+        case 'sothieuBtn':
+            break;
+        case 'ngaysinhBtn':
+            break;
+        case 'namcanhanBtn':
+            break;
+        case 'thangcanhanBtn':
+            break;
+        case 'ngaycanhanBtn':
+            break;
+        case 'canbangBtn':
+            break;
+        case 'changBtn':
+            break;
+        case 'tuoiBtn':
+            break;
+        case 'thachthucBtn':
+            break;
+        default:
+            break;
+    }
+}
+
+function vietnameseIndexButtons(buttonId) {
+    var header = document.getElementById('bottomHead');
+    var mess1 = document.getElementById('message1');
+    var mess2 = document.getElementById('message2');
+    var mess3 = document.getElementById('message3');
+    var mess4 = document.getElementById('message4');
+    switch (buttonId) {
+        case 'duongdoiBtn':
+            header.textContent = "Đường đời";
+            mess1.textContent = "xin chào"
+            break;
+        case 'sumenhBtn':
+            header.textContent = "Sứ mệnh";
+            mess1.textContent = "ok chưa"
+            break;
+        case 'lienketduongdoisumenhBtn':
+            header.textContent = "Liên kết đường đời sứ mệnh";
+            mess1.textContent = "cứt"
+            break;
+        case 'linhhonBtn':
+            break;
+        case 'nhancachBtn':
+            break;
+        case 'lienketlinhhonnhancachBtn':
+            break;
+        case 'canbangBtn':
+            break;
+        case 'tuduylytriBtn':
+            break;
+        case 'sucmanhtiemthucBtn':
+            break;
+        case 'sothieuBtn':
+            break;
+        case 'ngaysinhBtn':
+            break;
+        case 'namcanhanBtn':
+            break;
+        case 'thangcanhanBtn':
+            break;
+        case 'ngaycanhanBtn':
+            break;
+        case 'canbangBtn':
+            break;
+        case 'changBtn':
+            break;
+        case 'tuoiBtn':
+            break;
+        case 'thachthucBtn':
+            break;
+        default:
+            break;
+    }
+}
+// Explanation for the idecies <---
+
 // Add event listener when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function () {
     // Event listener for the Enter key press
@@ -352,10 +506,10 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('language').addEventListener('change', function () {
         const selectedLanguage = this.value;
         translatePage(selectedLanguage);
+        translateButtonMeaning(prevButton);
     });
-
-    // Initial translation based on default language
-    translatePage('en');
+    translatePage('en'); // Initial translation based on default language
+    buttonListener();
 
     // Event listener for calculate button press
     document.getElementById('calculateBtn').addEventListener('click', calculateNumerology);
