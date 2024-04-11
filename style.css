@@ -1,13 +1,14 @@
 /* style.css */
 
 body {
-    font-family: Arial, sans-serif;
+    font-family:'Courier New', Courier, monospace;
     margin: 0;
     padding: 0;
+    background-color: #003d17;
 }
 
 header, footer {
-    background-color: #333;
+    background-color: #0c2946;
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -24,7 +25,7 @@ main {
 
 /*Left content*/
 #left-content {
-    background-color: rgb(230, 230, 230);
+    background-color: #091d32;
     width: fit-content;
     flex: 1;
     max-width: 320px;
@@ -41,9 +42,11 @@ input[type="text"] {
     font-size: 16px; /* Adjust the font size as needed */
     padding: 3px; /* Adjust padding to increase input box size */
     width: 290px; /* Adjust width as needed */
+    background-color: #c5b4db;
 }
 
 input[type="text"], #calculateBtn {
+    font-family:'Courier New', Courier, monospace;
     width: calc(100% - 10px);
     margin-bottom: 2px;
 }
@@ -52,6 +55,12 @@ input[type="text"], #calculateBtn {
     font-size: 16px;
     text-align: center;
     width: 100%;
+    background-color: #7827db;
+    color: #fff;
+}
+
+#input-container button:hover {
+    background-color: #2d0e52;
 }
 
 /*Result Container*/
@@ -61,13 +70,15 @@ input[type="text"], #calculateBtn {
 }
 
 #result-container h2 {
+    color: #ffffff;
     margin: 0px;
     padding-left: 5px;
     border-top: 3px solid #000000;
 }
 
 #basicInfo-container {
-    background-color: #a09e9e;
+    color: #fff;
+    background-color: #5b96d2;
     border: 3px solid #000000;
     border-right: 0px;
     border-left: 0px;
@@ -78,15 +89,16 @@ input[type="text"], #calculateBtn {
     cursor: pointer;
     padding: 5px 10px;
     margin: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #000000;
     border-radius: 5px;
-    background-color: #f9f9f9;
+    background-color: #66a1db;
+    color: #fff;
     transition: background-color 0.3s;
 }
 
 #index-container p:hover { 
     /* Add hover effect */
-    background-color: #e0e0e0;
+    background-color: #0c2946;
 }
 
 /*Right content*/
@@ -97,7 +109,8 @@ input[type="text"], #calculateBtn {
 }
 
 #bottomright {
-    background-color: rgb(179, 179, 179);
+    background-color: #091d32;
+    color: #fff;
     flex: 1;
     text-align: justify;
     border: 3px solid black;
@@ -118,7 +131,8 @@ input[type="text"], #calculateBtn {
     padding: 10px;
     border: 3px solid #000000;
     border-left: 0px;
-    background-color: #d9d9d9;
+    background-color: #66a1db;
+    color: #000000;
 }
 
 #upperright h2 {
