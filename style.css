@@ -1,15 +1,17 @@
 /* style.css */
+/* 05386b 379683 5cdb95 8ee4af edf5e1 */
+
 
 body {
+    background-color: #5cdb95;
     font-family:'Courier New', Courier, monospace;
     margin: 0;
     padding: 0;
-    background-color: #003d17;
 }
 
 header, footer {
-    background-color: #0c2946;
-    color: #fff;
+    background-color: #379683;
+    color: #edf5e1;
     padding: 20px;
     text-align: center;
 }
@@ -25,42 +27,39 @@ main {
 
 /*Left content*/
 #left-content {
-    background-color: #091d32;
     width: fit-content;
     flex: 1;
     max-width: 320px;
-    border: 3px solid black;
-
 }
 
 #input-container {
     text-align: center;
-    width: 100%;
+    margin: 5px;
 }
 
 input[type="text"] {
+    background-color: #edf5e1;
     font-size: 16px; /* Adjust the font size as needed */
     padding: 3px; /* Adjust padding to increase input box size */
-    width: 290px; /* Adjust width as needed */
-    background-color: #c5b4db;
 }
 
 input[type="text"], #calculateBtn {
     font-family:'Courier New', Courier, monospace;
     width: calc(100% - 10px);
-    margin-bottom: 2px;
 }
 
 #calculateBtn {
+    background-color: #05386b;
+    color: #edf5e1;
+    width: 100%;
     font-size: 16px;
     text-align: center;
-    width: 100%;
-    background-color: #7827db;
-    color: #fff;
+    transition: background-color 0.3s;
 }
 
 #input-container button:hover {
-    background-color: #2d0e52;
+    background-color: #8ee4af;
+    color: #05386b;
 }
 
 /*Result Container*/
@@ -70,35 +69,29 @@ input[type="text"], #calculateBtn {
 }
 
 #result-container h2 {
-    color: #ffffff;
+    color: #05386b;
+    text-align: center;
     margin: 0px;
-    padding-left: 5px;
-    border-top: 3px solid #000000;
 }
 
 #basicInfo-container {
-    color: #fff;
-    background-color: #5b96d2;
-    border: 3px solid #000000;
-    border-right: 0px;
-    border-left: 0px;
-    margin-bottom: 10px;
+    background-color: #edf5e1;
+    color: #05386b;
+    margin: 5px;
 }
 
 #index-container p {
+    background-color: #05386b;
+    color: #edf5e1;
     cursor: pointer;
     padding: 5px 10px;
     margin: 5px;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    background-color: #66a1db;
-    color: #fff;
     transition: background-color 0.3s;
 }
 
 #index-container p:hover { 
-    /* Add hover effect */
-    background-color: #0c2946;
+    background-color: #8ee4af;
+    color: #05386b;
 }
 
 /*Right content*/
@@ -109,14 +102,13 @@ input[type="text"], #calculateBtn {
 }
 
 #bottomright {
-    background-color: #091d32;
-    color: #fff;
+    background-color: #05386b;
+    color: #edf5e1;
     flex: 1;
     text-align: justify;
-    border: 3px solid black;
-    border-top: 0px;
-    border-left: 0px;
     padding: 10px;
+    margin: 5px;
+    margin-top: 2.5px;
 }
 
 #bottomright h2 {
@@ -128,11 +120,11 @@ input[type="text"], #calculateBtn {
 }
 
 #upperright {
+    background-color: #edf5e1;
+    color: #05386b;
     padding: 10px;
-    border: 3px solid #000000;
-    border-left: 0px;
-    background-color: #66a1db;
-    color: #000000;
+    margin: 5px;
+    margin-bottom: 2.5px;
 }
 
 #upperright h2 {
@@ -154,16 +146,15 @@ input[type="text"], #calculateBtn {
 /* Footer */
 #contactInfo {
     margin-top: 0; /* Remove top margin */
+    color: #edf5e1;
 }
 
 #contactInfo h3 {
-    color: #fff;
     font-size: 18px;
     margin-bottom: 10px;
 }
 
 #contactInfo p {
-    color: #fff;
     font-size: 16px;
     margin: 5px 0;
 }
