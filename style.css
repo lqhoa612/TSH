@@ -1,10 +1,11 @@
 /* style.css */
-/* 05386b 379683 5cdb95 8ee4af edf5e1 */
+/* 05386b 379683 5cdb95 8ee4af edf5e1 
+https://visme.co/blog/website-color-schemes/ */
 
 
 body {
     background-color: #5cdb95;
-    font-family:'Courier New', Courier, monospace;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -44,7 +45,7 @@ input[type="text"] {
 }
 
 input[type="text"], #calculateBtn {
-    font-family:'Courier New', Courier, monospace;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     width: calc(100% - 10px);
 }
 
@@ -139,6 +140,8 @@ input[type="text"], #calculateBtn {
 }
 
 #language {
+    background-color: #edf5e1;
+    color: #05386b;
     font-size: 16px;
     padding: 3px;
 }

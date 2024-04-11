@@ -5,8 +5,8 @@ function translatePage(language) {
     // Translations
     const translations = {
     en: {
-        name: "Fullname last middle first",
-        birthdate: "Birthdate dd/mm/yyyy",
+        name: "Fullname (last middle first)",
+        birthdate: "Birthdate (dd/mm/yyyy)",
         header: "Welcome to Numerology Calculator",
         languageLabel: "Language: ",
         calculateBtn: "Start Calculation",
@@ -44,8 +44,8 @@ function translatePage(language) {
         thachthucLabel: "Challenges: ",
     },
     vi: {
-        name: "Họ và Tên họ đệm tên",
-        birthdate: "Ngày Sinh dd/mm/yyyy",
+        name: "Họ và Tên (họ đệm tên)",
+        birthdate: "Ngày Sinh (dd/mm/yyyy)",
         header: "Chào mừng đến với Máy tính Thần Số Học",
         languageLabel: "Ngôn ngữ: ",
         calculateBtn: "Bắt đầu tính toán",
