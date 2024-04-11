@@ -1,30 +1,6 @@
 // script.js
-// Define a function to reduce the sum to a single-digit number
-function reduceToSingleDigit(num, allowMaster) {
-    // Reduce the sum to a single-digit number
-    if (allowMaster == true) {
-        if (num == 11 || num == 22 || num == 33)
-        return num;
-    }
 
-    while (num > 9) {
-
-        num = num.toString().split('').reduce(function (acc, digit) {
-            return acc + parseInt(digit);
-        }, 0);
-        
-        if (allowMaster == true) {
-            if (num == 11 || num == 22 || num == 33)
-            return num;
-        }
-    }
-    return num;
-}
-
-// Define a global variable to store translated text
-let translatedText = {};
-
-// Function to translate the page
+// Page Formatting, Inputs, and features --->
 function translatePage(language) {
     // Translations
     const translations = {
@@ -49,11 +25,11 @@ function translatePage(language) {
         todateLabel: "Date generated: ",
         duongdoiLabel: "Lifepath: ",
         sumenhLabel: "Destiny/Mission: ",
-        lienketduongdoisumenhLabel: "Connection (Lifepath and Destiny): ",
+        lienketduongdoisumenhLabel: "Connection (Lifepath - Destiny): ",
         truongthanhLabel: "Growth/Mature: ",
         linhhonLabel: "Soul/Urge: ",
         nhancachLabel: "Characteristic: ",
-        lienketlinhhonnhancachLabel: "Connection (Soul and Characteristic): ",
+        lienketlinhhonnhancachLabel: "Connection (Soul - Characteristic): ",
         canbangLabel: "Balance: ",
         tuduylytriLabel: "Rational Thinking: ",
         sucmanhtiemthucLabel: "Subconsious Ability: ",
@@ -63,7 +39,7 @@ function translatePage(language) {
         thangcanhanLabel: "Personal Month: ",
         ngaycanhanLabel: "Personal Day: ",
         changLabel: "Milestones: ",
-        tuoiLabel: "Milestones Age: ",
+        tuoiLabel: "Milestone Ages: ",
         thachthucLabel: "Challenges: ",
     },
     vi: {
@@ -87,12 +63,12 @@ function translatePage(language) {
         todateLabel: "Ngày hiện tại: ",
         duongdoiLabel: "Đường đời: ",
         sumenhLabel: "Sứ mệnh: ",
-        lienketduongdoisumenhLabel: "Liên kết (Đường đời và Sứ mệnh): ",
+        lienketduongdoisumenhLabel: "Liên kết (Đường đời - Sứ mệnh): ",
         truongthanhLabel: "Trưởng thành: ",
-        linhhonLabel: "Linh hồn: ", // vowelsLabel: "|     Nguyên âm: ",
-        nhancachLabel: "Nhân cách: ", // consonantsLabel: "|     Phụ âm: ",
-        lienketlinhhonnhancachLabel: "Liên kết (Linh hồn và Nhân cách): ",
-        canbangLabel: "Cân bằng: ", // initialsLabel: "|     Ký tự đầu: ",
+        linhhonLabel: "Linh hồn: ",
+        nhancachLabel: "Nhân cách: ",
+        lienketlinhhonnhancachLabel: "Liên kết (Linh hồn - Nhân cách): ",
+        canbangLabel: "Cân bằng: ",
         tuduylytriLabel: "Tư duy lý trí: ",
         sucmanhtiemthucLabel: "Sức mạnh tiềm thức: ",
         sothieuLabel: "Số thiếu: ",
@@ -126,12 +102,10 @@ function translatePage(language) {
     });
 }
 
-// Function to remove accents from a string
 function removeAccents(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-// Date format function
 function formatDate(input) {
     console.log("Input value changed:", input);
     
@@ -174,8 +148,30 @@ function formatDate(input) {
     // Set the input value to the formatted date
     document.getElementById('birthdate').value = formattedDate;
 }
+// Page Formatting, Inputs, and features <---
 
 // Calculate Numerology --->
+function reduceToSingleDigit(num, allowMaster) {
+    // Reduce the sum to a single-digit number
+    if (allowMaster == true) {
+        if (num == 11 || num == 22 || num == 33)
+        return num;
+    }
+
+    while (num > 9) {
+
+        num = num.toString().split('').reduce(function (acc, digit) {
+            return acc + parseInt(digit);
+        }, 0);
+        
+        if (allowMaster == true) {
+            if (num == 11 || num == 22 || num == 33)
+            return num;
+        }
+    }
+    return num;
+}
+
 function calculateNumerology() {
     // Get user inputs
     var rawName = document.getElementById('name').value;
@@ -382,46 +378,76 @@ function englishIndexButtons(buttonId) {
     var mess4 = document.getElementById('message4');
     switch (buttonId) {
         case 'duongdoiBtn':
-            header.textContent = "Pathlife";
-            mess1.textContent = "hello"
+            header.textContent = "Lifepath";
+            mess1.textContent = ""
             break;
         case 'sumenhBtn':
-            header.textContent = "Destiny";
-            mess1.textContent = "bruh"
+            header.textContent = "Destiny/Mission";
+            mess1.textContent = ""
             break;
         case 'lienketduongdoisumenhBtn':
-            header.textContent = "Connection (Pathlife-Destiny)";
-            mess1.textContent = "shit"
+            header.textContent = "Connection (Lifepath - Destiny/Mission)";
+            mess1.textContent = ""
+            break;
+        case 'truongthanhBtn':
+            header.textContent = "Growth/Mature";
+            mess1.textContent = "";
             break;
         case 'linhhonBtn':
+            header.textContent = "Soul/Urge";
+            mess1.textContent = ""
             break;
         case 'nhancachBtn':
+            header.textContent = "Characteristic";
+            mess1.textContent = ""
             break;
         case 'lienketlinhhonnhancachBtn':
+            header.textContent = "Connection (Soul/Urge - Characteristic)";
+            mess1.textContent = ""
             break;
         case 'canbangBtn':
+            header.textContent = "Balance";
+            mess1.textContent = ""
             break;
         case 'tuduylytriBtn':
+            header.textContent = "Rational thinking";
+            mess1.textContent = ""
             break;
         case 'sucmanhtiemthucBtn':
+            header.textContent = "Subconcious ability";
+            mess1.textContent = ""
             break;
         case 'sothieuBtn':
+            header.textContent = "Imbalance number(s)";
+            mess1.textContent = ""
             break;
         case 'ngaysinhBtn':
+            header.textContent = "Birth day";
+            mess1.textContent = ""
             break;
         case 'namcanhanBtn':
+            header.textContent = "Personal year";
+            mess1.textContent = ""
             break;
         case 'thangcanhanBtn':
+            header.textContent = "Personal month";
+            mess1.textContent = ""
             break;
         case 'ngaycanhanBtn':
-            break;
-        case 'canbangBtn':
+            header.textContent = "Personal day";
+            mess1.textContent = ""
             break;
         case 'changBtn':
+            header.textContent = "Milestones";
+            mess1.textContent = ""
             break;
         case 'tuoiBtn':
+            header.textContent = "Milestone ages";
+            mess1.textContent = ""
             break;
         case 'thachthucBtn':
+            header.textContent = "Challenges";
+            mess1.textContent = ""
             break;
         default:
             break;
@@ -437,45 +463,75 @@ function vietnameseIndexButtons(buttonId) {
     switch (buttonId) {
         case 'duongdoiBtn':
             header.textContent = "Đường đời";
-            mess1.textContent = "xin chào"
+            mess1.textContent = ""
             break;
         case 'sumenhBtn':
             header.textContent = "Sứ mệnh";
-            mess1.textContent = "ok chưa"
+            mess1.textContent = ""
             break;
         case 'lienketduongdoisumenhBtn':
-            header.textContent = "Liên kết đường đời sứ mệnh";
-            mess1.textContent = "cứt"
+            header.textContent = "Liên kết (Đường đời - Sứ mệnh)";
+            mess1.textContent = ""
+            break;
+        case 'truongthanhBtn':
+            header.textContent = "Trưởng thành";
+            mess1.textContent = "";
             break;
         case 'linhhonBtn':
+            header.textContent = "Linh hòn";
+            mess1.textContent = ""
             break;
         case 'nhancachBtn':
+            header.textContent = "Nhân cách";
+            mess1.textContent = ""
             break;
         case 'lienketlinhhonnhancachBtn':
+            header.textContent = "Liên kết (Linh hồn - Nhân cách)";
+            mess1.textContent = ""
             break;
         case 'canbangBtn':
+            header.textContent = "Cân bằng";
+            mess1.textContent = ""
             break;
         case 'tuduylytriBtn':
+            header.textContent = "Tư duy lý trí";
+            mess1.textContent = ""
             break;
         case 'sucmanhtiemthucBtn':
+            header.textContent = "Sức mạnh tiềm thức";
+            mess1.textContent = ""
             break;
         case 'sothieuBtn':
+            header.textContent = "Số thiếu";
+            mess1.textContent = ""
             break;
         case 'ngaysinhBtn':
+            header.textContent = "Ngày sinh";
+            mess1.textContent = ""
             break;
         case 'namcanhanBtn':
+            header.textContent = "Năm cá nhân";
+            mess1.textContent = ""
             break;
         case 'thangcanhanBtn':
+            header.textContent = "Tháng cá nhân";
+            mess1.textContent = ""
             break;
         case 'ngaycanhanBtn':
-            break;
-        case 'canbangBtn':
+            header.textContent = "Ngày cá nhân";
+            mess1.textContent = ""
             break;
         case 'changBtn':
+            header.textContent = "Chặng";
+            mess1.textContent = ""
             break;
         case 'tuoiBtn':
+            header.textContent = "Tuổi kết thúc chặng";
+            mess1.textContent = ""
             break;
         case 'thachthucBtn':
+            header.textContent = "Thách thức";
+            mess1.textContent = ""
             break;
         default:
             break;
