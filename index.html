@@ -27,14 +27,15 @@
         </div>
     </header>
     <main>
-        <div id="main-container">
-            <div id="left-content">
+        <section id="main-container">
+            <aside id="left-content">
                 <div id="input-container">
                     <input type="text" id="name" placeholder="Fullname last middle first"><br>
                     <input type="text" id="birthdate" placeholder="Birthdate dd/mm/yyyy"><br>
                     <button id="calculateBtn" data-translate="calculateBtn">Start Calculation</button>
                 </div>
-                <div id="result-container">
+
+                <section id="result-container">
                     <h2 id="resultHeading"></h2>
                     <div id="basicInfo-container">
                         <p><span id="fullnameLabel"></span> <span id="fullname"></span></p>
@@ -62,9 +63,10 @@
                         <p id="tuoiBtn"><span id="tuoiLabel"></span> <span id="tuoi"></span></p>
                         <p id="thachthucBtn"><span id="thachthucLabel"></span> <span id="thachthuc"></span></p>
                     </div>
-                </div>
-            </div>
-            <div id="right-content">
+                </section>
+            </aside>
+
+            <aside id="right-content">
                 <div id="upperright">
                     <h2 id="rightHead"></h2>
                     <p id="guide1"></p>
@@ -75,29 +77,31 @@
                     <p id="guide6"></p>
                     <p id="guide7"></p>
                 </div>
+
                 <div id="bottomright">
                     <h2 id="bottomHead"></h2>
                     <p id="message1"></p>
                     <p id="message2"></p>
                     <p id="message3"></p>
                     <p id="message4"></p>
-                    <p id="message5"></p>
-                    <p id="message6"></p>
-                    <p id="message7"></p>
-                    <p id="message8"></p>
-                    <p id="message9"></p>
+                    <div id="matrix-container">
+                        <div id="birthdateMatrixContainer"></div>
+                        <div id="nameMatrixContainer"></div>
+                        <p id="mapComment"></p>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </aside>
+        </section>
     </main>
     <footer>
         <p id="footer">&copy; 2024 Numerology Calculator by Quoc Hoa Le</p>
-        <div id="contactInfo">
+
+        <section id="contactInfo">
             <h3 id="contactHead"></h3>
             <p id="email">Email: lqhoa612@gmail.com</p>
             <p id="phone">Phone: (+61)493304530</p>
-        </div>
+        </section>
     </footer>
-    <script defer src="main.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

@@ -113,8 +113,6 @@ function removeAccents(str) {
 }
 
 function formatDate(input) {
-    console.log("Input value changed:", input);
-    
     // Remove any non-numeric characters from the input
     var cleanedInput = input.replace(/\D/g, '');
 
@@ -579,8 +577,7 @@ function displayBirthdateMap() {
         [2,5,8],
         [1,4,7]
     ];
-    const matrixContainer = document.createElement('div');
-    matrixContainer.id = 'birthdateMatrixContainer';
+    let matrixContainer = document.getElementById('birthdateMatrixContainer');
     const table = document.createElement('table');
 
     for (let i = 0; i < 3; i++) {
@@ -601,7 +598,6 @@ function displayBirthdateMap() {
     }
     matrixContainer.appendChild(header);
     matrixContainer.appendChild(table);
-    bottomright.appendChild(matrixContainer);
 }
 
 function displayNameMap() {
@@ -613,6 +609,7 @@ function displayNameMap() {
     name = name.toLowerCase();
     var nChar = ' ';
     var nCharNumStorage = [];
+    let nCharNum;
     for (let i = 0; i < name.length; i++) {
         nChar = name.charAt(i);
         if (/[a-z]/.test(nChar)) {
@@ -626,8 +623,7 @@ function displayNameMap() {
         [2,5,8],
         [1,4,7]
     ];
-    const matrixContainer = document.createElement('div');
-    matrixContainer.id = 'nameMatrixContainer';
+    const matrixContainer = document.getElementById('nameMatrixContainer');
     const table = document.createElement('table');
 
     for (let i = 0; i < 3; i++) {
@@ -648,17 +644,19 @@ function displayNameMap() {
     }
     matrixContainer.appendChild(header);
     matrixContainer.appendChild(table);
-    bottomright.appendChild(matrixContainer);
 }
 
 function clearMap() {
-    var matrixContainer = document.getElementById('bottomright').querySelector('div');
-    if (matrixContainer == null) return;
-    // Remove all child elements from matrixContainer
-    while (matrixContainer.firstChild != null) {
-        matrixContainer.removeChild(matrixContainer.firstChild);
+    var birthdateMatrixContainer = document.getElementById('birthdateMatrixContainer');
+    var nameMatrixContainer = document.getElementById('nameMatrixContainer');
+    if (birthdateMatrixContainer == null || nameMatrixContainer == null) {
+        return;
     }
-    matrixContainer.parentNode.removeChild(matrixContainer);
+    // Remove all child elements from matrixContainer
+    while (birthdateMatrixContainer.firstChild != null && nameMatrixContainer.firstChild != null) {
+        birthdateMatrixContainer.removeChild(birthdateMatrixContainer.firstChild);
+        nameMatrixContainer.removeChild(nameMatrixContainer.firstChild);
+    }
 }
 
 function clearMessages() {
@@ -691,8 +689,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Event listener for input field value changes
     document.getElementById('birthdate').addEventListener('input', function () {
-        console.log("Input field value changed:", this.value);
-
         // Call the formatDate function when the input field value changes
         formatDate(this.value);
     });

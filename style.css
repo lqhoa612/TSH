@@ -1,6 +1,11 @@
 /* style.css */
-/* 05386b 379683 5cdb95 8ee4af edf5e1 
-https://visme.co/blog/website-color-schemes/ */
+/* https://visme.co/blog/website-color-schemes/ */
+/* Color scheme */
+/* 05386b - Dark blue */
+/* 379683 - Teal */
+/* 5cdb95 - Light green */
+/* 8ee4af - Light teal */
+/* edf5e1 - Off-white */
 
 
 body {
@@ -31,6 +36,7 @@ main {
 #left-content {
     width: fit-content;
     flex: 1;
+    min-width: 250px;
     max-width: 340px;
 }
 
@@ -83,6 +89,7 @@ input[type="text"], #calculateBtn {
     margin: 5px;
 }
 
+/* Index container */
 #index-container p {
     background-color: #05386b;
     color: #edf5e1;
@@ -183,46 +190,50 @@ input[type="text"], #calculateBtn {
 }
 
 /* Matrix */
+/* Matrix */
+#matrix-container {
+    display: flex;
+    justify-content: center;  /* Center children horizontally */
+    align-items: center;      /* Center children vertically */
+    margin-top: 20px;         /* Add some space at the top */
+}
+
 #birthdateMatrixContainer {
     width: 250px;
-    margin-left: 15px;
-}
-
-#birthdateMatrixContainer h3 {
-    text-align: center;
-}
-
-#birthdateMatrixContainer table {
-    margin-top: 10px;
-    border-collapse: collapse;
-}
-
-#birthdateMatrixContainer td {
-    padding: 15px;
-    border: 1px solid #edf5e1;
-    width: 55px;
-    height: 55px;
-    text-align: center;
+    margin-right: 100px;
 }
 
 #nameMatrixContainer {
     width: 250px;
-    margin-left: 15px;
+    margin-left: 100px;
 }
 
+#birthdateMatrixContainer h3,
 #nameMatrixContainer h3 {
     text-align: center;
+    margin: 0px;
 }
 
+#birthdateMatrixContainer table,
 #nameMatrixContainer table {
     margin-top: 10px;
     border-collapse: collapse;
+    width: 100%; /* Set table width to 100% */
 }
 
+#birthdateMatrixContainer th,
+#nameMatrixContainer th {
+    text-align: center; /* Center align header text */
+    padding: 15px;
+    border: 1px solid #edf5e1;
+}
+
+#birthdateMatrixContainer td,
 #nameMatrixContainer td {
     padding: 15px;
     border: 1px solid #edf5e1;
-    width: 55px;
-    height: 55px;
+    width: 35px;
+    height: 35px;
     text-align: center;
+    vertical-align: middle; /* Align cells vertically in the middle */
 }
