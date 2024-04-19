@@ -7,7 +7,7 @@ function translatePage(language) {
     en: {
         name: "Fullname (last middle first)",
         birthdate: "Birthdate (dd/mm/yyyy)",
-        header: "Welcome to Numerology Calculator",
+        header: "Welcome to Pythagorean Numerology Calculator",
         languageLabel: "Language: ",
         calculateBtn: "Start Calculation",
         resultHeading: "Result: ",
@@ -18,26 +18,26 @@ function translatePage(language) {
         guide4: "Finally just hit Enter key or click the Calculate button and your Numerology results should appear below the button.",
         guide5: "*** To learn more about your Numerology result, contact me via the email below with the result and I'll get back to you as soon as I can.",
         guide6: "*** Please email me if there is any error with the calculator or any feedback/improvement you want to share.",
-        guide7: "*** Disclamer: This is a work in process!",
-        footer: "&copy; 2024 Numerology Calculator by Quoc Hoa Le",
+        guide7: "*** Disclamer: This is a work in progress!",
+        footer: "&copy; 2024 Pythagorean Numerology Calculator by Quoc Hoa Le",
         contactHead: "Contact Information:",
 
-        yourmapLabel: "Your map: ",
+        yourmapLabel: "View your map",
         fullnameLabel: "Fullname: ",
         birthdate2Label: "Birthdate: ",
         todateLabel: "Date generated: ",
         duongdoiLabel: "Life path: ",
         sumenhLabel: "Destiny/Mission: ",
         lienketduongdoisumenhLabel: "Connection (Life path - Destiny): ",
-        truongthanhLabel: "Growth/Mature: ",
-        linhhonLabel: "Soul/Urge: ",
-        nhancachLabel: "Characteristic: ",
-        lienketlinhhonnhancachLabel: "Connection (Soul - Characteristic): ",
+        truongthanhLabel: "Growth/Maturity: ",
+        linhhonLabel: "Soul Urge: ",
+        nhancachLabel: "Personality: ",
+        lienketlinhhonnhancachLabel: "Connection (Soul - Personality): ",
         canbangLabel: "Balance: ",
-        tuduylytriLabel: "Rational Thinking: ",
-        sucmanhtiemthucLabel: "Subconsious Ability: ",
+        tuduylytriLabel: "Rational Thought: ",
+        sucmanhtiemthucLabel: "Subconsious Self: ",
         sothieuLabel: "Imbalanced Number(s): ",
-        ngaysinhLabel: "Birth Day: ",
+        ngaysinhLabel: "Birthday Number: ",
         namcanhanLabel: "Personal Year: ",
         thangcanhanLabel: "Personal Month: ",
         ngaycanhanLabel: "Personal Day: ",
@@ -48,7 +48,7 @@ function translatePage(language) {
     vi: {
         name: "Họ và Tên (họ đệm tên)",
         birthdate: "Ngày Sinh (dd/mm/yyyy)",
-        header: "Chào mừng đến với Máy tính Thần Số Học",
+        header: "Chào mừng đến với Máy tính Thần Số Học Pythagorean",
         languageLabel: "Ngôn ngữ: ",
         calculateBtn: "Bắt đầu tính toán",
         resultHeading: "Kết quả: ",
@@ -60,10 +60,10 @@ function translatePage(language) {
         guide5: "*** Để tìm hiểu thêm về chỉ số Thần Số Học của bạn, hãy liên hệ tôi qua email bên dưới kèm theo kết quả bạn tính được, và tôi sẽ gửi cho bạn thông tin về các chỉ số sớm nhất có thể.",
         guide6: "*** Hãy liên hệ với tôi nếu bạn cho rằng chương trình tính có lỗi hoặc bạn muốn chia sẻ cảm nhận. Mọi đóng góp đều mang ý nghĩa rất lớn đối với tôi.",
         guide7: "*** Chú ý: Đây là chương trình thử nghiệm!",
-        footer: "&copy; 2024 Máy tính Thần Số Học do Quốc Hòa Lê phát triển",
+        footer: "&copy; 2024 Máy tính Thần Số Học Pythagorean do Quốc Hòa Lê phát triển",
         contactHead: "Thông Tin Liên Lạc:",
 
-        yourmapLabel: "Bản đồ của bạn: ",
+        yourmapLabel: "Xem bản đồ của bạn",
         fullnameLabel: "Họ và Tên: ",
         birthdate2Label: "Ngày sinh: ",
         todateLabel: "Ngày hiện tại: ",
@@ -259,7 +259,7 @@ function calculateCoreNumbers(name, ngaysinh, thangsinh, namsinh) {
     sumenh = reduceToSingleDigit(sumenh, true); console.log('sumenh: ', nCharNumStorage);
     linhhon = reduceToSingleDigit(linhhon, true); console.log('nguyenam: ', vowelsNumStorage);
     nhancach = reduceToSingleDigit(nhancach, true); console.log('phuam: ', consonantsNumStorage);
-    canbang = reduceToSingleDigit(canbang, true); console.log('chucaidau: ', initialsNumStorage);
+    canbang = reduceToSingleDigit(canbang, false); console.log('chucaidau: ', initialsNumStorage);
     sucmanhtiemthuc = 9 - sothieu.length;
 
     return [duongdoi, sumenh, linhhon, nhancach, canbang, sucmanhtiemthuc, sothieu];
@@ -384,7 +384,6 @@ function englishIndexButtons(buttonId) {
     var mess4 = document.getElementById('message4');
     if (prevButton == 'yourmapBtn') {
         clearMap();
-        clearMap();
     } else {
         clearMessages();
     }
@@ -396,77 +395,77 @@ function englishIndexButtons(buttonId) {
             displayNameMap();
             break;
         case 'duongdoiBtn':
-            header.textContent = "Life path"
-            mess1.textContent = "Life path numbers reveal who you are, your strengths and weaknesses."
-            mess2.textContent = "It tells you the lesson you need to learn to be your better version."
-            mess3.textContent = "Life path number is calculated by add each numbers of your birthday and reduce to a single digit (from 1 to 9)."
-            mess4.textContent = "Exept when it is 11, 22 or 33."
+            header.textContent = "Life path";
+            mess1.textContent = "Life path number reveals who you are, your strengths and weaknesses.";
+            mess2.textContent = "It tells you the lesson you need to learn to be your better version.";
+            mess4.textContent = "Your life path number is " + document.getElementById('duongdoi').textContent;
             break;
         case 'sumenhBtn':
-            header.textContent = "Destiny/Mission"
-            mess1.textContent = "Destiny numbers explore what you are destined to do in your lifetime, your mission and who you are destined to become."
-            mess2.textContent = "It also points out the strengths you can use and develop to fulfill your life path."
-            
+            header.textContent = "Destiny/Mission";
+            mess1.textContent = "Destiny number explores what you are destined to do in your lifetime, your mission and who you are destined to become.";
+            mess2.textContent = "It also points out the strengths you can use and develop to fulfill your life path.";
+            mess4.textContent = "Your destiny number is " + document.getElementById('sumenh').textContent;
             break;
         case 'lienketduongdoisumenhBtn':
-            header.textContent = "Connection (Life path - Destiny/Mission)"
-            mess1.textContent = "Connection numbers show how you can become what you are destined to be and by that, fulfill your life path."
-            
+            header.textContent = "Connection (Life path - Destiny/Mission)";
+            mess1.textContent = "Connection number shows how you can become what you are destined to be and by that, fulfill your life path.";
+            mess2.textContent = "In some cases, these numbers also represent the challange you need to overcome to walk on the right path.";
+            mess4.textContent = "Your connection number is " + document.getElementById('lienketduongdoisumenh').textContent;
             break;
         case 'truongthanhBtn':
-            header.textContent = "Growth/Mature"
-            mess1.textContent = "Growth or Mature numbers tell you how you can grow with your body, your mind, and your heart."
-            
+            header.textContent = "Growth/Maturity";
+            mess1.textContent = "Growth or Maturity number tells you how you can grow with your body, your mind, and your heart.";
+            mess2.textContent = "It also indicates an underlying wish or desire that gradually arise when a person is coming into the middle age phase.";
+            mess4.textContent = "Your growth number is " + document.getElementById('truongthanh').textContent;
             break;
         case 'linhhonBtn':
-            header.textContent = "Soul/Urge"
-            mess1.textContent = "The soul urge numbers reveal what you would love to do, what you would want to become, what you are urging for in life."
-            mess2.textContent = "They also project how you want people to treat you."
-            
+            header.textContent = "Soul urge";
+            mess1.textContent = "The soul urge number represents the inner desire and motivation of the person.";
+            mess4.textContent = "Your soul urge number is " + document.getElementById('linhhon').textContent;
             break;
         case 'nhancachBtn':
-            header.textContent = "Characteristic"
-            mess1.textContent = "Characteristic numbers tell you how people see you."
-            mess2.textContent = "It is sometimes called First Impression numbers."
-            mess3.textContent = "And sometimes this is not who you really are."
+            header.textContent = "Personality";
+            mess1.textContent = "Personality number represents how other people will think of a person.";
+            mess2.textContent = "It is sometimes called First Impression numbers.";
+            mess4.textContent = "Your personality number is " + document.getElementById('truongthanh').textContent;
             break;
         case 'lienketlinhhonnhancachBtn':
-            header.textContent = "Connection (Soul/Urge - Characteristic)"
-            mess1.textContent = "Sometimes the way people see you is not the way you want to express."
-            mess2.textContent = "These numbers suggest you how to unify the two of them, how to live as your true self and not something else."
-            
+            header.textContent = "Connection (Soul/Urge - Personality)";
+            mess1.textContent = "Sometimes the way people see you is not the way you want to express.";
+            mess2.textContent = "This number suggest you how to unify the two of them, how to express what you really meant and avoid unwanted misunderstanding.";
+            mess4.textContent = "Your connection number is " + document.getElementById('lienketlinhhonnhancach').textContent;
             break;
         case 'canbangBtn':
             header.textContent = "Balance"
-            mess1.textContent = "These numbers show how you face problems in life."
-            
+            mess1.textContent = "This number provides guidance on how to best deal with difficult situations."
+            mess4.textContent = "Your balance number is " + document.getElementById('canbang').textContent;
             break;
         case 'tuduylytriBtn':
-            header.textContent = "Rational thinking"
-            mess1.textContent = "These numbers reveal the way you think, how you would approach a problem in life."
-            
+            header.textContent = "Rational thought"
+            mess1.textContent = "This number reveals the way you think, how you process your thoughts, like do emotions back it, or is it practical?"
+            mess4.textContent = "Your rational thought number is " + document.getElementById('tuduylytri').textContent;
             break;
         case 'sucmanhtiemthucBtn':
-            header.textContent = "Subconcious ability"
-            mess1.textContent = "Subconsios ability numbers tell you about what you are capable of, your speciality in your past life that is brought to this life."
-            
+            header.textContent = "Subconcious self";
+            mess1.textContent = "Subconcious self number can be from talking, writing, meeting new people, performing on stage or controlling the crowd to simply your conduct at the workplace.";
+            mess2.textContent = "It lets you know your capabilities, competence, spontaneity and management skills.";
+            mess4.textContent = "Your subconcious self number is " + document.getElementById('sucmanhtiemthuc').textContent;
             break;
         case 'sothieuBtn':
-            header.textContent = "Imbalance number(s)"
-            mess1.textContent = "Imbalance numbers are numbers whose energy is exceeding or contrasting to the standard."
-            mess2.textContent = "For example if you have a number X as one of the imbalance numbers, you might be talking too much that you cannot control what you are saying, or you are not communicating enough yet you think no one understands you."
-            
+            header.textContent = "Imbalance number(s)";
+            mess1.textContent = "Imbalance number(s) show(s) your weakness(es) via your fullname.";
+            mess2.textContent = "These weakenesses might become unnoticable as you grow, as you change yourself for the better.";
+            mess4.textContent = "Your imbalance number(s) are " + document.getElementById('sothieu').textContent;
             break;
         case 'ngaysinhBtn':
-            header.textContent = "Birth day"
-            mess1.textContent = "Your natural talents are hidden behind your very own day of birth."
-            mess2.textContent = "Just reduce your day of birth to a single digit and you will have your birth day number."
-            
+            header.textContent = "Birthday number";
+            mess1.textContent = "The birthday number shows your other personality traits, specific abilities and natural talents that will assist you during your life time.";
+            mess2.textContent = "It also describes the way others see you.";
+            mess4.textContent = "Your birthday number is " + document.getElementById('ngaysinh').textContent;
             break;
         case 'namcanhanBtn':
-            header.textContent = "Personal year"
-            mess1.textContent = "In Numerology, everyone has their 4 milestones and each milestone is 9 years."
-            mess2.textContent = "From the day you are born to 9 years before"
+            header.textContent = "Personal year";
+            mess1.textContent = "In Numerology";
             
             break;
         case 'thangcanhanBtn':

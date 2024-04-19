@@ -112,6 +112,10 @@ input[type="text"], #calculateBtn {
     font-size: 20px;
 }
 
+#yourmapBtn {
+    text-align: center;
+}
+
 #upperright {
     background-color: #edf5e1;
     color: #05386b;
@@ -143,7 +147,7 @@ input[type="text"], #calculateBtn {
 }
 
 #bottomright p {
-    margin: 0px;
+    margin-bottom: 10px;
 }
 
 /*Language Container*/  
