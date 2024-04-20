@@ -35,7 +35,7 @@ function translatePage(language) {
         lienketlinhhonnhancachLabel: "Connection (Soul - Personality): ",
         canbangLabel: "Balance: ",
         tuduylytriLabel: "Rational Thought: ",
-        sucmanhtiemthucLabel: "Subconsious Self: ",
+        sucmanhtiemthucLabel: "Subconscious Self: ",
         sothieuLabel: "Imbalanced Number(s): ",
         ngaysinhLabel: "Birthday Number: ",
         namcanhanLabel: "Personal Year: ",
@@ -446,15 +446,15 @@ function englishIndexButtons(buttonId) {
             mess4.textContent = "Your rational thought number is " + document.getElementById('tuduylytri').textContent;
             break;
         case 'sucmanhtiemthucBtn':
-            header.textContent = "Subconcious self";
-            mess1.textContent = "Subconcious self number can be from talking, writing, meeting new people, performing on stage or controlling the crowd to simply your conduct at the workplace.";
+            header.textContent = "Subconscious self";
+            mess1.textContent = "Subconscious self number can be from talking, writing, meeting new people, performing on stage or controlling the crowd to simply your conduct at the workplace.";
             mess2.textContent = "It lets you know your capabilities, competence, spontaneity and management skills.";
-            mess4.textContent = "Your subconcious self number is " + document.getElementById('sucmanhtiemthuc').textContent;
+            mess4.textContent = "Your subconscious self number is " + document.getElementById('sucmanhtiemthuc').textContent;
             break;
         case 'sothieuBtn':
             header.textContent = "Imbalance number(s)";
             mess1.textContent = "Imbalance number(s) show(s) your weakness(es) via your fullname.";
-            mess2.textContent = "These weakenesses might become unnoticable as you grow, as you change yourself for the better.";
+            mess2.textContent = "These weakenesses might become unnoticeable as you grow, as you change yourself for the better.";
             mess4.textContent = "Your imbalance number(s) are " + document.getElementById('sothieu').textContent;
             break;
         case 'ngaysinhBtn':
@@ -465,23 +465,39 @@ function englishIndexButtons(buttonId) {
             break;
         case 'namcanhanBtn':
             header.textContent = "Personal year";
-            mess1.textContent = "In Numerology";
-            
+            mess1.textContent = "In Pythagorean Numerology, each of us has a personal year numerical vibration which changes each year in a 9-year cycle.";
+            mess2.textContent = "It reveals much about the influences and events you will be experiencing, like a weather forecast - a human forecast.";
+            mess4.textContent = "Your personal year number is " + document.getElementById('namcanhan').textContent;
             break;
         case 'thangcanhanBtn':
-            header.textContent = "Personal month"
+            header.textContent = "Personal month";
+            mess1.textContent = "In Pythagorean Numerology, each of us has a personal month numerical vibration which changes each year in a 9-year cycle.";
+            mess2.textContent = "It reveals much about the influences and events you will be experiencing, like a weather forecast - a human forecast.";
+            mess4.textContent = "Your personal month number is " + document.getElementById('thangcanhan').textContent;
             break;
         case 'ngaycanhanBtn':
             header.textContent = "Personal day"
+            mess1.textContent = "In Pythagorean Numerology, each of us has a personal day numerical vibration which changes each year in a 9-year cycle.";
+            mess2.textContent = "It reveals much about the influences and events you will be experiencing, like a weather forecast - a human forecast.";
+            mess4.textContent = "Your personal day number is " + document.getElementById('ngaycanhan').textContent;
             break;
         case 'changBtn':
-            header.textContent = "Milestones"
+            header.textContent = "Milestones";
+            mess1.textContent = "Milestones or Pinnacles are a roadmap of what to expect, the type of experiences we're likely to have.";
+            mess2.textContent = "There are four of them, in order, each a major cycle of life. They are likely to deepen your life experience.";
+            mess4.textContent = "Your milestones are " + document.getElementById('chang').textContent;
             break;
         case 'tuoiBtn':
-            header.textContent = "Milestone ages"
+            header.textContent = "Milestone ages";
+            mess1.textContent = "These numbers are the ages you are, were or will be in your ninth year of the corresponding milestone.";
+            mess2.textContent = "They reveal when you're coming to the end of a milestone and starting a new cycle in your next milestone.";
+            mess4.textContent = "Your milestone ages are " + document.getElementById('tuoi').textContent;
             break;
         case 'thachthucBtn':
-            header.textContent = "Challenges"
+            header.textContent = "Challenges";
+            mess1.textContent = "These numbers show you four challenges to be faced during your lives.";
+            mess2.textContent = "In some cases, the same challenge is repeated, while others have four distinctly different lessons to learn. Repeated challanges may have different meaning according to their position in your life.";
+            mess4.textContent = "Your challange numbers are " + document.getElementById('thachthuc').textContent;
             break;
         default:
             break;
