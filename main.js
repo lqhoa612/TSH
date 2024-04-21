@@ -427,7 +427,7 @@ function englishIndexButtons(buttonId) {
             header.textContent = "Personality";
             mess1.textContent = "Personality number represents how other people will think of a person.";
             mess2.textContent = "It is sometimes called First Impression numbers.";
-            mess4.textContent = "Your personality number is " + document.getElementById('truongthanh').textContent;
+            mess4.textContent = "Your personality number is " + document.getElementById('nhancach').textContent;
             break;
         case 'lienketlinhhonnhancachBtn':
             header.textContent = "Connection (Soul/Urge - Personality)";
@@ -471,13 +471,13 @@ function englishIndexButtons(buttonId) {
             break;
         case 'thangcanhanBtn':
             header.textContent = "Personal month";
-            mess1.textContent = "In Pythagorean Numerology, each of us has a personal month numerical vibration which changes each year in a 9-year cycle.";
+            mess1.textContent = "In Pythagorean Numerology, each of us has a personal month numerical vibration which month each year in a 9-month cycle.";
             mess2.textContent = "It reveals much about the influences and events you will be experiencing, like a weather forecast - a human forecast.";
             mess4.textContent = "Your personal month number is " + document.getElementById('thangcanhan').textContent;
             break;
         case 'ngaycanhanBtn':
             header.textContent = "Personal day"
-            mess1.textContent = "In Pythagorean Numerology, each of us has a personal day numerical vibration which changes each year in a 9-year cycle.";
+            mess1.textContent = "In Pythagorean Numerology, each of us has a personal day numerical vibration which changes each day in a 9-day cycle.";
             mess2.textContent = "It reveals much about the influences and events you will be experiencing, like a weather forecast - a human forecast.";
             mess4.textContent = "Your personal day number is " + document.getElementById('ngaycanhan').textContent;
             break;
@@ -496,8 +496,8 @@ function englishIndexButtons(buttonId) {
         case 'thachthucBtn':
             header.textContent = "Challenges";
             mess1.textContent = "These numbers show you four challenges to be faced during your lives.";
-            mess2.textContent = "In some cases, the same challenge is repeated, while others have four distinctly different lessons to learn. Repeated challanges may have different meaning according to their position in your life.";
-            mess4.textContent = "Your challange numbers are " + document.getElementById('thachthuc').textContent;
+            mess2.textContent = "In some cases, the same challenge is repeated, while others have four distinctly different lessons to learn. Repeated challenges may have different meaning according to their position in your life.";
+            mess4.textContent = "Your challenge numbers are " + document.getElementById('thachthuc').textContent;
             break;
         default:
             break;
