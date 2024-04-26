@@ -202,14 +202,9 @@ input[type="text"], #calculateBtn {
     margin-top: 20px;         /* Add some space at the top */
 }
 
-#birthdateMatrixContainer {
+#birthdateMatrixContainer, #nameMatrixContainer {
     width: 250px;
-    margin-right: 100px;
-}
-
-#nameMatrixContainer {
-    width: 250px;
-    margin-left: 100px;
+    margin: 0px 15%;
 }
 
 #birthdateMatrixContainer h3,
@@ -223,21 +218,31 @@ input[type="text"], #calculateBtn {
     margin-top: 10px;
     border-collapse: collapse;
     width: 100%; /* Set table width to 100% */
+    background-color: #edf5e1;
+    color: #05386b;
 }
 
 #birthdateMatrixContainer th,
 #nameMatrixContainer th {
     text-align: center; /* Center align header text */
     padding: 15px;
-    border: 1px solid #edf5e1;
+    border: 1px solid #05386b;
 }
 
 #birthdateMatrixContainer td,
 #nameMatrixContainer td {
     padding: 15px;
-    border: 1px solid #edf5e1;
+    border: 3px solid #05386b;
     width: 35px;
     height: 35px;
     text-align: center;
     vertical-align: middle; /* Align cells vertically in the middle */
+}
+
+.birthdate-text {
+    color: red; /* Set the color for birthdate text */
+}
+
+.name-text {
+    color: #05386b; /* Set the color for name text */
 }

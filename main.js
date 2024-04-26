@@ -390,9 +390,9 @@ function englishIndexButtons(buttonId) {
     
     switch (buttonId) {
         case 'yourmapBtn':
-            header.textContent = "Your map"
+            header.textContent = "Your map:";
             displayBirthdateMap();
-            displayNameMap();
+            displayCombinedMap();
             break;
         case 'duongdoiBtn':
             header.textContent = "Life path";
@@ -520,6 +520,7 @@ function vietnameseIndexButtons(buttonId) {
         case 'yourmapBtn':
             header.textContent = "Bản đồ của bạn:"
             displayBirthdateMap();
+            displayCombinedMap();
             break;
         case 'duongdoiBtn':
             header.textContent = "Đường đời";
@@ -580,100 +581,6 @@ function vietnameseIndexButtons(buttonId) {
     }
 }
 
-function displayBirthdateMap() {
-    const header = document.createElement('h3');
-    header.textContent = 'Birthdate map';
-
-    const birthday = document.getElementById('birthdate').value;
-    const birthdateString = birthday.replace(/\//g, '');
-
-    var frameMap = [
-        [3,6,9],
-        [2,5,8],
-        [1,4,7]
-    ];
-    let matrixContainer = document.getElementById('birthdateMatrixContainer');
-    const table = document.createElement('table');
-
-    for (let i = 0; i < 3; i++) {
-        const row = document.createElement('tr');
-        for (let j = 0; j < 3; j++) {
-            const cell = document.createElement('td');
-            let cellContent = '';
-            for (let index = 0; index < birthdateString.length; index++) {
-                if (birthdateString[index] == frameMap[i][j]) {
-                    cellContent += birthdateString[index];
-                }
-            }
-            cell.textContent = cellContent || ' ';
-            row.appendChild(cell);
-            
-        }
-        table.appendChild(row);
-    }
-    matrixContainer.appendChild(header);
-    matrixContainer.appendChild(table);
-}
-
-function displayNameMap() {
-    const header = document.createElement('h3');
-    header.textContent = 'Name map';
-
-    var rawName = document.getElementById('name').value;
-    var name = removeAccents(rawName);
-    name = name.toLowerCase();
-    var nChar = ' ';
-    var nCharNumStorage = [];
-    let nCharNum;
-    for (let i = 0; i < name.length; i++) {
-        nChar = name.charAt(i);
-        if (/[a-z]/.test(nChar)) {
-            nCharNum = reduceToSingleDigit(nChar.charCodeAt(0)-96, false);
-            nCharNumStorage.push(nCharNum.toString());
-        }
-    }
-    
-    var frameMap = [
-        [3,6,9],
-        [2,5,8],
-        [1,4,7]
-    ];
-    const matrixContainer = document.getElementById('nameMatrixContainer');
-    const table = document.createElement('table');
-
-    for (let i = 0; i < 3; i++) {
-        const row = document.createElement('tr');
-        for (let j = 0; j < 3; j++) {
-            const cell = document.createElement('td');
-            let cellContent = '';
-            for (let index = 0; index < nCharNumStorage.length; index++) {
-                if (nCharNumStorage[index] == frameMap[i][j]) {
-                    cellContent += nCharNumStorage[index];
-                }
-            }
-            cell.textContent = cellContent || ' ';
-            row.appendChild(cell);
-            
-        }
-        table.appendChild(row);
-    }
-    matrixContainer.appendChild(header);
-    matrixContainer.appendChild(table);
-}
-
-function clearMap() {
-    var birthdateMatrixContainer = document.getElementById('birthdateMatrixContainer');
-    var nameMatrixContainer = document.getElementById('nameMatrixContainer');
-    if (birthdateMatrixContainer == null || nameMatrixContainer == null) {
-        return;
-    }
-    // Remove all child elements from matrixContainer
-    while (birthdateMatrixContainer.firstChild != null && nameMatrixContainer.firstChild != null) {
-        birthdateMatrixContainer.removeChild(birthdateMatrixContainer.firstChild);
-        nameMatrixContainer.removeChild(nameMatrixContainer.firstChild);
-    }
-}
-
 function clearMessages() {
     var header = document.getElementById('bottomHead');
     var mess1 = document.getElementById('message1');
@@ -690,6 +597,142 @@ function clearMessages() {
     }
 }
 // Explanation for the idecies <---
+
+// Map --->
+const frameMap = [[3,6,9], [2,5,8], [1,4,7]];
+let emptyTable = [[null,null,null], [null,null,null], [null,null,null]];
+
+function displayBirthdateMap() {
+    const header = document.createElement('h3');
+    header.textContent = 'Birthdate map';
+
+    const birthday = document.getElementById('birthdate').value;
+    const birthdateString = birthday.replace(/\//g, '');
+    
+    let matrixContainer = document.getElementById('birthdateMatrixContainer');
+    const table = document.createElement('table');
+
+    for (let i = 0; i < 3; i++) {
+        const row = document.createElement('tr');
+        for (let j = 0; j < 3; j++) {
+            const cell = document.createElement('td');
+            let cellContent = '';
+            for (let index = 0; index < birthdateString.length; index++) {
+                if (birthdateString[index] == frameMap[i][j]) {
+                    cellContent += birthdateString[index];
+                    emptyTable[i][j] = frameMap[i][j];
+                }
+            }
+            cell.textContent = cellContent || null;
+            row.appendChild(cell);
+        }
+        table.appendChild(row);
+    }
+    matrixContainer.appendChild(header);
+    matrixContainer.appendChild(table);
+    handleMapArrows(emptyTable);
+}
+
+function displayCombinedMap() {
+    const header = document.createElement('h3');
+    header.textContent = 'Combined map';
+
+    var rawName = document.getElementById('name').value;
+    var name = removeAccents(rawName);
+    name = name.toLowerCase();
+    var nChar = ' ';
+    var nCharNumStorage = [];
+    let nCharNum;
+    for (let i = 0; i < name.length; i++) {
+        nChar = name.charAt(i);
+        if (/[a-z]/.test(nChar)) {
+            nCharNum = reduceToSingleDigit(nChar.charCodeAt(0)-96, false);
+            nCharNumStorage.push(nCharNum.toString());
+        }
+    }
+    const matrixContainer = document.getElementById('nameMatrixContainer');
+    const table = document.createElement('table');
+    const birthdateTable = document.getElementById('birthdateMatrixContainer').querySelector('table');
+    for (let i = 0; i < 3; i++) {
+        const row = document.createElement('tr');
+        const birthdateCells = birthdateTable.querySelectorAll('tr')[i].querySelectorAll('td');
+        for (let j = 0; j < 3; j++) {
+            const cell = document.createElement('td');
+            const birthdateTextNode = document.createTextNode(birthdateCells[j].textContent);
+            const birthdateSpan = document.createElement('span');
+            birthdateSpan.classList.add('birthdate-text');
+            birthdateSpan.appendChild(birthdateTextNode);
+            cell.appendChild(birthdateSpan);
+            for (let index = 0; index < nCharNumStorage.length; index++) {
+                if (nCharNumStorage[index] == frameMap[i][j]) {
+                    const nameTextNode = document.createTextNode(nCharNumStorage[index]);
+                    const nameSpan = document.createElement('span');
+                    nameSpan.classList.add('name-text');
+                    nameSpan.appendChild(nameTextNode);
+                    cell.appendChild(nameSpan);
+                    emptyTable[i][j] = frameMap[i][j];
+                }
+            }
+            row.appendChild(cell);
+        }
+        table.appendChild(row);
+    }
+    matrixContainer.appendChild(header);
+    matrixContainer.appendChild(table);
+    handleMapArrows(emptyTable);
+}
+
+function handleMapArrows(table) {
+    const patterns = [
+        // Rows
+        [[2, 0], [2, 1], [2, 2], "1-4-7"],
+        [[1, 0], [1, 1], [1, 2], "2-5-8"],
+        [[0, 0], [0, 1], [0, 2], "3-6-9"],
+        // Columns
+        [[2, 0], [1, 0], [0, 0], "1-2-3"],
+        [[2, 1], [1, 1], [0, 1], "4-5-6"],
+        [[2, 2], [1, 2], [0, 2], "7-8-9"],
+        // Diagonals
+        [[2, 0], [1, 1], [0, 2], "1-5-9"],
+        [[2, 2], [1, 1], [0, 0], "3-5-7"]
+    ];
+
+    let noarrow = true;
+
+    for (const pattern of patterns) {
+        const [cell1, cell2, cell3, patternName] = pattern;
+        const [i1, j1] = cell1;
+        const [i2, j2] = cell2;
+        const [i3, j3] = cell3;
+
+        if (table[i1][j1] !== null && table[i2][j2] !== null && table[i3][j3] !== null) {
+            console.log(patternName);
+            noarrow = false;
+        } else if (table[i1][j1] === null && table[i2][j2] === null && table[i3][j3] === null) {
+            console.log(`miss ${patternName}`);
+            noarrow = false;
+        }
+    }
+
+    if (noarrow) {
+        console.log("map is balanced");
+    }
+}
+
+function clearMap() {
+    emptyTable = [[null,null,null], [null,null,null], [null,null,null]];
+    var birthdateMatrixContainer = document.getElementById('birthdateMatrixContainer');
+    var nameMatrixContainer = document.getElementById('nameMatrixContainer');
+    if (!birthdateMatrixContainer || !nameMatrixContainer) {
+        return;
+    }
+    // Remove all child elements from matrixContainer
+    while (birthdateMatrixContainer.firstChild || nameMatrixContainer.firstChild) {
+        birthdateMatrixContainer.removeChild(birthdateMatrixContainer.firstChild);
+        nameMatrixContainer.removeChild(nameMatrixContainer.firstChild);
+    }
+}
+// Map <---
 
 // Add event listener when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function () {
