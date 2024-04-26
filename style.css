@@ -247,11 +247,11 @@ input[type="text"], #calculateBtn {
     color: #05386b; /* Set the color for name text */
 }
 
-#cmtHead, #cmt {
+#patternContainer {
     color: #edf5e1;
 }
 
-#cmt {
+#cmt1, #cmt2 {
     padding-left: 100px;
     margin: 0px;
 }

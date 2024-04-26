@@ -631,7 +631,7 @@ function displayBirthdateMap(language) {
     }
     matrixContainer.appendChild(header);
     matrixContainer.appendChild(table);
-    displayMapComments(handleMapArrows(emptyTable), language);
+    displayMapComments(false, handleMapArrows(emptyTable), language);
 }
 
 function displayCombinedMap(language) {
@@ -681,7 +681,7 @@ function displayCombinedMap(language) {
     }
     matrixContainer.appendChild(header);
     matrixContainer.appendChild(table);
-    // handleMapArrows(emptyTable);
+    displayMapComments(true, handleMapArrows(emptyTable), language);
 }
 
 function handleMapArrows(table) {
@@ -717,22 +717,44 @@ function handleMapArrows(table) {
     return results;
 }
 
-function displayMapComments(results, language) {
+function displayMapComments(combined, results, language) {
     const patternContainer = document.getElementById('patternContainer');
-    let cmtHead = document.getElementById('cmtHead');
-    let cmt = document.getElementById('cmt');
+    let cmtHead1 = document.getElementById('cmtHead1');
+    let cmt1 = document.getElementById('cmt1');
+    let cmtHead2 = document.getElementById('cmtHead2');
+    let cmt2 = document.getElementById('cmt2');
+    if (language == 'en') {
+        if (combined == true) {
+            handleComments(patternContainer, cmtHead2, cmt2, language, results, "COMBINED");
+        } else {
+            handleComments(patternContainer, cmtHead1, cmt1, language, results, "BIRTHDATE");
+        }
+    } else {
+        if (combined == true) {
+            handleComments(patternContainer, cmtHead2, cmt2, language, results, "ĐÃ ĐƯỢC HỌ TÊN BỔ TRỢ");
+        } else {
+            handleComments(patternContainer, cmtHead1, cmt1, language, results, "SỨC MẠNH NGÀY SINH");
+        }
+    }
+    
 
+}
+
+function handleComments(container, cmtHeadSlot, cmtSlot, language, results, combined) {
+    patternContainer = container;
+    cmtHead = cmtHeadSlot;
+    cmt = cmtSlot
     if (language == 'en') {
         if (results.length === 0) {
-            cmtHead.textContent = "Your map is balanced.";
+            cmtHead.textContent = "Your " + combined + " map is balanced.";
             return;
         } else {
-            cmtHead.textContent = "Based on your map, you have the following arrow(s):";
+            cmtHead.textContent = "Based on your " + combined + " map, you have the following arrow(s):";
         }
     
         for (const result of results) {
             const { patternName, status } = result;
-            if (status == "found") {
+            if (status == "filled") {
                 switch (patternName) {
                     case "1-2-3":
                         cmt.textContent += " +Planning arrow";
@@ -791,15 +813,85 @@ function displayMapComments(results, language) {
             patternContainer.appendChild(cmt);
         }
     }
-
+    if (language == 'vi') {
+        if (results.length === 0) {
+            cmtHead.textContent = "Bản đồ " + combined + " của bạn cân bằng.";
+            return;
+        } else {
+            cmtHead.textContent = "Dựa vào bản dồ " + combined + ", bạn có những mũi tên sau:";
+        }
+    
+        for (const result of results) {
+            const { patternName, status } = result;
+            if (status == "filled") {
+                switch (patternName) {
+                    case "1-2-3":
+                        cmt.textContent += " +Mũi tên Kế Hoạch";
+                        break;
+                    case "4-5-6":
+                        cmt.textContent += " +Mũi tên Ý Chí";
+                        break;
+                    case "7-8-9":
+                        cmt.textContent += " +Mũi tên Hành Động";
+                        break;
+                    case "1-4-7":
+                        cmt.textContent += " +Mũi tên Thể Chất";
+                        break;
+                    case "2-5-8":
+                        cmt.textContent += " +Mũi tên Tinh Thần";
+                        break;
+                    case "3-6-9":
+                        cmt.textContent += " +Mũi tên Trí Tuệ";
+                        break;
+                    case "3-5-7":
+                        cmt.textContent += " +Mũi tên Trắc Ẩn";
+                        break;
+                    case "1-5-9":
+                        cmt.textContent += " +Mũi tên Quyết Tâm";
+                        break;
+                    default:
+                        break;
+                }
+            } else if (status == "empty") {
+                switch (patternName) {
+                    case "4-5-6":
+                        cmt.textContent += " -Mũi tên Uất Hận";
+                        break;
+                    case "7-8-9":
+                        cmt.textContent += " -Mũi tên Thụ Động";
+                        break;
+                    case "1-4-7":
+                        cmt.textContent += " -Mũi tên Thiếu Thực Tế";
+                        break;
+                    case "2-5-8":
+                        cmt.textContent += " -Mũi tên Nhạy Cảm";
+                        break;
+                    case "3-6-9":
+                        cmt.textContent += " -Mũi tên Hay Quên";
+                        break;
+                    case "3-5-7":
+                        cmt.textContent += " -Mũi tên Hoài Nghi";
+                        break;
+                    case "1-5-9":
+                        cmt.textContent += " -Mũi tên Thiếu Quyết Đoán";
+                        break;
+                    default:
+                        break;
+                }
+            }
+            patternContainer.appendChild(cmt);
+        }
+    }
 }
 
 function clearMap() {
     emptyTable = [[null,null,null], [null,null,null], [null,null,null]];
     var birthdateMatrixContainer = document.getElementById('birthdateMatrixContainer');
     var combinedMartixContainer = document.getElementById('combinedMartixContainer');
-    document.getElementById('cmtHead').textContent = "";
-    document.getElementById('cmt').textContent = "";
+    document.getElementById('cmtHead1').textContent = "";
+    document.getElementById('cmt1').textContent = "";
+    document.getElementById('cmtHead2').textContent = "";
+    document.getElementById('cmt2').textContent = "";
     if (!birthdateMatrixContainer || !combinedMartixContainer) {
         return;
     }
