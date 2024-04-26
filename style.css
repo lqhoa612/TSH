@@ -202,19 +202,19 @@ input[type="text"], #calculateBtn {
     margin-top: 20px;         /* Add some space at the top */
 }
 
-#birthdateMatrixContainer, #nameMatrixContainer {
+#birthdateMatrixContainer, #combinedMartixContainer {
     width: 250px;
     margin: 0px 15%;
 }
 
 #birthdateMatrixContainer h3,
-#nameMatrixContainer h3 {
+#combinedMartixContainer h3 {
     text-align: center;
     margin: 0px;
 }
 
 #birthdateMatrixContainer table,
-#nameMatrixContainer table {
+#combinedMartixContainer table {
     margin-top: 10px;
     border-collapse: collapse;
     width: 100%; /* Set table width to 100% */
@@ -223,14 +223,14 @@ input[type="text"], #calculateBtn {
 }
 
 #birthdateMatrixContainer th,
-#nameMatrixContainer th {
+#combinedMartixContainer th {
     text-align: center; /* Center align header text */
     padding: 15px;
     border: 1px solid #05386b;
 }
 
 #birthdateMatrixContainer td,
-#nameMatrixContainer td {
+#combinedMartixContainer td {
     padding: 15px;
     border: 3px solid #05386b;
     width: 35px;
@@ -245,4 +245,13 @@ input[type="text"], #calculateBtn {
 
 .name-text {
     color: #05386b; /* Set the color for name text */
+}
+
+#cmtHead, #cmt {
+    color: #edf5e1;
+}
+
+#cmt {
+    padding-left: 100px;
+    margin: 0px;
 }

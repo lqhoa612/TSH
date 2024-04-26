@@ -391,8 +391,8 @@ function englishIndexButtons(buttonId) {
     switch (buttonId) {
         case 'yourmapBtn':
             header.textContent = "Your map:";
-            displayBirthdateMap();
-            displayCombinedMap();
+            displayBirthdateMap('en');
+            displayCombinedMap('en');
             break;
         case 'duongdoiBtn':
             header.textContent = "Life path";
@@ -471,7 +471,7 @@ function englishIndexButtons(buttonId) {
             break;
         case 'thangcanhanBtn':
             header.textContent = "Personal month";
-            mess1.textContent = "In Pythagorean Numerology, each of us has a personal month numerical vibration which month each year in a 9-month cycle.";
+            mess1.textContent = "In Pythagorean Numerology, each of us has a personal month numerical vibration which changes each month in a 9-month cycle.";
             mess2.textContent = "It reveals much about the influences and events you will be experiencing, like a weather forecast - a human forecast.";
             mess4.textContent = "Your personal month number is " + document.getElementById('thangcanhan').textContent;
             break;
@@ -519,8 +519,8 @@ function vietnameseIndexButtons(buttonId) {
     switch (buttonId) {
         case 'yourmapBtn':
             header.textContent = "Bản đồ của bạn:"
-            displayBirthdateMap();
-            displayCombinedMap();
+            displayBirthdateMap('vi');
+            displayCombinedMap('vi');
             break;
         case 'duongdoiBtn':
             header.textContent = "Đường đời";
@@ -602,9 +602,10 @@ function clearMessages() {
 const frameMap = [[3,6,9], [2,5,8], [1,4,7]];
 let emptyTable = [[null,null,null], [null,null,null], [null,null,null]];
 
-function displayBirthdateMap() {
+function displayBirthdateMap(language) {
     const header = document.createElement('h3');
-    header.textContent = 'Birthdate map';
+    if (language == 'en') {header.textContent = "Birthdate Map";}
+    if (language == 'vi') {header.textContent = "Bản đồ sức mạnh ngày sinh";}
 
     const birthday = document.getElementById('birthdate').value;
     const birthdateString = birthday.replace(/\//g, '');
@@ -630,12 +631,13 @@ function displayBirthdateMap() {
     }
     matrixContainer.appendChild(header);
     matrixContainer.appendChild(table);
-    handleMapArrows(emptyTable);
+    displayMapComments(handleMapArrows(emptyTable), language);
 }
 
-function displayCombinedMap() {
+function displayCombinedMap(language) {
     const header = document.createElement('h3');
-    header.textContent = 'Combined map';
+    if (language == 'en') {header.textContent = "Combined Map";}
+    if (language =='vi') {header.textContent = "Bản đồ được họ tên bổ trợ";}
 
     var rawName = document.getElementById('name').value;
     var name = removeAccents(rawName);
@@ -650,7 +652,7 @@ function displayCombinedMap() {
             nCharNumStorage.push(nCharNum.toString());
         }
     }
-    const matrixContainer = document.getElementById('nameMatrixContainer');
+    const matrixContainer = document.getElementById('combinedMartixContainer');
     const table = document.createElement('table');
     const birthdateTable = document.getElementById('birthdateMatrixContainer').querySelector('table');
     for (let i = 0; i < 3; i++) {
@@ -679,7 +681,7 @@ function displayCombinedMap() {
     }
     matrixContainer.appendChild(header);
     matrixContainer.appendChild(table);
-    handleMapArrows(emptyTable);
+    // handleMapArrows(emptyTable);
 }
 
 function handleMapArrows(table) {
@@ -697,7 +699,7 @@ function handleMapArrows(table) {
         [[2, 2], [1, 1], [0, 0], "3-5-7"]
     ];
 
-    let noarrow = true;
+    const results = [];
 
     for (const pattern of patterns) {
         const [cell1, cell2, cell3, patternName] = pattern;
@@ -706,30 +708,105 @@ function handleMapArrows(table) {
         const [i3, j3] = cell3;
 
         if (table[i1][j1] !== null && table[i2][j2] !== null && table[i3][j3] !== null) {
-            console.log(patternName);
-            noarrow = false;
+            results.push({ patternName, status: "filled" });
         } else if (table[i1][j1] === null && table[i2][j2] === null && table[i3][j3] === null) {
-            console.log(`miss ${patternName}`);
-            noarrow = false;
+            results.push({ patternName, status: "empty" });
         }
     }
 
-    if (noarrow) {
-        console.log("map is balanced");
+    return results;
+}
+
+function displayMapComments(results, language) {
+    const patternContainer = document.getElementById('patternContainer');
+    let cmtHead = document.getElementById('cmtHead');
+    let cmt = document.getElementById('cmt');
+
+    if (language == 'en') {
+        if (results.length === 0) {
+            cmtHead.textContent = "Your map is balanced.";
+            return;
+        } else {
+            cmtHead.textContent = "Based on your map, you have the following arrow(s):";
+        }
+    
+        for (const result of results) {
+            const { patternName, status } = result;
+            if (status == "found") {
+                switch (patternName) {
+                    case "1-2-3":
+                        cmt.textContent += " +Planning arrow";
+                        break;
+                    case "4-5-6":
+                        cmt.textContent += " +Willpower arrow";
+                        break;
+                    case "7-8-9":
+                        cmt.textContent += " +Activity arrow";
+                        break;
+                    case "1-4-7":
+                        cmt.textContent += " +Practicality arrow";
+                        break;
+                    case "2-5-8":
+                        cmt.textContent += " +Emotional Balance arrow";
+                        break;
+                    case "3-6-9":
+                        cmt.textContent += " +Intellect arrow";
+                        break;
+                    case "3-5-7":
+                        cmt.textContent += " +Compassion arrow";
+                        break;
+                    case "1-5-9":
+                        cmt.textContent += " +Determination arrow";
+                        break;
+                    default:
+                        break;
+                }
+            } else if (status == "empty") {
+                switch (patternName) {
+                    case "4-5-6":
+                        cmt.textContent += " -Frustration arrow";
+                        break;
+                    case "7-8-9":
+                        cmt.textContent += " -Hesitation arrow";
+                        break;
+                    case "1-4-7":
+                        cmt.textContent += " -Impracticality arrow";
+                        break;
+                    case "2-5-8":
+                        cmt.textContent += " -Emotional Sensitivity arrow";
+                        break;
+                    case "3-6-9":
+                        cmt.textContent += " -Poor Memory arrow";
+                        break;
+                    case "3-5-7":
+                        cmt.textContent += " -Skepticism arrow";
+                        break;
+                    case "1-5-9":
+                        cmt.textContent += " -Indecision arrow";
+                        break;
+                    default:
+                        break;
+                }
+            }
+            patternContainer.appendChild(cmt);
+        }
     }
+
 }
 
 function clearMap() {
     emptyTable = [[null,null,null], [null,null,null], [null,null,null]];
     var birthdateMatrixContainer = document.getElementById('birthdateMatrixContainer');
-    var nameMatrixContainer = document.getElementById('nameMatrixContainer');
-    if (!birthdateMatrixContainer || !nameMatrixContainer) {
+    var combinedMartixContainer = document.getElementById('combinedMartixContainer');
+    document.getElementById('cmtHead').textContent = "";
+    document.getElementById('cmt').textContent = "";
+    if (!birthdateMatrixContainer || !combinedMartixContainer) {
         return;
     }
     // Remove all child elements from matrixContainer
-    while (birthdateMatrixContainer.firstChild || nameMatrixContainer.firstChild) {
+    while (birthdateMatrixContainer.firstChild || combinedMartixContainer.firstChild) {
         birthdateMatrixContainer.removeChild(birthdateMatrixContainer.firstChild);
-        nameMatrixContainer.removeChild(nameMatrixContainer.firstChild);
+        combinedMartixContainer.removeChild(combinedMartixContainer.firstChild);
     }
 }
 // Map <---
