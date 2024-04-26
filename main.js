@@ -747,9 +747,11 @@ function handleComments(container, cmtHeadSlot, cmtSlot, language, results, comb
     if (language == 'en') {
         if (results.length === 0) {
             cmtHead.textContent = "Your " + combined + " map is balanced.";
+            patternContainer.appendChild(cmtHead);
             return;
         } else {
             cmtHead.textContent = "Based on your " + combined + " map, you have the following arrow(s):";
+            patternContainer.appendChild(cmtHead);
         }
     
         for (const result of results) {
@@ -879,7 +881,6 @@ function handleComments(container, cmtHeadSlot, cmtSlot, language, results, comb
                         break;
                 }
             }
-            patternContainer.appendChild(cmt);
         }
     }
 }
