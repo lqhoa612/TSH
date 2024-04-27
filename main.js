@@ -437,12 +437,12 @@ function englishIndexButtons(buttonId) {
             break;
         case 'canbangBtn':
             header.textContent = "Balance"
-            mess1.textContent = "This number provides guidance on how to best deal with difficult situations."
+            mess1.textContent = "This number provides guidance on how to best deal with difficult situations.";
             mess4.textContent = "Your balance number is " + document.getElementById('canbang').textContent;
             break;
         case 'tuduylytriBtn':
             header.textContent = "Rational thought"
-            mess1.textContent = "This number reveals the way you think, how you process your thoughts, like do emotions back it, or is it practical?"
+            mess1.textContent = "This number reveals the way you think, how you process your thoughts, like do emotions back it, or is it practical?";
             mess4.textContent = "Your rational thought number is " + document.getElementById('tuduylytri').textContent;
             break;
         case 'sucmanhtiemthucBtn':
@@ -495,8 +495,8 @@ function englishIndexButtons(buttonId) {
             break;
         case 'thachthucBtn':
             header.textContent = "Challenges";
-            mess1.textContent = "These numbers show you four challenges to be faced during your lives.";
-            mess2.textContent = "In some cases, the same challenge is repeated, while others have four distinctly different lessons to learn. Repeated challenges may have different meaning according to their position in your life.";
+            mess1.textContent = "These numbers show you four challenges to be faced in each milestone during your life.";
+            mess2.textContent = "In some cases, the same challenge is repeated, while others have four distinctly different lessons to learn. Repeated challenges may have different meaning according to their position in each milestone in your life.";
             mess4.textContent = "Your challenge numbers are " + document.getElementById('thachthuc').textContent;
             break;
         default:
@@ -524,57 +524,107 @@ function vietnameseIndexButtons(buttonId) {
             break;
         case 'duongdoiBtn':
             header.textContent = "Đường đời";
+            mess1.textContent = "Đường đời tiết lộ con người của bạn, sức mạnh và điểm yếu của bạn.";
+            mess2.textContent = "Số đường đời còn cho bạn biết bài học mà bạn cần phải trải qua để trở thành phiên bản tốt hơn của chính mình.";
+            mess4.textContent = "Chỉ số đường đời của bạn là " + document.getElementById('duongdoi').textContent;
             break;
         case 'sumenhBtn':
             header.textContent = "Sứ mệnh";
+            mess1.textContent = "Số sứ mệnh cho bạn biết nhiệm vụ của bạn khi đến thế giới này.";
+            mess2.textContent = "Nó còn chỉ ra lý do bạn được sinh ra trong cuộc đời và bạn cần hướng đến điều gì để có được hạnh phúc trong cuộc đời.";
+            mess4.textContent = "Chỉ số sứ mệnh của bạn là " + document.getElementById('sumenh').textContent;
             break;
         case 'lienketduongdoisumenhBtn':
             header.textContent = "Liên kết (Đường đời - Sứ mệnh)";
+            mess1.textContent = "Số liên kết đường đời - sứ mệnh cho bạn biết thử thách bạn cần phải vượt qua để hoàn thành bài học đường đời và sứ mệnh.";
+            mess4.textContent = "Chỉ số liên kết đường đời sứ mệnh của bạn là " + document.getElementById('lienketduongdoisumenh').textContent;
             break;
         case 'truongthanhBtn':
             header.textContent = "Trưởng thành";
+            mess1.textContent = "Số trưởng thành cho bạn biết cách để trưởng thành trong tâm trí, thân thể, và trí tuệ.";
+            mess2.textContent = "Nó còn chỉ ra những mong muốn nảy sinh của bạn khi bạn đến càng gần với giai đoạn trung niên. ";
+            mess4.textContent = "Chỉ số trưởng thành của bạn là " + document.getElementById('truongthanh').textContent;
             break;
         case 'linhhonBtn':
             header.textContent = "Linh hồn";
+            mess1.textContent = "Số linh hồn chỉ ra điều mà trong lòng bạn khao khát từ khi sinh ra.";
+            mess4.textContent = "Chỉ số linh hồn của bạn là " + document.getElementById('linhhon').textContent;
             break;
         case 'nhancachBtn':
             header.textContent = "Nhân cách";
+            mess1.textContent = "Số nhân cách cho bạn biết người ngoài nhìn thấy và nghĩ về bạn như thế nào.";
+            mess2.textContent = "Đôi khi chỉ số này còn được gọi là chỉ số ấn tượng đầu tiên.";
+            mess4.textContent = "Chỉ số nhân cách của bạn là " + document.getElementById('nhancach').textContent;
             break;
         case 'lienketlinhhonnhancachBtn':
             header.textContent = "Liên kết (Linh hồn - Nhân cách)";
+            mess1.textContent = "Đôi khi cái mà người ngoài thấy và nghĩ về bạn không phải là cái mà bạn thực sự muốn truyền đạt, biểu đạt.";
+            mess2.textContent = "Số liên kết linh hồn - nhân cách cho bạn biết phải làm thế nào để có thể sống đúng với bản thân mình, biểu đạt mà không gây hiểu lầm.";
+            mess4.textContent = "Chỉ số liên kết linh hồn nhân cách của bạn là " + document.getElementById('lienketlinhhonnhancach').textContent;
             break;
         case 'canbangBtn':
             header.textContent = "Cân bằng";
+            mess1.textContent = "Số cân bằng hướng dẫn bạn cách để đối diện với khó khăn trong cuộc sống.";
+            mess4.textContent = "Chỉ số cân bằng của bạn là " + document.getElementById('canbang').textContent;
             break;
         case 'tuduylytriBtn':
             header.textContent = "Tư duy lý trí";
+            mess1.textContent = "Số tư duy lý trí tiết lộ cách bạn đưa ra quyết định, như là dựa vào cảm xúc hay là dựa vào thực tiễn?";
+            mess4.textContent = "Chỉ số tư duy lý trí của bạn là " + document.getElementById('tuduylytri').textContent;
             break;
         case 'sucmanhtiemthucBtn':
             header.textContent = "Sức mạnh tiềm thức";
+            mess1.textContent = "Số sức mạnh tiềm thức mang theo bài học từ kiếp trước của bạn và cho biết được khả năng của bạn bẩm sinh, sẵn có trong tiềm thức của bạn.";
+            mess4.textContent = "Chỉ số sức mạnh tiềm thức của bạn là " + document.getElementById('sucmanhtiemthuc').textContent;
             break;
         case 'sothieuBtn':
             header.textContent = "Số thiếu";
+            mess1.textContent = "Số thiếu, có thể gồm nhiều số hoặc một số duy nhất, cho bạn biết những khía cạnh mà bạn đang hoặc đã từng mất cân bằng.";
+            mess2.textContent = "Nó cho thấy bạn đã/đang đi ngược hoặc đi quá năng lượng của những con số đó.";
+            mess3.textContent = "Biết được những điểm yếu này bạn có thể làm nhòa con số ấy đi cũng nhưng chỉnh lại sự cân bằng năng lượng của con số đó."
+            mess4.textContent = "Số thiếu của bạn bao gồm " + document.getElementById('sothieu').textContent;
             break;
         case 'ngaysinhBtn':
             header.textContent = "Ngày sinh";
+            mess1.textContent = "Số ngày sinh cho bạn biết một số khía cạnh khác trong tính cách con người bạn và tài năng bẩm sinh có khả năng giúp bạn trong cuộc sống.";
+            mess2.textContent = "Ngoài ra nó cũng chỉ ra người ngoài nghĩ về bạn như thế nào.";
+            mess4.textContent = "Chỉ số ngày sinh của bạn là " + document.getElementById('ngaysinh').textContent;
             break;
         case 'namcanhanBtn':
             header.textContent = "Năm cá nhân";
+            mess1.textContent = "Trong thần số học Pythagorean, mỗi chúng ta đều có một năm rung động số riêng, thay đổi hàng năm theo chu kỳ 9 năm.";
+            mess2.textContent = "Nó tiết lộ nhiều về những ảnh hưởng và sự kiện mà bạn sẽ trải qua, giống như dự báo thời tiết - dự báo của con người.";
+            mess4.textContent = "Chỉ số năm cá nhân của bạn là " + document.getElementById('namcanhan').textContent;
             break;
         case 'thangcanhanBtn':
             header.textContent = "Tháng cá nhân";
+            mess1.textContent = "Trong thần số học Pythagorean, mỗi chúng ta đều có một tháng rung động số riêng, thay đổi hàng tháng theo chu kỳ 9 tháng.";
+            mess2.textContent = "Nó tiết lộ nhiều về những ảnh hưởng và sự kiện mà bạn sẽ trải qua, giống như dự báo thời tiết - dự báo của con người.";
+            mess4.textContent = "Chỉ số tháng cá nhân của bạn là " + document.getElementById('thangcanhan').textContent;
             break;
         case 'ngaycanhanBtn':
             header.textContent = "Ngày cá nhân";
+            mess1.textContent = "Trong thần số học Pythagorean, mỗi chúng ta đều có một ngày rung động số riêng, thay đổi hàng ngày theo chu kỳ 9 ngày.";
+            mess2.textContent = "Nó tiết lộ nhiều về những ảnh hưởng và sự kiện mà bạn sẽ trải qua, giống như dự báo thời tiết - dự báo của con người.";
+            mess4.textContent = "Chỉ số ngày cá nhân của bạn là " + document.getElementById('ngaycanhan').textContent;
             break;
         case 'changBtn':
             header.textContent = "Chặng";
+            mess1.textContent = "Số chặng hoặc số đỉnh là lộ trình về những trải nghiệm, những gì khả năng cao sẽ xảy ra xuyên suốt cuộc đời bạn.";
+            mess2.textContent = "Có bốn cột mốc trong số đó, theo thứ tự 1-9, mỗi cột mốc là một chu kỳ chính của cuộc đời. Chúng có khả năng làm trải nghiệm cuộc sống của bạn sâu sắc hơn.";
+            mess4.textContent = "Bốn chặng của bạn bao gồm " + document.getElementById('chang').textContent;
             break;
         case 'tuoiBtn':
             header.textContent = "Tuổi kết thúc chặng";
+            mess1.textContent = "Những con số này là độ tuổi của bạn ở năm thứ chín của chặng tương ứng.";
+            mess2.textContent = "Chúng tiết lộ thời điểm bạn sắp kết thúc một chặng quan trọng và bắt đầu một chu kỳ mới trong chặng tiếp theo của mình.";
+            mess4.textContent = "Tuổi kết thúc từng chặng của bạn gồm " + document.getElementById('tuoi').textContent;
             break;
         case 'thachthucBtn':
             header.textContent = "Thách thức";
+            mess1.textContent = "Những con số này cho bạn thấy bốn thách thức phải đối mặt trong từng chặng cuộc đời.";
+            mess2.textContent = "Trong một số trường hợp, một thử thách có thể lặp lại hơn một lần ở một chặng khác. Những thử thách lặp đi lặp lại có thể có ý nghĩa khác nhau tùy theo vị trí của chúng ở từng chặng trong cuộc sống của bạn.";
+            mess4.textContent = "Bốn thử thách của bạn bao gồm " + document.getElementById('thachthuc').textContent;
             break;
         default:
             break;
@@ -718,40 +768,36 @@ function handleMapArrows(table) {
 }
 
 function displayMapComments(combined, results, language) {
-    const patternContainer = document.getElementById('patternContainer');
     let cmtHead1 = document.getElementById('cmtHead1');
     let cmt1 = document.getElementById('cmt1');
     let cmtHead2 = document.getElementById('cmtHead2');
     let cmt2 = document.getElementById('cmt2');
     if (language == 'en') {
         if (combined == true) {
-            handleComments(patternContainer, cmtHead2, cmt2, language, results, "COMBINED");
+            handleComments(cmtHead2, cmt2, language, results, "COMBINED");
         } else {
-            handleComments(patternContainer, cmtHead1, cmt1, language, results, "BIRTHDATE");
+            handleComments(cmtHead1, cmt1, language, results, "BIRTHDATE");
         }
     } else {
         if (combined == true) {
-            handleComments(patternContainer, cmtHead2, cmt2, language, results, "ĐÃ ĐƯỢC HỌ TÊN BỔ TRỢ");
+            handleComments(cmtHead2, cmt2, language, results, "ĐÃ ĐƯỢC HỌ TÊN BỔ TRỢ");
         } else {
-            handleComments(patternContainer, cmtHead1, cmt1, language, results, "SỨC MẠNH NGÀY SINH");
+            handleComments(cmtHead1, cmt1, language, results, "SỨC MẠNH NGÀY SINH");
         }
     }
     
 
 }
 
-function handleComments(container, cmtHeadSlot, cmtSlot, language, results, combined) {
-    patternContainer = container;
+function handleComments(cmtHeadSlot, cmtSlot, language, results, combined) {
     cmtHead = cmtHeadSlot;
     cmt = cmtSlot
     if (language == 'en') {
         if (results.length === 0) {
             cmtHead.textContent = "Your " + combined + " map is balanced.";
-            patternContainer.appendChild(cmtHead);
             return;
         } else {
             cmtHead.textContent = "Based on your " + combined + " map, you have the following arrow(s):";
-            patternContainer.appendChild(cmtHead);
         }
     
         for (const result of results) {
@@ -812,7 +858,6 @@ function handleComments(container, cmtHeadSlot, cmtSlot, language, results, comb
                         break;
                 }
             }
-            patternContainer.appendChild(cmt);
         }
     }
     if (language == 'vi') {
