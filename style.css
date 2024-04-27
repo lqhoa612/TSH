@@ -23,6 +23,14 @@ header, footer {
     font-size: 20px;
 }
 
+header p {
+    margin: 0px;
+}
+
+header h1 {
+    margin-bottom: 0px;
+}
+
 main {
     padding: 10px;
 }
