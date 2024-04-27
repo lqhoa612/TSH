@@ -655,7 +655,7 @@ let emptyTable = [[null,null,null], [null,null,null], [null,null,null]];
 function displayBirthdateMap(language) {
     const header = document.createElement('h3');
     if (language == 'en') {header.textContent = "Birthdate Map";}
-    if (language == 'vi') {header.textContent = "Bản đồ sức mạnh ngày sinh";}
+    if (language == 'vi') {header.textContent = "Bản đồ ngày sinh";}
 
     const birthday = document.getElementById('birthdate').value;
     const birthdateString = birthday.replace(/\//g, '');
