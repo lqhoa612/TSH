@@ -37,7 +37,6 @@ main {
 
 /*Left content*/
 #left-content {
-    width: fit-content;
     flex: 1;
     min-width: 250px;
     max-width: 340px;
