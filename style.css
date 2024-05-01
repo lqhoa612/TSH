@@ -4,14 +4,14 @@
 
 
 body {
-    background-color: #868378;
+    background-color: #4C301F;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin: 0;
     padding: 0;
 }
 
 header, footer {
-    background-color: #868378;
+    background-color: #4C301F;
     color: #F8F2DC;
     padding: 20px;
     text-align: center;
@@ -83,6 +83,18 @@ input[type="text"], #calculateBtn {
     color: #F8F2DC;
 }
 
+#basicInfo-container {
+    background-color: #4C301F;
+    color: #F8F2DC;
+    text-align: justify;
+    font-size: 20px;
+    margin: 5px 0px;
+}
+
+#basicInfo-container p {
+    margin: 5px 0px;
+}
+
 /*Result Container*/
 #result-container p {
     margin: 5px 0px;
@@ -96,13 +108,11 @@ input[type="text"], #calculateBtn {
     margin: 0px;
 }
 
-#basicInfo-container {
-    background-color: #BDD0D2;
-    color: #4B86AA;
-    margin: 5px;
+/* Index container */
+#yourmapBtn {
+    text-align: center;
 }
 
-/* Index container */
 #index-container p {
     background-color: #BDD0D2;
     color: #4B86AA;
@@ -125,13 +135,10 @@ input[type="text"], #calculateBtn {
     font-size: 20px;
 }
 
-#yourmapBtn {
-    text-align: center;
-}
-
 #upperright {
     background-color: #4B86AA;
     color: #F8F2DC;
+    text-align: justify;
     padding: 10px;
     margin: 5px;
     margin-top: 0px;
@@ -174,7 +181,7 @@ input[type="text"], #calculateBtn {
 
 #language {
     background-color: #F8F2DC;
-    color: #868378;
+    color: #4C301F;
     font-size: 16px;
     padding: 3px;
 }
@@ -234,7 +241,7 @@ input[type="text"], #calculateBtn {
     border-collapse: collapse;
     width: 100%; /* Set table width to 100% */
     background-color: #F8F2DC;
-    color: #4B86AA;
+    color: #000000;
 }
 
 #birthdateMatrixContainer th,
@@ -255,11 +262,11 @@ input[type="text"], #calculateBtn {
 }
 
 .birthdate-text {
-    color: #CD4631; /* Set the color for birthdate text */
+    color: #4B86AA; /* Set the color for birthdate text */
 }
 
 .name-text {
-    color: #4B86AA; /* Set the color for name text */
+    color: #000000; /* Set the color for name text */
 }
 
 #patternContainer {
