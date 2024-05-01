@@ -41,12 +41,15 @@ main {
     flex: 1;
     min-width: 250px;
     max-width: 340px;
-    background-color: #F8F2DC;
 }
 
 #input-container {
+    background-color: #F8F2DC;
+    color: #4C301F;
+    font-size: 20px;
+    padding: 5px;
     text-align: center;
-    margin: 5px;
+    border-radius: 10px;
 }
 
 #name {
@@ -83,6 +86,7 @@ input[type="text"], #calculateBtn {
     color: #F8F2DC;
 }
 
+/* Basic Info Container */
 #basicInfo-container {
     background-color: #4C301F;
     color: #F8F2DC;
@@ -95,20 +99,21 @@ input[type="text"], #calculateBtn {
     margin: 5px 0px;
 }
 
-/*Result Container*/
-#result-container p {
-    margin: 5px 0px;
-    margin-left: 10px;
+/* Index container */
+#index-container {
+    background-color: #F8F2DC;
+    text-align: justify;
     font-size: 20px;
+    padding: 5px;
+    border-radius: 10px;
 }
 
-#result-container h2 {
+#index-container h2 {
     color: #4B86AA;
     text-align: center;
-    margin: 0px;
+    margin: 5px 0px;
 }
 
-/* Index container */
 #yourmapBtn {
     text-align: center;
 }
@@ -143,6 +148,7 @@ input[type="text"], #calculateBtn {
     margin: 5px;
     margin-top: 0px;
     margin-bottom: 2.5px;
+    border-radius: 10px;
 }
 
 #upperright h2 {
@@ -162,6 +168,7 @@ input[type="text"], #calculateBtn {
     margin: 5px;
     margin-bottom: 0px;
     margin-top: 2.5px;
+    border-radius: 10px;
 }
 
 #bottomright h2 {
