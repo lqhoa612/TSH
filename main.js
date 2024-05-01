@@ -867,7 +867,7 @@ function handleComments(cmtHeadSlot, cmtSlot, language, results, combined) {
             cmtHead.textContent = "Bản đồ " + combined + " của bạn cân bằng.";
             return;
         } else {
-            cmtHead.textContent = "Dựa vào bản dồ " + combined + ", bạn có những mũi tên sau:";
+            cmtHead.textContent = "Dựa vào bản đồ " + combined + ", bạn có những mũi tên sau:";
         }
     
         for (const result of results) {

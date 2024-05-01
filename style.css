@@ -8,6 +8,7 @@ body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin: 0;
     padding: 0;
+    font-size: 1em;
 }
 
 header, footer {
@@ -15,7 +16,7 @@ header, footer {
     color: #F8F2DC;
     padding: 20px;
     text-align: center;
-    font-size: 20px;
+    font-size: 1.3em;
 }
 
 header p {
@@ -45,7 +46,6 @@ main {
 #input-container {
     background-color: #F8F2DC;
     color: #4C301F;
-    font-size: 20px;
     padding: 5px;
     text-align: center;
     border-radius: 10px;
@@ -58,7 +58,6 @@ main {
 input[type="text"] {
     background-color: #F8F2DC;
     color: #000000;
-    font-size: 20px;
     border-width: 3px;
     width: calc(100% - 10px);
     padding: 3px;
@@ -73,7 +72,6 @@ input[type="text"], #calculateBtn {
     background-color: #E39C87;
     color: #CD4631;
     cursor: pointer;
-    font-size: 20px;
     width: 100%;
     transition: background-color 0.3s;
     border-width: 0px;
@@ -92,7 +90,6 @@ input[type="text"], #calculateBtn {
     background-color: #4C301F;
     color: #F8F2DC;
     text-align: justify;
-    font-size: 20px;
     margin: 5px 0px;
 }
 
@@ -104,7 +101,6 @@ input[type="text"], #calculateBtn {
 #index-container {
     background-color: #F8F2DC;
     text-align: justify;
-    font-size: 20px;
     padding: 5px;
     border-radius: 10px;
 }
@@ -138,7 +134,6 @@ input[type="text"], #calculateBtn {
     display: flex;
     flex-direction: column;
     flex: 1;
-    font-size: 20px;
 }
 
 #upperright {
@@ -190,7 +185,6 @@ input[type="text"], #calculateBtn {
 #language {
     background-color: #F8F2DC;
     color: #4C301F;
-    font-size: 16px;
     padding: 3px;
 }
 
@@ -201,12 +195,10 @@ input[type="text"], #calculateBtn {
 }
 
 #contactInfo h3 {
-    font-size: 20px;
     margin-bottom: 10px;
 }
 
 #contactInfo p {
-    font-size: 20px;
     margin: 5px 0;
 }
 
@@ -223,6 +215,10 @@ input[type="text"], #calculateBtn {
 
     input[type="text"] {
         width: calc(inherit - 10px);
+    }
+
+    body {
+        font-size: 0.7em;
     }
 }
 
