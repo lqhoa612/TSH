@@ -1,1 +1,1 @@
-[anchor]lqhoa612.github.io/TSH/(#heading-to-achor)
+[# Pythagorean Numerology Calculator]((lqhoa612.github.io/TSH)
