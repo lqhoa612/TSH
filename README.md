@@ -1,1 +1,1 @@
-[# Pythagorean Numerology Calculator]((lqhoa612.github.io/TSH)
+[Pythagorean Numerology Calculator]((lqhoa612.github.io/TSH)
