@@ -203,7 +203,7 @@ input[type="text"], #calculateBtn {
 }
 
 /* Define a media query for small screens */
-@media only screen and (max-width: 660px) {
+@media only screen and (max-width: 550px) {
     /* Hide the right content */
     #right-content {
         display: none;
@@ -222,7 +222,16 @@ input[type="text"], #calculateBtn {
     }
 }
 
-/* Matrix */
+@media only screen and (max-width: 870px) {
+    input[type="text"] {
+        width: calc(inherit - 10px);
+    }
+
+    body {
+        font-size: 0.7em;
+    }
+}
+
 /* Matrix */
 #matrix-container {
     display: flex;

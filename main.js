@@ -39,6 +39,7 @@ function translatePage(language) {
         sucmanhtiemthucLabel: "Subconscious Self: ",
         sothieuLabel: "Imbalanced Number(s): ",
         ngaysinhLabel: "Birthday Number: ",
+        dammeLabel: "Passion Number: ",
         namcanhanLabel: "Personal Year: ",
         thangcanhanLabel: "Personal Month: ",
         ngaycanhanLabel: "Personal Day: ",
@@ -81,6 +82,7 @@ function translatePage(language) {
         sucmanhtiemthucLabel: "Sức mạnh tiềm thức: ",
         sothieuLabel: "Số thiếu: ",
         ngaysinhLabel: "Ngày sinh: ",
+        dammeLabel: "Đam mê: ",
         namcanhanLabel: "Năm cá nhân: ",
         thangcanhanLabel: "Tháng cá nhân: ",
         ngaycanhanLabel: "Ngày cá nhân: ",
@@ -196,7 +198,7 @@ function calculateNumerology() {
     var [ngaysinh, thangsinh, namsinh] =  birthdate.split('/').map(Number);
 
     // Perform calculation of core numbers
-    var [duongdoi, sumenh, linhhon, nhancach, canbang, sucmanhtiemthuc, sothieu] = calculateCoreNumbers(name, ngaysinh, thangsinh, namsinh);
+    var [duongdoi, sumenh, linhhon, nhancach, canbang, sucmanhtiemthuc, sothieu, damme] = calculateCoreNumbers(name, ngaysinh, thangsinh, namsinh);
 
     // Calculate connections and other indices
     var lienketduongdoisumenh = Math.abs(reduceToSingleDigit(duongdoi, false) - reduceToSingleDigit(sumenh, false));
@@ -213,13 +215,14 @@ function calculateNumerology() {
     var tuoi = calculateMilestoneAges(duongdoi);
 
     // Display the results
-    displayResults(rawName, birthdate, day, month, year, duongdoi, sumenh, lienketduongdoisumenh, truongthanh, linhhon, nhancach, lienketlinhhonnhancach, canbang, tuduylytri, sucmanhtiemthuc, sothieu, ngaysinhIndex, namcanhan, thangcanhan, ngaycanhan, chang, tuoi, thachthuc);
+    displayResults(rawName, birthdate, day, month, year, duongdoi, sumenh, lienketduongdoisumenh, truongthanh, linhhon, nhancach, lienketlinhhonnhancach, canbang, tuduylytri, sucmanhtiemthuc, sothieu, ngaysinhIndex, damme, namcanhan, thangcanhan, ngaycanhan, chang, tuoi, thachthuc);
 }
 
 function calculateCoreNumbers(name, ngaysinh, thangsinh, namsinh) {
-    var [duongdoi, sumenh, linhhon, nhancach, canbang, sucmanhtiemthuc, nCharNum] = [0, 0, 0, 0, 0, 0, 0];
+    var [duongdoi, sumenh, linhhon, nhancach, canbang, sucmanhtiemthuc, nCharNum, damme, maxCount] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     var [nChar, prevChar] = [' ', ' '];
     var [nCharNumStorage, vowelsNumStorage, consonantsNumStorage, initialsNumStorage, sothieu] = [[], [], [], [], []];
+    let countMap = new Map();
     name = name.toLowerCase();
     // Lifepath
     duongdoi = reduceToSingleDigit(ngaysinh, false) + reduceToSingleDigit(thangsinh, false) + reduceToSingleDigit(namsinh, false);
@@ -258,13 +261,26 @@ function calculateCoreNumbers(name, ngaysinh, thangsinh, namsinh) {
         }
     }
 
+    for (let i of nCharNumStorage) {
+        if (!countMap.has(i)) {
+            countMap.set(i, 1);
+        } else {
+            countMap.set(i, countMap.get(i) + 1);
+        }
+    
+        if (countMap.get(i) > maxCount) {
+            maxCount = countMap.get(i);
+            damme = i;
+        }
+    }
+
     sumenh = reduceToSingleDigit(sumenh, true); console.log('sumenh: ', nCharNumStorage);
     linhhon = reduceToSingleDigit(linhhon, true); console.log('nguyenam: ', vowelsNumStorage);
     nhancach = reduceToSingleDigit(nhancach, true); console.log('phuam: ', consonantsNumStorage);
     canbang = reduceToSingleDigit(canbang, false); console.log('chucaidau: ', initialsNumStorage);
     sucmanhtiemthuc = 9 - sothieu.length;
 
-    return [duongdoi, sumenh, linhhon, nhancach, canbang, sucmanhtiemthuc, sothieu];
+    return [duongdoi, sumenh, linhhon, nhancach, canbang, sucmanhtiemthuc, sothieu, damme];
 }
 
 function calculateRationalThinking(name, ngaysinh) {
@@ -311,7 +327,7 @@ function calculateMilestoneAges(duongdoi) {
     return tuoi;
 }
 
-function displayResults(rawName, birthdate, day, month, year, duongdoi, sumenh, lienketduongdoisumenh, truongthanh, linhhon, nhancach, lienketlinhhonnhancach, canbang, tuduylytri, sucmanhtiemthuc, sothieu, ngaysinh, namcanhan, thangcanhan, ngaycanhan, chang, tuoi, thachthuc) {
+function displayResults(rawName, birthdate, day, month, year, duongdoi, sumenh, lienketduongdoisumenh, truongthanh, linhhon, nhancach, lienketlinhhonnhancach, canbang, tuduylytri, sucmanhtiemthuc, sothieu, ngaysinh, damme, namcanhan, thangcanhan, ngaycanhan, chang, tuoi, thachthuc) {
     document.getElementById('fullname').textContent = rawName;
     document.getElementById('birthdate2').textContent = birthdate;
     document.getElementById('todate').textContent = `${day}/${month}/${year}`;
@@ -328,6 +344,7 @@ function displayResults(rawName, birthdate, day, month, year, duongdoi, sumenh, 
     document.getElementById('sucmanhtiemthuc').textContent = sucmanhtiemthuc;
     document.getElementById('sothieu').textContent = sothieu;
     document.getElementById('ngaysinh').textContent = ngaysinh;
+    document.getElementById('damme').textContent = damme;
     document.getElementById('namcanhan').textContent = namcanhan;
     document.getElementById('thangcanhan').textContent = thangcanhan;
     document.getElementById('ngaycanhan').textContent = ngaycanhan;
@@ -465,6 +482,11 @@ function englishIndexButtons(buttonId) {
             mess2.textContent = "It also describes the way others see you.";
             mess4.textContent = "Your birthday number is " + document.getElementById('ngaysinh').textContent;
             break;
+        case 'dammeBtn':
+            header.textContent = "Passion number";
+            mess1.textContent = "As straight forward as its name, this number tells you about the passion within you.";
+            mess4.textContent = "Your passion number is " + document.getElementById('damme').textContent;
+            break;
         case 'namcanhanBtn':
             header.textContent = "Personal year";
             mess1.textContent = "In Pythagorean Numerology, each of us has a personal year numerical vibration which changes each year in a 9-year cycle.";
@@ -591,6 +613,11 @@ function vietnameseIndexButtons(buttonId) {
             mess1.textContent = "Số ngày sinh cho bạn biết một số khía cạnh khác trong tính cách con người bạn và tài năng bẩm sinh có khả năng giúp bạn trong cuộc sống.";
             mess2.textContent = "Ngoài ra nó cũng chỉ ra người ngoài nghĩ về bạn như thế nào.";
             mess4.textContent = "Chỉ số ngày sinh của bạn là " + document.getElementById('ngaysinh').textContent;
+            break;
+        case 'dammeBtn':
+            header.textContent = "Đam mê";
+            mess1.textContent = "Như tên gọi, chỉ số đam mê bật mí về đam mê bên trong bạn.";
+            mess4.textContent = "Chỉ số đam mể của bạn là " + document.getElementById('damme').textContent;
             break;
         case 'namcanhanBtn':
             header.textContent = "Năm cá nhân";
