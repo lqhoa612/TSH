@@ -202,6 +202,15 @@ input[type="text"], #calculateBtn {
     margin: 5px 0;
 }
 
+a {
+    color: #4B86AA;
+}
+
+a:hover {
+    color: #d5e0e7
+}
+
+
 /* Define a media query for small screens */
 @media only screen and (max-width: 550px) {
     /* Hide the right content */
