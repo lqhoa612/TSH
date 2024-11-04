@@ -4,7 +4,6 @@
 
 
 body {
-    background-color: #4C301F;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin: 0;
     padding: 0;
@@ -12,7 +11,7 @@ body {
 }
 
 header, footer {
-    background-color: #4C301F;
+    background-color: rgba(76,48,31,.5);
     color: #F8F2DC;
     padding: 20px;
     text-align: center;
@@ -45,7 +44,7 @@ main {
 
 #input-container {
     background-color: #F8F2DC;
-    color: #4C301F;
+    background-color: rgba(76,48,31,.5);
     padding: 5px;
     text-align: center;
     border-radius: 10px;
@@ -87,7 +86,7 @@ input[type="text"], #calculateBtn {
 
 /* Basic Info Container */
 #basicInfo-container {
-    background-color: #4C301F;
+    background-color: rgba(76,48,31,.5);
     color: #F8F2DC;
     text-align: justify;
     margin: 5px 0px;
@@ -99,14 +98,14 @@ input[type="text"], #calculateBtn {
 
 /* Index container */
 #index-container {
-    background-color: #F8F2DC;
+    background-color: rgba(248, 242, 220, .5);
     text-align: justify;
     padding: 5px;
     border-radius: 10px;
 }
 
 #index-container h2 {
-    color: #4B86AA;
+    color: rgba(248, 242, 220, 1);
     text-align: center;
     margin: 5px 0px;
 }
@@ -137,7 +136,7 @@ input[type="text"], #calculateBtn {
 }
 
 #upperright {
-    background-color: #4B86AA;
+    background-color: rgba(75,134,170, .5);
     color: #F8F2DC;
     text-align: justify;
     padding: 10px;
@@ -156,7 +155,7 @@ input[type="text"], #calculateBtn {
 }
 
 #bottomright {
-    background-color: #CD4631;
+    background-color: rgba(205,70,49, .5);
     color: #F8F2DC;
     flex: 1;
     text-align: justify;
@@ -301,4 +300,17 @@ a:hover {
 #cmt1, #cmt2 {
     padding-left: 100px;
     margin: 0px;
+}
+
+video {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    min-height: 50%;
+    min-width: 50%;
+    z-index:-100;
+    filter: blur(5px);
 }
