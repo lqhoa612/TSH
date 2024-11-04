@@ -309,8 +309,8 @@ video {
     right: 0;
     left: 0;
     margin: auto;
-    min-height: 150%;
-    min-width: 150%;
+    min-height: 120%;
+    min-width: 100%;
     z-index:-100;
     filter: blur(5px);
 }
