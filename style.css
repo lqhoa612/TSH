@@ -304,6 +304,8 @@ a:hover {
 
 video {
     position: fixed;
+    display: flex;
+    background-size: cover;
     top: 0;
     bottom: 0;
     right: 0;
