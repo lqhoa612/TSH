@@ -308,6 +308,7 @@ video {
     bottom: 0;
     right: 0;
     left: 0;
+    margin: 0;
     min-height: max-content;
     min-width: max-content;
     z-index:-100;
