@@ -13,7 +13,7 @@ function translatePage(language) {
         languageLabel: "Language: ",
         calculateBtn: "Start Calculation",
         resultHeading: "Result: ",
-        rightHead: "How to use:",
+        rightHead: "How to use",
         guide1: "Enter your fullname in Last-Middle-First name order. Ex: John Micheal Smith, enter Smith Micheal John.",
         guide2: "If you have multiple middle names, enter anyhow you like just make sure to enter your first name LAST.",
         guide3: "Enter your birthdate in dd-mm-yyyy format, just the numbers, like 1st January 1111, enter 01011111.",
@@ -56,7 +56,7 @@ function translatePage(language) {
         languageLabel: "Ngôn ngữ: ",
         calculateBtn: "Bắt đầu tính toán",
         resultHeading: "Kết quả: ",
-        rightHead: "Cách sử dụng:",
+        rightHead: "Cách sử dụng",
         guide1: "Nhập họ và tên không dấu để độ chính xác cao hơn, không quan trọng viết hoa hay viết thường.",
         guide2: "Nếu bạn có nhiều tên đệm, bạn nhập theo thứ tự nào cũng được, riêng tên gọi phải được nhập cuối cùng.",
         guide3: "Nhập ngày tháng năm sinh theo dd/mm/yyyy, ví dụ như ngày 1 tháng 1 năm 1111, thì nhập 01011111",
@@ -1007,4 +1007,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Event listener for calculate button press
     document.getElementById('calculateBtn').addEventListener('click', calculateNumerology);
+
+    // Event listener for dropdown press
+    document.getElementById('upperright').addEventListener('click', function () {
+        const dropdown = document.getElementById('dropdown');
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    });
 });
