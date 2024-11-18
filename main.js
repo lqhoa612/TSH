@@ -1,3 +1,4 @@
+
 // script.js
 
 // Page Formatting, Inputs, and features --->
@@ -8,10 +9,11 @@ function translatePage(language) {
         name: "Fullname (last middle first)",
         birthdate: "Birthdate (dd/mm/yyyy)",
         header: "Welcome to Pythagorean Numerology Calculator",
+        mobileGuide: "use horizontal view on mobile device to get full experience",
         languageLabel: "Language: ",
         calculateBtn: "Start Calculation",
         resultHeading: "Result: ",
-        rightHead: "How to use:",
+        rightHead: "How to use",
         guide1: "Enter your fullname in Last-Middle-First name order. Ex: John Micheal Smith, enter Smith Micheal John.",
         guide2: "If you have multiple middle names, enter anyhow you like just make sure to enter your first name LAST.",
         guide3: "Enter your birthdate in dd-mm-yyyy format, just the numbers, like 1st January 1111, enter 01011111.",
@@ -38,6 +40,7 @@ function translatePage(language) {
         sucmanhtiemthucLabel: "Subconscious Self: ",
         sothieuLabel: "Imbalanced Number(s): ",
         ngaysinhLabel: "Birthday Number: ",
+        dammeLabel: "Passion Number: ",
         namcanhanLabel: "Personal Year: ",
         thangcanhanLabel: "Personal Month: ",
         ngaycanhanLabel: "Personal Day: ",
@@ -49,10 +52,11 @@ function translatePage(language) {
         name: "Họ và Tên (họ đệm tên)",
         birthdate: "Ngày Sinh (dd/mm/yyyy)",
         header: "Chào mừng đến với Máy tính Thần Số Học Pythagorean",
+        mobileGuide: "quay ngang màn hình trên thiết bị di động để có trải nghiệm đầy đủ nhất",
         languageLabel: "Ngôn ngữ: ",
         calculateBtn: "Bắt đầu tính toán",
         resultHeading: "Kết quả: ",
-        rightHead: "Cách sử dụng:",
+        rightHead: "Cách sử dụng",
         guide1: "Nhập họ và tên không dấu để độ chính xác cao hơn, không quan trọng viết hoa hay viết thường.",
         guide2: "Nếu bạn có nhiều tên đệm, bạn nhập theo thứ tự nào cũng được, riêng tên gọi phải được nhập cuối cùng.",
         guide3: "Nhập ngày tháng năm sinh theo dd/mm/yyyy, ví dụ như ngày 1 tháng 1 năm 1111, thì nhập 01011111",
@@ -79,6 +83,7 @@ function translatePage(language) {
         sucmanhtiemthucLabel: "Sức mạnh tiềm thức: ",
         sothieuLabel: "Số thiếu: ",
         ngaysinhLabel: "Ngày sinh: ",
+        dammeLabel: "Đam mê: ",
         namcanhanLabel: "Năm cá nhân: ",
         thangcanhanLabel: "Tháng cá nhân: ",
         ngaycanhanLabel: "Ngày cá nhân: ",
@@ -194,7 +199,7 @@ function calculateNumerology() {
     var [ngaysinh, thangsinh, namsinh] =  birthdate.split('/').map(Number);
 
     // Perform calculation of core numbers
-    var [duongdoi, sumenh, linhhon, nhancach, canbang, sucmanhtiemthuc, sothieu] = calculateCoreNumbers(name, ngaysinh, thangsinh, namsinh);
+    var [duongdoi, sumenh, linhhon, nhancach, canbang, sucmanhtiemthuc, sothieu, damme] = calculateCoreNumbers(name, ngaysinh, thangsinh, namsinh);
 
     // Calculate connections and other indices
     var lienketduongdoisumenh = Math.abs(reduceToSingleDigit(duongdoi, false) - reduceToSingleDigit(sumenh, false));
@@ -211,13 +216,14 @@ function calculateNumerology() {
     var tuoi = calculateMilestoneAges(duongdoi);
 
     // Display the results
-    displayResults(rawName, birthdate, day, month, year, duongdoi, sumenh, lienketduongdoisumenh, truongthanh, linhhon, nhancach, lienketlinhhonnhancach, canbang, tuduylytri, sucmanhtiemthuc, sothieu, ngaysinhIndex, namcanhan, thangcanhan, ngaycanhan, chang, tuoi, thachthuc);
+    displayResults(rawName, birthdate, day, month, year, duongdoi, sumenh, lienketduongdoisumenh, truongthanh, linhhon, nhancach, lienketlinhhonnhancach, canbang, tuduylytri, sucmanhtiemthuc, sothieu, ngaysinhIndex, damme, namcanhan, thangcanhan, ngaycanhan, chang, tuoi, thachthuc);
 }
 
 function calculateCoreNumbers(name, ngaysinh, thangsinh, namsinh) {
-    var [duongdoi, sumenh, linhhon, nhancach, canbang, sucmanhtiemthuc, nCharNum] = [0, 0, 0, 0, 0, 0, 0];
+    var [duongdoi, sumenh, linhhon, nhancach, canbang, sucmanhtiemthuc, nCharNum, damme, maxCount] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     var [nChar, prevChar] = [' ', ' '];
     var [nCharNumStorage, vowelsNumStorage, consonantsNumStorage, initialsNumStorage, sothieu] = [[], [], [], [], []];
+    let countMap = new Map();
     name = name.toLowerCase();
     // Lifepath
     duongdoi = reduceToSingleDigit(ngaysinh, false) + reduceToSingleDigit(thangsinh, false) + reduceToSingleDigit(namsinh, false);
@@ -256,13 +262,26 @@ function calculateCoreNumbers(name, ngaysinh, thangsinh, namsinh) {
         }
     }
 
+    for (let i of nCharNumStorage) {
+        if (!countMap.has(i)) {
+            countMap.set(i, 1);
+        } else {
+            countMap.set(i, countMap.get(i) + 1);
+        }
+    
+        if (countMap.get(i) > maxCount) {
+            maxCount = countMap.get(i);
+            damme = i;
+        }
+    }
+
     sumenh = reduceToSingleDigit(sumenh, true); console.log('sumenh: ', nCharNumStorage);
     linhhon = reduceToSingleDigit(linhhon, true); console.log('nguyenam: ', vowelsNumStorage);
     nhancach = reduceToSingleDigit(nhancach, true); console.log('phuam: ', consonantsNumStorage);
     canbang = reduceToSingleDigit(canbang, false); console.log('chucaidau: ', initialsNumStorage);
     sucmanhtiemthuc = 9 - sothieu.length;
 
-    return [duongdoi, sumenh, linhhon, nhancach, canbang, sucmanhtiemthuc, sothieu];
+    return [duongdoi, sumenh, linhhon, nhancach, canbang, sucmanhtiemthuc, sothieu, damme];
 }
 
 function calculateRationalThinking(name, ngaysinh) {
@@ -309,7 +328,7 @@ function calculateMilestoneAges(duongdoi) {
     return tuoi;
 }
 
-function displayResults(rawName, birthdate, day, month, year, duongdoi, sumenh, lienketduongdoisumenh, truongthanh, linhhon, nhancach, lienketlinhhonnhancach, canbang, tuduylytri, sucmanhtiemthuc, sothieu, ngaysinh, namcanhan, thangcanhan, ngaycanhan, chang, tuoi, thachthuc) {
+function displayResults(rawName, birthdate, day, month, year, duongdoi, sumenh, lienketduongdoisumenh, truongthanh, linhhon, nhancach, lienketlinhhonnhancach, canbang, tuduylytri, sucmanhtiemthuc, sothieu, ngaysinh, damme, namcanhan, thangcanhan, ngaycanhan, chang, tuoi, thachthuc) {
     document.getElementById('fullname').textContent = rawName;
     document.getElementById('birthdate2').textContent = birthdate;
     document.getElementById('todate').textContent = `${day}/${month}/${year}`;
@@ -326,6 +345,7 @@ function displayResults(rawName, birthdate, day, month, year, duongdoi, sumenh, 
     document.getElementById('sucmanhtiemthuc').textContent = sucmanhtiemthuc;
     document.getElementById('sothieu').textContent = sothieu;
     document.getElementById('ngaysinh').textContent = ngaysinh;
+    document.getElementById('damme').textContent = damme;
     document.getElementById('namcanhan').textContent = namcanhan;
     document.getElementById('thangcanhan').textContent = thangcanhan;
     document.getElementById('ngaycanhan').textContent = ngaycanhan;
@@ -463,6 +483,11 @@ function englishIndexButtons(buttonId) {
             mess2.textContent = "It also describes the way others see you.";
             mess4.textContent = "Your birthday number is " + document.getElementById('ngaysinh').textContent;
             break;
+        case 'dammeBtn':
+            header.textContent = "Passion number";
+            mess1.textContent = "As straight forward as its name, this number tells you about the passion within you.";
+            mess4.textContent = "Your passion number is " + document.getElementById('damme').textContent;
+            break;
         case 'namcanhanBtn':
             header.textContent = "Personal year";
             mess1.textContent = "In Pythagorean Numerology, each of us has a personal year numerical vibration which changes each year in a 9-year cycle.";
@@ -589,6 +614,11 @@ function vietnameseIndexButtons(buttonId) {
             mess1.textContent = "Số ngày sinh cho bạn biết một số khía cạnh khác trong tính cách con người bạn và tài năng bẩm sinh có khả năng giúp bạn trong cuộc sống.";
             mess2.textContent = "Ngoài ra nó cũng chỉ ra người ngoài nghĩ về bạn như thế nào.";
             mess4.textContent = "Chỉ số ngày sinh của bạn là " + document.getElementById('ngaysinh').textContent;
+            break;
+        case 'dammeBtn':
+            header.textContent = "Đam mê";
+            mess1.textContent = "Như tên gọi, chỉ số đam mê bật mí về đam mê bên trong bạn.";
+            mess4.textContent = "Chỉ số đam mể của bạn là " + document.getElementById('damme').textContent;
             break;
         case 'namcanhanBtn':
             header.textContent = "Năm cá nhân";
@@ -865,7 +895,7 @@ function handleComments(cmtHeadSlot, cmtSlot, language, results, combined) {
             cmtHead.textContent = "Bản đồ " + combined + " của bạn cân bằng.";
             return;
         } else {
-            cmtHead.textContent = "Dựa vào bản dồ " + combined + ", bạn có những mũi tên sau:";
+            cmtHead.textContent = "Dựa vào bản đồ " + combined + ", bạn có những mũi tên sau:";
         }
     
         for (const result of results) {
@@ -977,4 +1007,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Event listener for calculate button press
     document.getElementById('calculateBtn').addEventListener('click', calculateNumerology);
+
+    // Event listener for dropdown press
+    document.getElementById('upperright').addEventListener('click', function () {
+        const dropdown = document.getElementById('dropdown');
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    });
 });

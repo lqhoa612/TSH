@@ -314,7 +314,7 @@ void TSH(string name, string birthdate) {
 }
 
 int main() {
-    string name = ("le quoc hoa");
-    string birthdate = ("06/12/1997");
+    string name = ("dao thi thu thuy");
+    string birthdate = ("31/10/1991");
     TSH(name, birthdate);
 }
