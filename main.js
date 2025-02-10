@@ -190,7 +190,7 @@ function calculateNumerology() {
     clearMap();
     // Get user inputs
     var rawName = document.getElementById('name').value;
-    var name = removeAccents(document.getElementById('name').value);
+    var name = removeAccents(rawName);
     var birthdate = document.getElementById('birthdate').value;
 
     // Get system date
