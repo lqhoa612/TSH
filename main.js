@@ -115,10 +115,10 @@ function translatePage(language) {
 
 function removeAccents(str) {
     return str
-    .normalize("NFD") // Normalize characters to decomposed form
-    .replace(/[\u0300-\u036f]/g, "") // Remove all diacritics
-    .replace(/đ/g, "d") // Replace Vietnamese "đ"
-    .replace(/Đ/g, "D"); // Replace uppercase "Đ"
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f\u1dc0-\u1dff\u20d0-\u20ff\u2cef-\u2cff]/g, "") // Remove diacritics
+        .replace(/đ/g, "d") // Handle Vietnamese-specific "đ"
+        .replace(/Đ/g, "D");
 }
 
 function formatDate(input) {
