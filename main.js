@@ -189,8 +189,9 @@ function calculateNumerology() {
     clearMessages();
     clearMap();
     // Get user inputs
-    var rawName = document.getElementById('name').value;
-    var name = removeAccents(rawName);
+    //var rawName = document.getElementById('name').value;
+    var name = removeAccents(document.getElementById('name').value);
+    var rawName = name;
     var birthdate = document.getElementById('birthdate').value;
 
     // Get system date
