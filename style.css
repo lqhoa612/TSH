@@ -119,7 +119,7 @@ input[type="text"], #calculateBtn {
 
 #index-container p {
     background-color: #BDD0D2;
-    color: #4B86AA;
+    color: #0063a1;
     cursor: pointer;
     padding: 5px 10px;
     margin: 5px;
@@ -149,7 +149,7 @@ input[type="text"], #calculateBtn {
 }
 
 #upperright {
-    background-color: rgba(75,134,170, .7);
+    background-color: rgba(75,134,170, .85);
     color: #F8F2DC;
     text-align: justify;
     padding: 10px;
@@ -161,7 +161,7 @@ input[type="text"], #calculateBtn {
 }
 
 #upperright:hover {
-    background-color: rgba(75,134,170, .9);
+    background-color: rgba(75,134,170, 1);
 }
 
 #upperright h2 {
@@ -173,7 +173,7 @@ input[type="text"], #calculateBtn {
 }
 
 #bottomright {
-    background-color: rgba(205,70,49, .7);
+    background-color: rgba(205,70,49, .85);
     color: #F8F2DC;
     flex: 1;
     text-align: justify;
