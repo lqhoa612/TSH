@@ -68,7 +68,7 @@ input[type="text"], #calculateBtn {
 }
 
 #calculateBtn {
-    background-color: #E39C87;
+    background-color: #F0A487;
     color: #CD4631;
     cursor: pointer;
     width: 100%;
@@ -77,6 +77,7 @@ input[type="text"], #calculateBtn {
     padding: 5px 10px;
     margin: 5px;
     margin-left: 0px;
+    size: 3.44in;
 }
 
 #input-container button:hover {
