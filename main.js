@@ -983,6 +983,9 @@ function clearMap() {
 }
 // Map <---
 
+// Calendar --->
+// Calendar <---
+
 // Add event listener when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function () {
     // Event listener for the Enter key press

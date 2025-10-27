@@ -149,7 +149,7 @@ input[type="text"], #calculateBtn {
 }
 
 #upperright {
-    background-color: rgba(75,134,170, .5);
+    background-color: rgba(75,134,170, .7);
     color: #F8F2DC;
     text-align: justify;
     padding: 10px;
@@ -161,7 +161,7 @@ input[type="text"], #calculateBtn {
 }
 
 #upperright:hover {
-    background-color: rgba(75,134,170, .85);
+    background-color: rgba(75,134,170, .9);
 }
 
 #upperright h2 {
@@ -173,7 +173,7 @@ input[type="text"], #calculateBtn {
 }
 
 #bottomright {
-    background-color: rgba(205,70,49, .5);
+    background-color: rgba(205,70,49, .7);
     color: #F8F2DC;
     flex: 1;
     text-align: justify;
