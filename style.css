@@ -124,6 +124,7 @@ input[type="text"], #calculateBtn {
     padding: 5px 10px;
     margin: 5px;
     transition: background-color 0.3s;
+    font-weight: bold;
 }
 
 #index-container p:hover { 
