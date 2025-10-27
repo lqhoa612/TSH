@@ -135,7 +135,6 @@ input[type="text"], #calculateBtn {
     display: flex;
     flex-direction: column;
     flex: 1;
-    cursor: pointer;
 }
 
 #rightHead {
@@ -157,6 +156,7 @@ input[type="text"], #calculateBtn {
     margin-top: 0px;
     margin-bottom: 2.5px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 #upperright:hover {
