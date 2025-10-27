@@ -140,6 +140,7 @@ input[type="text"], #calculateBtn {
 #rightHead {
     text-align: center;
     color: #F8F2DC;
+    cursor: pointer;
 }
 
 #dropdown {
