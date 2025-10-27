@@ -135,12 +135,12 @@ input[type="text"], #calculateBtn {
     display: flex;
     flex-direction: column;
     flex: 1;
+    cursor: pointer;
 }
 
 #rightHead {
     text-align: center;
     color: #F8F2DC;
-    cursor: pointer;
 }
 
 #dropdown {
