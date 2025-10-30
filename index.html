@@ -18,7 +18,6 @@
 <body>
     <header>
         <h1 id="header">Welcome to Numerology Calculator</h1>
-        <p id="mobileGuide"></p>
         <div id="language-container">
             <label id="languageLabel" for="language">Language: </label>
             <select id="language">
@@ -31,8 +30,10 @@
         <section id="main-container">
             <aside id="left-content">
                 <div id="input-container">
-                    <input type="text" id="name" placeholder="Fullname last middle first"><br>
-                    <input type="text" id="birthdate" placeholder="Birthdate dd/mm/yyyy"><br>
+                    <label for="name" class="visually-hidden">Full Name (last middle first)</label>
+                    <input type="text" id="name" placeholder="Fullname last middle first">
+                    <label for="birthdate" class="visually-hidden">Birthdate (dd/mm/yyyy)</label>
+                    <input type="text" id="birthdate" placeholder="Birthdate dd/mm/yyyy">
                     <button id="calculateBtn" data-translate="calculateBtn">Start Calculation</button>
                 </div>
 
@@ -70,7 +71,7 @@
             <aside id="right-content">
                 <div id="upperright">
                     <h2 id="rightHead" data-toggle="dropdown"></h2>
-                    <div id="dropdown" style="display: none;">
+                    <div id="dropdown">
                         <p id="guide1"></p>
                         <p id="guide2"></p>
                         <p id="guide3"></p>
@@ -87,6 +88,7 @@
                     <p id="message2"></p>
                     <p id="message3"></p>
                     <p id="message4"></p>
+                    <div id="personalYearCalendar"></div>
                     <div id="matrix-container">
                         <div id="birthdateMatrixContainer"></div>
                         <div id="combinedMartixContainer"></div>

@@ -2,40 +2,114 @@
 /* https://visme.co/blog/website-color-schemes/ */
 /* Color scheme */
 
+/*-------------------Settings START--------------------*/
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    /* Primary Palette */
+    --color-brown-dark: #4C301F;
+    --color-brown-medium: rgba(76,48,31,.5);
+    --color-cream: #F8F2DC;
+    
+    /* Accent 1: Blue/Teal for Index/Links */
+    --color-teal-dark: #0063a1;
+    --color-teal-medium: #BDD0D2;
+    --color-teal-hover: #4B86AA;
+    --color-teal-bg: rgba(75,134,170, .85);
+    --color-teal-bg-hover: rgba(75,134,170, 1);
+
+    /* Accent 2: Red/Orange for Button/Bottom Content */
+    --color-red-dark: #CD4631;
+    --color-orange-light: #ffc6af;
+    --color-red-bg: rgba(205,70,49, .85);
+}
+
+.visually-hidden { /* For accessible labels that are visually hidden */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
 
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin: 0;
-    padding: 0;
-    /*font-size: 1em;*/
 }
 
 header, footer {
-    background-color: rgba(76,48,31,.5);
-    color: #F8F2DC;
+    background-color: var(--color-brown-medium);
+    color: var(--color-cream);
     padding: 20px;
     text-align: center;
     font-size: 1.3em;
 }
 
 header p {
-    margin: 0px;
+    margin: 0;
 }
 
 header h1 {
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 main {
     padding: 10px;
 }
-/*------------------------------------------------------*/
-/*Main container*/
+
+/*------------------Media Settings START----------------*/
+@media only screen and (max-width: 870px) {
+    /* General layout adjustments for medium/small screens */
+    body {
+        font-size: 0.8em; /* Slightly larger than 0.7em for better readability */
+    }
+
+    #main-container {
+        flex-direction: column; /* Stack left and right content */
+    }
+
+    #left-content {
+        max-width: 100%; /* Allow it to take full width */
+    }
+
+    /* Adjust matrix layout for smaller horizontal space */
+    #matrix-container {
+        flex-direction: column;
+    }
+
+    #birthdateMatrixContainer, #combinedMartixContainer {
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    #cmt1, #cmt2 {
+        padding-left: 10px; /* Reduce padding for smaller screens */
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    /* Hide content only on very small screens */
+    body {
+        font-size: 0.7em;
+    }
+
+    #right-content {
+        display: none;
+    }
+}
+/*------------------Media Settings END----------------*/
+/*-------------------Settings END--------------------*/
+
+/*-----------------Main container START-----------------*/
 #main-container {
     display: flex;
 }
 
-/*Left content*/
+/*-----------------Left content START-------------------*/
 #left-content {
     flex: 1;
     min-width: 250px;
@@ -43,63 +117,62 @@ main {
 }
 
 #input-container {
-    background-color: #F8F2DC;
-    background-color: rgba(76,48,31,.5);
+    background-color: var(--color-brown-medium);
     padding: 5px;
     text-align: center;
     border-radius: 10px;
 }
 
-#name {
-    border-bottom-width: 0px;
+#name, #birthdate {
+    border-bottom-width: 0;
 }
 
 input[type="text"] {
-    background-color: #F8F2DC;
+    background-color: var(--color-cream);
     color: #000000;
-    border-width: 3px;
-    width: calc(100% - 10px);
-    padding: 3px;
+    border-width: 3px solid var(--color-red-dark);;
+    width: 100%;
+    padding: 5px;
     margin-right: 5px;
 }
 
-input[type="text"], #calculateBtn {
+/* input[type="text"], #calculateBtn {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
+} */
 
 #calculateBtn {
-    background-color: #ffc6af;
-    color: #CD4631;
+    background-color: var(--color-orange-light);
+    color: var(--color-red-dark);
     cursor: pointer;
     width: 100%;
     transition: background-color 0.3s;
-    border-width: 0px;
+    border: none;
     padding: 5px 10px;
-    margin: 5px;
-    margin-left: 0px;
+    margin: 5px 0 0 0;
     font-size: 1.0rem;
 }
 
-#input-container button:hover {
-    background-color: #CD4631;
-    color: #F8F2DC;
+#calculateBtn:hover {
+    background-color: var(--color-red-dark);
+    color: var(--color-cream);
 }
 
-/* Basic Info Container */
+/*-------------Basic Info Container START---------------*/
 #basicInfo-container {
-    background-color: rgba(76,48,31,.5);
-    color: #F8F2DC;
+    background-color: var(--color-brown-medium);
+    color: var(--color-cream);
     text-align: justify;
-    margin: 5px 0px;
+    margin: 5px 0;
     border-radius: 10px;
 }
 
 #basicInfo-container p {
-    margin: 5px 0px;
+    margin: 5px 0;
     padding-left: 10px;
 }
+/*-------------Basic Info Container END----------------*/
 
-/* Index container */
+/*---------------Index container START-----------------*/
 #index-container {
     background-color: rgba(248, 242, 220, .5);
     text-align: justify;
@@ -110,11 +183,7 @@ input[type="text"], #calculateBtn {
 #index-container h2 {
     color: rgba(248, 242, 220, 1);
     text-align: center;
-    margin: 5px 0px;
-}
-
-#yourmapBtn {
-    text-align: center;
+    margin: 5px 0;
 }
 
 #index-container p {
@@ -129,10 +198,16 @@ input[type="text"], #calculateBtn {
 
 #index-container p:hover { 
     background-color: #4B86AA;
-    color: #F8F2DC;
+    color: var(--color-cream);
 }
+/*---------------Index container END-----------------*/
 
-/*Right content*/
+#yourmapBtn {
+    text-align: center;
+}
+/*-----------------Left content END-------------------*/
+
+/*------------------Right content START---------------*/
 #right-content {
     display: flex;
     flex-direction: column;
@@ -141,32 +216,38 @@ input[type="text"], #calculateBtn {
 
 #rightHead {
     text-align: center;
-    color: #F8F2DC;
+    color: var(--color-cream);
 }
 
 #dropdown {
     text-align: justify;
+    max-height: 0; /* Start collapsed */
+    overflow: hidden;
     transition: max-height 0.3s ease-out;
+}
+
+#dropdown.open {
+    max-height: 500px;
 }
 
 #upperright {
     background-color: rgba(75,134,170, .85);
-    color: #F8F2DC;
+    color: var(--color-cream);
     text-align: justify;
     padding: 10px;
     margin: 5px;
-    margin-top: 0px;
+    margin-top: 0;
     margin-bottom: 2.5px;
     border-radius: 10px;
     cursor: pointer;
 }
 
 #upperright:hover {
-    background-color: rgba(75,134,170, 1);
+    background-color: var(--color-teal-bg-hover);
 }
 
 #upperright h2 {
-    margin: 0px;
+    margin: 0;
 }
 
 #upperright p {
@@ -174,26 +255,62 @@ input[type="text"], #calculateBtn {
 }
 
 #bottomright {
-    background-color: rgba(205,70,49, .85);
-    color: #F8F2DC;
+    background-color: var(--color-red-bg);
+    color: var(--color-cream);
     flex: 1;
     text-align: justify;
     padding: 10px;
     margin: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     margin-top: 2.5px;
     border-radius: 10px;
 }
 
 #bottomright h2 {
-    margin: 0px;
+    margin: 0;
 }
 
 #bottomright p {
     margin-bottom: 10px;
 }
+/*------------------Right content END---------------*/
 
-/*Language Container*/  
+/*-------------Personal Year Calendar START----------*/
+#personalYearCalendar {
+    margin-top: 20px;
+    text-align: center;
+    color: var(--color-cream);
+}
+
+#personalYearCalendar table {
+    margin: 10px auto;
+    border-collapse: collapse;
+    background-color: var(--color-cream);
+    color: #000;
+}
+
+#personalYearCalendar th,
+#personalYearCalendar td {
+    border: 2px solid var(--color-red-dark);
+    padding: 8px 10px;
+    text-align: center;
+}
+
+#personalYearCalendar th {
+    background-color: #4B86AA;
+    color: var(--color-cream);
+}
+
+#personalYearCalendar .current-personal-month {
+    background-color: var(--color-red-dark);
+    color: var(--color-cream);
+    font-weight: bold;
+    border: 3px solid var(--color-orange-light);
+}
+/*-------------Personal Year Calendar END--------------*/
+/*------------------Main container END-----------------*/
+
+/*----------------Language Container START--------------*/  
 #language-container {
     position: absolute;
     top: 10px;
@@ -201,15 +318,16 @@ input[type="text"], #calculateBtn {
 }
 
 #language {
-    background-color: #F8F2DC;
-    color: #4C301F;
+    background-color: var(--color-cream);
+    color: var(--color-brown-dark);
     padding: 3px;
 }
+/*----------------Language Container END--------------*/  
 
-/* Footer */
+/*-------------------Footer START-------------------*/
 #contactInfo {
     margin-top: 0; /* Remove top margin */
-    color: #F8F2DC;
+    color: var(--color-cream);
 }
 
 #contactInfo h3 {
@@ -227,41 +345,9 @@ a {
 a:hover {
     color: #d5e0e7
 }
+/*-------------------Footer END-------------------*/
 
-
-/* Define a media query for small screens */
-@media only screen and (max-width: 550px) {
-    /* Hide the right content */
-    #right-content {
-        display: none;
-    }
-
-    #left-content {
-        max-width: 100%;
-    }
-
-    input[type="text"] {
-        width: calc(inherit - 10px);
-    }
-
-    body {
-        font-size: 0.7em;
-    }
-}
-
-@media only screen and (max-width: 870px) {
-    input[type="text"] {
-        width: calc(inherit - 10px);
-    }
-
-    body {
-        font-size: 0.7em;
-    }
-
-    
-}
-
-/* Matrix */
+/*------------------Matrix (Map) START--------------*/
 #matrix-container {
     display: flex;
     justify-content: center;  /* Center children horizontally */
@@ -271,13 +357,13 @@ a:hover {
 
 #birthdateMatrixContainer, #combinedMartixContainer {
     width: 250px;
-    margin: 0px 15%;
+    margin: 0 15%;
 }
 
 #birthdateMatrixContainer h3,
 #combinedMartixContainer h3 {
     text-align: center;
-    margin: 0px;
+    margin: 0;
 }
 
 #birthdateMatrixContainer table,
@@ -285,7 +371,7 @@ a:hover {
     margin-top: 10px;
     border-collapse: collapse;
     width: 100%; /* Set table width to 100% */
-    background-color: #F8F2DC;
+    background-color: var(--color-cream);
     color: #000000;
 }
 
@@ -293,13 +379,13 @@ a:hover {
 #combinedMartixContainer th {
     text-align: center; /* Center align header text */
     padding: 15px;
-    border: 1px solid #CD4631;
+    border: 1px solid var(--color-red-dark);
 }
 
 #birthdateMatrixContainer td,
 #combinedMartixContainer td {
     padding: 15px;
-    border: 3px solid #CD4631;
+    border: 3px solid var(--color-red-dark);
     width: 35px;
     height: 35px;
     text-align: center;
@@ -315,24 +401,24 @@ a:hover {
 }
 
 #patternContainer {
-    color: #F8F2DC;
+    color: var(--color-cream);
 }
 
 #cmt1, #cmt2 {
     padding-left: 100px;
-    margin: 0px;
+    margin: 0;
 }
+/*------------------Matrix (Map) END--------------*/
 
-video {
+/*---------------Additional Settings START--------------*/
+#bgv { /* Use the ID for the video element */
     position: fixed;
-    display: flex;
     top: 0;
-    bottom: 0;
-    right: 0;
     left: 0;
-    margin: 0%;
-    min-height: 100%;
-    min-width: 100%;
-    z-index:-100;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; /* Ensures the video covers the entire viewport */
+    z-index: -100;
     filter: blur(5px);
 }
+/*----------------Additional Settings END--------------*/

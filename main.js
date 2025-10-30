@@ -9,7 +9,6 @@ function translatePage(language) {
         name: "Fullname (last middle first)",
         birthdate: "Birthdate (dd/mm/yyyy)",
         header: "Welcome to Pythagorean Numerology Calculator",
-        mobileGuide: "use horizontal view on mobile device to get full experience",
         languageLabel: "Language: ",
         calculateBtn: "Start Calculation",
         resultHeading: "Result: ",
@@ -52,7 +51,6 @@ function translatePage(language) {
         name: "Họ và Tên (họ đệm tên)",
         birthdate: "Ngày Sinh (dd/mm/yyyy)",
         header: "Chào mừng đến với Máy tính Thần Số Học Pythagorean",
-        mobileGuide: "quay ngang màn hình trên thiết bị di động để có trải nghiệm đầy đủ nhất",
         languageLabel: "Ngôn ngữ: ",
         calculateBtn: "Bắt đầu tính toán",
         resultHeading: "Kết quả: ",
@@ -391,12 +389,11 @@ function getCurrentLanguage() {
 }
 
 function translateButtonMeaning(prevButton) {
-    var buttonId = prevButton;
     if (getCurrentLanguage() == 'en') {
-        englishIndexButtons(buttonId);
+        englishIndexButtons(prevButton);
     }
     else if (getCurrentLanguage() == 'vi') {
-        vietnameseIndexButtons(buttonId);
+        vietnameseIndexButtons(prevButton);
     }
 }
 
@@ -406,10 +403,17 @@ function englishIndexButtons(buttonId) {
     var mess2 = document.getElementById('message2');
     var mess3 = document.getElementById('message3');
     var mess4 = document.getElementById('message4');
-    if (prevButton == 'yourmapBtn') {
-        clearMap();
-    } else {
-        clearMessages();
+
+    switch (prevButton) {
+        case 'yourmapBtn':
+            clearMap();
+            break;
+        case 'namcanhanBtn':
+            document.getElementById('personalYearCalendar').innerHTML = '';
+            break;
+        default:
+            clearMessages();
+            break;
     }
     
     switch (buttonId) {
@@ -494,6 +498,7 @@ function englishIndexButtons(buttonId) {
             break;
         case 'namcanhanBtn':
             header.textContent = "Personal year";
+            displayPersonalYearCalendar();
             mess1.textContent = "In Pythagorean Numerology, each of us has a personal year numerical vibration which changes each year in a 9-year cycle.";
             mess2.textContent = "It reveals much about the influences and events you will be experiencing, like a weather forecast - a human forecast.";
             mess4.textContent = "Your personal year number is " + document.getElementById('namcanhan').textContent;
@@ -539,10 +544,17 @@ function vietnameseIndexButtons(buttonId) {
     var mess2 = document.getElementById('message2');
     var mess3 = document.getElementById('message3');
     var mess4 = document.getElementById('message4');
-    if (prevButton == 'yourmapBtn') {
-        clearMap();
-    } else {
-        clearMessages();
+
+    switch (prevButton) {
+        case 'yourmapBtn':
+            clearMap();
+            break;
+        case 'namcanhanBtn':
+            document.getElementById('personalYearCalendar').innerHTML = '';
+            break;
+        default:
+            clearMessages();
+            break;
     }
     
     switch (buttonId) {
@@ -626,6 +638,7 @@ function vietnameseIndexButtons(buttonId) {
             break;
         case 'namcanhanBtn':
             header.textContent = "Năm cá nhân";
+            displayPersonalYearCalendar();
             mess1.textContent = "Trong thần số học Pythagorean, mỗi chúng ta đều có một năm rung động số riêng, thay đổi hàng năm theo chu kỳ 9 năm.";
             mess2.textContent = "Nó tiết lộ nhiều về những ảnh hưởng và sự kiện mà bạn sẽ trải qua, giống như dự báo thời tiết - dự báo của con người.";
             mess4.textContent = "Chỉ số năm cá nhân của bạn là " + document.getElementById('namcanhan').textContent;
@@ -984,40 +997,92 @@ function clearMap() {
 // Map <---
 
 // Calendar --->
+function displayPersonalYearCalendar() {
+    const container = document.getElementById('personalYearCalendar');
+    container.innerHTML = ''; // Clear previous calendar content
+
+    const language = getCurrentLanguage();
+    const date = new Date();
+    const year = date.getFullYear();
+
+    const namcanhan = parseInt(document.getElementById('namcanhan').textContent);
+    if (isNaN(namcanhan)) return;
+
+    const personalYearHead = document.createElement('h3');
+    personalYearHead.textContent = language === 'en'
+        ? `Personal Months for ${year} (Personal Year: ${namcanhan})`
+        : `Tháng cá nhân trong năm ${year} (Năm cá nhân: ${namcanhan})`;
+    container.appendChild(personalYearHead);
+
+    // Create the table
+    const table = document.createElement('table');
+    table.id = 'personalYearTable';
+
+    // Header row: month names
+    const headerRow = document.createElement('tr');
+    for (let m = 1; m <= 12; m++) {
+        const th = document.createElement('th');
+        th.textContent = new Date(year, m - 1, 1).toLocaleString(language, { month: 'short' });
+        headerRow.appendChild(th);
+    }
+    table.appendChild(headerRow);
+
+    // Data row: personal month numbers
+    const dataRow = document.createElement('tr');
+    for (let m = 1; m <= 12; m++) {
+        const cell = document.createElement('td');
+        const personalMonth = reduceToSingleDigit(namcanhan + reduceToSingleDigit(m, false), false);
+        cell.textContent = personalMonth;
+
+        if (m === date.getMonth() + 1) {
+            cell.classList.add('current-personal-month');
+        }
+
+        dataRow.appendChild(cell);
+    }
+    table.appendChild(dataRow);
+    container.appendChild(table);
+}
+
 // Calendar <---
 
 // Add event listener when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function () {
-    // Event listener for the Enter key press
+    // Get DOM Elements
+    const upperRight = document.getElementById('upperright');
+    const dropdown = document.getElementById('dropdown');
+    const calculateBtn = document.getElementById('calculateBtn');
+    const birthdateInput = document.getElementById('birthdate');
+    const languageSelect = document.getElementById('language');
+
+    translatePage('en'); // Initial translation based on default language
+    buttonListener(); // Set up listeners for the index buttons
+
+    // Toggle dropdown
+    upperRight.addEventListener('click', () => {
+        dropdown.classList.toggle('open');
+    });
+
+    // Calculate button press
+    calculateBtn.addEventListener('click', calculateNumerology);
+
+    // Enter key press triggers calculation
     document.addEventListener('keydown', function(event) {
-        // Check if the pressed key is Enter (keycode 13)
-        if (event.keyCode === 13) {
-            // Trigger the click event of the calculation button
-            document.getElementById('calculateBtn').click();
+        // Use 'key' property for modern browsers
+        if (event.key === 'Enter') { 
+            calculateBtn.click();
         }
     });
 
-    // Event listener for input field value changes
-    document.getElementById('birthdate').addEventListener('input', function () {
-        // Call the formatDate function when the input field value changes
+    // Birthdate input
+    birthdateInput.addEventListener('input', function () {
         formatDate(this.value);
     });
 
-    // Event listener for language selection change
-    document.getElementById('language').addEventListener('change', function () {
+    // Language selection change
+    languageSelect.addEventListener('change', function () {
         const selectedLanguage = this.value;
         translatePage(selectedLanguage);
         translateButtonMeaning(prevButton);
-    });
-    translatePage('en'); // Initial translation based on default language
-    buttonListener();
-
-    // Event listener for calculate button press
-    document.getElementById('calculateBtn').addEventListener('click', calculateNumerology);
-
-    // Event listener for dropdown press
-    document.getElementById('upperright').addEventListener('click', function () {
-        const dropdown = document.getElementById('dropdown');
-        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
     });
 });
