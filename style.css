@@ -70,10 +70,18 @@ main {
 
     #main-container {
         flex-direction: column; /* Stack left and right content */
+        align-items: center;
     }
 
     #left-content {
         max-width: 100%; /* Allow it to take full width */
+        margin-bottom: 2.5px;
+    }
+
+    #right-content {
+        max-width: 350px;
+        width: 100%;
+        margin-top: 2.5px;
     }
 
     /* Adjust matrix layout for smaller horizontal space */
@@ -282,29 +290,37 @@ input[type="text"] {
     color: var(--color-cream);
 }
 
-#personalYearCalendar table {
-    margin: 10px auto;
-    border-collapse: collapse;
+/* Styles for the ONLY structure used now: #personalYearList (the cards) */
+#personalYearList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Spacing between cards */
+    padding: 10px;
+    margin-top: 10px;
+    max-width: 400px; /* Constrain width for centering */
+    margin: 10px auto; /* Center the list on the page */
+}
+
+.personal-month-card {
     background-color: var(--color-cream);
-    color: #000;
+    color: var(--color-red-dark);
+    padding: 8px 15px;
+    border: 1px solid var(--color-red-dark);
+    border-radius: 5px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between; /* Pushes Month and Number to opposite sides */
+    font-weight: bold;
 }
 
-#personalYearCalendar th,
-#personalYearCalendar td {
-    border: 2px solid var(--color-red-dark);
-    padding: 8px 10px;
-    text-align: center;
+.personal-month-card .month-number {
+    font-weight: bold;
 }
 
-#personalYearCalendar th {
-    background-color: #4B86AA;
-    color: var(--color-cream);
-}
-
-#personalYearCalendar .current-personal-month {
+/* Highlighting the entire current month card */
+.personal-month-card.current-month-row {
     background-color: var(--color-red-dark);
     color: var(--color-cream);
-    font-weight: bold;
     border: 3px solid var(--color-orange-light);
 }
 /*-------------Personal Year Calendar END--------------*/

@@ -162,25 +162,26 @@ function formatDate(input) {
 // Page Formatting, Inputs, and features <---
 
 // Calculate Numerology --->
-function reduceToSingleDigit(num, allowMaster) {
+function reduceToSingleDigit(number, masterNumbers = true) {
     // Reduce the sum to a single-digit number
-    if (allowMaster == true) {
-        if (num == 11 || num == 22 || num == 33)
-        return num;
-    }
+    let num = parseInt(number, 10);
+    if (isNaN(num) || num === 0) return 0;
 
-    while (num > 9) {
+    if (masterNumbers && (num === 11 || num === 22 || num === 33)) return num;
 
-        num = num.toString().split('').reduce(function (acc, digit) {
-            return acc + parseInt(digit);
-        }, 0);
-        
-        if (allowMaster == true) {
-            if (num == 11 || num == 22 || num == 33)
-            return num;
-        }
-    }
-    return num;
+    let reducedNum = (num - 1) % 9 + 1;
+    if (!masterNumbers && reducedNum === 11 || reducedNum === 22 || reducedNum === 33) return (reducedNum - 1) % 9 + 1;
+
+    // while (num > 9) {
+    //     let sum = 0;
+    //     let str = num.toString();
+    //     for (let i = 0; i < str.length; i++) {
+    //         sum += parseInt(str[i], 10);
+    //     }
+    //     num = sum;
+    //     if (masterNumbers && (num === 11 || num === 22 || num === 33)) return num;
+    // }
+    return reducedNum;
 }
 
 function calculateNumerology() {
@@ -410,6 +411,7 @@ function englishIndexButtons(buttonId) {
             break;
         case 'namcanhanBtn':
             document.getElementById('personalYearCalendar').innerHTML = '';
+            clearMessages();
             break;
         default:
             clearMessages();
@@ -551,6 +553,7 @@ function vietnameseIndexButtons(buttonId) {
             break;
         case 'namcanhanBtn':
             document.getElementById('personalYearCalendar').innerHTML = '';
+            clearMessages();
             break;
         default:
             clearMessages();
@@ -1001,49 +1004,49 @@ function displayPersonalYearCalendar() {
     const container = document.getElementById('personalYearCalendar');
     container.innerHTML = ''; // Clear previous calendar content
 
-    const language = getCurrentLanguage();
-    const date = new Date();
-    const year = date.getFullYear();
-
     const namcanhan = parseInt(document.getElementById('namcanhan').textContent);
     if (isNaN(namcanhan)) return;
 
+    const language = getCurrentLanguage();
+    const date = new Date();
+    const year = date.getFullYear();
+    const currentMonth = date.getMonth() + 1;
+
+    // Create Header
     const personalYearHead = document.createElement('h3');
     personalYearHead.textContent = language === 'en'
         ? `Personal Months for ${year} (Personal Year: ${namcanhan})`
         : `Tháng cá nhân trong năm ${year} (Năm cá nhân: ${namcanhan})`;
     container.appendChild(personalYearHead);
-
+    
     // Create the table
-    const table = document.createElement('table');
-    table.id = 'personalYearTable';
-
-    // Header row: month names
-    const headerRow = document.createElement('tr');
-    for (let m = 1; m <= 12; m++) {
-        const th = document.createElement('th');
-        th.textContent = new Date(year, m - 1, 1).toLocaleString(language, { month: 'short' });
-        headerRow.appendChild(th);
-    }
-    table.appendChild(headerRow);
-
-    // Data row: personal month numbers
-    const dataRow = document.createElement('tr');
-    for (let m = 1; m <= 12; m++) {
-        const cell = document.createElement('td');
-        const personalMonth = reduceToSingleDigit(namcanhan + reduceToSingleDigit(m, false), false);
-        cell.textContent = personalMonth;
-
-        if (m === date.getMonth() + 1) {
-            cell.classList.add('current-personal-month');
-        }
-
-        dataRow.appendChild(cell);
-    }
-    table.appendChild(dataRow);
-    container.appendChild(table);
+    const calendarElement = generateCalendarList(namcanhan, language, year, currentMonth);
+    container.appendChild(calendarElement);
 }
 
+function generateCalendarList(namcanhan, language, year, currentMonth) {
+    const list = document.createElement('div');
+    list.id = 'personalYearList';
+    
+    for (let m = 1; m <= 12; m++) {
+        // Calculation is performed here
+        const reducedMonth = reduceToSingleDigit(m, false);
+        const preReducedMonth = namcanhan + reducedMonth;
+        const personalMonth = reduceToSingleDigit(preReducedMonth, false);
+
+        const monthName = new Date(year, m - 1, 1).toLocaleString(language, { month: 'long' }); 
+        
+        const card = document.createElement('div');
+        card.className = 'personal-month-card';
+        card.innerHTML = `<span class="month-name">${monthName}: </span><span class="month-number">${personalMonth}</span>`;
+
+        if (m === currentMonth) {
+            card.classList.add('current-month-row'); 
+        }
+        list.appendChild(card);
+    }
+    return list;
+}
 // Calendar <---
 
 // Add event listener when the DOM content is loaded
