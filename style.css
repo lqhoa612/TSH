@@ -97,6 +97,10 @@ main {
     #cmt1, #cmt2 {
         padding-left: 10px; /* Reduce padding for smaller screens */
     }
+
+    #personalMonthLegend {
+        max-width: 300px;
+    }
 }
 
 @media only screen and (max-width: 550px) {
@@ -286,7 +290,7 @@ input[type="text"] {
 /*-------------Personal Year Calendar START----------*/
 #personalYearCalendar {
     margin-top: 20px;
-    text-align: center;
+    /* text-align: center; */
     color: var(--color-cream);
 }
 
@@ -294,11 +298,20 @@ input[type="text"] {
 #personalYearList {
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Spacing between cards */
-    padding: 10px;
-    margin-top: 10px;
-    max-width: 400px; /* Constrain width for centering */
-    margin: 10px auto; /* Center the list on the page */
+    gap: 0px !important; /* Eliminate gap between cards for seamless look */
+    padding: 0 10px 10px 10px; /* Adjust padding to match the card structure */
+    margin-top: 0px !important; /* Remove top margin so it butts up against the header */
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0 0 5px 5px; /* Keep bottom border radius only */
+}
+
+/* Update the first month card to visually connect to the legend header */
+#personalYearList .personal-month-card:first-child {
+    border-top: none !important; /* Remove top border of the first month card */
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
 }
 
 .personal-month-card {
@@ -322,6 +335,32 @@ input[type="text"] {
     background-color: var(--color-red-dark);
     color: var(--color-cream);
     border: 3px solid var(--color-orange-light);
+}
+
+/* Styling for the new Header/Legend Row */
+#personalMonthLegend {
+    /* Use a contrasting background color from your teal palette */
+    background-color: var(--color-teal-dark) !important;
+    color: var(--color-cream) !important;
+    border: 1px solid var(--color-teal-dark) !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    /* Enforce Padding: This ensures the height is exactly the same as .personal-month-card */
+    padding: 8px 10px !important; 
+    /* Explicitly remove the bottom border to visually merge with the list below */
+    border-bottom: none !important; 
+    /* Keep top border radius, remove bottom radius */
+    border-radius: 5px 5px 0 0 !important; 
+    /* Remove any margin spacing */
+    margin-bottom: 2px !important;
+    width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Ensure text inside the legend is clearly visible */
+#personalMonthLegend .month-name, #personalMonthLegend .month-number {
+    color: var(--color-cream);
 }
 /*-------------Personal Year Calendar END--------------*/
 /*------------------Main container END-----------------*/

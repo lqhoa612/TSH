@@ -1018,6 +1018,18 @@ function displayPersonalYearCalendar() {
         ? `Personal Months for ${year} (Personal Year: ${namcanhan})`
         : `Tháng cá nhân trong năm ${year} (Năm cá nhân: ${namcanhan})`;
     container.appendChild(personalYearHead);
+
+    //Create Legends
+    const legend = document.createElement('div');
+    legend.id = 'personalMonthLegend';
+    legend.className = 'personal-month-card'; // Reuses the card's flex layout
+
+    const legendMonthText = language === 'en' ? 'MONTH' : 'THÁNG';
+    const legendPersonalText = language === 'en' ? 'PERSONAL MONTH' : 'THÁNG CÁ NHÂN';
+
+    // Inject the translated header text
+    legend.innerHTML = `<span class="month-name">${legendMonthText}</span><span class="month-number">${legendPersonalText}</span>`;
+    container.appendChild(legend);
     
     // Create the table
     const calendarElement = generateCalendarList(namcanhan, language, year, currentMonth);
@@ -1038,7 +1050,7 @@ function generateCalendarList(namcanhan, language, year, currentMonth) {
         
         const card = document.createElement('div');
         card.className = 'personal-month-card';
-        card.innerHTML = `<span class="month-name">${monthName}: </span><span class="month-number">${personalMonth}</span>`;
+        card.innerHTML = `<span class="month-name">${monthName} </span><span class="month-number">${personalMonth}</span>`;
 
         if (m === currentMonth) {
             card.classList.add('current-month-row'); 
