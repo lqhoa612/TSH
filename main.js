@@ -410,7 +410,11 @@ function englishIndexButtons(buttonId) {
             clearMap();
             break;
         case 'namcanhanBtn':
-            document.getElementById('personalYearCalendar').innerHTML = '';
+            document.getElementById('personalCalendar').innerHTML = '';
+            clearMessages();
+            break;
+        case 'thangcanhanBtn':
+            document.getElementById('personalCalendar').innerHTML = '';
             clearMessages();
             break;
         default:
@@ -507,6 +511,7 @@ function englishIndexButtons(buttonId) {
             break;
         case 'thangcanhanBtn':
             header.textContent = "Personal month";
+            displayPersonalMonthCalendar();
             mess1.textContent = "In Pythagorean Numerology, each of us has a personal month numerical vibration which changes each month in a 9-month cycle.";
             mess2.textContent = "It reveals much about the influences and events you will be experiencing, like a weather forecast - a human forecast.";
             mess4.textContent = "Your personal month number is " + document.getElementById('thangcanhan').textContent;
@@ -552,7 +557,11 @@ function vietnameseIndexButtons(buttonId) {
             clearMap();
             break;
         case 'namcanhanBtn':
-            document.getElementById('personalYearCalendar').innerHTML = '';
+            document.getElementById('personalCalendar').innerHTML = '';
+            clearMessages();
+            break;
+        case 'thangcanhanBtn':
+            document.getElementById('personalCalendar').innerHTML = '';
             clearMessages();
             break;
         default:
@@ -648,6 +657,7 @@ function vietnameseIndexButtons(buttonId) {
             break;
         case 'thangcanhanBtn':
             header.textContent = "Tháng cá nhân";
+            displayPersonalMonthCalendar();
             mess1.textContent = "Trong thần số học Pythagorean, mỗi chúng ta đều có một tháng rung động số riêng, thay đổi hàng tháng theo chu kỳ 9 tháng.";
             mess2.textContent = "Nó tiết lộ nhiều về những ảnh hưởng và sự kiện mà bạn sẽ trải qua, giống như dự báo thời tiết - dự báo của con người.";
             mess4.textContent = "Chỉ số tháng cá nhân của bạn là " + document.getElementById('thangcanhan').textContent;
@@ -1001,12 +1011,14 @@ function clearMap() {
 
 // Calendar --->
 function displayPersonalYearCalendar() {
-    const container = document.getElementById('personalYearCalendar');
+    const container = document.getElementById('personalCalendar');
     container.innerHTML = ''; // Clear previous calendar content
 
     const namcanhan = parseInt(document.getElementById('namcanhan').textContent);
-    if (isNaN(namcanhan)) return;
-
+    if (isNaN(namcanhan)) {
+        console.error("birth year is missing");
+        return;
+    }
     const language = getCurrentLanguage();
     const date = new Date();
     const year = date.getFullYear();
@@ -1034,6 +1046,77 @@ function displayPersonalYearCalendar() {
     // Create the table
     const calendarElement = generateCalendarList(namcanhan, language, year, currentMonth);
     container.appendChild(calendarElement);
+}
+
+function displayPersonalMonthCalendar() {
+    const container = document.getElementById('personalCalendar');
+    container.innerHTML = ''; // Clear previous
+
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth();
+    const today = now.getDate();
+
+    const namcanhan = parseInt(document.getElementById('namcanhan').textContent);
+    const thangcanhan = parseInt(document.getElementById('thangcanhan').textContent);
+
+    // Determine first and last days of current month
+    const firstDay = new Date(currentYear, currentMonth, 1);
+    const lastDay = new Date(currentYear, currentMonth + 1, 0);
+    const daysInMonth = lastDay.getDate();
+    const startDay = firstDay.getDay(); // Sunday=0
+
+    // Adjust start index to make Monday=0
+    const offset = (startDay + 6) % 7;
+
+    // Create calendar grid
+    const calendar = document.createElement('div');
+    calendar.className = 'personal-day-calendar';
+
+    const daysOfWeek = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    for (let d of daysOfWeek) {
+        const header = document.createElement('div');
+        header.className = 'day-header';
+        header.textContent = d;
+        calendar.appendChild(header);
+    }
+
+    // Fill empty cells before 1st
+    for (let i = 0; i < offset; i++) {
+        const emptyCell = document.createElement('div');
+        emptyCell.className = 'day-cell empty';
+        calendar.appendChild(emptyCell);
+    }
+
+    // Generate day cells
+    let personalDay = reduceToSingleDigit(thangcanhan + 1, false); // start personal-day seed
+    for (let day = 1; day <= daysInMonth; day++) {
+        const cell = document.createElement('div');
+        cell.className = 'day-cell';
+
+        const dateEl = document.createElement('div');
+        dateEl.className = 'day-number';
+        dateEl.textContent = day;
+
+        const personalDayEl = document.createElement('div');
+        personalDayEl.className = 'personal-day';
+        personalDayEl.textContent = personalDay;
+
+        // Highlight today's cell
+        if (day === today) {
+            cell.classList.add('today');
+        }
+
+        cell.appendChild(dateEl);
+        cell.appendChild(personalDayEl);
+        calendar.appendChild(cell);
+
+        // Increment personal-day (1–9 cycle)
+        personalDay++;
+        if (personalDay > 9) personalDay = 1;
+    }
+
+    container.appendChild(calendar);
 }
 
 function generateCalendarList(namcanhan, language, year, currentMonth) {

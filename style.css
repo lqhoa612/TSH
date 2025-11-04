@@ -288,7 +288,7 @@ input[type="text"] {
 /*------------------Right content END---------------*/
 
 /*-------------Personal Year Calendar START----------*/
-#personalYearCalendar {
+#personalCalendar {
     margin-top: 20px;
     /* text-align: center; */
     color: var(--color-cream);
@@ -363,6 +363,88 @@ input[type="text"] {
     color: var(--color-cream);
 }
 /*-------------Personal Year Calendar END--------------*/
+/*-----------Personal Month Calendar START-------------*/
+.personal-day-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    max-width: 700px;
+    margin: 25px auto;
+    background-color: var(--color-cream);
+    border: 4px solid var(--color-red-dark);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* Day of week header row */
+.personal-day-calendar .day-header {
+    background-color: var(--color-teal-dark);
+    color: var(--color-cream);
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+/* Day cell */
+.personal-day-calendar .day-cell {
+    position: relative;
+    background-color: var(--color-cream);
+    color: var(--color-brown-dark);
+    border: 2px solid var(--color-teal-medium);
+    border-radius: 5px;
+    aspect-ratio: 1 / 1; /* keeps cells square */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+/* .personal-day-calendar .day-cell:hover {
+    background-color: var(--color-orange-light);
+    transform: scale(1.03);
+} */
+
+/* Day number (small, top-right corner) */
+.personal-day-calendar .day-number {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    font-size: 0.8rem;
+    color: var(--color-brown-dark);
+    font-weight: 600;
+}
+
+/* Personal day number (centered, larger) */
+.personal-day-calendar .personal-day {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--color-red-dark);
+}
+
+/* Highlight current day */
+.personal-day-calendar .today {
+    background-color: var(--color-cream);
+    color: var(--color-cream);
+    border: 3px solid var(--color-red-dark);
+    box-shadow: 0 0 10px var(--color-orange-light);
+    transform: scale(1.02);
+}
+
+/* Empty filler cells (for days before/after current month) */
+.personal-day-calendar .empty {
+    background-color: rgba(248, 242, 220, 0.6);
+    border: 1px solid var(--color-teal-medium);
+    pointer-events: none;
+}
+/*---------------Personal Month Calendar END----------*/
+
 /*------------------Main container END-----------------*/
 
 /*----------------Language Container START--------------*/  
