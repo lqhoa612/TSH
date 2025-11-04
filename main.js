@@ -1057,7 +1057,6 @@ function displayPersonalMonthCalendar() {
     const currentMonth = now.getMonth();
     const today = now.getDate();
 
-    const namcanhan = parseInt(document.getElementById('namcanhan').textContent);
     const thangcanhan = parseInt(document.getElementById('thangcanhan').textContent);
 
     // Determine first and last days of current month
@@ -1069,11 +1068,23 @@ function displayPersonalMonthCalendar() {
     // Adjust start index to make Monday=0
     const offset = (startDay + 6) % 7;
 
+    
+    // Create Header
+    const language = getCurrentLanguage();
+    const monthName = new Date(currentYear, currentMonth, 1).toLocaleString(language, { month: 'long' });
+    const personalMonthHead = document.createElement('h3');
+    personalMonthHead.textContent = language === 'en'
+        ? `Personal Day Calendar for ${monthName} (Personal Month: ${thangcanhan})`
+        : `Lịch Ngày Cá Nhân trong tháng ${currentMonth + 1} (Tháng cá nhân: ${thangcanhan})`;
+    container.appendChild(personalMonthHead);
+
     // Create calendar grid
     const calendar = document.createElement('div');
     calendar.className = 'personal-day-calendar';
 
-    const daysOfWeek = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    const daysOfWeek = language === 'en' 
+            ? ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+            : ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN'];
     for (let d of daysOfWeek) {
         const header = document.createElement('div');
         header.className = 'day-header';
