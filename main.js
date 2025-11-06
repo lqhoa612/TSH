@@ -1172,7 +1172,7 @@ function setupThemeToggle() {
     }
 
     // Load saved theme preference
-    const savedTheme = localStorage.getItem("theme");
+    const savedTheme = sessionStorage.getItem("theme");
     if (savedTheme === "old") {
         body.classList.add("old-theme");
         themeToggleBtn.textContent = "🌙";
@@ -1186,7 +1186,8 @@ function setupThemeToggle() {
         const isOldTheme = body.classList.contains("old-theme");
 
         themeToggleBtn.textContent = isOldTheme ? "🌙" : "☀️";
-        localStorage.setItem("theme", isOldTheme ? "old" : "new");
+
+        sessionStorage.setItem("theme", isOldTheme ? "old" : "new");
     });
 }
 // Themes control <---
