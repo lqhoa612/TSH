@@ -1058,16 +1058,6 @@ function displayPersonalMonthCalendar() {
     const today = now.getDate();
 
     const thangcanhan = parseInt(document.getElementById('thangcanhan').textContent);
-
-    // Determine first and last days of current month
-    const firstDay = new Date(currentYear, currentMonth, 1);
-    const lastDay = new Date(currentYear, currentMonth + 1, 0);
-    const daysInMonth = lastDay.getDate();
-    const startDay = firstDay.getDay(); // Sunday=0
-
-    // Adjust start index to make Monday=0
-    const offset = (startDay + 6) % 7;
-
     
     // Create Header
     const language = getCurrentLanguage();
@@ -1078,20 +1068,60 @@ function displayPersonalMonthCalendar() {
         : `Lịch Ngày Cá Nhân trong tháng ${currentMonth + 1} (Tháng cá nhân: ${thangcanhan})`;
     container.appendChild(personalMonthHead);
 
+    // Generate and append the grid
+    const calendarGrid = generatePersonalMonthGrid(currentYear, currentMonth, today, thangcanhan);
+    container.appendChild(calendarGrid);
+}
+
+function generateCalendarList(namcanhan, language, year, currentMonth) {
+    const list = document.createElement('div');
+    list.id = 'personalYearList';
+    
+    for (let m = 1; m <= 12; m++) {
+        // Calculation is performed here
+        const reducedMonth = reduceToSingleDigit(m, false);
+        const preReducedMonth = namcanhan + reducedMonth;
+        const personalMonth = reduceToSingleDigit(preReducedMonth, false);
+
+        const monthName = new Date(year, m - 1, 1).toLocaleString(language, { month: 'long' }); 
+        
+        const card = document.createElement('div');
+        card.className = 'personal-month-card';
+        card.innerHTML = `<span class="month-name">${monthName} </span><span class="month-number">${personalMonth}</span>`;
+
+        if (m === currentMonth) {
+            card.classList.add('current-month-row'); 
+        }
+        list.appendChild(card);
+    }
+    return list;
+}
+
+function generatePersonalMonthGrid(currentYear, currentMonth, today, thangcanhan) {
+    // Determine first and last days of current month
+    const firstDay = new Date(currentYear, currentMonth, 1);
+    const lastDay = new Date(currentYear, currentMonth + 1, 0);
+    const daysInMonth = lastDay.getDate();
+    const startDay = firstDay.getDay(); // Sunday=0
+
+    // Adjust start index to make Monday=0
+    const offset = (startDay + 6) % 7;
+
     // Create calendar grid
     const calendar = document.createElement('div');
     calendar.className = 'personal-day-calendar';
 
-    const daysOfWeek = language === 'en' 
-            ? ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+    const daysOfWeek = getCurrentLanguage() === 'en' 
+            ? ['M','T','W','T','F','S','S']
             : ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN'];
+
     for (let d of daysOfWeek) {
         const header = document.createElement('div');
         header.className = 'day-header';
         header.textContent = d;
         calendar.appendChild(header);
     }
-
+    
     // Fill empty cells before 1st
     for (let i = 0; i < offset; i++) {
         const emptyCell = document.createElement('div');
@@ -1127,35 +1157,41 @@ function displayPersonalMonthCalendar() {
         if (personalDay > 9) personalDay = 1;
     }
 
-    container.appendChild(calendar);
-}
-
-function generateCalendarList(namcanhan, language, year, currentMonth) {
-    const list = document.createElement('div');
-    list.id = 'personalYearList';
-    
-    for (let m = 1; m <= 12; m++) {
-        // Calculation is performed here
-        const reducedMonth = reduceToSingleDigit(m, false);
-        const preReducedMonth = namcanhan + reducedMonth;
-        const personalMonth = reduceToSingleDigit(preReducedMonth, false);
-
-        const monthName = new Date(year, m - 1, 1).toLocaleString(language, { month: 'long' }); 
-        
-        const card = document.createElement('div');
-        card.className = 'personal-month-card';
-        card.innerHTML = `<span class="month-name">${monthName} </span><span class="month-number">${personalMonth}</span>`;
-
-        if (m === currentMonth) {
-            card.classList.add('current-month-row'); 
-        }
-        list.appendChild(card);
-    }
-    return list;
+    return calendar;
 }
 // Calendar <---
 
-// Add event listener when the DOM content is loaded
+// Themes control --->
+function setupThemeToggle() {
+    const themeToggleBtn = document.getElementById("themeToggleBtn");
+    const body = document.body;
+
+    if (!themeToggleBtn) {
+        console.warn("Theme toggle button not found.");
+        return;
+    }
+
+    // Load saved theme preference
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "old") {
+        body.classList.add("old-theme");
+        themeToggleBtn.textContent = "🌙";
+    } else {
+        themeToggleBtn.textContent = "☀️";
+    }
+
+    // Toggle behavior
+    themeToggleBtn.addEventListener("click", () => {
+        body.classList.toggle("old-theme");
+        const isOldTheme = body.classList.contains("old-theme");
+
+        themeToggleBtn.textContent = isOldTheme ? "🌙" : "☀️";
+        localStorage.setItem("theme", isOldTheme ? "old" : "new");
+    });
+}
+// Themes control <---
+
+// Add event listener when the DOM content is loaded --->
 document.addEventListener('DOMContentLoaded', function () {
     // Get DOM Elements
     const upperRight = document.getElementById('upperright');
@@ -1166,6 +1202,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     translatePage('en'); // Initial translation based on default language
     buttonListener(); // Set up listeners for the index buttons
+    setupThemeToggle(); // Change themes
 
     // Toggle dropdown
     upperRight.addEventListener('click', () => {

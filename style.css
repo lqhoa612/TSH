@@ -1,5 +1,6 @@
 /* style.css */
-/* https://visme.co/blog/website-color-schemes/ */
+/* https://visme.co/blog/website-color-schemes/ 
+https://coolors.co/02111b-3f4045-30292f-5d737e-fcfcfc */
 /* Color scheme */
 
 /*-------------------Settings START--------------------*/
@@ -8,23 +9,112 @@
 }
 
 :root {
-    /* Primary Palette */
-    --color-brown-dark: #4C301F;
-    --color-brown-medium: rgba(76,48,31,.5);
-    --color-cream: #F8F2DC;
-    
-    /* Accent 1: Blue/Teal for Index/Links */
-    --color-teal-dark: #0063a1;
-    --color-teal-medium: #BDD0D2;
-    --color-teal-hover: #4B86AA;
-    --color-teal-bg: rgba(75,134,170, .85);
-    --color-teal-bg-hover: rgba(75,134,170, 1);
-
-    /* Accent 2: Red/Orange for Button/Bottom Content */
-    --color-red-dark: #CD4631;
-    --color-orange-light: #ffc6af;
-    --color-red-bg: rgba(205,70,49, .85);
+    --gunmetal: #212A31;
+    --gunmetal-gray-blue: #2E3944;
+    --midnight-green: #124E66;
+    --slate-fray: #748D92;
+    --timberwolf: #D3D9D4;
+    --verdigris: #12ADAD;
+    --yellow: rgba(221,221,39,1);
 }
+
+/*-------------- THEME TOGGLE SYSTEM START --------------*/
+body.old-theme {
+    --gunmetal: rgba(76,48,31,.5);
+    --gunmetal-gray-blue: rgba(76,48,31,.5);
+    --midnight-green: rgba(75,134,170,.85);
+    --slate-fray: #BDD0D2;
+    --timberwolf: #F8F2DC;
+    --verdigris: #CD4631;
+
+    background-color: #F8F2DC;
+    color: #000;
+}
+
+body.old-theme header,
+body.old-theme footer {
+    background-color: #F8F2DC;
+    color: rgba(76,48,31,.5);
+}
+
+body.old-theme #input-container {
+    background-color: rgba(76,48,31,.5);
+}
+
+body.old-theme #calculateBtn {
+    background-color: #ffc6af;
+    color: #CD4631;
+}
+
+body.old-theme #calculateBtn:hover {
+    background-color: #CD4631;
+    color: #F8F2DC;
+}
+
+body.old-theme #basicInfo-container {
+    color: rgba(76,48,31,.85);
+}
+
+body.old-theme #index-container p {
+    background-color: #BDD0D2;
+    color: #0063a1;
+}
+
+body.old-theme #index-container p:hover {
+    background-color: #4B86AA;
+    color: #F8F2DC;
+}
+
+body.old-theme #upperright {
+    background-color: rgba(75,134,170, .85);
+    color: #F8F2DC;
+}
+
+body.old-theme #upperright:hover {
+    background-color: rgba(75,134,170, 1);
+}
+
+body.old-theme #bottomright {
+    /* background-color: rgba(76,48,31,.5);
+    color: #F8F2DC; */
+    background-color: #F8F2DC;
+    color: rgba(76,48,31,.5);
+}
+
+body.old-theme #personalCalendar {
+    color: rgba(76,48,31,.5);
+}
+
+body.old-theme #contactHead {
+    color: rgba(76,48,31,.5);
+}
+
+body.old-theme a {
+    color: #4B86AA;
+}
+
+body.old-theme a:hover {
+    color: #d5e0e7;
+}
+
+body, header, footer, #left-content, #right-content, 
+#input-container, #index-container, #upperright, 
+#bottomright, #calculateBtn, #personalCalendar, 
+.personal-month-card, #personalMonthLegend {
+    transition: 
+        background-color 0.4s ease, 
+        color 0.4s ease, 
+        border-color 0.4s ease;
+}
+
+#themeToggleBtn {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+#themeToggleBtn:active {
+    transform: rotate(25deg) scale(1.1);
+}
+/*-------------- THEME TOGGLE SYSTEM END---------------*/
 
 .visually-hidden { /* For accessible labels that are visually hidden */
     position: absolute;
@@ -39,11 +129,12 @@
 
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--gunmetal);
 }
 
 header, footer {
-    background-color: var(--color-brown-medium);
-    color: var(--color-cream);
+    background-color: var(--gunmetal);
+    color: var(--timberwolf);
     padding: 20px;
     text-align: center;
     font-size: 1.3em;
@@ -130,8 +221,8 @@ main {
         transform: translate(-50%, -50%);
         font-size: 1.1rem;
         font-weight: 800;
-        color: var(--color-red-dark);
-        background-color: rgba(255, 255, 255, 0.9);
+        color: rgb(200, 47, 47);
+        /* background-color: rgba(211, 217, 212, 0.9); */
         padding: 4px 8px;
         border-radius: 6px;
         transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
@@ -142,7 +233,7 @@ main {
     .personal-day-calendar .day-number {
         font-size: 1rem;
         font-weight: 700;
-        color: var(--color-brown-dark);
+        color: var(---midnight-green);
         opacity: 1;
         transition: opacity 0.2s ease-in-out;
     }
@@ -150,10 +241,16 @@ main {
     .personal-day-calendar .day-cell:hover .personal-day {
         opacity: 1;
         visibility: visible;
+        color: rgb(200, 47, 47);
     }
 
     .personal-day-calendar .day-cell:hover .day-number {
-        opacity: 0.25;
+        opacity: 0;
+        background-color: rgba(211, 217, 212, 1);
+    }
+
+    .personal-day-calendar .today:hover .personal-day {
+        color: rgb(200, 47, 47);
     }
 
     /* ↓ Align the title/header to the left instead of center */
@@ -211,7 +308,7 @@ main {
 }
 
 #input-container {
-    background-color: var(--color-brown-medium);
+    background-color: var(--gunmetal);
     padding: 5px;
     text-align: center;
     border-radius: 10px;
@@ -222,9 +319,9 @@ main {
 }
 
 input[type="text"] {
-    background-color: var(--color-cream);
+    background-color: var(--timberwolf);
     color: #000000;
-    border-width: 3px solid var(--color-red-dark);;
+    border-width: 3px solid var(--timberwolf);;
     width: 100%;
     padding: 5px;
     margin-right: 5px;
@@ -235,8 +332,8 @@ input[type="text"] {
 } */
 
 #calculateBtn {
-    background-color: var(--color-orange-light);
-    color: var(--color-red-dark);
+    background-color: rgb(255, 255, 81);
+    color: var(--midnight-green);
     cursor: pointer;
     width: 100%;
     transition: background-color 0.3s;
@@ -244,17 +341,18 @@ input[type="text"] {
     padding: 5px 10px;
     margin: 5px 0 0 0;
     font-size: 1.0rem;
+    border-radius: 10px;
 }
 
 #calculateBtn:hover {
-    background-color: var(--color-red-dark);
-    color: var(--color-cream);
+    background-color: var(--midnight-green);
+    color: rgb(255, 255, 81);
 }
 
 /*-------------Basic Info Container START---------------*/
 #basicInfo-container {
-    background-color: var(--color-brown-medium);
-    color: var(--color-cream);
+    background-color: var(---midnight-green);
+    color: var(--timberwolf);
     text-align: justify;
     margin: 5px 0;
     border-radius: 10px;
@@ -268,21 +366,21 @@ input[type="text"] {
 
 /*---------------Index container START-----------------*/
 #index-container {
-    background-color: rgba(248, 242, 220, .5);
+    background-color: var(--gunmetal);
     text-align: justify;
     padding: 5px;
     border-radius: 10px;
 }
 
 #index-container h2 {
-    color: rgba(248, 242, 220, 1);
+    color: var(--timberwolf);
     text-align: center;
     margin: 5px 0;
 }
 
 #index-container p {
-    background-color: #BDD0D2;
-    color: #0063a1;
+    background-color: var(--timberwolf);
+    color: var(--midnight-green);
     cursor: pointer;
     padding: 5px 10px;
     margin: 5px;
@@ -291,8 +389,8 @@ input[type="text"] {
 }
 
 #index-container p:hover { 
-    background-color: #4B86AA;
-    color: var(--color-cream);
+    background-color: var(--gunmetal-gray-blue);
+    color: var(--timberwolf);
 }
 /*---------------Index container END-----------------*/
 
@@ -310,7 +408,6 @@ input[type="text"] {
 
 #rightHead {
     text-align: center;
-    color: var(--color-cream);
 }
 
 #dropdown {
@@ -325,8 +422,8 @@ input[type="text"] {
 }
 
 #upperright {
-    background-color: rgba(75,134,170, .85);
-    color: var(--color-cream);
+    background-color: var(--timberwolf);
+    color: var(--midnight-green);
     text-align: justify;
     padding: 10px;
     margin: 5px;
@@ -337,7 +434,8 @@ input[type="text"] {
 }
 
 #upperright:hover {
-    background-color: var(--color-teal-bg-hover);
+    background-color: var(--midnight-green);
+    color: var(--timberwolf);
 }
 
 #upperright h2 {
@@ -349,8 +447,8 @@ input[type="text"] {
 }
 
 #bottomright {
-    background-color: var(--color-red-bg);
-    color: var(--color-cream);
+    background-color: var(--gunmetal);
+    color: var(--timberwolf);
     flex: 1;
     text-align: justify;
     padding: 10px;
@@ -372,8 +470,8 @@ input[type="text"] {
 /*-------------Personal Year Calendar START----------*/
 #personalCalendar {
     margin-top: 20px;
-    /* text-align: center; */
-    color: var(--color-cream);
+    text-align: center;
+    color: var(--timberwolf);
 }
 
 /* Styles for the ONLY structure used now: #personalYearList (the cards) */
@@ -390,17 +488,17 @@ input[type="text"] {
 }
 
 /* Update the first month card to visually connect to the legend header */
-#personalYearList .personal-month-card:first-child {
-    border-top: none !important; /* Remove top border of the first month card */
+/* #personalYearList .personal-month-card:first-child {
+    border-top: none !important; /* Remove top border of the first month card
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
-}
+} */
 
 .personal-month-card {
-    background-color: var(--color-cream);
-    color: var(--color-red-dark);
+    background-color: var(--timberwolf);
+    color: var(--midnight-green);
     padding: 8px 15px;
-    border: 1px solid var(--color-red-dark);
+    border: 3px solid var(--gunmetal);
     border-radius: 5px;
     text-align: left;
     display: flex;
@@ -414,27 +512,27 @@ input[type="text"] {
 
 /* Highlighting the entire current month card */
 .personal-month-card.current-month-row {
-    background-color: var(--color-red-dark);
-    color: var(--color-cream);
-    border: 3px solid var(--color-orange-light);
+    background-color: var(--midnight-green);
+    color: var(--timberwolf);
+    border: 3px solid var(--gunmetal);
 }
 
 /* Styling for the new Header/Legend Row */
 #personalMonthLegend {
     /* Use a contrasting background color from your teal palette */
-    background-color: var(--color-teal-dark) !important;
-    color: var(--color-cream) !important;
-    border: 1px solid var(--color-teal-dark) !important;
+    background-color: var(--midnight-green) !important;
+    color: var(--timberwolf) !important;
+    border: 3px solid var(--gunmetal) !important;
     font-weight: bold;
     text-transform: uppercase;
     /* Enforce Padding: This ensures the height is exactly the same as .personal-month-card */
     padding: 8px 10px !important; 
     /* Explicitly remove the bottom border to visually merge with the list below */
-    border-bottom: none !important; 
+    /* border-bottom: none !important;  */
     /* Keep top border radius, remove bottom radius */
-    border-radius: 5px 5px 0 0 !important; 
+    border-radius: 5px 5px 5px 5px !important; 
     /* Remove any margin spacing */
-    margin-bottom: 2px !important;
+    margin-bottom: 0px !important;
     width: 380px;
     margin-left: auto;
     margin-right: auto;
@@ -442,7 +540,7 @@ input[type="text"] {
 
 /* Ensure text inside the legend is clearly visible */
 #personalMonthLegend .month-name, #personalMonthLegend .month-number {
-    color: var(--color-cream);
+    color: var(--timberwolf);
 }
 /*-------------Personal Year Calendar END--------------*/
 /*-----------Personal Month Calendar START-------------*/
@@ -452,8 +550,8 @@ input[type="text"] {
     gap: 5px;
     max-width: 700px;
     margin: 25px auto;
-    background-color: var(--color-cream);
-    border: 4px solid var(--color-red-dark);
+    background-color: var(--timberwolf);
+    border: 4px solid var(--midnight-green);
     border-radius: 8px;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
@@ -461,8 +559,9 @@ input[type="text"] {
 
 /* Day of week header row */
 .personal-day-calendar .day-header {
-    background-color: var(--color-teal-dark);
-    color: var(--color-cream);
+    background-color: var(--midnight-green);
+    /* background-color: rgba(0,0,0,0.3); */
+    color: rgb(221, 221, 39);
     font-weight: 700;
     text-align: center;
     padding: 10px 0;
@@ -477,9 +576,9 @@ input[type="text"] {
     flex-direction: column; /* stack day number above personal number */
     justify-content: flex-start;
     align-items: center;
-    background-color: var(--color-cream);
-    color: var(--color-brown-dark);
-    border: 2px solid var(--color-teal-medium);
+    background-color: rgb(182, 189, 182);
+    color: var(--gunmetal);
+    border: 2px solid var(--midnight-green);
     border-radius: 5px;
     aspect-ratio: 1 / 1;
     overflow: hidden;
@@ -498,7 +597,7 @@ input[type="text"] {
 .personal-day-calendar .day-number {
     font-size: 0.8rem;
     font-weight: 600;
-    color: var(--color-brown-dark);
+    color: var(--gunmetal-gray-blue);
     margin-top: 2px;
 }
 
@@ -506,7 +605,7 @@ input[type="text"] {
 .personal-day-calendar .personal-day {
     font-size: 1.5rem;
     font-weight: 900;
-    color: var(--color-red-dark);
+    color: rgb(200, 47, 47);
     margin-top: 4px;
     opacity: 1;
     transition: opacity 0.2s ease-in-out;
@@ -514,17 +613,20 @@ input[type="text"] {
 
 /* Highlight current day */
 .personal-day-calendar .today {
-    background-color: var(--color-cream);
-    color: var(--color-cream);
-    border: 3px solid var(--color-red-dark);
-    box-shadow: 0 0 10px var(--color-red-dark);
+    background-color: var(--midnight-green);
+    border: 3px solid var(--timberwolf);
+    box-shadow: 0 0 10px var(--midnight-green);
     transform: scale(1.02);
+}
+
+.personal-day-calendar .today .day-number {
+    color: rgb(236, 236, 236);
 }
 
 /* Empty cells (before/after month) */
 .personal-day-calendar .empty {
-    background-color: rgba(248, 242, 220, 0.6);
-    border: 1px solid var(--color-teal-medium);
+    background-color: var(--timberwolf);
+    border: 1px solid var(--midnight-green);
     pointer-events: none;
 }
 /*---------------Personal Month Calendar END----------*/
@@ -539,8 +641,8 @@ input[type="text"] {
 }
 
 #language {
-    background-color: var(--color-cream);
-    color: var(--color-brown-dark);
+    background-color: var(--timberwolf);
+    color: var(--midnight-green);
     padding: 3px;
 }
 /*----------------Language Container END--------------*/  
@@ -548,7 +650,7 @@ input[type="text"] {
 /*-------------------Footer START-------------------*/
 #contactInfo {
     margin-top: 0; /* Remove top margin */
-    color: var(--color-cream);
+    color: var(--timberwolf);
 }
 
 #contactInfo h3 {
@@ -564,7 +666,7 @@ a {
 }
 
 a:hover {
-    color: #d5e0e7
+    color: var(--timberwolf);
 }
 /*-------------------Footer END-------------------*/
 
@@ -592,21 +694,21 @@ a:hover {
     margin-top: 10px;
     border-collapse: collapse;
     width: 100%; /* Set table width to 100% */
-    background-color: var(--color-cream);
-    color: #000000;
+    background-color: var(--timberwolf);
+    color: var(--gunmetal);
 }
 
 #birthdateMatrixContainer th,
 #combinedMartixContainer th {
     text-align: center; /* Center align header text */
     padding: 15px;
-    border: 1px solid var(--color-red-dark);
+    border: 1px solid var(--midnight-green);
 }
 
 #birthdateMatrixContainer td,
 #combinedMartixContainer td {
     padding: 15px;
-    border: 3px solid var(--color-red-dark);
+    border: 3px solid var(--midnight-green);
     width: 35px;
     height: 35px;
     text-align: center;
@@ -614,15 +716,15 @@ a:hover {
 }
 
 .birthdate-text {
-    color: #4B86AA; /* Set the color for birthdate text */
+    color: var(--verdigris); /* Set the color for birthdate text */
 }
 
 .name-text {
-    color: #000000; /* Set the color for name text */
+    color: var(--gunmetal); /* Set the color for name text */
 }
 
 #patternContainer {
-    color: var(--color-cream);
+    color: var(--timberwolf);
 }
 
 #cmt1, #cmt2 {
