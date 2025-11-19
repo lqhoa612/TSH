@@ -1,0 +1,137 @@
+/* _calendar.css - Personal Calendars (Year and Day) */
+
+/*-------------Personal Year Calendar START----------*/
+#personalCalendar {
+    margin-top: 20px;
+    text-align: center;
+    color: var(--timberwolf);
+}
+
+#personalYearList {
+    display: flex;
+    flex-direction: column;
+    gap: 0px !important;
+    padding: 0 10px 10px 10px;
+    margin-top: 0px !important;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0 0 5px 5px;
+}
+
+.personal-month-card {
+    background-color: var(--timberwolf);
+    color: var(--midnight-green);
+    padding: 8px 15px;
+    border: 3px solid var(--gunmetal);
+    border-radius: 5px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.personal-month-card .month-number {
+    font-weight: bold;
+}
+
+.personal-month-card.current-month-row {
+    background-color: var(--midnight-green);
+    color: var(--timberwolf);
+    border: 3px solid var(--gunmetal);
+}
+
+#personalMonthLegend {
+    background-color: var(--midnight-green) !important;
+    color: var(--timberwolf) !important;
+    border: 3px solid var(--gunmetal) !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 8px 10px !important; 
+    border-radius: 5px 5px 5px 5px !important; 
+    margin-bottom: 0px !important;
+    width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#personalMonthLegend .month-name, #personalMonthLegend .month-number {
+    color: var(--timberwolf);
+}
+/*-------------Personal Year Calendar END--------------*/
+
+/*-----------Personal Month Calendar START-------------*/
+.personal-day-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    max-width: 700px;
+    margin: 25px auto;
+    background-color: var(--timberwolf);
+    border: 4px solid var(--midnight-green);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.personal-day-calendar .day-header {
+    background-color: var(--midnight-green);
+    color: rgb(221, 221, 39);
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.personal-day-calendar .day-cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgb(182, 189, 182);
+    color: var(--gunmetal);
+    border: 2px solid var(--midnight-green);
+    border-radius: 5px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    position: relative;
+    font-weight: 700;
+    transition: background-color 0.2s, transform 0.1s;
+    padding-top: 5px;
+}
+
+.personal-day-calendar .day-number {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gunmetal-gray-blue);
+    margin-top: 2px;
+}
+
+.personal-day-calendar .personal-day {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: rgb(200, 47, 47);
+    margin-top: 4px;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.personal-day-calendar .today {
+    background-color: var(--midnight-green);
+    border: 3px solid var(--timberwolf);
+    box-shadow: 0 0 10px var(--midnight-green);
+    transform: scale(1.02);
+}
+
+.personal-day-calendar .today .day-number {
+    color: rgb(236, 236, 236);
+}
+
+.personal-day-calendar .empty {
+    background-color: var(--timberwolf);
+    border: 1px solid var(--midnight-green);
+    pointer-events: none;
+}
+/*---------------Personal Month Calendar END----------*/

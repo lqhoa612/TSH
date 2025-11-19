@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+<link rel="manifest" href="favicon_io/site.webmanifest">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pythagorean Numerology Calculator by Hoa</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNTV3EVQNG"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-  gtag('config', 'G-JNTV3EVQNG');
+    gtag('config', 'G-JNTV3EVQNG');
 </script>
+
 <body>
     <header>
-        <h1 id="header">Welcome to Numerology Calculator</h1>
+        <h1 id="header" data-translate="header">Welcome to Numerology Calculator</h1>
         <div id="language-container">
-            <label id="languageLabel" for="language">Language: </label>
+            <label id="languageLabel" data-translate="languageLabel" for="language">Language: </label>
             <select id="language">
                 <option value="en">English</option>
                 <option value="vi">Vietnamese</option>
@@ -32,56 +38,84 @@
     <main>
         <section id="main-container">
             <aside id="left-content">
-                <div id="input-container">
-                    <label for="name" class="visually-hidden">Full Name (last middle first)</label>
-                    <input type="text" id="name" placeholder="Fullname last middle first">
-                    <label for="birthdate" class="visually-hidden">Birthdate (dd/mm/yyyy)</label>
-                    <input type="text" id="birthdate" placeholder="Birthdate dd/mm/yyyy">
+                <form id="input-container" autocomplete="on" onsubmit="return false;">
+                    <!-- <label for="name" class="visually-hidden">Full Name (last middle first)</label> -->
+                    <input type="text" id="name" name="name" data-placeholder="placeholders.name"
+                        placeholder="Fullname last middle first" autocomplete="name" />
+
+                    <!-- <input id="birthdate" type="text" inputmode="numeric" placeholder="DD/MM/YYYY" autocomplete="on"> -->
+
+                    <!-- <label for="birthdate" class="visually-hidden">Birthdate (dd/mm/yyyy)</label> -->
+                    <input type="text" id="birthdate" data-placeholder="placeholders.birthdate"
+                        placeholder="Birthdate dd/mm/yyyy" autocomplete="on" />
+
                     <button id="calculateBtn" data-translate="calculateBtn">Start Calculation</button>
-                </div>
+                </form>
 
                 <div id="basicInfo-container">
-                    <p><span id="fullnameLabel"></span> <span id="fullname"></span></p>
-                    <p><span id="birthdate2Label"></span> <span id="birthdate2"></span></p>
-                    <p><span id="todateLabel"></span> <span id="todate"></span></p>
+                    <p><span data-translate="fullnameLabel"></span> <span id="fullname"></span></p>
+                    <p><span data-translate="birthdate2Label"></span> <span id="birthdate2"></span></p>
+                    <p><span data-translate="currentDateLabel"></span> <span id="currentDate"></span></p>
                 </div>
 
                 <div id="index-container">
-                        <h2 id="resultHeading"></h2>
-                        <p id="yourmapBtn"><span id="yourmapLabel"></span></p>
-                        <p id="duongdoiBtn"><span id="duongdoiLabel"></span> <span id="duongdoi"></span></p>
-                        <p id="sumenhBtn"><span id="sumenhLabel"></span> <span id="sumenh"></span></p>
-                        <p id="lienketduongdoisumenhBtn"><span id="lienketduongdoisumenhLabel"></span> <span id="lienketduongdoisumenh"></span></p>
-                        <p id="truongthanhBtn"><span id="truongthanhLabel"></span> <span id="truongthanh"></span></p>
-                        <p id="linhhonBtn"><span id="linhhonLabel"></span> <span id="linhhon"></span></p>
-                        <p id="nhancachBtn"><span id="nhancachLabel"></span> <span id="nhancach"></span></p>
-                        <p id="lienketlinhhonnhancachBtn"><span id="lienketlinhhonnhancachLabel"></span> <span id="lienketlinhhonnhancach"></span></p>
-                        <p id="canbangBtn"><span id="canbangLabel"></span> <span id="canbang"></span></p>
-                        <p id="tuduylytriBtn"><span id="tuduylytriLabel"></span> <span id="tuduylytri"></span></p>
-                        <p id="sucmanhtiemthucBtn"><span id="sucmanhtiemthucLabel"></span> <span id="sucmanhtiemthuc"></span></p>
-                        <p id="sothieuBtn"><span id="sothieuLabel"></span> <span id="sothieu"></span></p>
-                        <p id="ngaysinhBtn"><span id="ngaysinhLabel"></span>  <span id="ngaysinh"></span></p>
-                        <p id="dammeBtn"><span id="dammeLabel"></span>  <span id="damme"></span></p>
-                        <p id="namcanhanBtn"><span id="namcanhanLabel"></span> <span id="namcanhan"></span></p>
-                        <p id="thangcanhanBtn"><span id="thangcanhanLabel"></span> <span id="thangcanhan"></span></p>
-                        <p id="ngaycanhanBtn"><span id="ngaycanhanLabel"></span> <span id="ngaycanhan"></span></p>
-                        <p id="changBtn"><span id="changLabel"></span> <span id="chang"></span></p>
-                        <p id="tuoiBtn"><span id="tuoiLabel"></span> <span id="tuoi"></span></p>
-                        <p id="thachthucBtn"><span id="thachthucLabel"></span> <span id="thachthuc"></span></p>
+                    <h2 id="resultHeading" data-translate="resultHeading"></h2>
+                    <p id="yourmapBtn" data-translate="yourmapLabel"></p>
+                    <p id="duongdoiBtn" class="index-button"><span data-translate="duongdoiLabel"></span> <span
+                            id="duongdoi"></span></p>
+                    <p id="sumenhBtn" class="index-button"><span data-translate="sumenhLabel"></span> <span
+                            id="sumenh"></span></p>
+                    <p id="LKDgdoiSumenhBtn" class="index-button"><span data-translate="LKDgdoiSumenhLabel"></span>
+                        <span id="LKDgdoiSumenh"></span>
+                    </p>
+                    <p id="truongthanhBtn" class="index-button"><span data-translate="truongthanhLabel"></span> <span
+                            id="truongthanh"></span></p>
+                    <p id="linhhonBtn" class="index-button"><span data-translate="linhhonLabel"></span> <span
+                            id="linhhon"></span></p>
+                    <p id="nhancachBtn" class="index-button"><span data-translate="nhancachLabel"></span> <span
+                            id="nhancach"></span></p>
+                    <p id="LKLinhhonNhancachBtn" class="index-button"><span
+                            data-translate="LKLinhhonNhancachLabel"></span> <span id="LKLinhhonNhancach"></span></p>
+                    <p id="canbangBtn" class="index-button"><span data-translate="canbangLabel"></span> <span
+                            id="canbang"></span></p>
+                    <p id="tuduylytriBtn" class="index-button"><span data-translate="tuduylytriLabel"></span> <span
+                            id="tuduylytri"></span>
+                    </p>
+                    <p id="sucmanhtiemthucBtn" class="index-button"><span data-translate="sucmanhtiemthucLabel"></span>
+                        <span id="sucmanhtiemthuc"></span>
+                    </p>
+                    <p id="sothieuBtn" class="index-button"><span data-translate="sothieuLabel"></span> <span
+                            id="sothieu"></span></p>
+                    <p id="ngaysinhBtn" class="index-button"><span data-translate="ngaysinhLabel"></span> <span
+                            id="ngaysinh"></span></p>
+                    <p id="dammeBtn" class="index-button"><span data-translate="dammeLabel"></span> <span
+                            id="damme"></span></p>
+                    <p id="namcanhanBtn"><span data-translate="namcanhanLabel"></span> <span id="namcanhan"></span></p>
+                    <p id="thangcanhanBtn"><span data-translate="thangcanhanLabel"></span> <span
+                            id="thangcanhan"></span></p>
+                    <p id="ngaycanhanBtn" class="index-button"><span data-translate="ngaycanhanLabel"></span> <span
+                            id="ngaycanhan"></span>
+                    </p>
+                    <p id="changBtn" class="index-button"><span data-translate="changLabel"></span> <span
+                            id="chang"></span></p>
+                    <p id="tuoiBtn" class="index-button"><span data-translate="tuoiLabel"></span> <span
+                            id="tuoi"></span></p>
+                    <p id="thachthucBtn" class="index-button"><span data-translate="thachthucLabel"></span> <span
+                            id="thachthuc"></span></p>
                 </div>
             </aside>
 
             <aside id="right-content">
                 <div id="upperright">
-                    <h2 id="rightHead" data-toggle="dropdown"></h2>
+                    <h2 id="rightHead" data-translate="rightHead" data-toggle="dropdown"></h2>
                     <div id="dropdown">
-                        <p id="guide1"></p>
-                        <p id="guide2"></p>
-                        <p id="guide3"></p>
-                        <p id="guide4"></p>
-                        <p id="guide5"></p>
-                        <p id="guide6"></p>
-                        <p id="guide7"></p>
+                        <p id="guide1" data-translate="guide1"></p>
+                        <p id="guide2" data-translate="guide2"></p>
+                        <p id="guide3" data-translate="guide3"></p>
+                        <p id="guide4" data-translate="guide4"></p>
+                        <p id="guide5" data-translate="guide5"></p>
+                        <p id="guide6" data-translate="guide6"></p>
+                        <p id="guide7" data-translate="guide7"></p>
                     </div>
                 </div>
 
@@ -91,32 +125,36 @@
                     <p id="message2"></p>
                     <p id="message3"></p>
                     <p id="message4"></p>
+
+                    <div id="birthdate-map"></div>
+                    <div id="combined-map"></div>
+                    <div id="birth-comments"></div>
+                    <div id="combined-comments"></div>
+
                     <div id="personalCalendar"></div>
-                    <div id="matrix-container">
-                        <div id="birthdateMatrixContainer"></div>
-                        <div id="combinedMartixContainer"></div>
-                    </div>
+                    <!-- <div id="map-container"></div>
                     <div id="patternContainer">
                         <h4 id="cmtHead1"></h4>
                         <p id="cmt1"></p>
                         <h4 id="cmtHead2"></h4>
                         <p id="cmt2"></p>
-                    </div>
+                    </div> -->
                 </div>
             </aside>
         </section>
     </main>
     <footer>
-        <p id="footer">&copy; 2024 Numerology Calculator by Quoc Hoa Le</p>
+        <p id="footer" data-translate="footer">&copy; 2024 Numerology Calculator by Quoc Hoa Le</p>
 
         <section id="contactInfo">
-            <h3 id="contactHead"></h3>
+            <h3 id="contactHead" data-translate="contactHead"></h3>
             <p id="linktree"><a href="https://linktr.ee/lqhoa" target="_blank">Linktree</a></p>
         </section>
     </footer>
     <!-- <video autoplay muted loop playsinline id="bgv">
         <source src="numbers_cliped.mp4" type="video/mp4">
     </video> -->
-    <script src="main.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
+
 </html>

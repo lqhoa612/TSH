@@ -1,0 +1,13 @@
+/* style.css - Main Entry Point */
+
+@import url('components/_base.css');
+@import url('components/_theme.css');
+@import url('components/_header-footer.css');
+@import url('components/_layout.css');
+@import url('components/_form-index.css');
+@import url('components/_map.css');
+@import url('components/_calendar.css');
+@import url('components/_media.css');
+
+/* https://visme.co/blog/website-color-schemes/ 
+https://coolors.co/02111b-3f4045-30292f-5d737e-fcfcfc */

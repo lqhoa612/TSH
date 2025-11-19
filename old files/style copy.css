@@ -1,0 +1,702 @@
+/* style.css - FINAL CLEANED AND FUNCTIONAL VERSION */
+
+/*-------------------Settings START--------------------*/
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    /* Color Palette */
+    --gunmetal: #212A31;
+    --gunmetal-gray-blue: #2E3944;
+    --midnight-green: #124E66;
+    --slate-fray: #748D92;
+    --timberwolf: #D3D9D4;
+    --verdigris: #12ADAD;
+    --yellow: rgba(221,221,39,1);
+}
+
+/*-------------- THEME TOGGLE SYSTEM START --------------*/
+body.old-theme {
+    --gunmetal: rgba(76,48,31,.5);
+    --gunmetal-gray-blue: rgba(76,48,31,.5);
+    --midnight-green: rgba(75,134,170,.85);
+    --slate-fray: #BDD0D2;
+    --timberwolf: #F8F2DC;
+    --verdigris: #CD4631;
+
+    background-color: #F8F2DC;
+    color: #000;
+}
+
+body.old-theme header,
+body.old-theme footer {
+    background-color: #F8F2DC;
+    color: rgba(76,48,31,.5);
+}
+
+body.old-theme #input-container {
+    background-color: rgba(76,48,31,.5);
+}
+
+body.old-theme #calculateBtn {
+    background-color: #ffc6af;
+    color: #CD4631;
+}
+
+body.old-theme #calculateBtn:hover {
+    background-color: #CD4631;
+    color: #F8F2DC;
+}
+
+body.old-theme #basicInfo-container {
+    color: rgba(76,48,31,.85);
+}
+
+body.old-theme #index-container p {
+    background-color: #BDD0D2;
+    color: #0063a1;
+}
+
+body.old-theme #index-container p:hover {
+    background-color: #4B86AA;
+    color: #F8F2DC;
+}
+
+body.old-theme #upperright {
+    background-color: rgba(75,134,170, .85);
+    color: #F8F2DC;
+}
+
+body.old-theme #upperright:hover {
+    background-color: rgba(75,134,170, 1);
+}
+
+body.old-theme #bottomright {
+    background-color: #F8F2DC;
+    color: rgba(76,48,31,.5);
+}
+
+body.old-theme #personalCalendar {
+    color: rgba(76,48,31,.5);
+}
+
+body.old-theme #contactHead {
+    color: rgba(76,48,31,.5);
+}
+
+body.old-theme a {
+    color: #4B86AA;
+}
+
+body.old-theme a:hover {
+    color: #d5e0e7;
+}
+
+body, header, footer, #left-content, #right-content, 
+#input-container, #index-container, #upperright, 
+#bottomright, #calculateBtn, #personalCalendar, 
+.personal-month-card, #personalMonthLegend {
+    transition: 
+        background-color 0.4s ease, 
+        color 0.4s ease, 
+        border-color 0.4s ease;
+}
+
+#theme-toggle-container {
+    position: fixed;
+    top: 33%;
+    right: 20px;
+    z-index: 1000;
+    transform: translateY(-50%);
+}
+
+#themeToggleBtn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid var(--timberwolf);
+    border-radius: 50%;
+    font-size: 1.8rem;
+    color: #00FFFF;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition:
+        background-color 0.3s ease,
+        transform 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+#themeToggleBtn:active {
+    transform: rotate(25deg) scale(1.1);
+}
+
+#themeToggleBtn:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+}
+/*-------------- THEME TOGGLE SYSTEM END---------------*/
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--gunmetal);
+}
+
+header, footer {
+    background-color: var(--gunmetal);
+    color: var(--timberwolf);
+    padding: 20px;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+header p {
+    margin: 0;
+}
+
+header h1 {
+    margin-bottom: 0;
+}
+
+main {
+    padding: 10px;
+}
+
+a {
+    color: #4B86AA;
+}
+
+a:hover {
+    color: var(--timberwolf);
+}
+
+/*-----------------Layout START-----------------*/
+#main-container {
+    display: flex;
+}
+
+/*-----------------Left content START-------------------*/
+#left-content {
+    flex: 1;
+    min-width: 250px;
+    max-width: 340px;
+}
+
+#input-container {
+    background-color: var(--gunmetal);
+    padding: 5px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#name, #birthdate {
+    border-bottom-width: 0;
+}
+
+input[type="text"] {
+    background-color: var(--timberwolf);
+    color: #000000;
+    border-width: 3px;
+    width: 100%;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+#calculateBtn {
+    background-color: rgb(255, 255, 81);
+    color: var(--midnight-green);
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px 0 0 0;
+    font-size: 1.0rem;
+    border-radius: 10px;
+}
+
+#calculateBtn:hover {
+    background-color: var(--midnight-green);
+    color: rgb(255, 255, 81);
+}
+
+/*-------------Basic Info Container START---------------*/
+#basicInfo-container {
+    background-color: var(--gunmetal);
+    color: var(--timberwolf);
+    text-align: justify;
+    margin: 5px 0;
+    border-radius: 10px;
+}
+
+#basicInfo-container p {
+    margin: 5px 0;
+    padding-left: 10px;
+}
+/*-------------Basic Info Container END----------------*/
+
+/*---------------Index container START-----------------*/
+#index-container {
+    background-color: var(--gunmetal);
+    text-align: justify;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+#index-container h2 {
+    color: var(--timberwolf);
+    text-align: center;
+    margin: 5px 0;
+}
+
+#index-container p {
+    background-color: var(--timberwolf);
+    color: var(--midnight-green);
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 5px;
+    transition: background-color 0.3s;
+    font-weight: 700;
+}
+
+#index-container p:hover { 
+    background-color: var(--gunmetal-gray-blue);
+    color: var(--timberwolf);
+}
+/*---------------Index container END-----------------*/
+
+#yourmapBtn {
+    text-align: center;
+}
+/*-----------------Left content END-------------------*/
+
+/*------------------Right content START---------------*/
+#right-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+#rightHead {
+    text-align: center;
+}
+
+#dropdown {
+    text-align: justify;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+#dropdown.open {
+    max-height: 500px;
+}
+
+#upperright {
+    background-color: var(--timberwolf);
+    color: var(--midnight-green);
+    text-align: justify;
+    padding: 10px;
+    margin: 5px;
+    margin-top: 0;
+    margin-bottom: 2.5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#upperright:hover {
+    background-color: var(--midnight-green);
+    color: var(--timberwolf);
+}
+
+#upperright h2 {
+    margin: 0;
+}
+
+#upperright p {
+    margin: 10px;
+}
+
+#bottomright {
+    background-color: var(--gunmetal);
+    color: var(--timberwolf);
+    flex: 1;
+    text-align: justify;
+    padding: 10px;
+    margin: 5px;
+    margin-bottom: 0;
+    margin-top: 2.5px;
+    border-radius: 10px;
+}
+
+#bottomright h2 {
+    margin: 0;
+}
+
+#bottomright p {
+    margin-bottom: 10px;
+}
+/*------------------Right content END---------------*/
+
+/*-------------Personal Year Calendar START----------*/
+#personalCalendar {
+    margin-top: 20px;
+    text-align: center;
+    color: var(--timberwolf);
+}
+
+#personalYearList {
+    display: flex;
+    flex-direction: column;
+    gap: 0px !important;
+    padding: 0 10px 10px 10px;
+    margin-top: 0px !important;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0 0 5px 5px;
+}
+
+.personal-month-card {
+    background-color: var(--timberwolf);
+    color: var(--midnight-green);
+    padding: 8px 15px;
+    border: 3px solid var(--gunmetal);
+    border-radius: 5px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.personal-month-card .month-number {
+    font-weight: bold;
+}
+
+.personal-month-card.current-month-row {
+    background-color: var(--midnight-green);
+    color: var(--timberwolf);
+    border: 3px solid var(--gunmetal);
+}
+
+#personalMonthLegend {
+    background-color: var(--midnight-green) !important;
+    color: var(--timberwolf) !important;
+    border: 3px solid var(--gunmetal) !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 8px 10px !important; 
+    border-radius: 5px 5px 5px 5px !important; 
+    margin-bottom: 0px !important;
+    width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#personalMonthLegend .month-name, #personalMonthLegend .month-number {
+    color: var(--timberwolf);
+}
+/*-------------Personal Year Calendar END--------------*/
+
+/*-----------Personal Month Calendar START-------------*/
+.personal-day-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    max-width: 700px;
+    margin: 25px auto;
+    background-color: var(--timberwolf);
+    border: 4px solid var(--midnight-green);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.personal-day-calendar .day-header {
+    background-color: var(--midnight-green);
+    color: rgb(221, 221, 39);
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.personal-day-calendar .day-cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgb(182, 189, 182);
+    color: var(--gunmetal);
+    border: 2px solid var(--midnight-green);
+    border-radius: 5px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    position: relative;
+    font-weight: 700;
+    transition: background-color 0.2s, transform 0.1s;
+    padding-top: 5px;
+}
+
+.personal-day-calendar .day-number {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gunmetal-gray-blue);
+    margin-top: 2px;
+}
+
+.personal-day-calendar .personal-day {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: rgb(200, 47, 47);
+    margin-top: 4px;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.personal-day-calendar .today {
+    background-color: var(--midnight-green);
+    border: 3px solid var(--timberwolf);
+    box-shadow: 0 0 10px var(--midnight-green);
+    transform: scale(1.02);
+}
+
+.personal-day-calendar .today .day-number {
+    color: rgb(236, 236, 236);
+}
+
+.personal-day-calendar .empty {
+    background-color: var(--timberwolf);
+    border: 1px solid var(--midnight-green);
+    pointer-events: none;
+}
+/*---------------Personal Month Calendar END----------*/
+/*-----------------Main container END-----------------*/
+
+/*----------------Language Container START--------------*/  
+#language-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+#language {
+    background-color: var(--timberwolf);
+    color: var(--midnight-green);
+    padding: 3px;
+}
+/*----------------Language Container END--------------*/  
+
+/*-------------------Footer START-------------------*/
+#contactInfo {
+    margin-top: 0;
+    color: var(--timberwolf);
+}
+
+#contactInfo h3 {
+    margin-bottom: 10px;
+}
+
+#contactInfo p {
+    margin: 5px 0;
+}
+/*-------------------Footer END-------------------*/
+
+/* --- Numerology Map Styles (Modern Grid) --- */
+
+#birthdate-map, #combined-map {
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px;
+}
+
+.map-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  grid-template-rows: repeat(3, 60px);
+  gap: 6px;
+  justify-content: center;
+  align-content: center;
+}
+
+.map-cell {
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #f9f9f9;
+  color: #007bff;
+  transition: background-color 0.3s ease;
+}
+
+.map-cell.filled {
+  background-color: rgba(0, 128, 255, 0.1);
+  border-color: #007bff;
+}
+
+.map-cell.empty {
+  border-style: dashed;
+  color: #bbb;
+}
+
+.combined-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.birth-num {
+  color: #007bff;
+}
+
+.name-num {
+  color: #28a745;
+}
+
+/*------------------Media Settings START----------------*/
+@media only screen and (max-width: 870px) {
+    body {
+        font-size: 0.8em;
+    }
+
+    #main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #left-content {
+        max-width: 100%;
+        margin-bottom: 2.5px;
+    }
+
+    #right-content {
+        max-width: 350px;
+        width: 100%;
+        margin-top: 2.5px;
+    }
+
+    /* Map settings */
+    #birthdate-map, #combined-map {
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    /* Personal months settings */
+    #personalMonthLegend {
+        max-width: 300px;
+    }
+
+    /* Personal days settings */
+    .personal-day-calendar {
+        max-width: 95%;
+        gap: 3px;
+        padding: 5px;
+    }
+
+    .personal-day-calendar .day-header {
+        font-size: 0.75rem;
+        padding: 5px 0;
+    }
+
+    .personal-day-calendar .day-cell {
+        border-width: 1.5px;
+        padding-top: 2px;
+    }
+
+    .personal-day-calendar .personal-day {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: rgb(200, 47, 47);
+        padding: 4px 8px;
+        border-radius: 6px;
+        transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+        pointer-events: none;
+        z-index: 5;
+    }
+
+    .personal-day-calendar .day-number {
+        font-size: 1rem;
+        font-weight: 700;
+        /* FIX: Corrected variable typo from 'var(---midnight-green)' to 'var(--midnight-green)' */
+        color: var(--midnight-green);
+        opacity: 1;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .personal-day-calendar .day-cell:hover .personal-day {
+        opacity: 1;
+        visibility: visible;
+        color: rgb(200, 47, 47);
+    }
+
+    .personal-day-calendar .day-cell:hover .day-number {
+        opacity: 0;
+        background-color: rgba(211, 217, 212, 1);
+    }
+
+    .personal-day-calendar .today:hover .personal-day {
+        color: rgb(200, 47, 47);
+    }
+
+    #personalCalendar h3 {
+        text-align: left !important;
+        margin-left: 10px;
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    body {
+        font-size: 0.7em;
+    }
+
+    #right-content {
+        display: none;
+    }
+
+    .personal-day-calendar {
+        gap: 2px;
+        padding: 3px;
+    }
+
+    .personal-day-calendar .personal-day {
+        font-size: 1rem;
+        padding: 3px 6px;
+    }
+
+    .personal-day-calendar .day-number {
+        font-size: 0.9rem;
+    }
+
+    #personalCalendar h3 {
+        font-size: 0.85rem;
+        margin-left: 5px;
+    }
+}
+/*------------------Media Settings END----------------*/

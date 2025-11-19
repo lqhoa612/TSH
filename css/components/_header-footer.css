@@ -1,0 +1,54 @@
+/* _header-footer.css - Header, Footer, Contact, Links, Language */
+
+header, footer {
+    background-color: var(--gunmetal);
+    color: var(--timberwolf);
+    padding: 20px;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+header p {
+    margin: 0;
+}
+
+header h1 {
+    margin-bottom: 0;
+}
+
+a {
+    color: #4B86AA;
+}
+
+a:hover {
+    color: var(--timberwolf);
+}
+
+/*----------------Language Container START--------------*/ 	
+#language-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+#language {
+    background-color: var(--timberwolf);
+    color: var(--midnight-green);
+    padding: 3px;
+}
+/*----------------Language Container END--------------*/ 	
+
+/*-------------------Footer START-------------------*/
+#contactInfo {
+    margin-top: 0;
+    color: var(--timberwolf);
+}
+
+#contactInfo h3 {
+    margin-bottom: 10px;
+}
+
+#contactInfo p {
+    margin: 5px 0;
+}
+/*-------------------Footer END-------------------*/
