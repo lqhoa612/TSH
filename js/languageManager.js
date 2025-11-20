@@ -17,17 +17,32 @@ export class LanguageManager {
     }
 
     setupLanguageSelector() {
-        const selector = document.getElementById('language');
-        if (!selector) return;
+        // Floating toggle button
+        const toggleBtn = document.getElementById('languageToggleBtn');
+        const flagIcon = document.getElementById('flagIcon');
 
-        selector.value = this.currentLanguage;
+        if (!toggleBtn) return;
 
-        selector.addEventListener('change', (event) => {
-            this.currentLanguage = event.target.value;
+        // Initialize correct icon
+        flagIcon.src = this.currentLanguage === "en" ? "flags/en.svg" : "flags/vi.svg";
+
+        toggleBtn.addEventListener("click", () => {
+            // Swap language
+            this.currentLanguage = (this.currentLanguage === "en") ? "vi" : "en";
+
+            // Save
+            localStorage.setItem("language", this.currentLanguage);
+
+            // Update flag icon
+            flagIcon.src = this.currentLanguage === "en" ? "flags/en.svg" : "flags/vi.svg";
+
+            // Apply translations
             this.applyTranslations(this.currentLanguage);
-            localStorage.setItem('language', this.currentLanguage);
-            // dispatch languageChanged so other modules can react
-            document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: this.currentLanguage } }));
+
+            // Notify other managers
+            document.dispatchEvent(
+                new CustomEvent("languageChanged", { detail: { lang: this.currentLanguage } })
+            );
         });
     }
 
@@ -55,7 +70,7 @@ export class LanguageManager {
         this.placeholderElements.forEach(element => {
             const path = element.getAttribute('data-placeholder'); // e.g. "placeholders.name"
             const placeholderValue = this.resolvePath(dictionary, path);
-            if (placeholderValue && element.placeholder !==  placeholderValue) element.placeholder = placeholderValue;
+            if (placeholderValue && element.placeholder !== placeholderValue) element.placeholder = placeholderValue;
         });
 
         if (dispatch) {

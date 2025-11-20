@@ -24,20 +24,6 @@ a:hover {
     color: var(--timberwolf);
 }
 
-/*----------------Language Container START--------------*/ 	
-#language-container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-
-#language {
-    background-color: var(--timberwolf);
-    color: var(--midnight-green);
-    padding: 3px;
-}
-/*----------------Language Container END--------------*/ 	
-
 /*-------------------Footer START-------------------*/
 #contactInfo {
     margin-top: 0;
