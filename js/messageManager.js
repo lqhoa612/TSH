@@ -1,5 +1,5 @@
 // messageManager.js
-import { clearUI } from "./uiClearManager.js";
+import { clearUI } from "./uiClearmanager.js";
 import { CalendarManager } from "./calendarManager.js"
 
 export class MessageManager {

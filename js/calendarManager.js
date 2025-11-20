@@ -1,7 +1,7 @@
 // calendarManager.js
 import { reduceToSingleDigit } from "./utils.js";
 import { LanguageManager } from "./languageManager.js";
-import { clearUI } from "./uiClearManager.js"
+import { clearUI } from "./uiClearmanager.js"
 
 export class CalendarManager {
 

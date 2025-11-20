@@ -1,5 +1,5 @@
 // mapManager.js
-import { clearUI } from "./uiClearManager.js";
+import { clearUI } from "./uiClearmanager.js";
 
 export class MapManager {
     constructor(languageManager) {
