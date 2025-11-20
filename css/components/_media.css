@@ -43,7 +43,6 @@
 
     /* Personal Day Calendar compressed */
     .personal-day-calendar {
-        max-width: 100%;
         padding: 6px;
         gap: 2px;
     }
