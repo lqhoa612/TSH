@@ -31,7 +31,12 @@
 
     /* Personal months settings */
     #personalMonthLegend {
-        max-width: 300px;
+        width: 100%;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 5px !important;
+        margin-bottom: 0px !important;
     }
 
     /* Personal days settings */
