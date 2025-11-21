@@ -30,7 +30,7 @@
     }
 
     /* Personal months settings */
-    #personalMonthLegend {
+    #personalMonthLegend, .personal-month-card {
         max-width: 290px;
     }
 
@@ -134,7 +134,7 @@
         margin-left: 5px;
     }
 
-    #personalMonthLegend {
+    #personalMonthLegend, .personal-month-card {
         max-width: 280px;
     }
 }
