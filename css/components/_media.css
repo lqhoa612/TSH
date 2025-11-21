@@ -31,7 +31,7 @@
 
     /* Personal months settings */
     #personalMonthLegend {
-        max-width: 300px;
+        max-width: 290px;
     }
 
     /* Personal days settings */
@@ -135,6 +135,6 @@
     }
 
     #personalMonthLegend {
-        max-width: 300px;
+        max-width: 280px;
     }
 }
