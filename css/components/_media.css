@@ -30,13 +30,9 @@
     }
 
     /* Personal months settings */
-    #personalMonthLegend {
-        width: 100%;
-        max-width: 400px;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 5px !important;
-        margin-bottom: 0px !important;
+    #personalMonthLegend,
+    .personal-month-card {
+        max-width: 320px !important;
     }
 
     /* Personal days settings */
@@ -137,5 +133,10 @@
     #personalCalendar h3 {
         font-size: 0.85rem;
         margin-left: 5px;
+    }
+
+    #personalMonthLegend,
+    .personal-month-card {
+        max-width: 280px !important;
     }
 }
