@@ -133,4 +133,8 @@
         font-size: 0.85rem;
         margin-left: 5px;
     }
+
+    #personalMonthLegend {
+        max-width: 300px;
+    }
 }
