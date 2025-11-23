@@ -7,12 +7,26 @@
     color: var(--timberwolf);
 }
 
+#personalMonthLegend {
+    background: var(--midnight-green);
+    color: var(--timberwolf);
+    border: none;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto 5px auto;
+    padding: 12px 18px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
 #personalYearList {
     display: flex;
     flex-direction: column;
-    gap: 0px !important;
+    gap: 0px;
     padding: 0 10px 10px 10px;
-    margin-top: 0px !important;
+    margin-top: 0px;
     max-width: 400px;
     margin-left: auto;
     margin-right: auto;
@@ -20,21 +34,22 @@
 }
 
 .personal-month-card {
-    background-color: var(--timberwolf);
-    color: var(--midnight-green);
-    padding: 8px 15px;
-    border: 3px solid var(--gunmetal);
-    border-radius: 5px;
-    text-align: left;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto 8px auto;
+    padding: 14px 18px;
+
+    background: var(--timberwolf);
+    color: var(--gunmetal);
+    border-radius: 12px;
+    border: none;
 
     display: flex;
     justify-content: space-between;
-    font-weight: bold;
+    align-items: center;
 
-    width: 100%;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    font-size: 1rem;
 }
 
 .personal-month-card .month-number {
@@ -42,31 +57,16 @@
 }
 
 .personal-month-card.current-month-row {
-    background-color: var(--midnight-green);
+    background: var(--midnight-green);
     color: var(--timberwolf);
-    border: 3px solid var(--gunmetal);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
 }
 
-#personalMonthLegend {
-    background-color: var(--midnight-green) !important;
-    color: var(--timberwolf) !important;
-    border: 3px solid var(--gunmetal) !important;
-    font-weight: bold;
-    text-transform: uppercase;
-    
-    padding: 8px 10px !important; 
-    border-radius: 5px  !important; 
-    margin-bottom: 0px !important;
-
-    width: 100%;   
-    width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#personalMonthLegend .month-name, #personalMonthLegend .month-number {
+#personalMonthLegend .month-name,
+#personalMonthLegend .month-number {
     color: var(--timberwolf);
 }
+
 /*-------------Personal Year Calendar END--------------*/
 
 /*-----------Personal Month Calendar START-------------*/
@@ -80,7 +80,7 @@
     border: 4px solid var(--midnight-green);
     border-radius: 8px;
     padding: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .personal-day-calendar .day-header {
@@ -143,4 +143,5 @@
     border: 1px solid var(--midnight-green);
     pointer-events: none;
 }
+
 /*---------------Personal Month Calendar END----------*/
