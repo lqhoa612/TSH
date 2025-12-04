@@ -13,7 +13,7 @@
 
   .personal-day-calendar { gap:4px; padding:6px; max-width:100%; width:100%; }
   .personal-day-calendar .day-cell { padding:6px 4px; }
-  .personal-day-calendar .personal-day { font-size:1.1rem; }
+  .personal-day-calendar .personal-day { font-size:1.1rem; z-index: 5; }
   .personal-day-calendar .day-number { font-size:0.85rem; }
 
   /* map cells smaller */
