@@ -1,51 +1,86 @@
 /* _utils.css - Toggle System */
 
-/* Floating control container (theme + language buttons) */
 #utils-buttons {
-    position: fixed;
-    top: 40%;
-    right: 20px;
-
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-
-    z-index: 10000;
+  position: fixed;
+  top: 32%;
+  right: 18px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  z-index:10050;
 }
 
-/* Buttons styling */
 #utils-buttons button {
-    background: rgba(255, 255, 255, 0.15);
-    border: 2px solid var(--timberwolf);
-    border-radius: 50%;
-    font-size: 1rem;
-    color: #00FFFF;
-    padding: 10px 12px;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  border:1px solid var(--border);
+  background: var(--bg-soft);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow: var(--shadow-elev);
+  transition: transform .14s ease, box-shadow .14s ease;
+}
+#utils-buttons button:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,0.08); }
+
+#utils-buttons img#flagIcon { width:28px; height:18px; display:block; object-fit:cover; border-radius:4px; }
+
+/* small helpers */
+.hidden { display:none !important; }
+.visually-hidden { position:absolute !important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+
+#guide {white-space: pre-line; line-height: 1.55;}
+
+/* Full-screen overlay */
+#howToOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    backdrop-filter: blur(6px);
+    background: rgba(0,0,0,0.4);
+}
+
+/* Scrollable panel */
+#howToPanel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(90%, 400px);
+    max-height: 80%;
+    overflow-y: auto;
+    background: var(--paper);
+    color: var(--text);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-elev);
+}
+
+#howToPanel h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+#howToPanel p {
+  font-size: 1rem;
+}
+
+/* Close button */
+#closeHowTo {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    border: none;
+    background: transparent;
+    color: var(--text);
+    font-size: 1.2rem;
     cursor: pointer;
-    transition:
-        background-color 0.3s ease,
-        transform 0.3s ease,
-        color 0.3s ease,
-        box-shadow 0.3s ease;
-    backdrop-filter: blur(4px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-
-    width: 55px;
-    height: 55px;
 }
 
-#utils-buttons button:hover {
-    background-color: rgba(255, 255, 255, 0.25);
-    transform: scale(1.1);
+/* Disable page scroll when overlay is open */
+body.no-scroll {
+    overflow: hidden;
 }
-
-#utils-buttons button:active {
-    transform: rotate(25deg) scale(1.1);
-}
-
-#flagIcon {
-    width: 28px;
-    height: 28px;
-    display: block;
-}
-

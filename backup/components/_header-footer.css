@@ -1,8 +1,8 @@
 /* _header-footer.css - Header, Footer, Contact, Links, Language */
 
 header, footer {
-    background: var(--paper);
-    color: var(--text);
+    background-color: var(--gunmetal);
+    color: var(--timberwolf);
     padding: 20px;
     text-align: center;
     font-size: 1.3em;
@@ -21,13 +21,13 @@ a {
 }
 
 a:hover {
-    color: var(--text);
+    color: var(--timberwolf);
 }
 
 /*-------------------Footer START-------------------*/
 #contactInfo {
     margin-top: 0;
-    color: var(--text);
+    color: var(--timberwolf);
 }
 
 #contactInfo h3 {

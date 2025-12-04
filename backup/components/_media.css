@@ -1,0 +1,140 @@
+/* _media.css - Media Queries for Responsiveness */
+
+@media only screen and (max-width: 870px) {
+    body {
+        font-size: 0.8em;
+    }
+
+    #main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #left-content {
+        max-width: 350px;
+        width: 100%;
+        margin-bottom: 2.5px;
+    }
+
+    #right-content {
+        max-width: 350px;
+        width: 100%;
+        margin-top: 2.5px;
+    }
+
+    /* Map settings */
+    #birthdate-map,
+    #combined-map {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    /* Personal months settings */
+    #personalMonthLegend, .personal-month-card {
+        max-width: 290px;
+    }
+
+    /* Personal days settings */
+    .personal-day-calendar {
+        max-width: 95%;
+        gap: 3px;
+        padding: 5px;
+    }
+
+    .personal-day-calendar .day-header {
+        font-size: 0.75rem;
+        padding: 5px 0;
+    }
+
+    .personal-day-calendar .day-cell {
+        border-width: 1.5px;
+        padding-top: 2px;
+    }
+
+    .personal-day-calendar .personal-day {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: rgb(200, 47, 47);
+        padding: 4px 8px;
+        border-radius: 6px;
+        transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+        pointer-events: none;
+        z-index: 5;
+    }
+
+    .personal-day-calendar .day-number {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--midnight-green);
+        opacity: 1;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .personal-day-calendar .day-cell:hover .personal-day {
+        opacity: 1;
+        visibility: visible;
+        color: rgb(200, 47, 47);
+    }
+
+    .personal-day-calendar .day-cell:hover .day-number {
+        opacity: 0;
+        background-color: rgba(211, 217, 212, 1);
+    }
+
+    .personal-day-calendar .today:hover .personal-day {
+        color: rgb(200, 47, 47);
+    }
+
+    #personalCalendar h3 {
+        text-align: left !important;
+        margin-left: 10px;
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    body {
+        font-size: 0.7em;
+    }
+
+    #main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #right-content {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 12px;
+    }
+
+    .personal-day-calendar {
+        gap: 2px;
+        padding: 3px;
+    }
+
+    .personal-day-calendar .personal-day {
+        font-size: 1rem;
+        padding: 3px 6px;
+    }
+
+    .personal-day-calendar .day-number {
+        font-size: 0.9rem;
+    }
+
+    #personalCalendar h3 {
+        font-size: 0.85rem;
+        margin-left: 5px;
+    }
+
+    #personalMonthLegend, .personal-month-card {
+        max-width: 280px;
+    }
+}

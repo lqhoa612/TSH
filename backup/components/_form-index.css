@@ -1,0 +1,94 @@
+/* _form-index.css - Input, Buttons, Basic Info, and Index Containers */
+
+#input-container {
+    background-color: var(--gunmetal);
+    padding: 5px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#name, #birthdate {
+    border-bottom-width: 0;
+}
+
+input[type="text"] {
+    background-color: var(--timberwolf);
+    color: #000000;
+    border-width: 3px;
+    width: 100%;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+#calculateBtn {
+    background-color: rgb(255, 255, 81);
+    color: var(--midnight-green);
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px 0 0 0;
+    font-size: 1.0rem;
+    border-radius: 10px;
+}
+
+#calculateBtn:hover {
+    background-color: var(--midnight-green);
+    color: rgb(255, 255, 81);
+}
+
+/*-------------Basic Info Container START---------------*/
+#basicInfo-container {
+    background-color: var(--gunmetal);
+    color: var(--timberwolf);
+    text-align: justify;
+    margin: 5px 0;
+    border-radius: 10px;
+}
+
+#basicInfo-container p {
+    margin: 5px 0;
+    padding-left: 10px;
+}
+/*-------------Basic Info Container END----------------*/
+
+/*---------------Index container START-----------------*/
+#index-container {
+    background-color: var(--gunmetal);
+    text-align: justify;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+#index-container h2 {
+    color: var(--timberwolf);
+    text-align: center;
+    margin: 5px 0;
+}
+
+#index-container p {
+    background-color: var(--timberwolf);
+    color: var(--midnight-green);
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 5px;
+    transition: background-color 0.3s;
+    font-weight: 700;
+}
+
+#index-container p:hover { 
+    background-color: var(--gunmetal-gray-blue);
+    color: var(--timberwolf);
+}
+/*---------------Index container END-----------------*/
+
+/*--------------Input touchup START-----------------*/
+#birthdate.valid {
+    border: 2px solid #28a745 !important; /* green */
+}
+
+#birthdate.invalid {
+    border: 2px solid #dc3545 !important; /* red */
+}
+/*--------------Input touchup END-----------------*/

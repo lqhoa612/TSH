@@ -2,29 +2,31 @@
 export class ThemeManager {
     constructor(buttonSelector = "#themeToggleBtn") {
         this.button = document.querySelector(buttonSelector);
-        this.body = document.body;
+        this.root = document.documentElement; // <html>
     }
 
     init() {
         if (!this.button) return;
 
-        const savedTheme = sessionStorage.getItem("theme");
-        this.applyTheme(savedTheme === "old" ? "old" : "new");
+        // Load saved theme (default = light)
+        const saved = sessionStorage.getItem("theme") || "light";
+        this.applyTheme(saved);
 
+        // Toggle theme on click
         this.button.addEventListener("click", () => {
-            const isOld = this.body.classList.toggle("old-theme");
-            this.applyTheme(isOld ? "old" : "new");
-            sessionStorage.setItem("theme", isOld ? "old" : "new");
+            const newTheme = this.root.dataset.theme === "dark" ? "light" : "dark";
+            this.applyTheme(newTheme);
+            sessionStorage.setItem("theme", newTheme);
         });
     }
 
     applyTheme(theme) {
-        if (theme === "old") {
-            this.body.classList.add("old-theme");
-            this.button.textContent = "🌙";
+        if (theme === "dark") {
+            this.root.setAttribute("data-theme", "dark");
+            this.button.textContent = "🌙"; // dark icon
         } else {
-            this.body.classList.remove("old-theme");
-            this.button.textContent = "☀️";
+            this.root.removeAttribute("data-theme"); // fallback to light
+            this.button.textContent = "☀️"; // light icon
         }
     }
 }

@@ -35,14 +35,24 @@ export const vietnamese = {
     tuoiLabel: "Tuổi chặng: ",
     thachthucLabel: "Thách thức: ",
 
-    rightHead: "Cách sử dụng",
-    guide1: "Nhập họ và tên không dấu để độ chính xác cao hơn, không quan trọng viết hoa hay viết thường.",
-    guide2: "Nếu bạn có nhiều tên đệm, bạn nhập theo thứ tự nào cũng được, riêng tên gọi phải được nhập cuối cùng.",
-    guide3: "Nhập ngày tháng năm sinh theo dd/mm/yyyy, ví dụ như ngày 1 tháng 1 năm 1111, thì nhập 01011111",
-    guide4: "Cuối cùng nhấn Enter hoặc nhấp vào nút tính toán và kết quả Thần Số Học sẽ hiện ra ở dưới nút tính toán.",
-    guide5: "*** Để tìm hiểu thêm về chỉ số Thần Số Học của bạn, hãy liên hệ tôi qua email bên dưới kèm theo kết quả bạn tính được, và tôi sẽ gửi cho bạn thông tin về các chỉ số sớm nhất có thể.",
-    guide6: "*** Hãy liên hệ với tôi nếu bạn cho rằng chương trình tính có lỗi hoặc bạn muốn chia sẻ cảm nhận. Mọi đóng góp đều mang ý nghĩa rất lớn đối với tôi.",
-    guide7: "*** Chú ý: Dự án này đang trong quá trình thử nghiệm!",
+    // rightHead: "Cách sử dụng",
+    guide: "📝 Nhập họ tên theo thứ tự: Họ – Đệm – Tên.\n" +
+       "   Ví dụ: John Michael Smith → Smith Michael John.\n\n" +
+
+       "📛 Nếu bạn có nhiều tên đệm, bạn có thể nhập theo bất kỳ thứ tự nào.\n" +
+       "   Chỉ cần đảm bảo TÊN được đặt CUỐI.\n\n" +
+
+       "📅 Nhập ngày sinh theo định dạng DD/MM/YYYY.\n" +
+       "   Ví dụ: 01/01/1111 → 01011111.\n\n" +
+
+       "▶️ Nhấn Enter hoặc bấm nút “Bắt đầu tính” để xem kết quả.\n\n" +
+
+       "📧 Nếu bạn muốn hiểu rõ hơn về kết quả, hãy liên hệ qua email bên dưới.\n\n" +
+
+       "🛠️ Nếu bạn phát hiện lỗi hoặc có góp ý cải thiện, hãy gửi email cho tôi.\n\n" +
+
+       "⚠️ Lưu ý: Công cụ này vẫn đang trong quá trình hoàn thiện."
+,
 
     footer: "&copy; 2024 Máy tính Thần Số Học Pythagorean do Hòa Lê phát triển",
     contactHead: "Thông Tin Liên Hệ:",

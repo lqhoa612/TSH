@@ -1,56 +1,36 @@
 /* _map.css - Numerology Map Styles (Modern Grid) */
 
 #birthdate-map, #combined-map {
-    display: inline-block;
-    vertical-align: top;
-    margin: 10px;
+  max-width: 360px;
+  margin: 8px auto;
+  text-align:center;
 }
-
 .map-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 60px);
-    grid-template-rows: repeat(3, 60px);
-    gap: 6px;
-    justify-content: center;
-    align-content: center;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:8px;
+  justify-items:center;
+  align-items:center;
+  width:100%;
+  max-width: 300px;
+  margin: 10px auto;
 }
-
 .map-cell {
-    border: 1px solid #aaa;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 1.2em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: #f9f9f9;
-    color: #007bff;
-    transition: background-color 0.3s ease;
+  width: 64px;
+  height: 64px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background: var(--bg-soft);
+  font-weight:800;
+  color: var(--text);
 }
+.map-cell.filled { background: color-mix(in srgb, var(--accent) 15%, var(--bg-soft) 85%); border-color: color-mix(in srgb, var(--accent) 45%, var(--border) 55%); color: var(--text); }
+.map-cell.empty { opacity:0.35; color:var(--text-muted); border-style:dashed; background:transparent; }
 
-.map-cell.filled {
-    background-color: rgba(0, 128, 255, 0.1);
-    border-color: #007bff;
-}
-
-.map-cell.empty {
-    border-style: dashed;
-    color: #bbb;
-}
-
-.combined-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 2px;
-}
-
-.birth-num {
-    color: #007bff;
-}
-
-.name-num {
-    color: #28a745;
-}
+/* combined map small badges style preserved via span classes */
+.combined-content { display:flex; gap:4px; flex-wrap:wrap; justify-content:center; align-items:center; }
+.birth-num { color: color-mix(in srgb, var(--accent) 50%, black 10%); font-weight:900; }
+.name-num { color: var(--text-muted); }

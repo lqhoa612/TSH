@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const ui = new UIHelpers();
     console.log("UIHelpers initialized ✅");
-    ui.toggleDropdown('upperright');
+    ui.initHowToOverlay();
 
     const numerologyManager = new NumerologyManager(ui);
     console.log("NumerologyManager initialized ✅");

@@ -1,0 +1,85 @@
+/* _layout.css - Main Layout Containers and Right Content */
+
+#main-container {
+    display: flex;
+}
+
+/*-----------------Left content START-------------------*/
+#left-content {
+    flex: 1;
+    min-width: 250px;
+    max-width: 340px;
+}
+
+#yourmapBtn {
+    text-align: center;
+}
+/*-----------------Left content END-------------------*/
+
+/*------------------Right content START---------------*/
+#right-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+#rightHead {
+    text-align: center;
+}
+
+#dropdown {
+    text-align: justify;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+#dropdown.open {
+    max-height: 500px;
+}
+
+#upperright {
+    background-color: var(--timberwolf);
+    color: var(--midnight-green);
+    text-align: justify;
+    padding: 10px;
+    margin: 5px;
+    margin-top: 0;
+    margin-bottom: 2.5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#upperright:hover {
+    background-color: var(--midnight-green);
+    color: var(--timberwolf);
+}
+
+#upperright h2 {
+    margin: 0;
+}
+
+#upperright p {
+    margin: 10px;
+}
+
+#bottomright {
+    background-color: var(--gunmetal);
+    color: var(--timberwolf);
+    flex: 1;
+    text-align: justify;
+    padding: 10px;
+    margin: 5px;
+    margin-bottom: 0;
+    margin-top: 2.5px;
+    border-radius: 10px;
+}
+
+#bottomright h2 {
+    margin: 0;
+}
+
+#bottomright p {
+    margin-bottom: 10px;
+}
+/*------------------Right content END---------------*/

@@ -35,14 +35,23 @@ export const english = {
     tuoiLabel: "Milestone Ages: ",
     thachthucLabel: "Challenges: ",
 
-    rightHead: "How to use",
-    guide1: "Enter your fullname in Last-Middle-First name order. Ex: John Micheal Smith, enter Smith Micheal John.",
-    guide2: "If you have multiple middle names, enter anyhow you like just make sure to enter your first name LAST.",
-    guide3: "Enter your birthdate in dd-mm-yyyy format, just the numbers, like 1st January 1111, enter 01011111.",
-    guide4: "Finally just hit Enter key or click the Calculate button and your Numerology results should appear below the button.",
-    guide5: "*** To learn more about your Numerology result, contact me via the email below with the result and I'll get back to you as soon as I can.",
-    guide6: "*** Please email me if there is any error with the calculator or any feedback/improvement you want to share.",
-    guide7: "*** Disclamer: This is a work in progress!",
+    // rightHead: "How to use",
+    guide: "📝 Enter your fullname in Last–Middle–First order.\n" +
+       "   Example: John Michael Smith → Smith Michael John.\n\n" +
+
+       "📛 If you have multiple middle names, you may enter them in any order.\n" +
+       "   Just make sure your FIRST name goes LAST.\n\n" +
+
+       "📅 Enter your birthdate in DD/MM/YYYY format.\n" +
+       "   Example: 01/01/1111 → 01011111.\n\n" +
+
+       "▶️ Press Enter or click the “Start Calculation” button to see your results.\n\n" +
+
+       "📧 To learn more about your results, contact me using the email below.\n\n" +
+
+       "🛠️ If you find an error or have suggestions, please email me.\n\n" +
+
+       "⚠️ Disclaimer: This calculator is still a work in progress.",
 
     footer: "&copy; 2024 Pythagorean Numerology Calculator by Hoa Le",
     contactHead: "Contact Information:",

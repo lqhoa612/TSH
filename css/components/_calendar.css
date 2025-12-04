@@ -1,147 +1,108 @@
 /* _calendar.css - Personal Calendars (Year and Day) */
 
-/*-------------Personal Year Calendar START----------*/
-#personalCalendar {
-    margin-top: 20px;
-    text-align: center;
-    color: var(--timberwolf);
-}
+/* container */
+#personalCalendar { padding:8px 0; }
 
+/* Legend header */
 #personalMonthLegend {
-    background: var(--midnight-green);
-    color: var(--timberwolf);
-    border: none;
-    width: 100%;
-    max-width: 420px;
-    margin: 0 auto 5px auto;
-    padding: 12px 18px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    border-radius: 12px;
-    text-align: center;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 70%, white 10%), var(--accent-light));
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-weight:700;
+  width:100%;
+  max-width: var(--ui-width);
+  margin: 0 auto 8px auto;
+  text-align:left;
 }
 
+/* Month list */
 #personalYearList {
-    display: flex;
-    flex-direction: column;
-    gap: 0px;
-    padding: 0 10px 10px 10px;
-    margin-top: 0px;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 0 0 5px 5px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  max-width: var(--ui-width);
+  margin: 0 auto;
 }
-
 .personal-month-card {
-    width: 100%;
-    max-width: 420px;
-    margin: 0 auto 8px auto;
-    padding: 14px 18px;
-
-    background: var(--timberwolf);
-    color: var(--gunmetal);
-    border-radius: 12px;
-    border: none;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    font-size: 1rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight:700;
 }
 
-.personal-month-card .month-number {
-    font-weight: bold;
-}
-
+/* Highlight */
 .personal-month-card.current-month-row {
-    background: var(--midnight-green);
-    color: var(--timberwolf);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  background: color-mix(in srgb, var(--accent) 25%, var(--paper) 75%);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border) 55%);
 }
 
-#personalMonthLegend .month-name,
-#personalMonthLegend .month-number {
-    color: var(--timberwolf);
-}
-
-/*-------------Personal Year Calendar END--------------*/
-
-/*-----------Personal Month Calendar START-------------*/
+/* Month grid (personal-day-calendar) */
 .personal-day-calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    max-width: 700px;
-    margin: 25px auto;
-    background-color: var(--timberwolf);
-    border: 4px solid var(--midnight-green);
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display:grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap:6px;
+  background: var(--paper);
+  border:1px solid var(--border);
+  padding:8px;
+  border-radius: 10px;
+  max-width: 720px;
+  margin:12px auto;
 }
 
+/* header row */
 .personal-day-calendar .day-header {
-    background-color: var(--midnight-green);
-    color: rgb(221, 221, 39);
-    font-weight: 700;
-    text-align: center;
-    padding: 10px 0;
-    border-radius: 5px;
-    text-transform: uppercase;
-    font-size: 0.9rem;
+  text-align:center;
+  font-weight:700;
+  font-size:0.8rem;
+  color:var(--text-muted);
+  padding:6px 0;
 }
 
+/* day cells */
 .personal-day-calendar .day-cell {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: rgb(182, 189, 182);
-    color: var(--gunmetal);
-    border: 2px solid var(--midnight-green);
-    border-radius: 5px;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-    position: relative;
-    font-weight: 700;
-    transition: background-color 0.2s, transform 0.1s;
-    padding-top: 5px;
+  aspect-ratio:1/1;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+  padding:6px 4px;
+  background: color-mix(in srgb, var(--bg-soft) 85%, var(--paper) 15%);
+  border-radius:8px;
+  border:1px solid var(--border);
+  position:relative;
+  overflow:hidden;
 }
 
+/* date number small */
 .personal-day-calendar .day-number {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--gunmetal-gray-blue);
-    margin-top: 2px;
+  font-size:0.85rem;
+  font-weight:700;
+  color:var(--text-muted);
+  margin-top:2px;
 }
 
+/* personal day big */
 .personal-day-calendar .personal-day {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: rgb(200, 47, 47);
-    margin-top: 4px;
-    opacity: 1;
-    transition: opacity 0.2s ease-in-out;
+  font-size:1.4rem;
+  font-weight:900;
+  color: var(--accent);
+  margin-top:6px;
+  transition: opacity .12s ease;
 }
 
-.personal-day-calendar .today {
-    background-color: var(--midnight-green);
-    border: 3px solid var(--timberwolf);
-    box-shadow: 0 0 10px var(--midnight-green);
-    transform: scale(1.02);
-}
+/* desktop hover -> show personal, hide day */
+.personal-day-calendar .day-cell:hover .personal-day { opacity:1; }
+.personal-day-calendar .day-cell:hover .day-number { opacity:0; }
 
-.personal-day-calendar .today .day-number {
-    color: rgb(236, 236, 236);
-}
+/* mobile: default hide personal-day, will be toggled by JS (class .touch-hover) */
+.personal-day-calendar .day-cell.touch-hover .personal-day { opacity:1; }
+.personal-day-calendar .day-cell.touch-hover .day-number { opacity:0; }
 
-.personal-day-calendar .empty {
-    background-color: var(--timberwolf);
-    border: 1px solid var(--midnight-green);
-    pointer-events: none;
-}
-
-/*---------------Personal Month Calendar END----------*/
+/* today */
+.personal-day-calendar .today { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent); transform:scale(1.01); }

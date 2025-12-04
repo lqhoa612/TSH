@@ -1,84 +1,64 @@
 /* _theme.css - Theme Toggle System and old-theme styles */
 
-/*-------------- THEME TOGGLE SYSTEM START --------------*/
-body.old-theme {
-    --gunmetal: rgba(76,48,31,.5);
-    --gunmetal-gray-blue: rgba(76,48,31,.5);
-    --midnight-green: rgba(75,134,170,.85);
-    --slate-fray: #BDD0D2;
-    --timberwolf: #F8F2DC;
-    --verdigris: #CD4631;
-
-    background-color: #F8F2DC;
-    color: #000;
+/* Base tokens (light default) */
+:root {
+    --bg: #F5F7F8;
+    --bg-soft: #FFFFFF;
+    --paper: #FFFFFF;
+    --text: #1E1E1E;
+    --text-muted: #646A6D;
+    --accent: #6AA7A3;
+    --accent-light: #D9ECEA;
+    --border: #D5D9DA;
+    --shadow-elev: 0 6px 18px rgba(0, 0, 0, 0.06);
+    --radius: 12px;
+    --ui-width: 420px;
+    --gap: 12px;
+    --max-content-width: 1100px;
 }
 
-body.old-theme header,
-body.old-theme footer {
-    background-color: #F8F2DC;
-    color: rgba(76,48,31,.5);
+/* Dark theme override (applied when [data-theme="dark"] on html/body) */
+:root[data-theme="dark"] {
+    --bg: #121415;
+    --bg-soft: #1C1E1F;
+    --paper: #1C1E1F;
+    --text: #ECEDEE;
+    --text-muted: #8F9698;
+    --accent: #8EE0DD;
+    --accent-light: #234040;
+    --border: #2A2D2E;
+    --shadow-elev: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
 
-body.old-theme #language {
-    background-color: rgba(76, 48, 31, 0.5);
-    color:#F8F2DC;
+/* Small utility */
+.u-center {
+    margin-left: auto;
+    margin-right: auto;
 }
 
-body.old-theme #input-container {
-    background-color: rgba(76,48,31,.5);
+.u-flex {
+    display: flex;
 }
 
-body.old-theme #calculateBtn {
-    background-color: #ffc6af;
-    color: #CD4631;
+.u-between {
+    justify-content: space-between;
+    align-items: center;
 }
 
-body.old-theme #calculateBtn:hover {
-    background-color: #CD4631;
-    color: #F8F2DC;
+.container {
+    width: 100%;
+    max-width: var(--max-content-width);
+    margin: 0 auto;
+    padding: 0 16px;
 }
 
-body.old-theme #index-container p {
-    background-color: #BDD0D2;
-    color: #0063a1;
+/* Base text */
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: Inter, "Roboto", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.55;
+    -webkit-tap-highlight-color: transparent;
 }
-
-body.old-theme #index-container p:hover {
-    background-color: #4B86AA;
-    color: #F8F2DC;
-}
-
-body.old-theme #upperright {
-    background-color: rgba(75,134,170, .85);
-    color: #F8F2DC;
-}
-
-body.old-theme #upperright:hover {
-    background-color: rgba(75,134,170, 1);
-}
-
-body.old-theme #bottomright {
-    background-color: #F8F2DC;
-    color: rgba(76,48,31,.5);
-}
-
-body.old-theme #personalCalendar {
-    color: rgba(76,48,31,.5);
-}
-
-body.old-theme #contactHead {
-    color: rgba(76,48,31,.5);
-}
-
-body.old-theme a {
-    color: #4B86AA;
-}
-
-body.old-theme a:hover {
-    color: #d5e0e7;
-}
-
-body.old-theme #utils-buttons button {
-    background: rgba(76, 48, 31, 0.5);
-}
-/*-------------- THEME TOGGLE SYSTEM END---------------*/

@@ -1,0 +1,56 @@
+/* _map.css - Numerology Map Styles (Modern Grid) */
+
+#birthdate-map, #combined-map {
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px;
+}
+
+.map-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 60px);
+    grid-template-rows: repeat(3, 60px);
+    gap: 6px;
+    justify-content: center;
+    align-content: center;
+}
+
+.map-cell {
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #f9f9f9;
+    color: #007bff;
+    transition: background-color 0.3s ease;
+}
+
+.map-cell.filled {
+    background-color: rgba(0, 128, 255, 0.1);
+    border-color: #007bff;
+}
+
+.map-cell.empty {
+    border-style: dashed;
+    color: #bbb;
+}
+
+.combined-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
+.birth-num {
+    color: #007bff;
+}
+
+.name-num {
+    color: #28a745;
+}

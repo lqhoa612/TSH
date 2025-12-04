@@ -1,33 +1,78 @@
 /* _layout.css - Main Layout Containers and Right Content */
 
+header {
+  background: transparent;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+header .container { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+#header { font-weight:700; font-size:1.15rem; margin:0; }
+
+main { padding: 14px 0 40px 0; }
 #main-container {
-    display: flex;
+  display:flex;
+  gap: var(--gap);
+  align-items:flex-start;
+  justify-content:center;
+  width:100%;
+  max-width: var(--max-content-width);
+  margin: 0 auto;
 }
 
-/*-----------------Left content START-------------------*/
+/* Left and right columns */
 #left-content {
-    flex: 1;
-    min-width: 250px;
-    max-width: 340px;
+  flex:0 0 320px;
+  max-width: 340px;
+  width:100%;
+  min-width: 260px;
+  display:flex;
+  flex-direction:column;
+  gap: 12px;
 }
 
-#yourmapBtn {
-    text-align: center;
-}
-/*-----------------Left content END-------------------*/
-
-/*------------------Right content START---------------*/
 #right-content {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+  flex:1 1 520px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap: 12px;
 }
 
-#rightHead {
-    text-align: center;
+/* Left + Right card panels */
+#left-content,
+#right-content {
+    background: var(--bg-soft);
+    padding: 15px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-elev);
 }
 
-#dropdown {
+/* Standard card */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  box-shadow: var(--shadow-elev);
+}
+
+/* Small helpers */
+.small-muted { color: var(--text-muted); font-size:0.94rem; }
+.section-title { font-weight:700; margin:0 0 8px 0; font-size:1rem; }
+.footer {
+  padding: 18px 0;
+  text-align:center;
+  font-size:0.9rem;
+  color: var(--text-muted);
+  border-top:1px solid var(--border);
+  margin-top: 20px;
+}
+
+/* Responsive container inside card for basic info */
+.basic-info { display:flex; flex-direction:column; gap:6px; font-size:0.98rem; }
+.basic-info p { margin:0; }
+
+/* #dropdown {
     text-align: justify;
     max-height: 0;
     overflow: hidden;
@@ -36,50 +81,4 @@
 
 #dropdown.open {
     max-height: 500px;
-}
-
-#upperright {
-    background-color: var(--timberwolf);
-    color: var(--midnight-green);
-    text-align: justify;
-    padding: 10px;
-    margin: 5px;
-    margin-top: 0;
-    margin-bottom: 2.5px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-#upperright:hover {
-    background-color: var(--midnight-green);
-    color: var(--timberwolf);
-}
-
-#upperright h2 {
-    margin: 0;
-}
-
-#upperright p {
-    margin: 10px;
-}
-
-#bottomright {
-    background-color: var(--gunmetal);
-    color: var(--timberwolf);
-    flex: 1;
-    text-align: justify;
-    padding: 10px;
-    margin: 5px;
-    margin-bottom: 0;
-    margin-top: 2.5px;
-    border-radius: 10px;
-}
-
-#bottomright h2 {
-    margin: 0;
-}
-
-#bottomright p {
-    margin-bottom: 10px;
-}
-/*------------------Right content END---------------*/
+} */

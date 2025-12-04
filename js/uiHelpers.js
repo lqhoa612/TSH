@@ -36,6 +36,41 @@ export class UIHelpers {
         }
     }
 
+    initHowToOverlay() {
+        const howToBtn = document.getElementById("howToBtn");
+        const overlay = document.getElementById("howToOverlay");
+        const closeBtn = document.getElementById("closeHowTo");
+
+        const freezeScreen = (state) => {
+            if (state) {
+                document.body.classList.add("no-scroll");
+            } else {
+                document.body.classList.remove("no-scroll");
+            }
+        };
+
+        const toggleOverlay = () => {
+            const isOn = overlay.style.display === "flex";
+            if (isOn) {
+                overlay.style.display = "none";
+                freezeScreen(false);
+            } else {
+                overlay.style.display = "flex";
+                freezeScreen(true);
+            }
+        };
+
+        howToBtn.addEventListener("click", toggleOverlay);
+        closeBtn.addEventListener("click", toggleOverlay);
+        overlay.addEventListener("click", (e) => {
+            if (e.target === overlay) toggleOverlay();
+        });
+
+        overlay.style.display = "none";
+        overlay.style.alignItems = "center";
+        overlay.style.justifyContent = "center";
+    }
+
     toggleDropdown(id) {
         const element = document.getElementById(id);
         // const dropdown = document.getElementById('dropdown');
