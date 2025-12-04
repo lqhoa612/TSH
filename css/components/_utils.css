@@ -22,6 +22,7 @@
   cursor:pointer;
   box-shadow: var(--shadow-elev);
   transition: transform .14s ease, box-shadow .14s ease;
+  font-size: 1.5rem;
 }
 #utils-buttons button:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,0.08); }
 
