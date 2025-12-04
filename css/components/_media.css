@@ -2,32 +2,115 @@
 
 /* default small devices (mobile-first) */
 @media (max-width: 550px) {
-  #main-container { flex-direction:column; padding:10px 0; }
-  #left-content { width:100%; max-width: 720px; order:0; }
-  #right-content { width:100%; order:1; }
+  #main-container {
+    flex-direction: column;
+    padding: 10px 0;
+  }
 
-  #utils-buttons { right: 12px; top: 28%; }
+  #left-content {
+    width: 100%;
+    max-width: 720px;
+    order: 0;
+  }
 
-  /* month legend and cards adapt */
-  #personalMonthLegend, .personal-month-card { max-width: 100%; width: calc(100% - 28px); margin-left:auto; margin-right:auto; }
+  #right-content {
+    width: 100%;
+    order: 1;
+  }
 
-  .personal-day-calendar { gap:2px; padding:3px; max-width:100%; width:100%; }
-  .personal-day-calendar .day-cell { padding:6px 4px; }
-  .personal-day-calendar .personal-day { font-size:1rem; padding: 3px 6px; }
-  .personal-day-calendar .day-number { font-size:0.85rem; }
+  #utils-buttons {
+    right: 12px;
+    top: 28%;
+  }
+
+  .personal-day-calendar {
+    gap: 4px;
+    padding: 6px;
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: repeat(7, minmax(34px, 1fr));
+  }
+
+  .day-cell {
+    position: relative;
+    min-height: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* DEFAULT state: show day number only */
+  .day-number {
+    display: block;
+  }
+
+  .personal-day {
+    display: none;
+  }
+
+  /* ACTIVE (after tap) */
+  .day-cell.active .day-number {
+    display: none;
+  }
+
+  .day-cell.active .personal-day {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
 
   /* map cells smaller */
-  .map-cell { width: 54px; height:54px; font-size:0.95rem; }
+  .map-cell {
+    width: 54px;
+    height: 54px;
+    font-size: 0.95rem;
+  }
 }
 
 /* tablet */
 @media (min-width:551px) and (max-width: 870px) {
-  #main-container { flex-direction:row; align-items:flex-start; gap:14px; }
-  #left-content { max-width:380px; }
-  #right-content { max-width:640px; }
+  #main-container {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  #left-content {
+    max-width: 380px;
+  }
+
+  #right-content {
+    max-width: 640px;
+  }
+
+  .day-number {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    margin-bottom: 2px;
+  }
+
+  .personal-day {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* disable tap/active behavior */
+  .day-cell.active .day-number,
+  .day-cell.active .personal-day {
+    display: block !important;
+  }
 }
 
 /* desktop */
 @media (min-width:871px) {
-  #main-container { flex-direction:row; gap:20px; padding:8px 0; }
+  #main-container {
+    flex-direction: row;
+    gap: 20px;
+    padding: 8px 0;
+  }
 }

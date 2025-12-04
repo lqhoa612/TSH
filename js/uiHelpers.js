@@ -80,6 +80,19 @@ export class UIHelpers {
         });
     }
 
+    initMobileDayToggle() {
+        const isMobile = window.matchMedia("(max-width: 550px)").matches;
+        if (!isMobile) return;
+
+        const cells = document.querySelectorAll(".day-cell");
+
+        cells.forEach(cell => {
+            cell.addEventListener("click", () => {
+                cell.classList.toggle("active");
+            });
+        });
+    }
+
     displayResults(results) {
         //Helpers: safe DOM setter
         const set = (id, value) => {
