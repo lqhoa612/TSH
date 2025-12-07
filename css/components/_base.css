@@ -12,7 +12,7 @@
     --slate-fray: #748D92;
     --timberwolf: #D3D9D4;
     --verdigris: #12ADAD;
-    --yellow: rgba(221,221,39,1);
+    --yellow: rgba(221, 221, 39, 1);
 }
 
 .visually-hidden {
@@ -31,13 +31,21 @@ body {
     background-color: var(--gunmetal);
 }
 
-body, header, footer, #left-content, #right-content, 
-#input-container, #index-container, #upperright, 
-#bottomright, #calculateBtn, #personalCalendar, 
-.personal-month-card, #personalMonthLegend {
-    transition: 
-        background-color 0.4s ease, 
-        color 0.4s ease, 
+body,
+header,
+footer,
+#left-content,
+#right-content,
+#input-container,
+#index-container,
+#bottomright,
+#calculateBtn,
+#personalCalendar,
+.personal-month-card,
+#personalMonthLegend {
+    transition:
+        background-color 0.4s ease,
+        color 0.4s ease,
         border-color 0.4s ease;
 }
 

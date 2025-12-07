@@ -24,7 +24,7 @@ export class NumerologyManager {
         const { day: ngaysinh, month: thangsinh, year: namsinh } = parsed;
 
         const results = this.calculateAll(name, ngaysinh, thangsinh, namsinh);
-        
+
         if (this.ui && this.ui.displayResults) {
             this.ui.displayResults({
                 rawName,
@@ -32,6 +32,12 @@ export class NumerologyManager {
                 currentDateFormatted: new Date().toLocaleDateString(),
                 ...results
             });
+        }
+
+        if (results !== null) {
+            //show the download btn
+            const downloadBtn = document.getElementById("downloadPdfBtn");
+            downloadBtn.classList.remove("hidden");
         }
 
         return results;

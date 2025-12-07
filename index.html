@@ -47,17 +47,12 @@
         <section id="main-container">
             <aside id="left-content">
                 <form id="input-container" autocomplete="on" onsubmit="return false;">
-                    <!-- <label for="name" class="visually-hidden">Full Name (last middle first)</label> -->
                     <input type="text" id="name" name="name" data-placeholder="placeholders.name"
                         placeholder="Fullname last middle first" autocomplete="name" />
-
-                    <!-- <input id="birthdate" type="text" inputmode="numeric" placeholder="DD/MM/YYYY" autocomplete="on"> -->
-
-                    <!-- <label for="birthdate" class="visually-hidden">Birthdate (dd/mm/yyyy)</label> -->
                     <input type="text" id="birthdate" data-placeholder="placeholders.birthdate"
                         placeholder="Birthdate dd/mm/yyyy" autocomplete="on" />
-
                     <button id="calculateBtn" data-translate="calculateBtn">Start Calculation</button>
+                    <button id="downloadPdfBtn" class="hidden">Download PDF</button>
                 </form>
 
                 <div id="basicInfo-container">
@@ -68,7 +63,7 @@
 
                 <div id="index-container">
                     <h2 id="resultHeading" data-translate="resultHeading"></h2>
-                    <p id="yourmapBtn" data-translate="yourmapLabel"></p>
+                    <p id="yourmapBtn" class="index-button-visual" data-translate="yourmapLabel"></p>
                     <p id="duongdoiBtn" class="index-button"><span data-translate="duongdoiLabel"></span> <span
                             id="duongdoi"></span></p>
                     <p id="sumenhBtn" class="index-button"><span data-translate="sumenhLabel"></span> <span
@@ -116,13 +111,6 @@
             </aside>
 
             <aside id="right-content">
-                <!-- <div id="upperright">
-                    <h2 id="rightHead" data-translate="rightHead" data-toggle="dropdown"></h2>
-                    <div id="dropdown">
-                        <p id="guide" data-translate="guide"></p>
-                    </div>
-                </div> -->
-
                 <div id="bottomright">
                     <h2 id="bottomHead"></h2>
                     <p id="message1"></p>
@@ -151,6 +139,9 @@
     <!-- <video autoplay muted loop playsinline id="bgv">
         <source src="numbers_cliped.mp4" type="video/mp4">
     </video> -->
+    <div hidden> <!-- Hidden logos for PDF -->
+        <img id="tshLogo" src="favicon_io/android-chrome-192x192.png" style="display:none;" alt="">
+    </div>
     <script type="module" src="js/main.js"></script>
 </body>
 

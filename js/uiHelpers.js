@@ -94,7 +94,6 @@ export class UIHelpers {
     }
 
     displayResults(results) {
-        //Helpers: safe DOM setter
         const set = (id, value) => {
             const element = document.getElementById(id);
             if (element) element.textContent = value;

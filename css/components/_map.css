@@ -28,9 +28,9 @@
   color: var(--text);
 }
 .map-cell.filled { background: color-mix(in srgb, var(--accent) 15%, var(--bg-soft) 85%); border-color: color-mix(in srgb, var(--accent) 45%, var(--border) 55%); color: var(--text); }
-.map-cell.empty { opacity:0.35; color:var(--text-muted); border-style:dashed; background:transparent; }
+.map-cell.empty { color:var(--text-muted); border-color: color-mix(in srgb, var(--accent) 45%, var(--border) 55%); border-style:dashed; background:transparent; }
 
 /* combined map small badges style preserved via span classes */
 .combined-content { display:flex; gap:4px; flex-wrap:wrap; justify-content:center; align-items:center; }
-.birth-num { color: color-mix(in srgb, var(--accent) 50%, black 10%); font-weight:900; }
+.birth-num { color: color-mix(in srgb, var(--accent) 100%, black 1%); font-weight:900; }
 .name-num { color: var(--text-muted); }

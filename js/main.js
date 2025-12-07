@@ -7,6 +7,7 @@ import { MapManager } from './mapManager.js';
 import { autoFormatBirthdate, validateBirthdate } from "./utils.js";
 import { UIHelpers } from './uiHelpers.js';
 import { NumerologyManager } from './numerologyManager.js';
+import { PDFGenerator } from './pdfGenerator.js';
 
 // Add event listener when the DOM content is loaded --->
 document.addEventListener('DOMContentLoaded', function () {
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const map = new MapManager(language);
     map.init();
     console.log("MapManager initialized ✅");
-    
+
     autoFormatBirthdate();
     console.log("Utils initialized ✅");
 
@@ -34,6 +35,10 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log("UIHelpers initialized ✅");
     ui.initHowToOverlay();
     ui.initMobileDayToggle();
+
+    console.log("PDFGenerator initialized ✅");
+    document.getElementById("downloadPdfBtn")
+        .addEventListener("click", () => PDFGenerator.generate());
 
     const numerologyManager = new NumerologyManager(ui);
     console.log("NumerologyManager initialized ✅");

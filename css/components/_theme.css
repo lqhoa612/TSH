@@ -15,6 +15,7 @@
     --ui-width: 420px;
     --gap: 12px;
     --max-content-width: 1100px;
+    --map-border: color-mix(in srgb, var(--accent) 45%, var(--border) 55%)
 }
 
 /* Dark theme override (applied when [data-theme="dark"] on html/body) */
