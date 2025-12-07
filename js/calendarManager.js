@@ -16,7 +16,7 @@ export class CalendarManager {
     calendarHandler() {
         const namcanhanBtn = document.getElementById("namcanhanBtn");
         const thangcanhanBtn = document.getElementById("thangcanhanBtn");
-        
+
         if (namcanhanBtn) {
             namcanhanBtn.addEventListener("click", () => {
                 this.displayPersonalYearCalendar();
@@ -132,6 +132,8 @@ export class CalendarManager {
         // GRID
         const grid = this.generatePersonalMonthGrid(y, m, day, thangcanhan);
         this.container.appendChild(grid);
+
+        enableMobileDayToggle();
     }
 
     generatePersonalMonthGrid(year, month, today, thangcanhan) {
@@ -191,4 +193,19 @@ export class CalendarManager {
 
         return grid;
     }
+
+    enableMobileDayToggle() {
+        const cells = document.querySelectorAll('.day-cell');
+
+        cells.forEach(cell => {
+            cell.addEventListener('click', () => {
+                // remove from others first
+                cells.forEach(c => c.classList.remove('active'));
+
+                // toggle on this one
+                cell.classList.add('active');
+            });
+        });
+    }
+
 }
