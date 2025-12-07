@@ -133,7 +133,7 @@ export class CalendarManager {
         const grid = this.generatePersonalMonthGrid(y, m, day, thangcanhan);
         this.container.appendChild(grid);
 
-        enableMobileDayToggle();
+        this.enableMobileDayToggle();
     }
 
     generatePersonalMonthGrid(year, month, today, thangcanhan) {
