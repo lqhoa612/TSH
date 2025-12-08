@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const shareManager = new ShareManager();
     shareManager.init();
-    console.log("ShareManager initialized ✅");
 
     const numerologyManager = new NumerologyManager(ui);
     console.log("NumerologyManager initialized ✅");

@@ -15,10 +15,13 @@ export class ShareManager {
             return;
         }
 
-        // Toggle menu open/close
-        this.shareBtn.addEventListener("click", () =>
-            this.shareMenu.classList.toggle("show-menu")
-        );
+        this.shareBtn.addEventListener("click", () => {
+            if (!this.hasResults()) {
+                alert("Please generate your numerology report first.");
+                return;
+            }
+            this.shareMenu.classList.toggle("show-menu");
+        });
 
         // Hide when clicking outside
         document.addEventListener("click", (e) => {
@@ -27,15 +30,22 @@ export class ShareManager {
             }
         });
 
-        // Download handler
         this.actionDownload.addEventListener("click", () => this.downloadPDF());
-
-        // Share handler
         this.actionShare.addEventListener("click", () => this.sharePDF());
 
         console.log("ShareManager initialized ✅");
     }
 
+    // ---- CHECK IF RESULTS EXIST ----
+    hasResults() {
+        const name = document.getElementById("fullname")?.innerText.trim();
+        const lifePath = document.getElementById("duongdoi")?.innerText.trim();
+
+        // Require at least a name + 1 calculated value
+        return name && name.length > 0 && lifePath && lifePath.length > 0;
+    }
+
+    // ---- DOWNLOAD PDF ----
     downloadPDF() {
         const { blob, filename } = PDFGenerator.generate();
         const link = document.createElement("a");
@@ -45,20 +55,26 @@ export class ShareManager {
         this.shareMenu.classList.remove("show-menu");
     }
 
+    // ---- SHARE PDF ----
     async sharePDF() {
+        if (!this.hasResults()) {
+            alert("Please generate your numerology report first.");
+            return;
+        }
+
         const { blob, filename } = PDFGenerator.generate();
         const file = new File([blob], filename, { type: "application/pdf" });
 
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
             await navigator.share({
-                title: "Numerology Result",
-                text: "Here is my numerology report!",
+                title: "Pythagorean Numerology Calculator TSH Report",
+                text: "Here is my numerology report from Pythagorean Numerology Calculator TSH.",
                 files: [file]
             });
         } else {
             const url = URL.createObjectURL(blob);
             window.open(url, "_blank");
-            alert("Your PDF opened in a new tab. Save and share manually.");
+            alert("PDF opened in a new tab. Save and share manually.");
         }
 
         this.shareMenu.classList.remove("show-menu");

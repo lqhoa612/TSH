@@ -34,12 +34,6 @@ export class NumerologyManager {
             });
         }
 
-        if (results !== null) {
-            //show the download btn
-            const downloadBtn = document.getElementById("downloadPdfBtn");
-            downloadBtn.classList.remove("hidden");
-        }
-
         return results;
     }
 
