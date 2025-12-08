@@ -4,10 +4,10 @@ import { ThemeManager } from './themeManager.js';
 import { LanguageManager } from './languageManager.js';
 import { MessageManager } from './messageManager.js';
 import { MapManager } from './mapManager.js';
-import { autoFormatBirthdate, validateBirthdate } from "./utils.js";
+import { autoFormatBirthdate } from "./utils.js";
 import { UIHelpers } from './uiHelpers.js';
 import { NumerologyManager } from './numerologyManager.js';
-import { PDFGenerator } from './pdfGenerator.js';
+import { ShareManager } from './shareManager.js';
 
 // Add event listener when the DOM content is loaded --->
 document.addEventListener('DOMContentLoaded', function () {
@@ -36,9 +36,9 @@ document.addEventListener('DOMContentLoaded', function () {
     ui.initHowToOverlay();
     ui.initMobileDayToggle();
 
-    console.log("PDFGenerator initialized ✅");
-    document.getElementById("downloadPdfBtn")
-        .addEventListener("click", () => PDFGenerator.generate());
+    const shareManager = new ShareManager();
+    shareManager.init();
+    console.log("ShareManager initialized ✅");
 
     const numerologyManager = new NumerologyManager(ui);
     console.log("NumerologyManager initialized ✅");

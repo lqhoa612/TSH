@@ -10,13 +10,8 @@ export class MessageManager {
 
         this.calendarManager = new CalendarManager();
 
-        // message containers (#message1 to #message4)
-        this.messageElements = [
-            document.getElementById('message1'),
-            document.getElementById('message2'),
-            document.getElementById('message3'),
-            document.getElementById('message4')
-        ];
+        // message containers
+        this.messageContainer = document.getElementById("messages");
 
         // optional bottom heading (if used)
         this.bottomHead = document.getElementById('bottomHead');
@@ -63,27 +58,21 @@ export class MessageManager {
         const dict = this.languages[lang] || this.languages['en'];
         const messages = dict.buttonMessages?.[buttonId];
 
-        if (!messages || !Array.isArray(messages)) {
-            // console.warn(`⚠️ No message set defined for button "${buttonId}" in ${lang}.`);
-            return;
-        }
+        if (!messages || !Array.isArray(messages)) return;
 
-        window.requestAnimationFrame(() => {
-            this.messageElements.forEach((el, i) => {
-                if (!el) return;
-                el.textContent = messages[i] || '';
-            });
+        // Clear old messages
+        this.messageContainer.innerHTML = '';
+
+        // Add new messages
+        messages.forEach(msg => {
+            const p = document.createElement("p");
+            p.textContent = msg;
+            this.messageContainer.appendChild(p);
         });
 
-        // optional: heading above messages
+        // Optional bottom heading
         if (this.bottomHead && dict.buttonMessageHead && dict.buttonMessageHead[buttonId]) {
             this.bottomHead.textContent = dict.buttonMessageHead[buttonId];
         }
-
-        // display up to 4 messages
-        this.messageElements.forEach((el, i) => {
-            if (!el) return;
-            el.textContent = messages[i] || '';
-        });
     }
 }

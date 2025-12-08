@@ -71,14 +71,3 @@ main { padding: 14px 0 40px 0; }
 /* Responsive container inside card for basic info */
 .basic-info { display:flex; flex-direction:column; gap:6px; font-size:0.98rem; }
 .basic-info p { margin:0; }
-
-/* #dropdown {
-    text-align: justify;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-}
-
-#dropdown.open {
-    max-height: 500px;
-} */

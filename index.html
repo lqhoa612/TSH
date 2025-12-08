@@ -52,7 +52,17 @@
                     <input type="text" id="birthdate" data-placeholder="placeholders.birthdate"
                         placeholder="Birthdate dd/mm/yyyy" autocomplete="on" />
                     <button id="calculateBtn" data-translate="calculateBtn">Start Calculation</button>
-                    <button id="downloadPdfBtn" class="hidden">Download PDF</button>
+
+                    <div id="resultActions">
+                        <button id="shareBtn" class="index-button">
+                            📤 Share / Download
+                        </button>
+
+                        <div id="shareMenu" class="hidden-menu">
+                            <p id="actionShare">📤 Share Result</p>
+                            <p id="actionDownload">📄 Download PDF</p>
+                        </div>
+                    </div>
                 </form>
 
                 <div id="basicInfo-container">
@@ -113,10 +123,7 @@
             <aside id="right-content">
                 <div id="bottomright">
                     <h2 id="bottomHead"></h2>
-                    <p id="message1"></p>
-                    <p id="message2"></p>
-                    <p id="message3"></p>
-                    <p id="message4"></p>
+                    <div id="messages"></div>
 
                     <div id="birthdate-map"></div>
                     <div id="combined-map"></div>
@@ -129,7 +136,7 @@
         </section>
     </main>
     <footer>
-        <p id="footer" data-translate="footer">&copy; 2024 Numerology Calculator by Quoc Hoa Le</p>
+        <p id="footer" data-translate="footer">&copy; 2023 Numerology Calculator by Quoc Hoa Le</p>
 
         <section id="contactInfo">
             <h3 id="contactHead" data-translate="contactHead"></h3>

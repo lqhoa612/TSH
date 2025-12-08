@@ -184,7 +184,8 @@ export class PDFGenerator {
 
         /* ---------------- SAVE ---------------- */
         const safeName = fullname.replace(/\s+/g, "_") || "numerology";
-        doc.save(`numerology_${safeName}.pdf`);
+        return { blob: doc.output("blob"), filename: `numerology_${safeName}.pdf` };
+
     }
 
     /* ---------------- MAP DRAWER ---------------- */
