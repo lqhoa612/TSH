@@ -2,7 +2,6 @@
 import { registerNotoSans } from "./fonts/NotoSans.js";
 
 export class PDFGenerator {
-
     static generate(languageManager) {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF({ unit: "pt", format: "a4" });
@@ -140,11 +139,14 @@ export class PDFGenerator {
 
         /* ---------------- MAPS ---------------- */
         const mapTop = Math.max(leftY, rightY) + 30;
+        const bothTitle = languageManager.languages === "en" ? "Birth & Combined Maps" : "Bản đồ Ngày Sinh & bản đồ Kết Hợp";
+        const birthTitle = languageManager.languages === "en" ? "Birth Map" : "Bản đồ Ngày Sinh";
+        const combinedTitle = languageManager.languages === "en" ? "Combined Map" : "Bản đồ Kết Hợp";
 
         doc.setFont("NotoSans", "bold");
         doc.setFontSize(11);
         doc.setTextColor(accent);
-        doc.text("Birth & Combined Maps", leftX, mapTop);
+        doc.text(bothTitle, leftX, mapTop);
 
         const birthDigits = document
             .getElementById("birthdate")
@@ -167,8 +169,8 @@ export class PDFGenerator {
             [1, 4, 7]
         ];
 
-        this.drawMiniMap(doc, leftX, mapTop + 20, mapLayout, birthDigits, "Birth");
-        this.drawMiniMap(doc, leftX + 240, mapTop + 20, mapLayout, combinedDigits, "Combined");
+        this.drawMiniMap(doc, leftX + 60, mapTop + 30, mapLayout, birthDigits, birthTitle);
+        this.drawMiniMap(doc, leftX + 320, mapTop + 30, mapLayout, combinedDigits, combinedTitle);
 
         /* ---------------- FOOTER ---------------- */
         doc.setDrawColor("#CCCCCC");
