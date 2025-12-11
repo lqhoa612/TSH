@@ -18,6 +18,8 @@ export class ThemeManager {
             this.applyTheme(newTheme);
             sessionStorage.setItem("theme", newTheme);
         });
+
+        console.log("ThemeManager initialized ✅");
     }
 
     applyTheme(theme) {

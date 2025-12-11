@@ -14,6 +14,8 @@ export class LanguageManager {
         this.loadSavedLanguage();
         this.applyTranslations(this.currentLanguage, false);
         this.setupLanguageSelector();
+
+        console.log("LanguageManager initialized ✅");
     }
 
     setupLanguageSelector() {

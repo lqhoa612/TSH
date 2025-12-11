@@ -7,6 +7,7 @@ export const vietnamese = {
         name: "Họ và Tên (Họ Tên-đệm Tên)",
         birthdate: "Ngày Sinh (dd/mm/yyyy)",
     },
+    saveDataLabel: "Lưu thông tin của tôi",
     calculateBtn: "Tạo báo cáo",
 
     fullnameLabel: "Họ và Tên: ",

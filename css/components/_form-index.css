@@ -101,3 +101,11 @@ input:focus {
     background: var(--accent-light);
     transform: translateY(-2px);
 }
+
+#saveDataLabel {
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+}

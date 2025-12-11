@@ -7,6 +7,7 @@ export const english = {
         name: "Fullname (last middle first)",
         birthdate: "Birthdate (dd/mm/yyyy)",
     },
+    saveDataLabel: "Save my data",
     calculateBtn: "Generate report",
 
     fullnameLabel: "Fullname: ",

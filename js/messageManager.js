@@ -24,6 +24,8 @@ export class MessageManager {
         this.setupButtonListeners();
         this.handleLanguageChange();
         this.calendarManager.calendarHandler();
+
+        console.log("MessageManager initialized ✅");
     }
 
     setupButtonListeners() {

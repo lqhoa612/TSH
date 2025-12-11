@@ -32,6 +32,16 @@
             <button id="languageToggleBtn" aria-label="Toggle language">
                 <img id="flagIcon" src="flags/en.svg" alt="language flag" />
             </button>
+            <!-- Share Button -->
+            <div id="resultActions">
+                <button id="shareBtn" class="float-btn" aria-label="Share or Download">
+                    📤
+                </button>
+                <div id="shareMenu" class="float-menu">
+                    <p id="actionShare">📤 Share Result</p>
+                    <p id="actionDownload">📄 Download PDF</p>
+                </div>
+            </div>
             <!-- How-to Switch -->
             <button id="howToBtn" aria-label="How to use">❓</button>
             <div id="howToOverlay">
@@ -49,20 +59,17 @@
                 <form id="input-container" autocomplete="on" onsubmit="return false;">
                     <input type="text" id="name" name="name" data-placeholder="placeholders.name"
                         placeholder="Fullname last middle first" autocomplete="name" />
+
                     <input type="text" id="birthdate" data-placeholder="placeholders.birthdate"
                         placeholder="Birthdate dd/mm/yyyy" autocomplete="on" />
+
+                    <label id="saveDataLabel">
+                        <input type="checkbox" id="saveMyData" />
+                        <span data-translate="saveDataLabel"></span>
+                    </label>
+
+
                     <button id="calculateBtn" data-translate="calculateBtn">Start Calculation</button>
-
-                    <div id="resultActions">
-                        <button id="shareBtn" class="index-button">
-                            📤 Share / Download
-                        </button>
-
-                        <div id="shareMenu" class="hidden-menu">
-                            <p id="actionShare">📤 Share Result</p>
-                            <p id="actionDownload">📄 Download PDF</p>
-                        </div>
-                    </div>
                 </form>
 
                 <div id="basicInfo-container">
@@ -149,8 +156,8 @@
     <div hidden> <!-- Hidden logos for PDF -->
         <img id="tshLogo" src="favicon_io/android-chrome-192x192.png" style="display:none;" alt="">
     </div>
-   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>  <!-- jsPDF UMD build -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <!-- jsPDF UMD build -->
     <script type="module" src="js/main.js"></script>
 </body>
 

@@ -8,25 +8,22 @@ import { autoFormatBirthdate } from "./utils.js";
 import { UIHelpers } from './uiHelpers.js';
 import { NumerologyManager } from './numerologyManager.js';
 import { ShareManager } from './shareManager.js';
+import { SaveDataManager } from './saveData.js';
 
 // Add event listener when the DOM content is loaded --->
 document.addEventListener('DOMContentLoaded', function () {
     // Get DOM Elements
     const theme = new ThemeManager();
     theme.init();
-    console.log("ThemeManager initialized ✅");
 
     const language = new LanguageManager('en');
     language.init();
-    console.log("LanguageManager initialized ✅");
 
     const message = new MessageManager(language);
     message.init();
-    console.log("MessageManager initialized ✅");
 
     const map = new MapManager(language);
     map.init();
-    console.log("MapManager initialized ✅");
 
     autoFormatBirthdate();
     console.log("Utils initialized ✅");
@@ -43,6 +40,9 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log("NumerologyManager initialized ✅");
     ui.numerology = numerologyManager; // Link back
     ui.initInputEvents();
+
+    const saveData = new SaveDataManager();
+    saveData.init();
 
     console.log("App initialized ✅");
 });

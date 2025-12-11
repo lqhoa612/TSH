@@ -17,6 +17,8 @@ export class MapManager {
         this.cacheElements();
         this.setupListeners();
         this.handleLanguageChange();
+
+        console.log("MapManager initialized ✅");
     }
 
     cacheElements() {
