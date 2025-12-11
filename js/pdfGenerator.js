@@ -1,13 +1,16 @@
 // pdfGenerator.js
-import jsPDF from "https://cdn.jsdelivr.net/npm/jspdf@2.5.1/+esm";
+import { registerNotoSans } from "./fonts/NotoSans.js";
 
 export class PDFGenerator {
 
-    static generate() {
-        const doc = new jsPDF({
-            unit: "pt",
-            format: "a4"
-        });
+    static generate(languageManager) {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ unit: "pt", format: "a4" });
+        registerNotoSans(doc);
+        console.log(doc.getFontList());
+
+        // Set default Unicode font
+        doc.setFont("NotoSans", "normal");
 
         const accent = "#12ADAD";
         const labelFont = 9.5;
@@ -16,19 +19,23 @@ export class PDFGenerator {
         const rightX = 300;
         let y = 40;
 
-        /* ---------------- LOGOS ---------------- */
-        const tshLogo = document.getElementById("tshLogo");
+        const t = key =>
+            languageManager?.languages[languageManager.currentLanguage][key] || key;
 
+        /* ---------------- LOGO ---------------- */
+        const tshLogo = document.getElementById("tshLogo");
         if (tshLogo) {
-            try { doc.addImage(tshLogo.src, "PNG", 500, 100, 60, 60); } catch { }
+            try {
+                doc.addImage(tshLogo.src, "PNG", 500, 100, 60, 60);
+            } catch { }
         }
 
         y += 70;
 
         /* ---------------- TITLE ---------------- */
-        doc.setFont("Helvetica", "bold");
+        doc.setFont("NotoSans", "bold");
         doc.setFontSize(18);
-        doc.text("Numerology Report", leftX, y);
+        doc.text(t("pdfTitle") || "Numerology Report", leftX, y);
         y += 26;
 
         /* ----- BASIC INFO: Name / Birthdate / Date ----- */
@@ -36,13 +43,12 @@ export class PDFGenerator {
         const birthdate = document.getElementById("birthdate2")?.innerText || "";
         const currentDate = document.getElementById("currentDate")?.innerText || "";
 
-        doc.setFont("Helvetica", "normal");
+        doc.setFont("NotoSans", "normal");
         doc.setFontSize(10);
 
-        doc.text(`Name: ${fullname}`, leftX, y); y += 14;
-        doc.text(`Birthdate: ${birthdate}`, leftX, y); y += 14;
-        doc.text(`Generated: ${currentDate}`, leftX, y);
-
+        doc.text(`${t("fullnameLabel")}: ${fullname}`, leftX, y); y += 14;
+        doc.text(`${t("birthdate2Label")}: ${birthdate}`, leftX, y); y += 14;
+        doc.text(`${t("currentDateLabel")}: ${currentDate}`, leftX, y);
         y += 18;
 
         doc.setDrawColor(accent);
@@ -52,96 +58,90 @@ export class PDFGenerator {
 
         /* ---------------- FIELD SETS ---------------- */
         const fieldsLeft = [
-            ["Life Path", "duongdoi"],
-            ["Destiny", "sumenh"],
-            ["Connection (LP-D)", "LKDgdoiSumenh"],
-            ["Growth", "truongthanh"],
-            ["Soul Urge", "linhhon"],
-            ["Personality", "nhancach"],
-            ["Connection (SU-P)", "LKLinhhonNhancach"],
-            ["Balance", "canbang"],
-            ["Rational Thought", "tuduylytri"]
+            ["duongdoiLabel", "duongdoi"],
+            ["sumenhLabel", "sumenh"],
+            ["LKDgdoiSumenhLabel", "LKDgdoiSumenh"],
+            ["truongthanhLabel", "truongthanh"],
+            ["linhhonLabel", "linhhon"],
+            ["nhancachLabel", "nhancach"],
+            ["LKLinhhonNhancachLabel", "LKLinhhonNhancach"],
+            ["canbangLabel", "canbang"],
+            ["tuduylytriLabel", "tuduylytri"]
         ];
 
         const fieldsRight = [
-            ["Subconscious Self", "sucmanhtiemthuc"],
-            ["Imbalanced Numbers", "sothieu"],
-            ["Birthday Number", "ngaysinh"],
-            ["Passion Number", "damme"],
-            ["Personal Year", "namcanhan"],
-            ["Personal Month", "thangcanhan"],
-            ["Personal Day", "ngaycanhan"],
-            ["Milestones", "chang"],
-            ["Milestone Ages", "tuoi"],
-            ["Challenges", "thachthuc"]
+            ["sucmanhtiemthucLabel", "sucmanhtiemthuc"],
+            ["sothieuLabel", "sothieu"],
+            ["ngaysinhLabel", "ngaysinh"],
+            ["dammeLabel", "damme"],
+            ["namcanhanLabel", "namcanhan"],
+            ["thangcanhanLabel", "thangcanhan"],
+            ["ngaycanhanLabel", "ngaycanhan"],
+            ["changLabel", "chang"],
+            ["tuoiLabel", "tuoi"],
+            ["thachthucLabel", "thachthuc"]
         ];
 
         let leftY = y;
         let rightY = y;
 
-        /* -------- FIELD DRAWER (JUSTIFIED NUMBERS) -------- */
-        function drawField(label, value, x, cursorY, isRightColumn = false) {
+        /* -------- FIELD DRAWER -------- */
+        function drawField(label, value, x, cursorY) {
             if (!value) return cursorY;
 
-            const columnWidth = 240;        // width per column (safe space)
-            const valueColumnX = x + columnWidth; // number alignment point
+            const columnWidth = 240;
+            const valueColumnX = x + columnWidth;
 
-            // Label
-            doc.setFont("Helvetica", "bold");
+            doc.setFont("NotoSans", "bold");
             doc.setFontSize(labelFont);
             doc.setTextColor("#000");
+
             const labelFull = label + ":";
             doc.text(labelFull, x, cursorY);
 
-            // width of label text
             const labelWidth = doc.getTextWidth(labelFull);
 
-            // -------- dotted leaders --------
-            const dotsStart = x + labelWidth + 8;        // spacing after label
-            const dotsEnd = valueColumnX - 25;           // leave space before numbers
+            // Dotted leaders
+            const dotsStart = x + labelWidth + 8;
+            const dotsEnd = valueColumnX - 25;
 
             doc.setDrawColor("#AAAAAA");
             doc.setLineWidth(0.2);
-
             for (let dx = dotsStart; dx < dotsEnd; dx += 3) {
                 doc.line(dx, cursorY - 2, dx + 1, cursorY - 2);
             }
 
-            // -------- value (right aligned) --------
-            doc.setFont("Helvetica", "normal");
+            // Value
+            doc.setFont("NotoSans", "normal");
             doc.setFontSize(valueFont);
             doc.setTextColor("#000");
-
             doc.text(value, valueColumnX, cursorY, { align: "right" });
 
             return cursorY + 14;
         }
 
-        /* LEFT COLUMN */
-        fieldsLeft.forEach(([label, id]) => {
-            const val = document.getElementById(id)?.innerText?.trim();
-            leftY = drawField(label, val, leftX, leftY, false);
+        fieldsLeft.forEach(([labelKey, id]) => {
+            const value = document.getElementById(id)?.innerText?.trim();
+            leftY = drawField(t(labelKey), value, leftX, leftY);
         });
 
-        /* RIGHT COLUMN */
-        fieldsRight.forEach(([label, id]) => {
-            const val = document.getElementById(id)?.innerText?.trim();
-            rightY = drawField(label, val, rightX, rightY, true);
+        fieldsRight.forEach(([labelKey, id]) => {
+            const value = document.getElementById(id)?.innerText?.trim();
+            rightY = drawField(t(labelKey), value, rightX, rightY);
         });
 
-        /* Draw vertical separator line */
-        const sepTop = y - 13;                          // below date section
-        const sepBottom = Math.max(leftY, rightY); // end of fields
+        /* Vertical separator */
+        const sepTop = y - 13;
+        const sepBottom = Math.max(leftY, rightY);
 
         doc.setDrawColor("#CCCCCC");
         doc.setLineWidth(1);
-
         doc.line(290, sepTop, 290, sepBottom);
 
         /* ---------------- MAPS ---------------- */
         const mapTop = Math.max(leftY, rightY) + 30;
 
-        doc.setFont("Helvetica", "bold");
+        doc.setFont("NotoSans", "bold");
         doc.setFontSize(11);
         doc.setTextColor(accent);
         doc.text("Birth & Combined Maps", leftX, mapTop);
@@ -175,25 +175,24 @@ export class PDFGenerator {
         doc.setLineWidth(1);
         doc.line(40, 810, 555, 810);
 
-        doc.setFont("Helvetica", "normal");
+        doc.setFont("NotoSans", "normal");
         doc.setFontSize(9);
         doc.setTextColor("#555");
         doc.text("Contact: lqhoa612@gmail.com   |   Project TSH © 2023", 297, 825, {
             align: "center"
         });
 
-        /* ---------------- SAVE ---------------- */
         const safeName = fullname.replace(/\s+/g, "_") || "numerology";
         return { blob: doc.output("blob"), filename: `numerology_${safeName}.pdf` };
-
     }
+
 
     /* ---------------- MAP DRAWER ---------------- */
     static drawMiniMap(doc, x, y, layout, digits, label) {
-        const cell = 32;         // bigger map
+        const cell = 32;
         const size = cell * 3;
 
-        doc.setFont("Helvetica", "bold");
+        doc.setFont("NotoSans", "bold");
         doc.setFontSize(10);
         doc.text(label, x, y - 5);
 
@@ -204,7 +203,7 @@ export class PDFGenerator {
             doc.line(x + i * cell, y, x + i * cell, y + size);
         }
 
-        doc.setFont("Helvetica", "normal");
+        doc.setFont("NotoSans", "normal");
         doc.setFontSize(10);
 
         for (let r = 0; r < 3; r++) {

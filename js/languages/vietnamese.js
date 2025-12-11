@@ -7,7 +7,7 @@ export const vietnamese = {
         name: "Họ và Tên (Họ Tên-đệm Tên)",
         birthdate: "Ngày Sinh (dd/mm/yyyy)",
     },
-    calculateBtn: "Bắt đầu tính toán",
+    calculateBtn: "Tạo báo cáo",
 
     fullnameLabel: "Họ và Tên: ",
     birthdate2Label: "Ngày sinh: ",
@@ -17,11 +17,11 @@ export const vietnamese = {
     yourmapLabel: "Xem bản đồ của bạn",
     duongdoiLabel: "Đường đời: ",
     sumenhLabel: "Sứ mệnh: ",
-    LKDgdoiSumenhLabel: "Liên kết (Đường đời - Sứ mệnh): ",
+    LKDgdoiSumenhLabel: "Liên kết (ĐĐ-SM): ",
     truongthanhLabel: "Trưởng thành: ",
     linhhonLabel: "Linh hồn: ",
     nhancachLabel: "Nhân cách: ",
-    LKLinhhonNhancachLabel: "Liên kết (Linh hồn - Nhân cách): ",
+    LKLinhhonNhancachLabel: "Liên kết (LH-NC): ",
     canbangLabel: "Cân bằng: ",
     tuduylytriLabel: "Tư duy lý trí: ",
     sucmanhtiemthucLabel: "Sức mạnh tiềm thức: ",
@@ -37,22 +37,22 @@ export const vietnamese = {
 
     // rightHead: "Cách sử dụng",
     guide: "📝 Nhập họ tên theo thứ tự: Họ – Đệm – Tên.\n" +
-       "   Ví dụ: John Michael Smith → Smith Michael John.\n\n" +
+        "   Ví dụ: John Michael Smith → Smith Michael John.\n\n" +
 
-       "📛 Nếu bạn có nhiều tên đệm, bạn có thể nhập theo bất kỳ thứ tự nào.\n" +
-       "   Chỉ cần đảm bảo TÊN được đặt CUỐI.\n\n" +
+        "📛 Nếu bạn có nhiều tên đệm, bạn có thể nhập theo bất kỳ thứ tự nào.\n" +
+        "   Chỉ cần đảm bảo TÊN được đặt CUỐI.\n\n" +
 
-       "📅 Nhập ngày sinh theo định dạng DD/MM/YYYY.\n" +
-       "   Ví dụ: 01/01/1111 → 01011111.\n\n" +
+        "📅 Nhập ngày sinh theo định dạng DD/MM/YYYY.\n" +
+        "   Ví dụ: 01/01/1111 → 01011111.\n\n" +
 
-       "▶️ Nhấn Enter hoặc bấm nút “Bắt đầu tính” để xem kết quả.\n\n" +
+        "▶️ Nhấn Enter hoặc bấm nút “Bắt đầu tính” để xem kết quả.\n\n" +
 
-       "📧 Nếu bạn muốn hiểu rõ hơn về kết quả, hãy liên hệ qua email bên dưới.\n\n" +
+        "📧 Nếu bạn muốn hiểu rõ hơn về kết quả, hãy liên hệ qua email bên dưới.\n\n" +
 
-       "🛠️ Nếu bạn phát hiện lỗi hoặc có góp ý cải thiện, hãy gửi email cho tôi.\n\n" +
+        "🛠️ Nếu bạn phát hiện lỗi hoặc có góp ý cải thiện, hãy gửi email cho tôi.\n\n" +
 
-       "⚠️ Lưu ý: Công cụ này vẫn đang trong quá trình hoàn thiện."
-,
+        "⚠️ Lưu ý: Công cụ này vẫn đang trong quá trình hoàn thiện."
+    ,
 
     footer: "&copy; 2024 Máy tính Thần Số Học Pythagorean do Hòa Lê phát triển",
     contactHead: "Thông Tin Liên Hệ:",
@@ -174,6 +174,11 @@ export const vietnamese = {
             present: "Bạn có khả năng lập kế hoạch và làm việc có tổ chức (Mũi tên Lập kế hoạch).",
             missing: "Bạn dễ thiếu kế hoạch, làm việc tùy hứng hoặc không ổn định (Mũi tên Thiếu kế hoạch)."
         }
-    }
+    },
 
+    pdfTitle: "Báo cáo Thần Số Học",
+    pdfNullWarning: "Vui lòng tạo báo cáo thần số học của bạn trước.",
+    shareTitle: "Báo cáo Pythagorean Numerology Calculator TSH",
+    shareText: "Đây là báo cáo thần số học của tôi từ Pythagorean Numerology Calculator TSH.",
+    pdfOpenedTab: "PDF đã mở trong tab mới. Lưu và chia sẻ thủ công.",
 };

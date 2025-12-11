@@ -7,7 +7,7 @@ export const english = {
         name: "Fullname (last middle first)",
         birthdate: "Birthdate (dd/mm/yyyy)",
     },
-    calculateBtn: "Start Calculation",
+    calculateBtn: "Generate report",
 
     fullnameLabel: "Fullname: ",
     birthdate2Label: "Birthdate: ",
@@ -17,11 +17,11 @@ export const english = {
     yourmapLabel: "View your map",
     duongdoiLabel: "Life path: ",
     sumenhLabel: "Destiny/Mission: ",
-    LKDgdoiSumenhLabel: "Connection (Life path - Destiny): ",
+    LKDgdoiSumenhLabel: "Connection (LP-D): ",
     truongthanhLabel: "Growth/Maturity: ",
     linhhonLabel: "Soul Urge: ",
     nhancachLabel: "Personality: ",
-    LKLinhhonNhancachLabel: "Connection (Soul - Personality): ",
+    LKLinhhonNhancachLabel: "Connection (SU-P): ",
     canbangLabel: "Balance: ",
     tuduylytriLabel: "Rational Thought: ",
     sucmanhtiemthucLabel: "Subconscious Self: ",
@@ -37,21 +37,21 @@ export const english = {
 
     // rightHead: "How to use",
     guide: "📝 Enter your fullname in Last–Middle–First order.\n" +
-       "   Example: John Michael Smith → Smith Michael John.\n\n" +
+        "   Example: John Michael Smith → Smith Michael John.\n\n" +
 
-       "📛 If you have multiple middle names, you may enter them in any order.\n" +
-       "   Just make sure your FIRST name goes LAST.\n\n" +
+        "📛 If you have multiple middle names, you may enter them in any order.\n" +
+        "   Just make sure your FIRST name goes LAST.\n\n" +
 
-       "📅 Enter your birthdate in DD/MM/YYYY format.\n" +
-       "   Example: 01/01/1111 → 01011111.\n\n" +
+        "📅 Enter your birthdate in DD/MM/YYYY format.\n" +
+        "   Example: 01/01/1111 → 01011111.\n\n" +
 
-       "▶️ Press Enter or click the “Start Calculation” button to see your results.\n\n" +
+        "▶️ Press Enter or click the “Start Calculation” button to see your results.\n\n" +
 
-       "📧 To learn more about your results, contact me using the email below.\n\n" +
+        "📧 To learn more about your results, contact me using the email below.\n\n" +
 
-       "🛠️ If you find an error or have suggestions, please email me.\n\n" +
+        "🛠️ If you find an error or have suggestions, please email me.\n\n" +
 
-       "⚠️ Disclaimer: This calculator is still a work in progress.",
+        "⚠️ Disclaimer: This calculator is still a work in progress.",
 
     footer: "&copy; 2024 Pythagorean Numerology Calculator by Hoa Le",
     contactHead: "Contact Information:",
@@ -173,5 +173,11 @@ export const english = {
             present: "You plan ahead and work methodically (Arrow of Aim).",
             missing: "You may lack structure or long-term planning (Arrow of Aimlessness)."
         }
-    }
+    },
+
+    pdfTitle: "Numerology Report",
+    pdfNullWarning: "Please generate your numerology report first.",
+    shareTitle: "Pythagorean Numerology Calculator TSH Report",
+    shareText: "Here is my numerology report from Pythagorean Numerology Calculator TSH.",
+    pdfOpenedTab: "PDF opened in a new tab. Save and share manually.",
 };
