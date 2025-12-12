@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const theme = new ThemeManager();
     theme.init();
 
-    const language = new LanguageManager('en');
+    const language = new LanguageManager();
     language.init();
 
     const message = new MessageManager(language);

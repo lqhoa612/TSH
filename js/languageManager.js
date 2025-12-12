@@ -11,7 +11,8 @@ export class LanguageManager {
     }
 
     init() {
-        this.loadSavedLanguage();
+        this.detectBrowserLanguage();
+        // this.loadSavedLanguage();
         this.applyTranslations(this.currentLanguage, false);
         this.setupLanguageSelector();
 
@@ -89,4 +90,18 @@ export class LanguageManager {
     getLanguage() {
         return this.currentLanguage;
     }
+
+    detectBrowserLanguage() {
+        const lang = navigator.language || navigator.userLanguage || "en";
+        const short = lang.substring(0, 2).toLowerCase();
+
+        const supported = ["en", "vi"];
+
+        if (supported.includes(short)) {
+            this.currentLanguage = short;
+        } else {
+            this.currentLanguage = "en"; // fallback
+        }
+    }
+
 }

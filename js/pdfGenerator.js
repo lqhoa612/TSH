@@ -95,17 +95,20 @@ export class PDFGenerator {
             doc.setFontSize(labelFont);
             doc.setTextColor("#000");
 
-            const labelFull = label + ":";
+            const labelFull = label;
             doc.text(labelFull, x, cursorY);
 
             const labelWidth = doc.getTextWidth(labelFull);
+            const valueWidth = doc.getTextWidth(value);
 
             // Dotted leaders
             const dotsStart = x + labelWidth + 8;
-            const dotsEnd = valueColumnX - 25;
+            const dotsEnd = valueColumnX - valueWidth - 4; // Perfect alignment
 
             doc.setDrawColor("#AAAAAA");
-            doc.setLineWidth(0.2);
+            doc.setLineWidth(1);
+
+            // Build dotted line
             for (let dx = dotsStart; dx < dotsEnd; dx += 3) {
                 doc.line(dx, cursorY - 2, dx + 1, cursorY - 2);
             }
