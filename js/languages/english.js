@@ -181,4 +181,13 @@ export const english = {
     shareTitle: "Pythagorean Numerology Calculator TSH Report",
     shareText: "Here is my numerology report from Pythagorean Numerology Calculator TSH.",
     pdfOpenedTab: "PDF opened in a new tab. Save and share manually.",
+
+    spinnerTexts: [
+        "Beep-boop...",
+        "Hold on...",
+        "One moment please",
+        "Getting your file...",
+        "Preparing your report...",
+        "Almost ready..."
+    ],
 };

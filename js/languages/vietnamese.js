@@ -182,4 +182,12 @@ export const vietnamese = {
     shareTitle: "Báo cáo Pythagorean Numerology Calculator TSH",
     shareText: "Đây là báo cáo thần số học của tôi từ Pythagorean Numerology Calculator TSH.",
     pdfOpenedTab: "PDF đã mở trong tab mới. Lưu và chia sẻ thủ công.",
+
+    spinnerTexts: [
+        "Đang lấy báo cáo...",
+        "Chờ một tí nhé",
+        "Khoan đã, sắp xong rồi...",
+        "Đang chuẩn bị file...",
+        "Khoan, dừng khoảng chừng 2s..."
+    ],
 };

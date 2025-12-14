@@ -1,38 +1,41 @@
 // numerologyManager.js
 import { removeAccents, reduceToSingleDigit, parseMaskedDate } from './utils.js';
-
 export class NumerologyManager {
     constructor(uiHelperInstance) {
         this.ui = uiHelperInstance;
     }
 
-    calculateFromInputs() {
+    async calculateFromInputs() {
+        this.ui?.showResultSkeleton();
+
         const rawName = (document.getElementById('name')?.value || '').trim();
         const birthdateStr = (document.getElementById('birthdate')?.value || '').trim();
 
         const parsed = parseMaskedDate(birthdateStr);
         if (!parsed) {
-            // You can replace this by UI-friendly error handling
-            console.warn('NumerologyManager: invalid birthdate', birthdateStr);
-            if (this.ui && typeof this.ui.showError === 'function') {
-                this.ui.showError('Invalid birthdate. Use DD/MM/YYYY');
-            }
+            this.ui?.hideResultSkeleton();
+            this.ui?.showError?.('Invalid birthdate. Use DD/MM/YYYY');
             return null;
         }
 
         const name = removeAccents(rawName);
-        const { day: ngaysinh, month: thangsinh, year: namsinh } = parsed;
+        const { day, month, year } = parsed;
 
-        const results = this.calculateAll(name, ngaysinh, thangsinh, namsinh);
+        // Calculate immediately (no delay)
+        const results = this.calculateAll(name, day, month, year);
 
-        if (this.ui && this.ui.displayResults) {
-            this.ui.displayResults({
-                rawName,
-                birthdate: birthdateStr,
-                currentDateFormatted: new Date().toLocaleDateString(),
-                ...results
-            });
-        }
+        // Wait until skeleton is fully gone
+        await new Promise(resolve =>
+            this.ui.hideResultSkeleton(250, 250) || setTimeout(resolve, 500)
+        );
+
+        // NOW write numbers
+        this.ui?.displayResults?.({
+            rawName,
+            birthdate: birthdateStr,
+            currentDateFormatted: new Date().toLocaleDateString(),
+            ...results
+        });
 
         return results;
     }

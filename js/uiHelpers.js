@@ -71,6 +71,76 @@ export class UIHelpers {
         overlay.style.justifyContent = "center";
     }
 
+    // Show skeleton loaders on result buttons
+    showResultSkeleton() {
+        this._skeletonStart = performance.now();
+
+        document.querySelectorAll(
+            "#index-container .index-button, #index-container .index-button-visual"
+        ).forEach(el => {
+            el.classList.add("skeleton");
+            el.classList.remove("skeleton-fade-out");
+            el.style.opacity = "";
+        });
+    }
+
+    hideResultSkeleton(minDuration = 250, fadeDuration = 250) {
+        const elapsed = performance.now() - (this._skeletonStart || 0);
+        const wait = Math.max(0, minDuration - elapsed);
+
+        setTimeout(() => {
+            const nodes = document.querySelectorAll(
+                "#index-container .index-button, #index-container .index-button-visual"
+            );
+
+            // 1. Fade skeleton out
+            nodes.forEach(el => el.classList.add("skeleton-fade-out"));
+
+            // 2. Remove skeleton AFTER fade completes
+            setTimeout(() => {
+                nodes.forEach(el => {
+                    el.classList.remove("skeleton", "skeleton-fade-out");
+                    el.style.opacity = "";
+                });
+            }, fadeDuration);
+
+        }, wait);
+    }
+
+    // Spinner for PDF generation
+    showSpinner(languageManager) {
+        this._spinnerStart = performance.now();
+        this.setRandomSpinnerText(languageManager);
+        document.getElementById("loadingSpinner")
+            ?.classList.remove("visually-hidden");
+    }
+
+    hideSpinner(minDuration = 2000) {
+        const elapsed = performance.now() - (this._spinnerStart || 0);
+        const remaining = Math.max(0, minDuration - elapsed);
+
+        setTimeout(() => {
+            document.getElementById("loadingSpinner")
+                ?.classList.add("visually-hidden");
+        }, remaining);
+    }
+
+    setRandomSpinnerText(languageManager) {
+        const el = document.getElementById("spinnerText");
+        if (!el || !languageManager) return;
+
+        const lang = languageManager.languages[languageManager.currentLanguage];
+        const texts = lang?.spinnerTexts;
+
+        if (!Array.isArray(texts) || texts.length === 0) {
+            el.textContent = "Loading…";
+            return;
+        }
+
+        const randomIndex = Math.floor(Math.random() * texts.length);
+        el.textContent = texts[randomIndex];
+    }
+
     toggleDropdown(id) {
         const element = document.getElementById(id);
         // const dropdown = document.getElementById('dropdown');

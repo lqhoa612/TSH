@@ -102,6 +102,11 @@ input:focus {
     transform: translateY(-2px);
 }
 
+#index-container .index-button,
+#index-container .index-button-visual {
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
 #saveDataLabel {
     font-size: 0.85rem;
     display: flex;

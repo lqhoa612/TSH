@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ui.initMobileDayToggle();
 
     const shareManager = new ShareManager(language);
+    shareManager.ui = ui;
     shareManager.init();
 
     const numerologyManager = new NumerologyManager(ui);
