@@ -227,3 +227,14 @@ body.no-scroll { overflow: hidden; }
     0% { background-position: 100% 0; }
     100% { background-position: 0 0; }
 }
+
+/* Auto scroll */
+@keyframes softGlow {
+  0% { box-shadow: 0 0 0 rgba(18,173,173,0); }
+  50% { box-shadow: 0 0 18px rgba(18,173,173,0.4); }
+  100% { box-shadow: 0 0 0 rgba(18,173,173,0); }
+}
+
+.maps-highlight {
+  animation: softGlow 1.2s ease;
+}

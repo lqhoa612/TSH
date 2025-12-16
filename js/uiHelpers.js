@@ -210,4 +210,20 @@ export class UIHelpers {
         set('tuoi', results.tuoi?.join(', ') || '');
         set('thachthuc', results.thachthuc?.join(', ') || '');
     }
+
+    enableMapScroll(buttonId = 'yourmapBtn', targetId = 'maps-start') {
+        const button = document.getElementById(buttonId);
+        const target = document.getElementById(targetId);
+
+        if (!button || !target) return;
+
+        button.addEventListener('click', () => {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            target.classList.add('maps-highlight');
+            setTimeout(() => target.classList.remove('maps-highlight'), 1200);
+        });
+
+    }
+
 }

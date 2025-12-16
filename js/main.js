@@ -32,6 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log("UIHelpers initialized ✅");
     ui.initHowToOverlay();
     ui.initMobileDayToggle();
+    ui.enableMapScroll();
+
 
     const shareManager = new ShareManager(language);
     shareManager.ui = ui;
