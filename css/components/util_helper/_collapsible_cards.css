@@ -1,0 +1,132 @@
+/* _collapsible_cards.css */
+
+.collapsible .card-header {
+width: 100%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 8px;
+background: none;
+border: none;
+font-weight: 600;
+cursor: pointer;
+padding: 6px 2px;
+color: var(--text);
+}
+
+
+.collapsible .card-body {
+margin-top: 8px;
+display: none;
+animation: fadeIn 0.2s ease;
+}
+
+
+.collapsible.open .card-body {
+display: block;
+}
+
+.collapsible.open .card-header {
+  color: var(--accent);
+}
+
+.collapsible .chevron {
+transition: transform 0.2s ease;
+}
+
+
+.collapsible.open .chevron {
+transform: rotate(180deg);
+}
+
+.card.collapsible {
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.card.collapsible:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  border-color: var(--accent);
+}
+
+.card.collapsible.open {
+  border-color: var(--accent);
+  background: var(--paper);
+}
+
+/* Improve header feedback */
+.collapsible .card-header:hover {
+  color: var(--accent);
+}
+
+/* Keyboard accessibility */
+.collapsible .card-header:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(-2px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+/* Action Card – View Your Map */
+.map-action-card {
+  border: 1px solid rgba(18, 173, 173, 0.5);
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(18, 173, 173, 0.25),
+      transparent 60%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(18, 173, 173, 0.15),
+      rgba(18, 173, 173, 0.05)
+    );
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.map-action-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.map-action-icon {
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+.map-action-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(18, 173, 173, 0.35);
+  border-color: var(--accent);
+}
+
+.map-action-card:hover .map-action-icon {
+  transform: translateX(4px);
+}
+
+.map-action-card:active {
+  transform: translateY(0);
+}
+
+.card-desc {
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+  margin: 4px 0 0 0;
+}

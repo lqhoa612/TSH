@@ -142,14 +142,14 @@ export class PDFGenerator {
 
         /* ---------------- MAPS ---------------- */
         const mapTop = Math.max(leftY, rightY) + 30;
-        const bothTitle = languageManager.languages === "en" ? "Birth & Combined Maps" : "Bản đồ Ngày Sinh & bản đồ Kết Hợp";
-        const birthTitle = languageManager.languages === "en" ? "Birth Map" : "Bản đồ Ngày Sinh";
-        const combinedTitle = languageManager.languages === "en" ? "Combined Map" : "Bản đồ Kết Hợp";
+        const bothTitle = languageManager.currentLanguage === "en" ? "Birth & Combined Maps" : "Bản đồ Ngày Sinh & bản đồ Kết Hợp";
+        const birthTitle = languageManager.currentLanguage === "en" ? "Birth Map" : "Bản đồ Ngày Sinh";
+        const combinedTitle = languageManager.currentLanguage === "en" ? "Combined Map" : "Bản đồ Kết Hợp";
 
         doc.setFont("NotoSans", "bold");
         doc.setFontSize(11);
         doc.setTextColor(accent);
-        doc.text(bothTitle, leftX, mapTop);
+        doc.text(t(bothTitle), leftX, mapTop);
 
         const birthDigits = document
             .getElementById("birthdate")
@@ -172,8 +172,8 @@ export class PDFGenerator {
             [1, 4, 7]
         ];
 
-        this.drawMiniMap(doc, leftX + 60, mapTop + 30, mapLayout, birthDigits, birthTitle);
-        this.drawMiniMap(doc, leftX + 320, mapTop + 30, mapLayout, combinedDigits, combinedTitle);
+        this.drawMiniMap(doc, leftX + 60, mapTop + 30, mapLayout, birthDigits, t(birthTitle));
+        this.drawMiniMap(doc, leftX + 320, mapTop + 30, mapLayout, combinedDigits, t(combinedTitle));
 
         /* ---------------- FOOTER ---------------- */
         doc.setDrawColor("#CCCCCC");

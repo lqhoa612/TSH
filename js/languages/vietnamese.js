@@ -36,6 +36,26 @@ export const vietnamese = {
     tuoiLabel: "Tuổi chặng: ",
     thachthucLabel: "Thách thức: ",
 
+    duongdoiDesc: "Con số Đường đời thể hiện hướng đi cốt lõi của cuộc sống bạn. Nó phản ánh xu hướng tự nhiên, bài học cần trải qua và hành trình tổng thể của bạn.",
+    sumenhDesc: "Con số Sứ mệnh cho biết mục đích sống và những mục tiêu bạn cần hoàn thành. Nó phản ánh tài năng, khả năng và trách nhiệm trong cuộc đời.",
+    LKDgdoiSumenhDesc: "Liên kết này cho thấy mức độ hòa hợp giữa Đường đời và Sứ mệnh. Nó phản ánh sự đồng thuận hoặc mâu thuẫn giữa hướng đi và mục tiêu sống.",
+    truongthanhDesc: "Con số Trưởng thành thể hiện năng lượng bạn phát triển theo thời gian. Nó phản ánh những phẩm chất hình thành khi bạn tích lũy kinh nghiệm và sự chín chắn.",
+    linhhonDesc: "Con số Linh hồn phản ánh mong muốn sâu thẳm bên trong bạn. Nó cho biết điều gì thực sự thúc đẩy cảm xúc và động lực cá nhân.",
+    nhancachDesc: "Con số Nhân cách thể hiện cách người khác nhìn nhận bạn. Nó phản ánh hình ảnh, thái độ và ấn tượng bạn thể hiện ra bên ngoài.",
+    LKLinhhonNhancachDesc: "Liên kết này cho thấy sự tương quan giữa nội tâm và biểu hiện bên ngoài. Nó phản ánh mức độ nhất quán giữa con người thật và hình ảnh xã hội.",
+    canbangDesc: "Con số Cân bằng cho biết cách bạn đối mặt với áp lực và thử thách. Nó phản ánh sự ổn định cảm xúc và khả năng xử lý tình huống.",
+    tuduylytriDesc: "Con số Tư duy lý trí thể hiện cách bạn suy nghĩ và phân tích vấn đề. Nó phản ánh tư duy logic và phương pháp ra quyết định.",
+    sucmanhtiemthucDesc: "Con số Sức mạnh tiềm thức cho thấy khả năng chịu đựng và phản ứng bản năng của bạn. Nó phản ánh nội lực khi đối diện khó khăn.",
+    sothieuDesc: "Số Thiếu phản ánh những khía cạnh bạn cần rèn luyện thêm. Đây là các bài học giúp bạn phát triển toàn diện và cân bằng hơn.",
+    ngaysinhDesc: "Con số Ngày sinh thể hiện một tài năng hoặc điểm mạnh đặc biệt bạn sở hữu. Nó bổ sung ý nghĩa cho bức tranh tổng thể của bạn.",
+    dammeDesc: "Con số Đam mê cho biết điều gì mang lại hứng khởi cho bạn. Nó phản ánh những lĩnh vực hoặc hoạt động thu hút năng lượng của bạn.",
+    namcanhanDesc: "Con số Năm cá nhân phản ánh chủ đề chính ảnh hưởng đến bạn trong năm nay. Nó giúp bạn định hướng cơ hội và thử thách.",
+    thangcanhanDesc: "Con số Tháng cá nhân làm rõ năng lượng của Năm cá nhân. Nó cho biết trọng tâm và xu hướng trong ngắn hạn.",
+    ngaycanhanDesc: "Con số Ngày cá nhân phản ánh năng lượng ảnh hưởng trong ngày hôm nay. Nó hỗ trợ việc lựa chọn thời điểm và hành động phù hợp.",
+    changDesc: "Con số Chặng thể hiện các giai đoạn dài hạn trong cuộc đời. Mỗi chặng mang đến bài học và cơ hội phát triển riêng.",
+    tuoiDesc: "Con số Tuổi chặng cho biết độ tuổi tương ứng với giai đoạn hiện tại. Nó giúp bạn hiểu rõ vị trí của mình trong hành trình sống.",
+    thachthucDesc: "Con số Thách thức phản ánh những trở ngại bạn cần vượt qua. Các thử thách này giúp rèn luyện bản lĩnh và hoàn thiện bản thân.",
+    
     // rightHead: "Cách sử dụng",
     guide: "📝 Nhập họ tên theo thứ tự: Họ – Đệm – Tên.\n" +
         "   Ví dụ: John Michael Smith → Smith Michael John.\n\n" +

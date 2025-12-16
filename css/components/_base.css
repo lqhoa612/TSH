@@ -52,3 +52,9 @@ footer,
 main {
     padding: 10px;
 }
+
+body.spinner-active {
+    pointer-events: none;
+    user-select: none;
+    overflow: hidden;
+}

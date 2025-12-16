@@ -6,18 +6,21 @@ export class LanguageManager {
     constructor(defaultLanguage = 'en') {
         this.languages = { en: english, vi: vietnamese };
         this.currentLanguage = defaultLanguage;
-        this.translateElements = null;
-        this.placeholderElements = null;
     }
 
     init() {
         this.detectBrowserLanguage();
-        // this.loadSavedLanguage();
         this.applyTranslations(this.currentLanguage, false);
         this.setupLanguageSelector();
 
+        // 🔑 React to dynamic UI updates
+        document.addEventListener('ui:updated', () => {
+            this.applyTranslations(this.currentLanguage, false);
+        });
+
         console.log("LanguageManager initialized ✅");
     }
+
 
     setupLanguageSelector() {
         // Floating toggle button
@@ -56,29 +59,29 @@ export class LanguageManager {
         }
     }
 
-    applyTranslations(languageCode, dispatch = true) {
+    applyTranslations(languageCode = this.currentLanguage, dispatch = true) {
         const dictionary = this.languages[languageCode] || this.languages['en'];
 
-        if (!this.translateElements) this.translateElements = [...document.querySelectorAll('[data-translate]')];
-        if (!this.placeholderElements) this.placeholderElements = [...document.querySelectorAll('[data-placeholder]')];
+        // Always query fresh DOM
+        const translateElements = document.querySelectorAll('[data-translate]');
+        const placeholderElements = document.querySelectorAll('[data-placeholder]');
 
-        // Normal text content (for <p>, <button>, etc.)
-        this.translateElements.forEach(element => {
-            const key = element.getAttribute('data-translate');
-            const translateValue = dictionary[key];
-            if (translateValue && element.textContent !== translateValue) element.textContent = translateValue;
+        translateElements.forEach(element => {
+            const key = element.dataset.translate;
+            const value = dictionary[key];
+            if (value) element.textContent = value;
         });
 
-        // Apply placeholders for inputs
-        this.placeholderElements.forEach(element => {
-            const path = element.getAttribute('data-placeholder'); // e.g. "placeholders.name"
-            const placeholderValue = this.resolvePath(dictionary, path);
-            if (placeholderValue && element.placeholder !== placeholderValue) element.placeholder = placeholderValue;
+        placeholderElements.forEach(element => {
+            const path = element.dataset.placeholder;
+            const value = this.resolvePath(dictionary, path);
+            if (value) element.placeholder = value;
         });
 
         if (dispatch) {
-            // Notify listeners about language change
-            document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: languageCode } }));
+            document.dispatchEvent(
+                new CustomEvent('languageChanged', { detail: { lang: languageCode } })
+            );
         }
     }
 

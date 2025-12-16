@@ -50,13 +50,12 @@ export class ShareManager {
     // ---- DOWNLOAD PDF ----
     async downloadPDF() {
         this.shareMenu.classList.remove("show-menu");
-
-        this.ui.showSpinner(this.language);
-        await new Promise(r => setTimeout(r, 0)); // allow paint
-
+        // 1. Show spinner and WAIT for it to finish
+        await this.ui.showSpinner(this.language, 1500);
+        // 2. Now start heavy work
         const { blob, filename } = PDFGenerator.generate(this.language);
-
-        this.ui?.hideSpinner?.();
+        // 3. Hide spinner AFTER work
+        this.ui.hideSpinner();
 
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
@@ -76,27 +75,27 @@ export class ShareManager {
 
         this.shareMenu.classList.remove("show-menu");
 
-        this.ui.showSpinner(this.language);
-        await new Promise(r => setTimeout(r, 0)); // allow paint
+        // 1. Spinner first, fully
+        await this.ui.showSpinner(this.language, 1500);
 
+        // 2. Generate PDF only AFTER spinner finished
         const { blob, filename } = PDFGenerator.generate(this.language);
         const file = new File([blob], filename, { type: "application/pdf" });
 
-        this.ui?.hideSpinner?.();
+        this.ui.hideSpinner();
 
         const t = key =>
             this.language.languages[this.language.currentLanguage][key] || key;
 
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
             await navigator.share({
-                title: t("shareTitle") || "Pythagorean Numerology Calculator TSH Report",
-                text: t("shareText") || "Here is my numerology report.",
+                title: t("shareTitle"),
+                text: t("shareText"),
                 files: [file]
             });
         } else {
-            const url = URL.createObjectURL(blob);
-            window.open(url, "_blank");
-            alert(t("pdfOpenedTab") || "PDF opened in a new tab.");
+            window.open(URL.createObjectURL(blob), "_blank");
+            alert(t("pdfOpenedTab"));
         }
     }
 }

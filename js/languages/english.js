@@ -36,6 +36,26 @@ export const english = {
     tuoiLabel: "Milestone Ages: ",
     thachthucLabel: "Challenges: ",
 
+    duongdoiDesc: "Your Life Path number represents your core direction in life. It reveals your natural tendencies, lessons to learn, and the overall journey you are meant to experience.",
+    sumenhDesc: "Your Destiny number reflects your purpose and the goals you are meant to fulfill. It highlights the talents, abilities, and responsibilities that shape your life’s mission.",
+    LKDgdoiSumenhDesc: "This connection shows how your Life Path and Destiny work together. It reveals whether your natural direction and life purpose are in harmony or require adjustment.",
+    truongthanhDesc: "Your Maturity number describes the energy you grow into over time. It reflects the qualities you develop as you gain experience, wisdom, and self-awareness.",
+    linhhonDesc: "Your Soul Urge number represents your inner desires and emotional needs. It reveals what truly motivates you at a deep, personal level.",
+    nhancachDesc: "Your Personality number shows how others perceive you. It reflects the traits you naturally express in social situations and first impressions.",
+    LKLinhhonNhancachDesc: "This connection highlights the relationship between your inner self and outer expression. It shows how well your true desires align with how you present yourself.",
+    canbangDesc: "Your Balance number indicates how you handle challenges and unexpected situations. It reflects your emotional stability and problem-solving approach.",
+    tuduylytriDesc: "Your Rational Thought number describes how you think and analyze information. It reveals your logical approach to decisions and understanding the world.",
+    sucmanhtiemthucDesc: "Your Subconscious Strength number reflects your inner resilience. It shows how well you cope with pressure and rely on instinct when facing difficulties.",
+    sothieuDesc: "Your Missing Numbers reveal areas of life that require conscious development. They point to lessons that help you achieve personal balance.",
+    ngaysinhDesc: "Your Birth Day number highlights a specific talent or strength you carry naturally. It adds detail and nuance to your overall numerology profile.",
+    dammeDesc: "Your Passion number shows what energizes and excites you. It reveals activities, themes, or goals that naturally draw your interest.",
+    namcanhanDesc: "Your Personal Year number describes the main theme influencing you this year. It helps you understand the opportunities and challenges currently unfolding.",
+    thangcanhanDesc: "Your Personal Month number refines the energy of your Personal Year. It highlights short-term focus and priorities for the current month.",
+    ngaycanhanDesc: "Your Personal Day number reflects the energy influencing you today. It is useful for planning actions, decisions, and timing.",
+    changDesc: "Your Life Cycle indicates long-term phases in your life. Each cycle brings different lessons, opportunities, and areas of growth.",
+    tuoiDesc: "This number shows the age associated with your current life cycle or phase. It helps contextualize where you are in your personal development.",
+    thachthucDesc: "Your Challenge number represents obstacles you are meant to overcome. These challenges strengthen character and promote personal growth.",
+
     // rightHead: "How to use",
     guide: "📝 Enter your fullname in Last–Middle–First order.\n" +
         "   Example: John Michael Smith → Smith Michael John.\n\n" +

@@ -1,7 +1,13 @@
 // uiHelpers.js
+import { ResultCardManager } from "./ui/ResultCardManager.js";
+import { RESULT_SCHEMA } from "./config/resultSchema.js";
+import { LanguageManager } from "./languageManager.js";
+
 export class UIHelpers {
     constructor(numerologyManager) {
         this.numerology = numerologyManager;
+        this.resultCards = new ResultCardManager('result-cards-container');
+        this.languages = new LanguageManager();
     }
 
     initInputEvents() {
@@ -12,6 +18,9 @@ export class UIHelpers {
         if (calcBtn) {
             calcBtn.addEventListener("click", () => {
                 this.numerology.calculateFromInputs();
+                this.resultCards.render(RESULT_SCHEMA);
+                document.dispatchEvent(new Event('ui:updated'));
+                this.resultCards.enableCollapse();
             });
         }
 
@@ -108,21 +117,28 @@ export class UIHelpers {
     }
 
     // Spinner for PDF generation
-    showSpinner(languageManager) {
-        this._spinnerStart = performance.now();
+    showSpinner(languageManager, minDuration = 1000) {
         this.setRandomSpinnerText(languageManager);
-        document.getElementById("loadingSpinner")
-            ?.classList.remove("visually-hidden");
+
+        const spinner = document.getElementById("loadingSpinner");
+        if (!spinner) return Promise.resolve();
+
+        document.body.classList.add("spinner-active");
+        spinner.classList.remove("visually-hidden");
+        const start = performance.now();
+
+        // Return a promise that resolves only after minDuration
+        return new Promise(resolve => {
+            const elapsed = performance.now() - start;
+            const remaining = Math.max(0, minDuration - elapsed);
+            setTimeout(resolve, remaining);
+        });
     }
 
-    hideSpinner(minDuration = 2000) {
-        const elapsed = performance.now() - (this._spinnerStart || 0);
-        const remaining = Math.max(0, minDuration - elapsed);
-
-        setTimeout(() => {
-            document.getElementById("loadingSpinner")
-                ?.classList.add("visually-hidden");
-        }, remaining);
+    hideSpinner() {
+        const spinner = document.getElementById("loadingSpinner");
+        spinner?.classList.add("visually-hidden");
+        document.body.classList.remove("spinner-active");
     }
 
     setRandomSpinnerText(languageManager) {
@@ -137,8 +153,7 @@ export class UIHelpers {
             return;
         }
 
-        const randomIndex = Math.floor(Math.random() * texts.length);
-        el.textContent = texts[randomIndex];
+        el.textContent = texts[Math.floor(Math.random() * texts.length)];
     }
 
     toggleDropdown(id) {

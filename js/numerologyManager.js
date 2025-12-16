@@ -1,5 +1,6 @@
 // numerologyManager.js
 import { removeAccents, reduceToSingleDigit, parseMaskedDate } from './utils.js';
+
 export class NumerologyManager {
     constructor(uiHelperInstance) {
         this.ui = uiHelperInstance;
