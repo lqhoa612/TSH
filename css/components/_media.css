@@ -136,4 +136,12 @@
   .day-cell.active .personal-day {
     display: block !important;
   }
+
+  .collapsible .card-header {
+    font-size: 1.1rem;
+  }
+
+  .card-desc {
+    font-size: 1.05rem;
+  }
 }
