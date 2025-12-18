@@ -9,6 +9,7 @@ import { UIHelpers } from './uiHelpers.js';
 import { NumerologyManager } from './numerologyManager.js';
 import { ShareManager } from './shareManager.js';
 import { SaveDataManager } from './saveData.js';
+import { CalendarManager } from "./calendarManager.js";
 
 // Add event listener when the DOM content is loaded --->
 document.addEventListener('DOMContentLoaded', function () {
@@ -34,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
     ui.initMobileDayToggle();
     ui.enableMapScroll();
 
-
     const shareManager = new ShareManager(language);
     shareManager.ui = ui;
     shareManager.init();
@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const saveData = new SaveDataManager();
     saveData.init();
+
+    const calendar = new CalendarManager();
+    calendar.init();
 
     console.log("App initialized ✅");
 });

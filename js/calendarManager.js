@@ -1,157 +1,137 @@
 // calendarManager.js
 import { reduceToSingleDigit } from "./utils.js";
 import { LanguageManager } from "./languageManager.js";
-import { clearUI } from "./uiClearmanager.js"
+import { clearUI } from "./uiClearmanager.js";
 
 export class CalendarManager {
 
     constructor() {
         this.container = document.getElementById("personalCalendar");
         this.languageManager = new LanguageManager();
-        if (this.languageManager.getLanguage() == null) {
-            this.languageManager.currentLanguage = 'en';
-        }
-    }
 
-    calendarHandler() {
-        const namcanhanBtn = document.getElementById("namcanhanBtn");
-        const thangcanhanBtn = document.getElementById("thangcanhanBtn");
-
-        if (namcanhanBtn) {
-            namcanhanBtn.addEventListener("click", () => {
-                this.displayPersonalYearCalendar();
-            });
+        if (!this.languageManager.getLanguage()) {
+            this.languageManager.currentLanguage = "en";
         }
 
-        if (thangcanhanBtn) {
-            thangcanhanBtn.addEventListener("click", () => {
-                this.displayPersonalMonthCalendar();
-            });
-        }
-    }
-
-    // ---------------------------------------------------
-    // PERSONAL YEAR CALENDAR
-    // ---------------------------------------------------
-    displayPersonalYearCalendar() {
-        clearUI();
-        const namcanhan = parseInt(document.getElementById("namcanhan").textContent);
-
-        if (isNaN(namcanhan)) {
-            console.error("Personal year unavailable.");
-            return;
-        }
-
-        const language = this.languageManager.getLanguage();
         const today = new Date();
-        const year = today.getFullYear();
-        const currentMonth = today.getMonth() + 1;
-
-        // TITLE
-        const title = document.createElement("h3");
-        title.textContent = language === "en"
-            ? `Personal Months for ${year} (Personal Year: ${namcanhan})`
-            : `Tháng cá nhân trong năm ${year} (Năm cá nhân: ${namcanhan})`;
-
-        this.container.appendChild(title);
-
-        // LEGEND
-        this.appendLegend(language);
-
-        // LIST
-        const list = this.generatePersonalYearList(namcanhan, language, year, currentMonth);
-        this.container.appendChild(list);
+        this.state = {
+            year: today.getFullYear(),
+            month: today.getMonth(), // 0–11
+            today
+        };
     }
 
-    appendLegend(language) {
-        const legend = document.createElement("div");
-        legend.id = "personalMonthLegend";
-        legend.className = "personal-month-card";
+    init() {
+        const calculateBtn = document.getElementById("calculateBtn");
 
-        const monthTxt = language === "en" ? "MONTH" : "THÁNG";
-        const personalTxt = language === "en" ? "PERSONAL MONTH" : "THÁNG CÁ NHÂN";
+        calculateBtn.addEventListener("click", () => {
+            // allow numerology calculations to complete first
+            setTimeout(() => {
+                this.showAndRender();
+            }, 0);
+        });
+    }
 
-        legend.innerHTML = `
-            <span class="month-name">${monthTxt}</span>
-            <span class="month-number">${personalTxt}</span>
+    // --------------------------------------------------
+    // CORE RENDER
+    // --------------------------------------------------
+    renderUnifiedCalendar(year, month, direction = null) {
+        if (this.container) {
+            this.container.innerHTML = "";
+        } else {
+            this.container = document.getElementById("personalCalendar");
+            this.container.innerHTML = "";
+        }
+
+        const gridWrapper = document.createElement("div");
+        gridWrapper.className = "calendar-card";
+
+        const header = this.renderHeader(year, month);
+        const grid = this.renderDayGrid(year, month);
+
+        if (direction) {
+            grid.classList.add(direction === "next" ? "enter-right" : "enter-left");
+        }
+
+        gridWrapper.appendChild(header);
+        gridWrapper.appendChild(grid);
+        this.container.appendChild(gridWrapper);
+    }
+
+    showAndRender() {
+        this.container.classList.add("active");
+        this.renderUnifiedCalendar(this.state.year, this.state.month);
+    }
+
+    // --------------------------------------------------
+    // HEADER
+    // --------------------------------------------------
+    renderHeader(year, month) {
+        const lang = this.languageManager.getLanguage();
+
+        const systemMonthName = new Date(year, month, 1)
+            .toLocaleString(lang, { month: "long", year: "numeric" });
+
+
+        const birthText = document.getElementById("birthdate2")?.textContent;
+        const [birthDay, birthMonth, birthYear] = birthText.split("/").map(Number);
+        const reducedYear = reduceToSingleDigit(year, false);
+        const reducedBirthMonthDay = reduceToSingleDigit(birthMonth + birthDay, false);
+        const personalYear = reduceToSingleDigit(reducedYear + reducedBirthMonthDay, false);
+        const reducedMonth = reduceToSingleDigit(month + 1, false);
+        const personalMonth = reduceToSingleDigit(personalYear + reducedMonth, false);
+
+        const header = document.createElement("div");
+        header.className = "calendar-header";
+
+        header.innerHTML = `
+            <div class="calendar-titles">
+                <div class="system-title">${systemMonthName}</div>
+                <div class="personal-title">
+                    ${lang === "en" ? "Personal:" : "Cá nhân:"}
+                    ${lang === "en" ? "Year" : "Năm"} ${personalYear} ·
+                    ${lang === "en" ? "Month" : "Tháng"} ${personalMonth}
+                </div>
+            </div>
+            <div class="calendar-nav">
+                <button class="nav-btn" data-dir="prev">◀</button>
+                <button class="nav-btn" data-dir="next">▶</button>
+            </div>
         `;
 
-        this.container.appendChild(legend);
+        header.querySelectorAll(".nav-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const dir = btn.dataset.dir;
+                const newMonth = dir === "next" ? month + 1 : month - 1;
+                const newDate = new Date(year, newMonth, 1);
+
+                if (this.isBeforeBirth(newDate)) return;
+
+                this.state.year = newDate.getFullYear();
+                this.state.month = newDate.getMonth();
+                this.renderUnifiedCalendar(
+                    this.state.year,
+                    this.state.month,
+                    dir
+                );
+            });
+        });
+
+        return header;
     }
 
-    generatePersonalYearList(namcanhan, language, year, currentMonth) {
-        const list = document.createElement("div");
-        list.id = "personalYearList";
-
-        for (let m = 1; m <= 12; m++) {
-            const reducedMonth = reduceToSingleDigit(m, false);
-            const preReduced = namcanhan + reducedMonth;
-            const personalMonth = reduceToSingleDigit(preReduced, false);
-
-            const name = new Date(year, m - 1, 1)
-                .toLocaleString(language, { month: "long" });
-
-            const card = document.createElement("div");
-            card.className = "personal-month-card";
-            card.innerHTML = `
-                <span class="month-name">${name}</span>
-                <span class="month-number">${personalMonth}</span>
-            `;
-
-            if (m === currentMonth) card.classList.add("current-month-row");
-            list.appendChild(card);
-        }
-
-        return list;
-    }
-
-    // ---------------------------------------------------
-    // PERSONAL MONTH CALENDAR
-    // ---------------------------------------------------
-    displayPersonalMonthCalendar() {
-        clearUI();
-        const thangcanhan = parseInt(document.getElementById("thangcanhan").textContent);
-        if (isNaN(thangcanhan)) return;
-
-        const now = new Date();
-        const y = now.getFullYear();
-        const m = now.getMonth();
-        const day = now.getDate();
-
-        const language = this.languageManager.getLanguage();
-        const monthName = new Date(y, m, 1).toLocaleString(language, { month: "long" });
-
-        // TITLE
-        const header = document.createElement("h3");
-        header.textContent = language === "en"
-            ? `Personal Day Calendar for ${monthName} (Personal Month: ${thangcanhan})`
-            : `Lịch Ngày Cá Nhân trong tháng ${m + 1} (Tháng cá nhân: ${thangcanhan})`;
-
-        this.container.appendChild(header);
-
-        // GRID
-        const grid = this.generatePersonalMonthGrid(y, m, day, thangcanhan);
-        this.container.appendChild(grid);
-
-        this.enableMobileDayToggle();
-    }
-
-    generatePersonalMonthGrid(year, month, today, thangcanhan) {
-        const first = new Date(year, month, 1);
-        const last = new Date(year, month + 1, 0);
-
-        const days = last.getDate();
-        const startDay = (first.getDay() + 6) % 7; // Monday=0
-
-        const grid = document.createElement("div");
-        grid.className = "personal-day-calendar";
-
+    // --------------------------------------------------
+    // DAY GRID
+    // --------------------------------------------------
+    renderDayGrid(year, month) {
         const lang = this.languageManager.getLanguage();
+        const grid = document.createElement("div");
+        grid.className = "calendar-grid";
+
         const daysOfWeek = lang === "en"
             ? ["M", "T", "W", "T", "F", "S", "S"]
-            : ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "CN"];
+            : ["T2", "T3", "T4", "T5", "T6", "T7", "CN"];
 
-        // Headers
         daysOfWeek.forEach(d => {
             const h = document.createElement("div");
             h.className = "day-header";
@@ -159,53 +139,81 @@ export class CalendarManager {
             grid.appendChild(h);
         });
 
-        // Empty pre-cells
+        const first = new Date(year, month, 1);
+        const last = new Date(year, month + 1, 0);
+        const startDay = (first.getDay() + 6) % 7;
+
         for (let i = 0; i < startDay; i++) {
-            const empty = document.createElement("div");
-            empty.className = "day-cell empty";
-            grid.appendChild(empty);
+            grid.appendChild(this.emptyCell());
         }
 
-        // Days
-        let personalDay = reduceToSingleDigit(thangcanhan + 1, false);
+        const birthText = document.getElementById("birthdate2")?.textContent;
+        const [birthDay, birthMonth, birthYear] = birthText.split("/").map(Number);
+        const reducedYear = reduceToSingleDigit(year, false);
+        const reducedBirthMonthDay = reduceToSingleDigit(birthMonth + birthDay, false);
+        const personalYear = reduceToSingleDigit(reducedYear + reducedBirthMonthDay, false);
+        const reducedMonth = reduceToSingleDigit(month + 1, false);
+        const personalMonth = reduceToSingleDigit(personalYear + reducedMonth, false);
 
-        for (let d = 1; d <= days; d++) {
+        for (let d = 1; d <= last.getDate(); d++) {
             const cell = document.createElement("div");
             cell.className = "day-cell";
 
-            if (d === today) cell.classList.add("today");
+            const date = new Date(year, month, d);
+            if (this.isToday(date)) cell.classList.add("today");
 
-            const dateEl = document.createElement("div");
-            dateEl.className = "day-number";
-            dateEl.textContent = d;
+            const systemEl = document.createElement("div");
+            systemEl.className = "system-day";
+            systemEl.textContent = d;
 
-            const pEl = document.createElement("div");
-            pEl.className = "personal-day";
-            pEl.textContent = personalDay;
+            const personalEl = document.createElement("div");
+            personalEl.className = "personal-day";
+            personalEl.textContent = reduceToSingleDigit(
+                personalMonth + reduceToSingleDigit(d, false),
+                false
+            );
 
-            cell.appendChild(dateEl);
-            cell.appendChild(pEl);
+            cell.appendChild(systemEl);
+            cell.appendChild(personalEl);
             grid.appendChild(cell);
 
-            personalDay++;
-            if (personalDay > 9) personalDay = 1;
+            // mobile toggle
+            cell.addEventListener("click", () => {
+                document
+                    .querySelectorAll(".day-cell.active")
+                    .forEach(c => c.classList.remove("active"));
+                cell.classList.add("active");
+            });
         }
 
         return grid;
     }
 
-    enableMobileDayToggle() {
-        const cells = document.querySelectorAll('.day-cell');
-
-        cells.forEach(cell => {
-            cell.addEventListener('click', () => {
-                // remove from others first
-                cells.forEach(c => c.classList.remove('active'));
-
-                // toggle on this one
-                cell.classList.add('active');
-            });
-        });
+    emptyCell() {
+        const div = document.createElement("div");
+        div.className = "day-cell empty";
+        return div;
     }
 
+    // --------------------------------------------------
+    // HELPERS
+    // --------------------------------------------------
+    isToday(date) {
+        const t = this.state.today;
+        return (
+            date.getDate() === t.getDate() &&
+            date.getMonth() === t.getMonth() &&
+            date.getFullYear() === t.getFullYear()
+        );
+    }
+
+    isBeforeBirth(date) {
+        const birthText = document.getElementById("birthdate2")?.textContent;
+        if (!birthText) return false;
+
+        const [d, m, y] = birthText.split("/").map(Number);
+        const birth = new Date(y, m - 1, d);
+
+        return date < new Date(birth.getFullYear(), birth.getMonth(), 1);
+    }
 }

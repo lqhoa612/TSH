@@ -1,108 +1,126 @@
-/* _calendar.css - Personal Calendars (Year and Day) */
+/* ===============================
+   Unified Calendar
+   =============================== */
 
-/* container */
-#personalCalendar { padding:8px 0; }
-
-/* Legend header */
-#personalMonthLegend {
-  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 70%, white 10%), var(--accent-light));
-  color: var(--text);
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  font-weight:700;
-  width:100%;
-  max-width: var(--ui-width);
-  margin: 0 auto 8px auto;
-  text-align:left;
-}
-
-/* Month list */
-#personalYearList {
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  max-width: var(--ui-width);
-  margin: 0 auto;
-}
-.personal-month-card {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+.calendar-card {
   background: var(--paper);
-  border: 1px solid var(--border);
-  padding: 10px 12px;
-  border-radius: 10px;
-  font-weight:700;
+  border-radius: var(--radius);
+  padding: 12px;
+  overflow: hidden;
 }
 
-/* Highlight */
-.personal-month-card.current-month-row {
-  background: color-mix(in srgb, var(--accent) 25%, var(--paper) 75%);
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--border) 55%);
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-/* Month grid (personal-day-calendar) */
-.personal-day-calendar {
-  display:grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap:6px;
-  background: var(--paper);
-  border:1px solid var(--border);
-  padding:8px;
-  border-radius: 10px;
-  max-width: 720px;
-  margin:12px auto;
+.system-title {
+  font-weight: 700;
+  font-size: 1.05rem;
 }
 
-/* header row */
-.personal-day-calendar .day-header {
-  text-align:center;
-  font-weight:700;
-  font-size:0.8rem;
-  color:var(--text-muted);
-  padding:6px 0;
-}
-
-/* day cells */
-.personal-day-calendar .day-cell {
-  aspect-ratio:1/1;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
-  align-items:center;
-  padding:6px 4px;
-  background: color-mix(in srgb, var(--bg-soft) 85%, var(--paper) 15%);
-  border-radius:8px;
-  border:1px solid var(--border);
-  position:relative;
-  overflow:hidden;
-}
-
-/* date number small */
-.personal-day-calendar .day-number {
-  font-size:0.85rem;
-  font-weight:700;
-  color:var(--text-muted);
-  margin-top:2px;
-}
-
-/* personal day big */
-.personal-day-calendar .personal-day {
-  font-size:1.4rem;
-  font-weight:900;
+.personal-title {
+  font-size: 0.9rem;
   color: var(--accent);
-  margin-top: 4px;
-  transition: opacity .12s ease;
 }
 
-/* desktop hover -> show personal, hide day */
-.personal-day-calendar .day-cell:hover .personal-day { opacity:1; }
-.personal-day-calendar .day-cell:hover .day-number { opacity:0; }
+.calendar-nav .nav-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 4px 8px;
+  cursor: pointer;
+  color: var(--text);
+}
 
-/* mobile: default hide personal-day, will be toggled by JS (class .touch-hover) */
-.personal-day-calendar .day-cell.touch-hover .personal-day { opacity:1; }
-.personal-day-calendar .day-cell.touch-hover .day-number { opacity:0; }
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  animation: fadeSlide 0.35s ease;
+}
 
-/* today */
-.personal-day-calendar .today { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent); transform:scale(1.01); }
+.day-header {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+#personalCalendar .day-cell {
+    position: relative;
+    display: flex; /* Single flex declaration */
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    cursor: pointer;
+    overflow: hidden;
+    background: var(--bg-soft);
+    border-radius: var(--radius);
+}
+
+.day-cell.empty {
+  background: transparent;
+  cursor: default;
+}
+
+#personalCalendar .system-day,
+#personalCalendar .personal-day {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+    line-height: 1;
+    transition: none; /* Instant swap to prevent ghosting */
+}
+
+#personalCalendar .personal-day {
+    display: none !important;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--accent);
+}
+
+#personalCalendar .system-day {
+    display: block !important;
+}
+
+/* Desktop hover + Mobile toggle */
+#personalCalendar .day-cell:hover .system-day,
+#personalCalendar .day-cell.active .system-day {
+    display: none !important;
+}
+
+#personalCalendar .day-cell:hover .personal-day,
+#personalCalendar .day-cell.active .personal-day {
+    display: block !important;
+}
+
+/* Today highlight */
+.day-cell.today {
+  outline: 2px solid var(--accent);
+}
+
+/* Animation */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+#personalCalendar {
+  display: none;
+}
+
+#personalCalendar.active {
+  display: block;
+}

@@ -61,7 +61,7 @@ export class NumerologyManager {
         const ngaysinhIndex = reduceToSingleDigit(ngaysinh, true);
 
         // Personal date, milestones, challenges
-        const namcanhan = reduceToSingleDigit(ngaysinh + thangsinh + reduceToSingleDigit(namsinh, false), false);
+        const namcanhan = reduceToSingleDigit(ngaysinh + thangsinh + reduceToSingleDigit((new Date()).getFullYear(), false), false);
         const thangcanhan = reduceToSingleDigit(namcanhan + reduceToSingleDigit((new Date()).getMonth() + 1, false), false);
         // In the original code you used current month/day. Here we leave day used by caller if needed:
         const ngaycanhan = reduceToSingleDigit(thangcanhan + reduceToSingleDigit((new Date()).getDate(), false), false);

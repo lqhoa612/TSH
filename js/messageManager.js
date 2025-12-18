@@ -1,14 +1,11 @@
 // messageManager.js
 import { clearUI } from "./uiClearmanager.js";
-import { CalendarManager } from "./calendarManager.js"
 
 export class MessageManager {
     constructor(languageManager) {
         this.languageManager = languageManager;
         this.languages = languageManager.languages;
         this.currentLanguage = languageManager.getLanguage();
-
-        this.calendarManager = new CalendarManager();
 
         // message containers
         this.messageContainer = document.getElementById("messages");
@@ -23,7 +20,6 @@ export class MessageManager {
     init() {
         this.setupButtonListeners();
         this.handleLanguageChange();
-        this.calendarManager.calendarHandler();
 
         console.log("MessageManager initialized ✅");
     }

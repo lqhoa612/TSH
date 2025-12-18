@@ -12,14 +12,14 @@
   cursor: pointer;
   padding: 6px 2px;
   color: var(--text);
-  font-size: 1.05rem;
+  font-size: 0.9rem;
   line-height: 1.35;
 }
 
 /* Emphasize the result value slightly */
 .collapsible .card-header span#duongdoi,
 .collapsible .card-header span[id] {
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: 700;
 }
 

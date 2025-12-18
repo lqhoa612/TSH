@@ -14,6 +14,8 @@ export const RESULT_SCHEMA = [
   { key: 'sothieu', label: 'sothieuLabel', desc: 'sothieuDesc' },
   { key: 'ngaysinh', label: 'ngaysinhLabel', desc: 'ngaysinhDesc' },
   { key: 'damme', label: 'dammeLabel', desc: 'dammeDesc' },
+  { key: 'namcanhan', label: 'namcanhanLabel', desc: 'namcanhanDesc' },
+  { key: 'thangcanhan', label: 'thangcanhanLabel', desc: 'thangcanhanDesc' },
   { key: 'ngaycanhan', label: 'ngaycanhanLabel', desc: 'ngaycanhanDesc' },
   { key: 'chang', label: 'changLabel', desc: 'changDesc' },
   { key: 'tuoi', label: 'tuoiLabel', desc: 'tuoiDesc' },
