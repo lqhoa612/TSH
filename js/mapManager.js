@@ -2,8 +2,8 @@
 import { clearUI } from "./uiClearmanager.js";
 
 export class MapManager {
-    constructor(languageManager) {
-        this.languageManager = languageManager;
+    constructor(LanguageManager) {
+        this.languageManager = LanguageManager;
         this.birthdateMap = null;
         this.combinedMap = null;
         this.birthComments = null;
@@ -33,6 +33,15 @@ export class MapManager {
         if (!yourMapBtn) return;
 
         yourMapBtn.addEventListener('click', () => {
+            const name = document.getElementById("fullname")?.innerText.trim();
+            const lifePath = document.getElementById("duongdoi")?.innerText.trim();
+
+            if (!(name && name.length > 0 && lifePath && lifePath.length > 0)) {
+                alert(this.languageManager.languages[this.languageManager.currentLanguage].pdfNullWarning
+                    || "Please generate your numerology report first.");
+                return;
+            }
+
             this.lastBirthdate = document.getElementById('birthdate').value;
             this.lastName = document.getElementById('name').value;
 

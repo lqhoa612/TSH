@@ -19,6 +19,9 @@ export class CalendarManager {
             month: today.getMonth(), // 0–11
             today
         };
+
+        this.overlayMode = null;
+        this.ignoreOutsideClose = false;
     }
 
     init() {
@@ -35,32 +38,174 @@ export class CalendarManager {
     // --------------------------------------------------
     // CORE RENDER
     // --------------------------------------------------
-    renderUnifiedCalendar(year, month, direction = null) {
-        if (this.container) {
-            this.container.innerHTML = "";
-        } else {
+    renderUnifiedCalendar(direction = null) {
+        if (!this.container) {
             this.container = document.getElementById("personalCalendar");
-            this.container.innerHTML = "";
         }
+
+        this.container.innerHTML = "";
 
         const gridWrapper = document.createElement("div");
         gridWrapper.className = "calendar-card";
 
-        const header = this.renderHeader(year, month);
-        const grid = this.renderDayGrid(year, month);
+        const header = this.renderHeader(this.state.year, this.state.month);
+        const grid = this.renderDayGrid(this.state.year, this.state.month);
 
         if (direction) {
             grid.classList.add(direction === "next" ? "enter-right" : "enter-left");
         }
 
         gridWrapper.appendChild(header);
+
+        if (this.overlayMode) {
+            gridWrapper.appendChild(this.renderOverlay());
+        }
+
         gridWrapper.appendChild(grid);
         this.container.appendChild(gridWrapper);
     }
 
+    renderOverlay() {
+        const overlay = document.createElement("div");
+        overlay.className = "calendar-overlay";
+
+        if (this.overlayMode === "month") {
+            overlay.appendChild(this.renderMonthGrid(this.state.year));
+        }
+
+        if (this.overlayMode === "year") {
+            overlay.appendChild(this.renderYearGrid());
+        }
+
+        this.bindOutsideClick(overlay);
+
+        requestAnimationFrame(() => {
+            if (this.overlayMode === "year") {
+                const current = overlay.querySelector('[data-current="true"]');
+                if (current) {
+                    current.scrollIntoView({
+                        block: "center",
+                        behavior: "instant"
+                    });
+                }
+            }
+        });
+
+        return overlay;
+    }
+
+    renderMonthGrid(year) {
+        const lang = this.languageManager.getLanguage();
+        const grid = document.createElement("div");
+        grid.className = "month-grid";
+
+        const birth = this.getBirthDate();
+
+        for (let m = 0; m < 12; m++) {
+            const name = new Date(year, m, 1).toLocaleString(lang, { month: "short" });
+            const btn = document.createElement("button");
+            btn.textContent = name;
+
+            if (m === this.state.month) {
+                btn.classList.add("active");
+            }
+
+            const target = new Date(year, m, 1);
+            if (birth && target < new Date(birth.getFullYear(), birth.getMonth(), 1)) {
+                btn.disabled = true;
+            }
+
+            btn.addEventListener("click", (e) => {
+                e.stopPropagation(); // CRITICAL
+                if (this.activeCloseHandler) {
+                    document.removeEventListener("click", this.activeCloseHandler);
+                    this.activeCloseHandler = null;
+                }
+                this.overlayMode = null;
+                if (m !== undefined) this.state.month = m;
+                this.renderUnifiedCalendar("next");
+            });
+
+            grid.appendChild(btn);
+        }
+
+        const yearBtn = document.createElement("button");
+        yearBtn.className = "year-switch";
+        yearBtn.textContent = this.state.year;
+
+        yearBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); // ◀ ADD THIS LINE
+            this.overlayMode = "year";
+            this.renderUnifiedCalendar();
+        });
+
+        grid.appendChild(yearBtn);
+        return grid;
+    }
+
+    renderYearGrid() {
+        const grid = document.createElement("div");
+        grid.className = "year-grid";
+
+        const birth = this.getBirthDate();
+        const startYear = birth ? birth.getFullYear() : this.state.year - 100;
+        const endYear = this.state.year + 100;
+
+        for (let y = startYear; y <= endYear; y++) {
+            const btn = document.createElement("button");
+            btn.textContent = y;
+
+            if (y === this.state.year) {
+                btn.classList.add("active");
+                btn.dataset.current = "true";
+            }
+
+            btn.addEventListener("click", (e) => {
+                e.stopPropagation(); // CRITICAL
+                if (this.activeCloseHandler) {
+                    document.removeEventListener("click", this.activeCloseHandler);
+                    this.activeCloseHandler = null;
+                }
+                this.overlayMode = null;
+                if (y !== undefined) this.state.year = y;
+                this.renderUnifiedCalendar("next");
+            });
+
+            grid.appendChild(btn);
+        }
+
+        return grid;
+    }
+
+    bindOutsideClick(overlayEl) {
+        // 1. If there's an old listener still hanging around, kill it now
+        if (this.activeCloseHandler) {
+            document.removeEventListener("click", this.activeCloseHandler);
+        }
+
+        // 2. Define the new listener
+        this.activeCloseHandler = (e) => {
+            const isHeader = e.target.closest(".calendar-header");
+            const isOverlay = overlayEl.contains(e.target);
+
+            if (!isHeader && !isOverlay) {
+                this.overlayMode = null;
+                // Clean up before re-rendering
+                document.removeEventListener("click", this.activeCloseHandler);
+                this.activeCloseHandler = null;
+                this.renderUnifiedCalendar();
+            }
+        };
+
+        // 3. Attach it with a tiny delay
+        setTimeout(() => {
+            document.addEventListener("click", this.activeCloseHandler);
+        }, 10);
+    }
+
     showAndRender() {
         this.container.classList.add("active");
-        this.renderUnifiedCalendar(this.state.year, this.state.month);
+        this.renderUnifiedCalendar();
     }
 
     // --------------------------------------------------
@@ -86,7 +231,7 @@ export class CalendarManager {
 
         header.innerHTML = `
             <div class="calendar-titles">
-                <div class="system-title">${systemMonthName}</div>
+                <div class="system-title clickable" id="monthToggle">${systemMonthName}</div>
                 <div class="personal-title">
                     ${lang === "en" ? "Personal:" : "Cá nhân:"}
                     ${lang === "en" ? "Year" : "Năm"} ${personalYear} ·
@@ -109,12 +254,14 @@ export class CalendarManager {
 
                 this.state.year = newDate.getFullYear();
                 this.state.month = newDate.getMonth();
-                this.renderUnifiedCalendar(
-                    this.state.year,
-                    this.state.month,
-                    dir
-                );
+                this.renderUnifiedCalendar(dir);
             });
+        });
+
+        header.querySelector("#monthToggle").addEventListener("click", (e) => {
+            e.stopPropagation();
+            this.overlayMode = this.overlayMode === "month" ? null : "month";
+            this.renderUnifiedCalendar();
         });
 
         return header;
@@ -215,5 +362,12 @@ export class CalendarManager {
         const birth = new Date(y, m - 1, d);
 
         return date < new Date(birth.getFullYear(), birth.getMonth(), 1);
+    }
+
+    getBirthDate() {
+        const text = document.getElementById("birthdate2")?.textContent;
+        if (!text) return null;
+        const [d, m, y] = text.split("/").map(Number);
+        return new Date(y, m - 1, d);
     }
 }

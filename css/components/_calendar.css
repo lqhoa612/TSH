@@ -49,15 +49,16 @@
 }
 
 #personalCalendar .day-cell {
-    position: relative;
-    display: flex; /* Single flex declaration */
-    align-items: center;
-    justify-content: center;
-    height: 42px;
-    cursor: pointer;
-    overflow: hidden;
-    background: var(--bg-soft);
-    border-radius: var(--radius);
+  position: relative;
+  display: flex;
+  /* Single flex declaration */
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  cursor: pointer;
+  overflow: hidden;
+  background: var(--bg-soft);
+  border-radius: var(--radius);
 }
 
 .day-cell.empty {
@@ -67,36 +68,37 @@
 
 #personalCalendar .system-day,
 #personalCalendar .personal-day {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    white-space: nowrap;
-    line-height: 1;
-    transition: none; /* Instant swap to prevent ghosting */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  white-space: nowrap;
+  line-height: 1;
+  transition: none;
+  /* Instant swap to prevent ghosting */
 }
 
 #personalCalendar .personal-day {
-    display: none !important;
-    font-weight: 700;
-    font-size: 1.05rem;
-    color: var(--accent);
+  display: none !important;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--accent);
 }
 
 #personalCalendar .system-day {
-    display: block !important;
+  display: block !important;
 }
 
 /* Desktop hover + Mobile toggle */
 #personalCalendar .day-cell:hover .system-day,
 #personalCalendar .day-cell.active .system-day {
-    display: none !important;
+  display: none !important;
 }
 
 #personalCalendar .day-cell:hover .personal-day,
 #personalCalendar .day-cell.active .personal-day {
-    display: block !important;
+  display: block !important;
 }
 
 /* Today highlight */
@@ -123,4 +125,102 @@
 
 #personalCalendar.active {
   display: block;
+}
+
+/* ===============================
+   Calendar Overlay
+   =============================== */
+
+.system-title.clickable {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.calendar-overlay {
+  position: relative;
+  margin-top: 6px;
+  padding: 6px 0;
+  display: flex;
+  justify-content: center;
+  z-index: 5;
+}
+
+.month-grid,
+.year-grid {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.month-grid {
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 420px;
+}
+
+.year-grid {
+  width: 100%;
+  max-width: 420px;
+  max-height: 360px;
+  /* bigger scroll area */
+  overflow-y: auto;
+
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.year-grid button {
+  padding: 10px 6px;
+  font-size: 0.95rem;
+}
+
+.month-grid button,
+.year-grid button {
+  padding: 10px 8px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 500;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
+}
+
+.month-grid button:hover,
+.year-grid button:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.month-grid button.active,
+.year-grid button.active {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.month-grid button:disabled,
+.year-grid button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.year-switch {
+  grid-column: span 4;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.12);
 }
