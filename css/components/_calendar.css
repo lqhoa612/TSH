@@ -96,13 +96,17 @@
 /* Desktop hover + Mobile toggle */
 #personalCalendar .day-cell:hover .system-day,
 #personalCalendar .day-cell.active .system-day {
-  display: none !important;
+  opacity: 0;
   background-color: inherit;
 }
 
 #personalCalendar .day-cell:hover .personal-day,
 #personalCalendar .day-cell.active .personal-day {
-  display: block !important;
+  opacity: 1;
+}
+
+.day-cell.day-cell.active {
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 /* Today highlight */
