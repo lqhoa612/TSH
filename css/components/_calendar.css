@@ -1,6 +1,4 @@
-/* ===============================
-   Unified Calendar
-   =============================== */
+/* _calendar.css */
 
 .calendar-card {
   background: var(--paper);
@@ -72,7 +70,6 @@
   background: var(--bg-soft);
 }
 
-
 .day-cell.empty {
   background: transparent;
   cursor: default;
@@ -87,40 +84,38 @@
   pointer-events: none;
   white-space: nowrap;
   line-height: 1;
-  transition: none;
-  /* Instant swap to prevent ghosting */
+  transition: opacity 0.15s ease;
 }
 
 #personalCalendar .personal-day {
-  display: none !important;
+  opacity: 0 !important;
   font-weight: 700;
   font-size: 1.05rem;
   color: var(--accent);
 }
 
 #personalCalendar .system-day {
-  display: block !important;
+  opacity: 1;
 }
 
 /* Desktop hover + Mobile toggle */
 #personalCalendar .day-cell:hover .system-day,
 #personalCalendar .day-cell.active .system-day {
-  display: none !important;
-  background-color: inherit;
+  opacity: 0;
 }
 
 #personalCalendar .day-cell:hover .personal-day,
 #personalCalendar .day-cell.active .personal-day {
-  display: block !important;
+  opacity: 1 !important;
 }
 
-#personalCalendar .day-cell.active {
-  background-color: rgba(255, 255, 255, 0.08);
+#personalCalendar .day-cell:active {
+  background-color: var(--bg-soft);
 }
 
 /* Today highlight */
-.day-cell.today {
-  outline: 2px solid var(--accent);
+#personalCalendar .day-cell.today {
+  box-shadow: 0 0 0 2px var(--accent) inset;
 }
 
 /* Animation */
