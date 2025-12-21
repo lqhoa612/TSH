@@ -1,4 +1,6 @@
-/* _calendar.css */
+/* ===============================
+   Unified Calendar
+   =============================== */
 
 .calendar-card {
   background: var(--paper);
@@ -70,6 +72,7 @@
   background: var(--bg-soft);
 }
 
+
 .day-cell.empty {
   background: transparent;
   cursor: default;
@@ -102,13 +105,13 @@
 /* Desktop hover + Mobile toggle */
 #personalCalendar .day-cell:hover .system-day,
 #personalCalendar .day-cell.active .system-day {
-  opacity: 0;
+  display: none !important;
   background-color: inherit;
 }
 
 #personalCalendar .day-cell:hover .personal-day,
 #personalCalendar .day-cell.active .personal-day {
-  opacity: 1;
+  display: block !important;
 }
 
 #personalCalendar .day-cell.active {
