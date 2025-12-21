@@ -271,6 +271,8 @@ export class CalendarManager {
     // DAY GRID
     // --------------------------------------------------
     renderDayGrid(year, month) {
+        document.querySelectorAll(".day-cell.active").forEach(c => c.classList.remove("active"));
+
         const lang = this.languageManager.getLanguage();
         const grid = document.createElement("div");
         grid.className = "calendar-grid";

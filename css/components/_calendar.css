@@ -59,6 +59,9 @@
   overflow: hidden;
   background: var(--bg-soft);
   border-radius: var(--radius);
+
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
 .day-cell.empty {
@@ -94,6 +97,7 @@
 #personalCalendar .day-cell:hover .system-day,
 #personalCalendar .day-cell.active .system-day {
   display: none !important;
+  background-color: inherit;
 }
 
 #personalCalendar .day-cell:hover .personal-day,
