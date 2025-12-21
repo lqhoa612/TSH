@@ -1,6 +1,4 @@
-/* ===============================
-   Unified Calendar
-   =============================== */
+/* _calendar.css */
 
 .calendar-card {
   background: var(--paper);
@@ -62,6 +60,14 @@
 
   -webkit-tap-highlight-color: transparent;
   outline: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+#personalCalendar .day-cell:focus,
+#personalCalendar .day-cell:focus-visible {
+  outline: none;
+  background: var(--bg-soft);
 }
 
 .day-cell.empty {
@@ -105,7 +111,7 @@
   opacity: 1;
 }
 
-.day-cell.day-cell.active {
+#personalCalendar .day-cell.active {
   background-color: rgba(255, 255, 255, 0.08);
 }
 
