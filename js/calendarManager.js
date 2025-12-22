@@ -122,6 +122,7 @@ export class CalendarManager {
                     this.activeCloseHandler = null;
                 }
                 this.overlayMode = null;
+                this.blurActiveElement(); // 🔴 ADD
                 if (m !== undefined) this.state.month = m;
                 this.renderUnifiedCalendar("next");
             });
@@ -166,6 +167,7 @@ export class CalendarManager {
                     document.removeEventListener("click", this.activeCloseHandler);
                     this.activeCloseHandler = null;
                 }
+                this.blurActiveElement(); // 🔴 ADD
                 this.overlayMode = null;
                 if (y !== undefined) this.state.year = y;
                 this.renderUnifiedCalendar("next");
@@ -307,6 +309,7 @@ export class CalendarManager {
         for (let d = 1; d <= last.getDate(); d++) {
             const cell = document.createElement("div");
             cell.className = "day-cell";
+            cell.tabIndex = -1; // 🔴 CRITICAL
 
             const date = new Date(year, month, d);
             if (this.isToday(date)) cell.classList.add("today");
@@ -373,7 +376,10 @@ export class CalendarManager {
         return new Date(y, m - 1, d);
     }
 
-    clearActiveDay() {
-        this.activeDay = null;
+    blurActiveElement() {
+        if (document.activeElement instanceof HTMLElement) {
+            document.activeElement.blur();
+        }
     }
+
 }
