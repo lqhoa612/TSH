@@ -116,7 +116,6 @@ export class CalendarManager {
             }
 
             btn.addEventListener("click", (e) => {
-                this.clearActiveDay();
                 e.stopPropagation(); // CRITICAL
                 if (this.activeCloseHandler) {
                     document.removeEventListener("click", this.activeCloseHandler);
@@ -162,7 +161,6 @@ export class CalendarManager {
             }
 
             btn.addEventListener("click", (e) => {
-                this.clearActiveDay();
                 e.stopPropagation(); // CRITICAL
                 if (this.activeCloseHandler) {
                     document.removeEventListener("click", this.activeCloseHandler);
@@ -330,12 +328,10 @@ export class CalendarManager {
 
             // mobile toggle
             cell.addEventListener("click", () => {
-                this.activeDay = d;
-                document.querySelectorAll(".day-cell.active").forEach(c => c.classList.remove("active"));
-
-                if (this.activeDay === d) {
-                    cell.classList.add("active");
-                }
+                document
+                    .querySelectorAll(".day-cell.active")
+                    .forEach(c => c.classList.remove("active"));
+                cell.classList.add("active");
             });
         }
 
