@@ -109,10 +109,6 @@
   opacity: 1 !important;
 }
 
-#personalCalendar .day-cell:active {
-  background-color: var(--bg-soft);
-}
-
 /* Today highlight */
 #personalCalendar .day-cell.today {
   box-shadow: 0 0 0 2px var(--accent) inset;
@@ -235,4 +231,8 @@
   grid-column: span 4;
   font-weight: 600;
   background: rgba(255, 255, 255, 0.12);
+}
+
+#personalCalendar.block-days .day-cell {
+  pointer-events: none;
 }
