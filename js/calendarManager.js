@@ -116,6 +116,7 @@ export class CalendarManager {
             }
 
             btn.addEventListener("click", (e) => {
+                this.clearActiveDay();
                 e.stopPropagation(); // CRITICAL
                 if (this.activeCloseHandler) {
                     document.removeEventListener("click", this.activeCloseHandler);
@@ -161,6 +162,7 @@ export class CalendarManager {
             }
 
             btn.addEventListener("click", (e) => {
+                this.clearActiveDay();
                 e.stopPropagation(); // CRITICAL
                 if (this.activeCloseHandler) {
                     document.removeEventListener("click", this.activeCloseHandler);
@@ -371,5 +373,9 @@ export class CalendarManager {
         if (!text) return null;
         const [d, m, y] = text.split("/").map(Number);
         return new Date(y, m - 1, d);
+    }
+
+    clearActiveDay() {
+        this.activeDay = null;
     }
 }
