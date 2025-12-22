@@ -333,7 +333,7 @@ export class CalendarManager {
                 this.activeDay = d;
                 document.querySelectorAll(".day-cell.active").forEach(c => c.classList.remove("active"));
 
-                if (this.activeDay === day) {
+                if (this.activeDay === d) {
                     cell.classList.add("active");
                 }
             });
