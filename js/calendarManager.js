@@ -330,10 +330,12 @@ export class CalendarManager {
 
             // mobile toggle
             cell.addEventListener("click", () => {
-                document
-                    .querySelectorAll(".day-cell.active")
-                    .forEach(c => c.classList.remove("active"));
-                cell.classList.add("active");
+                this.activeDay = d;
+                document.querySelectorAll(".day-cell.active").forEach(c => c.classList.remove("active"));
+
+                if (this.activeDay === day) {
+                    cell.classList.add("active");
+                }
             });
         }
 
