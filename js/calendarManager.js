@@ -106,18 +106,14 @@ export class CalendarManager {
             }
 
             const target = new Date(year, m, 1);
-            if (birth && target < new Date(birth.getFullYear(), birth.getMonth(), 1)) {
+            if (birth && this.isBeforeBirth(target)) {
                 btn.disabled = true;
             }
 
             btn.addEventListener("click", (e) => {
-                e.stopPropagation(); // CRITICAL
-                if (this.activeCloseHandler) {
-                    document.removeEventListener("click", this.activeCloseHandler);
-                    this.activeCloseHandler = null;
-                }
-                this.overlayMode = null;
-                if (m !== undefined) this.state.month = m;
+                e.stopPropagation();
+                this.state.year = year;
+                this.state.month = m;
                 this.renderUnifiedCalendar("next");
             });
 
@@ -245,6 +241,7 @@ export class CalendarManager {
 
                 this.state.year = newDate.getFullYear();
                 this.state.month = newDate.getMonth();
+
                 this.renderUnifiedCalendar(dir);
             });
         });
@@ -285,8 +282,15 @@ export class CalendarManager {
             grid.appendChild(this.emptyCell());
         }
 
+        const birth = this.getBirthDate();
+
         for (let d = 1; d <= last.getDate(); d++) {
             const date = new Date(year, month, d);
+
+            if (birth && date < birth) {
+                grid.appendChild(this.emptyCell());
+                continue;
+            }
             const personal = this.calculatePersonalNumbersForDate(date);
 
             const cell = document.createElement("div");
@@ -338,16 +342,20 @@ export class CalendarManager {
         const birth = this.getBirthDate();
         if (!birth) return false;
 
-        // Compare at month precision (same logic you had before)
-        const birthMonthStart = new Date(
-            birth.getFullYear(),
-            birth.getMonth(),
-            1
+        const monthEnd = new Date(
+            date.getFullYear(),
+            date.getMonth() + 1,
+            0
         );
 
-        return date < birthMonthStart;
-    }
+        const birthDay = new Date(
+            birth.getFullYear(),
+            birth.getMonth(),
+            birth.getDate()
+        );
 
+        return monthEnd < birthDay;
+    }
 
     getBirthDate() {
         return this.birthDate || null;
