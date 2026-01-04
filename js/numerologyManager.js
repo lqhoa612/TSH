@@ -21,6 +21,9 @@ export class NumerologyManager {
 
         const name = removeAccents(rawName);
         const { day, month, year } = parsed;
+        document.dispatchEvent(new CustomEvent("birthdate:set", {
+            detail: new Date(year, month - 1, day)
+        }));
 
         // Calculate immediately (no delay)
         const results = this.calculateAll(name, day, month, year);

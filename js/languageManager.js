@@ -106,5 +106,4 @@ export class LanguageManager {
             this.currentLanguage = "en"; // fallback
         }
     }
-
 }

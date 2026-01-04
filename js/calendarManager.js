@@ -1,7 +1,6 @@
 // calendarManager.js
 import { reduceToSingleDigit } from "./utils.js";
 import { LanguageManager } from "./languageManager.js";
-import { clearUI } from "./uiClearmanager.js";
 
 export class CalendarManager {
 
@@ -25,13 +24,9 @@ export class CalendarManager {
     }
 
     init() {
-        const calculateBtn = document.getElementById("calculateBtn");
-
-        calculateBtn.addEventListener("click", () => {
-            // allow numerology calculations to complete first
-            setTimeout(() => {
-                this.showAndRender();
-            }, 0);
+        document.addEventListener("birthdate:set", (e) => {
+            this.setBirthDate(e.detail);
+            this.showAndRender();
         });
     }
 
@@ -117,7 +112,6 @@ export class CalendarManager {
 
             btn.addEventListener("click", (e) => {
                 e.stopPropagation(); // CRITICAL
-                this.disableDayInteractionTemporarily();
                 if (this.activeCloseHandler) {
                     document.removeEventListener("click", this.activeCloseHandler);
                     this.activeCloseHandler = null;
@@ -163,7 +157,6 @@ export class CalendarManager {
 
             btn.addEventListener("click", (e) => {
                 e.stopPropagation(); // CRITICAL
-                this.disableDayInteractionTemporarily();
                 if (this.activeCloseHandler) {
                     document.removeEventListener("click", this.activeCloseHandler);
                     this.activeCloseHandler = null;
@@ -219,14 +212,10 @@ export class CalendarManager {
         const systemMonthName = new Date(year, month, 1)
             .toLocaleString(lang, { month: "long", year: "numeric" });
 
+        const personal = this.calculatePersonalNumbersForDate(new Date(year, month, 1));
 
-        const birthText = document.getElementById("birthdate2")?.textContent;
-        const [birthDay, birthMonth, birthYear] = birthText.split("/").map(Number);
-        const reducedYear = reduceToSingleDigit(year, false);
-        const reducedBirthMonthDay = reduceToSingleDigit(birthMonth + birthDay, false);
-        const personalYear = reduceToSingleDigit(reducedYear + reducedBirthMonthDay, false);
-        const reducedMonth = reduceToSingleDigit(month + 1, false);
-        const personalMonth = reduceToSingleDigit(personalYear + reducedMonth, false);
+        const personalYear = personal?.year ?? "–";
+        const personalMonth = personal?.month ?? "–";
 
         const header = document.createElement("div");
         header.className = "calendar-header";
@@ -273,8 +262,6 @@ export class CalendarManager {
     // DAY GRID
     // --------------------------------------------------
     renderDayGrid(year, month) {
-        document.querySelectorAll(".day-cell.active").forEach(c => c.classList.remove("active"));
-
         const lang = this.languageManager.getLanguage();
         const grid = document.createElement("div");
         grid.className = "calendar-grid";
@@ -298,19 +285,13 @@ export class CalendarManager {
             grid.appendChild(this.emptyCell());
         }
 
-        const birthText = document.getElementById("birthdate2")?.textContent;
-        const [birthDay, birthMonth, birthYear] = birthText.split("/").map(Number);
-        const reducedYear = reduceToSingleDigit(year, false);
-        const reducedBirthMonthDay = reduceToSingleDigit(birthMonth + birthDay, false);
-        const personalYear = reduceToSingleDigit(reducedYear + reducedBirthMonthDay, false);
-        const reducedMonth = reduceToSingleDigit(month + 1, false);
-        const personalMonth = reduceToSingleDigit(personalYear + reducedMonth, false);
-
         for (let d = 1; d <= last.getDate(); d++) {
+            const date = new Date(year, month, d);
+            const personal = this.calculatePersonalNumbersForDate(date);
+
             const cell = document.createElement("div");
             cell.className = "day-cell";
 
-            const date = new Date(year, month, d);
             if (this.isToday(date)) cell.classList.add("today");
 
             const systemEl = document.createElement("div");
@@ -319,19 +300,14 @@ export class CalendarManager {
 
             const personalEl = document.createElement("div");
             personalEl.className = "personal-day";
-            personalEl.textContent = reduceToSingleDigit(
-                personalMonth + reduceToSingleDigit(d, false),
-                false
-            );
+            personalEl.textContent = personal?.day ?? "–";
 
             cell.appendChild(systemEl);
             cell.appendChild(personalEl);
             grid.appendChild(cell);
 
-            // mobile toggle
             cell.addEventListener("click", () => {
-                document
-                    .querySelectorAll(".day-cell.active")
+                document.querySelectorAll(".day-cell.active")
                     .forEach(c => c.classList.remove("active"));
                 cell.classList.add("active");
             });
@@ -359,27 +335,60 @@ export class CalendarManager {
     }
 
     isBeforeBirth(date) {
-        const birthText = document.getElementById("birthdate2")?.textContent;
-        if (!birthText) return false;
+        const birth = this.getBirthDate();
+        if (!birth) return false;
 
-        const [d, m, y] = birthText.split("/").map(Number);
-        const birth = new Date(y, m - 1, d);
+        // Compare at month precision (same logic you had before)
+        const birthMonthStart = new Date(
+            birth.getFullYear(),
+            birth.getMonth(),
+            1
+        );
 
-        return date < new Date(birth.getFullYear(), birth.getMonth(), 1);
+        return date < birthMonthStart;
     }
+
 
     getBirthDate() {
-        const text = document.getElementById("birthdate2")?.textContent;
-        if (!text) return null;
-        const [d, m, y] = text.split("/").map(Number);
-        return new Date(y, m - 1, d);
+        return this.birthDate || null;
     }
 
-    disableDayInteractionTemporarily() {
-        this.container.classList.add("block-days");
+    setBirthDate(date) {
+        if (!(date instanceof Date)) return;
+        this.birthDate = date;
+    }
 
-        setTimeout(() => {
-            this.container.classList.remove("block-days");
-        }, 150);
+    calculatePersonalNumbersForDate(date) {
+        const birth = this.getBirthDate();
+        if (!birth) return null;
+
+        const birthDay = birth.getDate();
+        const birthMonth = birth.getMonth() + 1;
+
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+
+        const personalYear = reduceToSingleDigit(
+            reduceToSingleDigit(year, false) +
+            reduceToSingleDigit(birthDay + birthMonth, false),
+            false
+        );
+
+        const personalMonth = reduceToSingleDigit(
+            personalYear + reduceToSingleDigit(month, false),
+            false
+        );
+
+        const personalDay = reduceToSingleDigit(
+            personalMonth + reduceToSingleDigit(day, false),
+            false
+        );
+
+        return {
+            year: personalYear,
+            month: personalMonth,
+            day: personalDay
+        };
     }
 }
