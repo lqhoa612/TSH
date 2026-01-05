@@ -9,6 +9,7 @@ export class LanguageManager {
     }
 
     init() {
+        this.loadSavedLanguage();
         this.detectBrowserLanguage();
         this.applyTranslations(this.currentLanguage, false);
         this.setupLanguageSelector();
@@ -20,7 +21,6 @@ export class LanguageManager {
 
         console.log("LanguageManager initialized ✅");
     }
-
 
     setupLanguageSelector() {
         // Floating toggle button
@@ -40,15 +40,12 @@ export class LanguageManager {
             localStorage.setItem("language", this.currentLanguage);
 
             // Update flag icon
-            flagIcon.src = this.currentLanguage === "en" ? "flags/en.svg" : "flags/vi.svg";
+            if (flagIcon) {
+                flagIcon.src = this.currentLanguage === "en" ? "flags/en.svg" : "flags/vi.svg";
+            }
 
             // Apply translations
             this.applyTranslations(this.currentLanguage);
-
-            // Notify other managers
-            document.dispatchEvent(
-                new CustomEvent("languageChanged", { detail: { lang: this.currentLanguage } })
-            );
         });
     }
 
@@ -68,8 +65,9 @@ export class LanguageManager {
 
         translateElements.forEach(element => {
             const key = element.dataset.translate;
-            const value = dictionary[key];
-            if (value) element.textContent = value;
+            const value = this.resolvePath(dictionary, key);
+            if (value !== undefined) element.textContent = value;
+
         });
 
         placeholderElements.forEach(element => {
@@ -95,15 +93,11 @@ export class LanguageManager {
     }
 
     detectBrowserLanguage() {
+        if (localStorage.getItem("language")) return;
+
         const lang = navigator.language || navigator.userLanguage || "en";
         const short = lang.substring(0, 2).toLowerCase();
 
-        const supported = ["en", "vi"];
-
-        if (supported.includes(short)) {
-            this.currentLanguage = short;
-        } else {
-            this.currentLanguage = "en"; // fallback
-        }
+        this.currentLanguage = ["en", "vi"].includes(short) ? short : "en";
     }
 }

@@ -29,35 +29,37 @@ export class MapManager {
     }
 
     setupListeners() {
-        const yourMapBtn = document.getElementById('yourmapBtn');
-        if (!yourMapBtn) return;
-
-        yourMapBtn.addEventListener('click', () => {
-            const name = document.getElementById("fullname")?.innerText.trim();
-            const lifePath = document.getElementById("duongdoi")?.innerText.trim();
-
-            if (!(name && name.length > 0 && lifePath && lifePath.length > 0)) {
-                alert(this.languageManager.languages[this.languageManager.currentLanguage].pdfNullWarning
-                    || "Please generate your numerology report first.");
-                return;
-            }
-
-            this.lastBirthdate = document.getElementById('birthdate').value;
-            this.lastName = document.getElementById('name').value;
-
-            clearUI();
-            this.displayBirthdateMap();
-            this.displayCombinedMap();
+        document.addEventListener('calculationCompleted', () => {
+            this.tryRenderMaps();
         });
+    }
+
+    tryRenderMaps() {
+        const name = document.getElementById("name")?.value.trim();
+        const birthdate = document.getElementById("birthdate")?.value.trim();
+        const lifePath = document.getElementById("duongdoi")?.innerText.trim();
+
+        if (!(name && birthdate && lifePath)) return;
+
+        this.lastName = name;
+        this.lastBirthdate = birthdate;
+
+        this.clearMaps();
+        this.displayBirthdateMap();
+        this.displayCombinedMap();
     }
 
     handleLanguageChange() {
         document.addEventListener('languageChanged', () => {
-            if (!this.lastBirthdate || !this.lastName) return;
-            clearUI();
-            this.displayBirthdateMap();
-            this.displayCombinedMap();
+            this.tryRenderMaps();
         });
+    }
+
+    clearMaps() {
+        this.birthdateMap.innerHTML = '';
+        this.combinedMap.innerHTML = '';
+        this.birthComments.innerHTML = '';
+        this.combinedComments.innerHTML = '';
     }
 
     /* ----------------------  MAP GENERATION ---------------------- */

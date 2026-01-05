@@ -156,6 +156,13 @@ export const english = {
         ],
     },
 
+    calendar: {
+        personal: "Personal",
+        year: "Year",
+        month: "Month",
+        weekdays: ["M", "T", "W", "T", "F", "S", "S"]
+    },
+
     birthdateMapTitle: "Birthdate Map",
     combinedMapTitle: "Combined Map",
     birthCommentsTitle: "Birthdate Arrows",

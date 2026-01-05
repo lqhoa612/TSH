@@ -1,12 +1,11 @@
 // calendarManager.js
 import { reduceToSingleDigit } from "./utils.js";
-import { LanguageManager } from "./languageManager.js";
 
 export class CalendarManager {
 
-    constructor() {
+    constructor(languageManager) {
         this.container = document.getElementById("personalCalendar");
-        this.languageManager = new LanguageManager();
+        this.languageManager = languageManager;
 
         if (!this.languageManager.getLanguage()) {
             this.languageManager.currentLanguage = "en";
@@ -27,6 +26,10 @@ export class CalendarManager {
         document.addEventListener("birthdate:set", (e) => {
             this.setBirthDate(e.detail);
             this.showAndRender();
+        });
+
+        document.addEventListener("languageChanged", () => {
+            this.renderUnifiedCalendar();
         });
     }
 
@@ -204,9 +207,10 @@ export class CalendarManager {
     // --------------------------------------------------
     renderHeader(year, month) {
         const lang = this.languageManager.getLanguage();
+        const dict = this.languageManager.languages[this.languageManager.getLanguage()]?.calendar || {};
 
-        const systemMonthName = new Date(year, month, 1)
-            .toLocaleString(lang, { month: "long", year: "numeric" });
+        const rawMonthName = new Date(year, month, 1).toLocaleString(lang, { month: "long", year: "numeric" });
+        const systemMonthName = rawMonthName.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
         const personal = this.calculatePersonalNumbersForDate(new Date(year, month, 1));
 
@@ -220,9 +224,9 @@ export class CalendarManager {
             <div class="calendar-titles">
                 <div class="system-title clickable" id="monthToggle">${systemMonthName}</div>
                 <div class="personal-title">
-                    ${lang === "en" ? "Personal:" : "Cá nhân:"}
-                    ${lang === "en" ? "Year" : "Năm"} ${personalYear} ·
-                    ${lang === "en" ? "Month" : "Tháng"} ${personalMonth}
+                    ${dict.personal ?? "Personal"}:
+                    ${dict.year ?? "Year"} ${personalYear} ·
+                    ${dict.month ?? "Month"} ${personalMonth}
                 </div>
             </div>
             <div class="calendar-nav">
@@ -259,13 +263,12 @@ export class CalendarManager {
     // DAY GRID
     // --------------------------------------------------
     renderDayGrid(year, month) {
-        const lang = this.languageManager.getLanguage();
+        // const lang = this.languageManager.getLanguage();
         const grid = document.createElement("div");
         grid.className = "calendar-grid";
 
-        const daysOfWeek = lang === "en"
-            ? ["M", "T", "W", "T", "F", "S", "S"]
-            : ["T2", "T3", "T4", "T5", "T6", "T7", "CN"];
+        const dict = this.languageManager.languages[this.languageManager.getLanguage()]?.calendar || {};
+        const daysOfWeek = dict.weekdays ?? ["M", "T", "W", "T", "F", "S", "S"];
 
         daysOfWeek.forEach(d => {
             const h = document.createElement("div");

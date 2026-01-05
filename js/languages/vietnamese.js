@@ -157,6 +157,13 @@ export const vietnamese = {
         ],
     },
 
+    calendar: {
+        personal: "Cá nhân",
+        year: "Năm",
+        month: "Tháng",
+        weekdays: ["T2", "T3", "T4", "T5", "T6", "T7", "CN"]
+    },
+
     birthdateMapTitle: "Bản đồ Ngày sinh",
     combinedMapTitle: "Bản đồ Kết hợp",
     birthCommentsTitle: "Mũi tên từ Ngày sinh",

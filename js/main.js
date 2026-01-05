@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const saveData = new SaveDataManager();
     saveData.init();
 
-    const calendar = new CalendarManager();
+    const calendar = new CalendarManager(language);
     calendar.init();
 
     console.log("App initialized ✅");
