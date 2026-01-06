@@ -133,6 +133,7 @@
   .day-cell.active .day-number {
     display: block !important;
   }
+
   .day-cell.active .personal-day {
     display: block !important;
   }
@@ -143,5 +144,16 @@
 
   .card-desc {
     font-size: 1.05rem;
+  }
+
+  #utils-buttons {
+    transform: none !important;
+    pointer-events: auto !important;
+    right: 18px;
+    padding-left: 0;
+  }
+
+  #utils-drawer-handle {
+    display: none !important;
   }
 }

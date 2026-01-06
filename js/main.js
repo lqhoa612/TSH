@@ -10,6 +10,7 @@ import { NumerologyManager } from './numerologyManager.js';
 import { ShareManager } from './shareManager.js';
 import { SaveDataManager } from './saveData.js';
 import { CalendarManager } from "./calendarManager.js";
+import { FloatingToolsManager } from './ui/FloatingToolsManager.js';
 
 // Add event listener when the DOM content is loaded --->
 document.addEventListener('DOMContentLoaded', function () {
@@ -38,6 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const shareManager = new ShareManager(language);
     shareManager.ui = ui;
     shareManager.init();
+
+    new FloatingToolsManager();
 
     const numerologyManager = new NumerologyManager(ui);
     console.log("NumerologyManager initialized ✅");

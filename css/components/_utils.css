@@ -1,39 +1,70 @@
 /* _utils.css - Buttons */
 @import url('util_helper/_collapsible_cards.css');
+@import url('util_helper/_floating_utils_drawer.css');
 
 #utils-buttons {
-  position: fixed;
-  top: 32%;
-  right: 18px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  z-index:1005;
+    position: fixed;
+    top: 32%;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    padding-left: 18px;
+    /* space between handle and buttons */
+
+    z-index: 1005;
+    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
 }
 
 #utils-buttons button {
-  width:56px;
-  height:56px;
-  border-radius:50%;
-  border:1px solid var(--border);
-  background: rgba(255, 255, 255, 0);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  box-shadow: var(--shadow-elev);
-  transition: transform .14s ease, box-shadow .14s ease;
-  font-size: 1.5rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-elev);
+    transition: transform .14s ease, box-shadow .14s ease;
+    font-size: 1.5rem;
 }
-#utils-buttons button:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,0.08); }
 
-#utils-buttons img#flagIcon { width:28px; height:18px; display:block; object-fit:cover; border-radius:4px; }
+#utils-buttons button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+}
+
+#utils-buttons img#flagIcon {
+    width: 28px;
+    height: 18px;
+    display: block;
+    object-fit: cover;
+    border-radius: 4px;
+}
 
 /* small helpers */
-.hidden { display:none !important; }
-.visually-hidden { position:absolute !important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.hidden {
+    display: none !important;
+}
 
-#guide {white-space: pre-line; line-height: 1.55;}
+.visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+#guide {
+    white-space: pre-line;
+    line-height: 1.55;
+}
 
 /* ------------------Full-screen overlay--------------- */
 #howToOverlay {
@@ -42,7 +73,7 @@
     inset: 0;
     z-index: 2000;
     backdrop-filter: blur(6px);
-    background: rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.4);
 }
 
 /* Scrollable panel */
@@ -61,8 +92,14 @@
     box-shadow: var(--shadow-elev);
 }
 
-#howToPanel h2 { margin-top: 0; text-align: center; }
-#howToPanel p { font-size: 1rem; }
+#howToPanel h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+#howToPanel p {
+    font-size: 1rem;
+}
 
 /* Close button */
 #closeHowTo {
@@ -77,7 +114,9 @@
 }
 
 /* Disable page scroll when overlay is open */
-body.no-scroll { overflow: hidden; }
+body.no-scroll {
+    overflow: hidden;
+}
 
 
 /* -------------Result actions-------------- */
@@ -157,7 +196,8 @@ body.no-scroll { overflow: hidden; }
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(33, 42, 49, 0.6); /* semi-transparent overlay */
+    background: rgba(33, 42, 49, 0.6);
+    /* semi-transparent overlay */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -200,20 +240,23 @@ body.no-scroll { overflow: hidden; }
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Skeleton loading */
 .skeleton {
     color: transparent !important;
     pointer-events: none;
-    background: linear-gradient(
-        90deg,
-        var(--paper) 25%,
-        var(--border) 37%,
-        var(--paper) 63%
-    );
+    background: linear-gradient(90deg,
+            var(--paper) 25%,
+            var(--border) 37%,
+            var(--paper) 63%);
     background-size: 400% 100%;
     animation: skeleton-loading 1.4s ease infinite;
     transition: opacity 0.25s ease;
@@ -224,17 +267,30 @@ body.no-scroll { overflow: hidden; }
 }
 
 @keyframes skeleton-loading {
-    0% { background-position: 100% 0; }
-    100% { background-position: 0 0; }
+    0% {
+        background-position: 100% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
 }
 
 /* Auto scroll */
 @keyframes softGlow {
-  0% { box-shadow: 0 0 0 rgba(18,173,173,0); }
-  50% { box-shadow: 0 0 18px rgba(18,173,173,0.4); }
-  100% { box-shadow: 0 0 0 rgba(18,173,173,0); }
+    0% {
+        box-shadow: 0 0 0 rgba(18, 173, 173, 0);
+    }
+
+    50% {
+        box-shadow: 0 0 18px rgba(18, 173, 173, 0.4);
+    }
+
+    100% {
+        box-shadow: 0 0 0 rgba(18, 173, 173, 0);
+    }
 }
 
 .maps-highlight {
-  animation: softGlow 1.2s ease;
+    animation: softGlow 1.2s ease;
 }

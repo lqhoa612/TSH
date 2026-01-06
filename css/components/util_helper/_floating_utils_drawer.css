@@ -1,0 +1,50 @@
+/* _floating_utils_drawer.css */
+
+/* Floating utils collapsed state */
+#utils-buttons.is-collapsed {
+    transform: translateX(calc(100% - 12px));
+    pointer-events: none;
+}
+
+#utils-buttons.is-collapsed #utils-drawer-handle {
+    pointer-events: auto;
+}
+
+
+/* Drawer handle */
+#utils-drawer-handle {
+    position: absolute;
+    top: 50%;
+    left: 0;
+
+    transform: translate(-100%, -50%);
+
+    width: 12px;
+    height: 72px;
+
+    background: linear-gradient(to right,
+            rgba(255, 255, 255, 0.18),
+            rgba(255, 255, 255, 0.05));
+
+    border-radius: 0 8px 8px 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.25);
+
+    cursor: pointer;
+}
+
+#utils-drawer-handle::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 3px;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 28px;
+    border-radius: 1px;
+    background: rgba(255, 255, 255, 0.35);
+}
+
+#utils-buttons:not(.is-collapsed)~#utils-drawer-handle {
+    opacity: 0;
+    pointer-events: none;
+}
