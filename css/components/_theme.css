@@ -15,7 +15,10 @@
     --ui-width: 420px;
     --gap: 12px;
     --max-content-width: 1100px;
-    --map-border: color-mix(in srgb, var(--accent) 45%, var(--border) 55%)
+    --map-border: color-mix(in srgb, var(--accent) 45%, var(--border) 55%);
+    --drawer-handle-bg-start: rgba(0, 0, 0, 0.18);
+    --drawer-handle-bg-end: rgba(0, 0, 0, 0.05);
+    --drawer-handle-shadow: rgba(0, 0, 0, 0.25);
 }
 
 /* Dark theme override (applied when [data-theme="dark"] on html/body) */
@@ -29,6 +32,9 @@
     --accent-light: #234040;
     --border: #2A2D2E;
     --shadow-elev: 0 8px 24px rgba(0, 0, 0, 0.45);
+    --drawer-handle-bg-start: rgba(255, 255, 255, 0.22);
+    --drawer-handle-bg-end: rgba(255, 255, 255, 0.06);
+    --drawer-handle-shadow: rgba(0, 0, 0, 0.4);
 }
 
 /* Small utility */
