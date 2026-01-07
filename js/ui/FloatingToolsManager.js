@@ -119,7 +119,7 @@ export class FloatingToolsManager {
                 if (this.scrollCloseRAF) return;
 
                 this.scrollCloseRAF = requestAnimationFrame(() => {
-                    this.collapse();
+                    setTimeout(() => this.collapse(), 20);
                     this.scrollCloseRAF = null;
                 });
             },
