@@ -13,6 +13,10 @@ export class FloatingToolsManager {
 
         this.hasSeen = localStorage.getItem("seenFloatingTools") === "true";
 
+        this.isExpanded = false;
+        this.isScrolling = false;
+        this.scrollCloseRAF = null;
+
         this.init();
     }
 
@@ -64,22 +68,30 @@ export class FloatingToolsManager {
                 this.scheduleAutoHide();
             }
         });
+
+        this.bindScrollClose();
     }
 
     expand() {
         clearTimeout(this.hideTimer);
+        this.isExpanded = true;
+
         this.utils.classList.remove("is-collapsed");
         this.utils.setAttribute("aria-hidden", "false");
-        this.handle.style.transform = "translateX(100%)";
+
+        // this.handle.style.transform = "translateX(100%)";s
 
         this.scheduleAutoHide();
     }
 
     collapse() {
         clearTimeout(this.hideTimer);
+        this.isExpanded = false;
+
         this.utils.classList.add("is-collapsed");
         this.utils.setAttribute("aria-hidden", "true");
-        this.handle.style.transform = "translateX(0)";
+
+        // this.handle.style.transform = "translateX(0)";
     }
 
     scheduleAutoHide() {
@@ -89,7 +101,34 @@ export class FloatingToolsManager {
         }, this.AUTO_HIDE_MS);
     }
 
+    bindScrollClose() {
+        let scrollTimeout;
+
+        window.addEventListener(
+            "scroll",
+            () => {
+                this.isScrolling = true;
+
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    this.isScrolling = false;
+                }, 120);
+
+                if (!this.isExpanded) return;
+
+                if (this.scrollCloseRAF) return;
+
+                this.scrollCloseRAF = requestAnimationFrame(() => {
+                    setTimeout(() => this.collapse(), 60);
+                    this.scrollCloseRAF = null;
+                });
+            },
+            { passive: true }
+        );
+    }
+
     resetAutoHide() {
+        if (this.isScrolling) return;
         this.expand();
     }
 
