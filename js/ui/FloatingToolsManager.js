@@ -100,7 +100,7 @@ export class FloatingToolsManager {
             this.utils.classList.remove("interaction-locked");
         }, this.OPEN_INTERACTION_DELAY);
 
-        // this.handle.style.transform = "translateX(100%)";s
+        this.handle.style.transform = "translateX(100%)";
 
         this.scheduleAutoHide();
     }
@@ -112,7 +112,7 @@ export class FloatingToolsManager {
         this.utils.classList.add("is-collapsed");
         this.utils.setAttribute("aria-hidden", "true");
 
-        // this.handle.style.transform = "translateX(0)";
+        this.handle.style.transform = "translateX(0)";
     }
 
     scheduleAutoHide() {
