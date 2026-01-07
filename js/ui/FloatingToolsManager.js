@@ -53,6 +53,8 @@ export class FloatingToolsManager {
         // Any interaction keeps tools visible
         const interactionEvents = ["click", "mousemove", "touchstart", "keydown"];
 
+        this.bindScrollClose();
+
         interactionEvents.forEach(evt => {
             this.utils.addEventListener(evt, () => this.resetAutoHide());
         });
@@ -68,8 +70,6 @@ export class FloatingToolsManager {
                 this.scheduleAutoHide();
             }
         });
-
-        this.bindScrollClose();
     }
 
     expand() {
@@ -119,7 +119,7 @@ export class FloatingToolsManager {
                 if (this.scrollCloseRAF) return;
 
                 this.scrollCloseRAF = requestAnimationFrame(() => {
-                    setTimeout(() => this.collapse(), 60);
+                    this.collapse();
                     this.scrollCloseRAF = null;
                 });
             },
