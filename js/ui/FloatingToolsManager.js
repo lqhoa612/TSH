@@ -53,7 +53,7 @@ export class FloatingToolsManager {
 
     bindEvents() {
         // Any interaction keeps tools visible
-        const interactionEvents = ["click", "mousemove", "touchstart", "keydown"];
+        const interactionEvents = ["click", "touchstart", "keydown"];
 
         this.bindScrollClose();
 
@@ -61,11 +61,15 @@ export class FloatingToolsManager {
             this.utils.addEventListener(evt, () => this.resetAutoHide());
         });
 
+        // Click handling with just-opened guard
         this.utils.addEventListener("click", (e) => {
             if (this.justOpened) {
                 e.stopPropagation();
                 e.preventDefault();
+                return;
             }
+
+            this.resetAutoHide();
         });
 
         // Global UI interactions reset timer
