@@ -5,7 +5,7 @@
     transform: translateX(calc(100% - 12px));
     pointer-events: none;
     transition-delay: 40ms;
-    transition-duration: 260ms;
+    transition-duration: 450ms;
 }
 
 #utils-buttons.is-collapsed #utils-drawer-handle {
