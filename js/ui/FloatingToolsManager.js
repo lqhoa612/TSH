@@ -7,7 +7,7 @@ export class FloatingToolsManager {
         this.handle = null;
         this.INITIAL_VISIBLE_MS = 15000; // 15 seconds
         this.AUTO_HIDE_MS = 5000; // 5 seconds
-        this.OPEN_INTERACTION_DELAY = 900; // ms
+        this.OPEN_INTERACTION_DELAY = 500; // ms
 
         this.hideTimer = null;
         this.initialTimer = null;
