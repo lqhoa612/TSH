@@ -5,10 +5,15 @@
     transform: translateX(calc(100% - 12px));
     pointer-events: none;
     transition-delay: 40ms;
+    transition-duration: 260ms;
 }
 
 #utils-buttons.is-collapsed #utils-drawer-handle {
     pointer-events: auto;
+}
+
+#utils-buttons.interaction-locked {
+    pointer-events: none;
 }
 
 

@@ -7,6 +7,7 @@ export class FloatingToolsManager {
         this.handle = null;
         this.INITIAL_VISIBLE_MS = 15000; // 15 seconds
         this.AUTO_HIDE_MS = 5000; // 5 seconds
+        this.OPEN_INTERACTION_DELAY = 240; // ms
 
         this.hideTimer = null;
         this.initialTimer = null;
@@ -16,6 +17,7 @@ export class FloatingToolsManager {
         this.isExpanded = false;
         this.isScrolling = false;
         this.scrollCloseRAF = null;
+        this.justOpened = false;
 
         this.init();
     }
@@ -59,6 +61,13 @@ export class FloatingToolsManager {
             this.utils.addEventListener(evt, () => this.resetAutoHide());
         });
 
+        this.utils.addEventListener("click", (e) => {
+            if (this.justOpened) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+        });
+
         // Global UI interactions reset timer
         document.addEventListener("ui:interaction", () => {
             this.resetAutoHide();
@@ -75,9 +84,17 @@ export class FloatingToolsManager {
     expand() {
         clearTimeout(this.hideTimer);
         this.isExpanded = true;
+        this.justOpened = true;
 
         this.utils.classList.remove("is-collapsed");
         this.utils.setAttribute("aria-hidden", "false");
+
+        this.utils.classList.add("interaction-locked"); // Temporarily disable button interaction
+
+        setTimeout(() => {
+            this.justOpened = false;
+            this.utils.classList.remove("interaction-locked");
+        }, this.OPEN_INTERACTION_DELAY);
 
         // this.handle.style.transform = "translateX(100%)";s
 
