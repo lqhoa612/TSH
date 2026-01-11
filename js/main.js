@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
     shareManager.init();
 
     const floatingUtils = new FloatingToolsManager();
-    uiManager.initHowToOverlay(floatingUtils);
+    ui.initHowToOverlay(floatingUtils);
 
     const numerologyManager = new NumerologyManager(ui);
     console.log("NumerologyManager initialized ✅");
