@@ -45,36 +45,45 @@ export class UIHelpers {
         }
     }
 
-    initHowToOverlay() {
+    initHowToOverlay(floatingUtils) {
         const howToBtn = document.getElementById("howToBtn");
         const overlay = document.getElementById("howToOverlay");
         const closeBtn = document.getElementById("closeHowTo");
 
+        if (!howToBtn || !overlay || !closeBtn) return;
+
         const freezeScreen = (state) => {
-            if (state) {
-                document.body.classList.add("no-scroll");
-            } else {
-                document.body.classList.remove("no-scroll");
-            }
+            document.body.classList.toggle("no-scroll", state);
         };
 
-        const toggleOverlay = () => {
-            const isOn = overlay.style.display === "flex";
-            if (isOn) {
-                overlay.style.display = "none";
-                freezeScreen(false);
-            } else {
-                overlay.style.display = "flex";
-                freezeScreen(true);
-            }
+        const openOverlay = () => {
+            overlay.style.display = "flex";
+            freezeScreen(true);
+
+            // Explicit UI state transition
+            floatingUtils?.enterModalState();
         };
 
-        howToBtn.addEventListener("click", toggleOverlay);
-        closeBtn.addEventListener("click", toggleOverlay);
-        overlay.addEventListener("click", (e) => {
-            if (e.target === overlay) toggleOverlay();
+        const closeOverlay = () => {
+            overlay.style.display = "none";
+            freezeScreen(false);
+
+            // Restore drawer behavior
+            floatingUtils?.exitModalState();
+        };
+
+        howToBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            openOverlay();
         });
 
+        closeBtn.addEventListener("click", closeOverlay);
+
+        overlay.addEventListener("click", (e) => {
+            if (e.target === overlay) closeOverlay();
+        });
+
+        // Safety reset
         overlay.style.display = "none";
         overlay.style.alignItems = "center";
         overlay.style.justifyContent = "center";

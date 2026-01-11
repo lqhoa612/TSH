@@ -40,7 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
     shareManager.ui = ui;
     shareManager.init();
 
-    new FloatingToolsManager();
+    const floatingUtils = new FloatingToolsManager();
+    uiManager.initHowToOverlay(floatingUtils);
 
     const numerologyManager = new NumerologyManager(ui);
     console.log("NumerologyManager initialized ✅");

@@ -18,6 +18,7 @@ export class FloatingToolsManager {
         this.isScrolling = false;
         this.scrollCloseRAF = null;
         this.justOpened = false;
+        this.isModalOpen = false;
 
         this.init();
     }
@@ -115,7 +116,25 @@ export class FloatingToolsManager {
         this.handle.style.transform = "translateX(0)";
     }
 
+    enterModalState() {
+        this.isModalOpen = true;
+        clearTimeout(this.hideTimer);
+
+        // Fully expand drawer so nothing is constrained
+        this.utils.classList.remove("is-collapsed");
+        this.utils.classList.remove("interaction-locked");
+    }
+
+    exitModalState() {
+        this.isModalOpen = false;
+
+        // Resume normal behavior
+        this.scheduleAutoHide();
+    }
+
     scheduleAutoHide() {
+        if (this.isModalOpen) return;
+        
         clearTimeout(this.hideTimer);
         this.hideTimer = setTimeout(() => {
             this.collapse();
@@ -135,9 +154,7 @@ export class FloatingToolsManager {
                     this.isScrolling = false;
                 }, 120);
 
-                if (!this.isExpanded) return;
-
-                if (this.scrollCloseRAF) return;
+                if (this.isModalOpen || !this.isExpanded || this.scrollCloseRAF) return;
 
                 this.scrollCloseRAF = requestAnimationFrame(() => {
                     setTimeout(() => this.collapse(), 20);
